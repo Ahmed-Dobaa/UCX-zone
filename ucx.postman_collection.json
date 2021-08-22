@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"ahmed\",\r\n    \"phoneNumber\": \"52145855\",\r\n    \"country\": \"egypt\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"confirmationPassword\": \"123456\",\r\n    \"interests\": [\"Advisory firm\"],\r\n    \"companyName\": \"test\",\r\n    \"position_in_company\": \"manager\",\r\n    \"website_of_company\": \"test\"\r\n}",
+							"raw": "{\r\n    \"name\": \"ahmed\",\r\n    \"phoneNumber\": \"52145855\",\r\n    \"country\": \"egypt\",\r\n    \"email\": \"moha@gmail.com\",\r\n    \"password\": \"Ahmed@123\",\r\n    \"confirmationPassword\": \"Ahmed@123\",\r\n    \"interests\": [\"Advisory firm\"],\r\n    \"companyName\": \"test\",\r\n    \"position_in_company\": \"manager\",\r\n    \"website_of_company\": \"test\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -40,10 +40,17 @@
 					"name": "login",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsIm5hbWUiOiJhaG1lZCIsImVtYWlsIjoiYWhtZWRkb2JhYUBnbWFpbC5jb20iLCJhY3RpdmUiOjAsImlhdCI6MTYyOTYzNDYwNywiZXhwIjoxNjI5NzIxMDA3fQ.YBQvSxbFPyf5Ft80PK-gGcn0JJiX0SJf2cvgp9C6AFs",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"ahmeddobaa@gmail.com\",\r\n    \"password\": \"Dobaa@12345\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -59,6 +66,48 @@
 							"port": "12225",
 							"path": [
 								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "company",
+			"item": [
+				{
+					"name": "create company",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsIm5hbWUiOiJhaG1lZCIsImVtYWlsIjoiYWhtZWRkb2JhYUBnbWFpbC5jb20iLCJhY3RpdmUiOjEsImlhdCI6MTYyOTYzNTUzMiwiZXhwIjoxNjI5NzIxOTMyfQ.46qWLFK76VNwe0UTf6Wf6lvp2TcOtxH4eIw_NBrGlCU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"params\": {\"userId\": 12},\r\n    \"payload\": {\r\n        \"isConfidential\": \"true\",\r\n       \"companyBasicData\": {\r\n        \"name\": \"test\",\r\n        \"registrationIdNo\": \"4235158542531\",\r\n        \"registrationOffice\": \"Cairo\",\r\n        \"sector\": 1,\r\n        \"subSector\": 2,\r\n        \"companyPurpose\": \"test\",\r\n        \"productsOrServices\": \"Software\",\r\n        \"legalForm\": 2,\r\n        \"address\": \"cairo\",\r\n        \"otherAddresses\": [\"Alex\"],\r\n        \"phoneNumbers\": \"01155467899\",\r\n        \"languageId\": 1\r\n    },\r\n    \"relationToCompany\": \"Manager\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/company",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"company"
 							]
 						}
 					},
