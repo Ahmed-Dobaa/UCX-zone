@@ -14,15 +14,15 @@ module.exports = {
       defaultValue: '0'
     },
     sector: {
-      type: Sequelize.INTEGER(10).UNSIGNED,
+      type: Sequelize.STRING(100), ///.INTEGER(10).UNSIGNED,
       allowNull: true
     },
     subSector: {
-      type: Sequelize.INTEGER(10).UNSIGNED,
+      type: Sequelize.STRING(100), //.INTEGER(10).UNSIGNED,
       allowNull: true
     },
     legalForm: {
-      type: Sequelize.INTEGER(10).UNSIGNED,
+      type: Sequelize.STRING(100), //.INTEGER(10).UNSIGNED,
       allowNull: true
     },
     verifiedAt: {

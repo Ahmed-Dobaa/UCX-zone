@@ -15,15 +15,15 @@ module.exports = function (sequelize, DataTypes) {
       defaultValue: false
     },
     sector: {
-      type: DataTypes.INTEGER(10).UNSIGNED,
+      type: DataTypes.STRING(100), // INTEGER(10).UNSIGNED,
       allowNull: true
     },
     subSector: {
-      type: DataTypes.INTEGER(10).UNSIGNED,
+      type: DataTypes.STRING(100), //.INTEGER(10).UNSIGNED,
       allowNull: true
     },
     legalForm: {
-      type: DataTypes.INTEGER(10).UNSIGNED,
+      type: DataTypes.STRING(100), //INTEGER(10).UNSIGNED,
       allowNull: true
     },
     verifiedAt: {

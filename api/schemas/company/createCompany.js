@@ -1,9 +1,9 @@
 const Joi = require('joi');
 
 const address = Joi.object({
-  streetNumber: Joi.string().example('102'),
-  streetName: Joi.string().example('Abu El-Ella main road'),
-  governorate: Joi.string().example('El-Zamalek'),
+  // streetNumber: Joi.string().example('102'),
+  // streetName: Joi.string().example('Abu El-Ella main road'),
+  // governorate: Joi.string().example('El-Zamalek'),
   city: Joi.string().example('Cairo'),
   country: Joi.string().example('Egypt')
 });
@@ -26,8 +26,9 @@ module.exports = {
         otherAddresses: Joi.array().items(address).required().label('other address'),
         phoneNumbers: Joi.string().required().label('phone number').example('01155467899'),
         languageId: Joi.number().required().label('language'),
-      },
-      relationToCompany: Joi.string().required().label('relation to company').example('Manager')
+        yearOfEstablishment: Joi.string(),
+        relationToCompany: Joi.string().required().label('relation to company').example('Manager')
+      }
     }
   },
   updateSchema: {}

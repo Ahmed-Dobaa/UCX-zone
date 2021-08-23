@@ -86,13 +86,13 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImFjdGl2ZSI6MCwiaWF0IjoxNjI5NzA3NTE1LCJleHAiOjE2Mjk3OTM5MTV9.L0fWcQsVRdjvrWhXTmagB_uGtmTn0ANBRpkUnwv6KDU",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjI5NzI2Nzc5LCJleHAiOjE2Mjk4MTMxNzl9.KZngYGSpJNmRmjz57r7ufu7kx5fWqqZCH7IcobRQPRw",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": {\"userId\":1},\r\n    \"payload\": {\r\n        \"isConfidential\": \"true\",\r\n       \"companyBasicData\": {\r\n        \"name\": \"test\",\r\n        \"registrationIdNo\": \"4235158542531\",\r\n        \"registrationOffice\": \"Cairo\",\r\n        \"sector\": 1,\r\n        \"subSector\": 2,\r\n        \"companyPurpose\": \"test\",\r\n        \"productsOrServices\": \"Software\",\r\n        \"legalForm\": 2,\r\n        \"address\": \"cairo\",\r\n        \"otherAddresses\": [\"Alex\"],\r\n        \"phoneNumbers\": \"01155467899\",\r\n        \"languageId\": 1\r\n    },\r\n    \"relationToCompany\": \"Manager\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"params\": {\"userId\":1},\r\n    \"payload\": {\r\n        \"isConfidential\": \"true\",\r\n       \"companyBasicData\": {\r\n        \"name\": \"ucx\",  \r\n        \"registrationIdNo\": \"4235158542531\",  \r\n        \"registrationOffice\": \"Cairo\", \r\n        \"sector\": \"Technology\",\r\n        \"subSector\": \"Mobiles\",  \r\n        \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n        \"productsOrServices\": \"Software\",\r\n        \"legalForm\": \"Mobile Software\",  \r\n        \"address\":  \"{ city: cairo, country: egypt }\",\r\n        \"otherAddresses\": [\"Alex\"],\r\n        \"phoneNumbers\": \"01155467899\",\r\n        \"languageId\": 1,\r\n        \"YearOfEstablishment\": \"2021\",\r\n        \"relationToCompany\": \"Manager\"\r\n    }\r\n    \r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

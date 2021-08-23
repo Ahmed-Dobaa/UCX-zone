@@ -42,7 +42,7 @@ module.exports = {
     let transaction;
 
     try {
-      const payload = request.payload;
+      const payload = request.payload.payload.companyBasicData;
       transaction = await models.sequelize.transaction();
       const createdCompanyBasicData = await models.companiesBasicData.create(payload, { transaction });
       request.payload.payload.companyBasicData.companyBasicDataId = createdCompanyBasicData.id;

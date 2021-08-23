@@ -50,6 +50,10 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: true
     },
+    relationToCompany: {
+      type: DataTypes.STRING(45),
+      allowNull: true
+    },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
