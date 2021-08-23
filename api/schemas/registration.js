@@ -18,6 +18,10 @@ module.exports = {
     companyName: Joi.string().allow(null, '').label('company name'),
     position_in_company: Joi.string().allow(null, '').label('position in company'),
     website_of_company: Joi.string().allow(null, '').label('website of company'),
-    media_source: Joi.string().optional()
+    media_source: Joi.string().optional(),
+    minimum_investment_amount: Joi.number().required(),
+    maximun_investment_amount: Joi.number().required(),
+    target_country: Joi.string(),
+    target_sectors: Joi.string()
   }
 };

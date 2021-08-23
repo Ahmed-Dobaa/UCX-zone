@@ -14,6 +14,10 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(255),
       allowNull: true,
     },
+    companyName: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
     email: {
       type: DataTypes.STRING(255),
       allowNull: true,
@@ -97,6 +101,30 @@ module.exports = function (sequelize, DataTypes) {
     subscription: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
+    },
+    website_of_company: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    minimum_investment_amount: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    maximun_investment_amount: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    position_in_company: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    target_country: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    target_sectors: {
+      type: DataTypes.STRING(100),
+      allowNull: true
     },
     createdAt: {
       type: DataTypes.DATE,

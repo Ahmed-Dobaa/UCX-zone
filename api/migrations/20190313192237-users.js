@@ -12,6 +12,22 @@ module.exports = {
       type: Sequelize.STRING(255),
       allowNull: true,
     },
+    companyName: {
+      type: Sequelize.STRING(255),
+      allowNull: true,
+    },
+    position_in_company: {
+      type: Sequelize.STRING(100),
+      allowNull: true
+    },
+    target_country: {
+      type: Sequelize.STRING(100),
+      allowNull: true
+    },
+    target_sectors: {
+      type: Sequelize.STRING(100),
+      allowNull: true
+    },
     email: {
       type: Sequelize.STRING(255),
       allowNull: true,
@@ -95,6 +111,18 @@ module.exports = {
     subscription: {
       type: Sequelize.INTEGER(11),
       allowNull: true,
+    },
+    website_of_company: {
+      type: Sequelize.STRING(100),
+      allowNull: true
+    },
+    minimum_investment_amount: {
+      type: Sequelize.INTEGER(11),
+      allowNull: true
+    },
+    maximun_investment_amount: {
+      type: Sequelize.INTEGER(11),
+      allowNull: true
     },
     createdAt: {
       type: Sequelize.DATE,
