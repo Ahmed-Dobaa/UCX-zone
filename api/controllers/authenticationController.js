@@ -34,7 +34,7 @@ module.exports = {
 
       createdUser = _.omit(createdUser.dataValues, privateAttributes);
 
-      // await Mailer.sendUserActivationMail(request.payload.email, activationToken);
+      await Mailer.sendUserActivationMail(request.payload.email, activationToken);
 
       return reply.response(createdUser).code(201);
     }

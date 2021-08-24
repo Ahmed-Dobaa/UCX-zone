@@ -31,14 +31,14 @@ module.exports = {
     authKey: 'o12omucSlk7maWgbsAzSuG6eDlrPjpRb'
   },
   mailing: {
-    host: '',
-    port: 465,
+    host: 'smtp.gmail.com',
+    port: 465, // 587
     secure: true, // true for 465, false for other ports
-    from: '',
+    from: 'UCX Zone',
     subjects: { activationMail: 'Activation Mail' },
     auth: {
-      user: '', // generated ethereal user
-      pass: '' // generated ethereal password
+      user: 'ucx.zone6@gmail.com', // generated ethereal user
+      pass: 'Ahmedmob@UCX6000' // generated ethereal password
     }
   },
 };
