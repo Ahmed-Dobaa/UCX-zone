@@ -120,8 +120,6 @@ module.exports = {
           secret: userService.generateActivationToken(),
           active: 0
         };
-        console.log("here")
-           console.log(ownershipUser);
         const createdUser = await models.users.create(ownershipUser, { transaction });
         await models.usersInvestees.create({ userId: createdUser.id, investeeId: request.params.investeeId, roleId: 4 }, { transaction });
         createdInvesteeOwnerships.accountId = createdUser.id;
