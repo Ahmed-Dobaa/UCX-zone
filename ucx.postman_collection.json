@@ -114,6 +114,148 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "investee",
+			"item": [
+				{
+					"name": "create investee company",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjI5NzkyNjM1LCJleHAiOjE2Mjk4NzkwMzV9.kisDw-_04A1MZ2kvRFEh8PJUEmlQX7QTXahRo_Fpr60",
+								"type": "text"
+							},
+							{
+								"key": "headers.accept-language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"params\": { \"userId\" :1 },\r\n    \"payload\": {\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"4235158542531\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"otherAddresses\": [\"Alex\"],\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/1/investees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"1",
+								"investees"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "investee capital",
+			"item": [
+				{
+					"name": "create investee capital",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjI5NzkyNjM1LCJleHAiOjE2Mjk4NzkwMzV9.kisDw-_04A1MZ2kvRFEh8PJUEmlQX7QTXahRo_Fpr60",
+								"type": "text"
+							},
+							{
+								"key": "headers.accept-language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 1,\r\n        \"investeeId\": 1\r\n    },\r\n    \"payload\": {\r\n        \"capitalCurrencyId\": 1,\r\n        \"issuedCapital\": 1000,\r\n        \"paidInCapital\": 200000,\r\n        \"currentTotalShares\": 3000000,\r\n        \"bookValue\": 254855,\r\n        \"authorizedCapital\": 251144\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/1/investees/1/capitals",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"1",
+								"investees",
+								"1",
+								"capitals"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "investee board director",
+			"item": [
+				{
+					"name": "create investee board director",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjI5NzkyNjM1LCJleHAiOjE2Mjk4NzkwMzV9.kisDw-_04A1MZ2kvRFEh8PJUEmlQX7QTXahRo_Fpr60",
+								"type": "text"
+							},
+							{
+								"key": "headers.accept-language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 1,\r\n        \"investeeId\": 1\r\n    },\r\n    \"payload\": {\r\n        \"email\": \"test@gmail.com\",\r\n        \"boardOfDirectorTranslation\": {\r\n            \"name\": \"ahmed\",\r\n            \"position\": \"Manager\",\r\n            \"phoneNumber\": \"01013848807\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/1/investees/1/directors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"1",
+								"investees",
+								"1",
+								"directors"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

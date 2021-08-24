@@ -48,7 +48,7 @@ module.exports = {
     let transaction;
     try {
 
-      const { payload } = request;
+      const { payload } = request.payload;
       const language = request.pre.languageId;
       payload.investeeId = request.params.investeeId;
       payload.createdBy = request.auth.decoded.id;
@@ -61,9 +61,9 @@ module.exports = {
       transaction = await models.sequelize.transaction();
 
       const createdDirector = await models.investeeBoardOfDirectors.create(payload, { transaction });
-      request.payload.boardOfDirectorTranslation.languageId = language;
-      request.payload.boardOfDirectorTranslation.investeeBoardOfDirectorsId = createdDirector.id;
-      const createdBoardOfDirectorTranslation = await models.investeeBoardOfDirectorTranslation.create(request.payload.boardOfDirectorTranslation, { transaction });
+      request.payload.payload.boardOfDirectorTranslation["languageId"] = language;
+      request.payload.payload.boardOfDirectorTranslation.investeeBoardOfDirectorsId = createdDirector.id;
+      const createdBoardOfDirectorTranslation = await models.investeeBoardOfDirectorTranslation.create(request.payload.payload.boardOfDirectorTranslation, { transaction });
       await transaction.commit();
 
       return reply.response(_.assign(createdDirector.toJSON(), { boardOfDirectorTranslation: createdBoardOfDirectorTranslation.toJSON() })).code(201);

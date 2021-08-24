@@ -684,12 +684,12 @@ module.exports = [
     options: {
       auth: false,
       description: 'Create investee Company',
-      payload: {
-        maxBytes: 2097152, // maximum payload size in bytes (2M)
-        output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
-        parse: true, // The parse property determines if the incoming payload gets parsed
-        allow: ['multipart/form-data']
-      },
+      // payload: {
+      //   maxBytes: 2097152, // maximum payload size in bytes (2M)
+      //   output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
+      //   parse: true, // The parse property determines if the incoming payload gets parsed
+      //   allow: ['multipart/form-data']
+      // },
       // app: { allowedPermission: { resource: 'investees', action: 'create' } },
       pre: [{ method: helperService.getLanguageId, assign: 'languageId' }],
       validate: investeeSchema.createSchema,

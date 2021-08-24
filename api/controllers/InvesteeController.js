@@ -195,7 +195,7 @@ module.exports = {
       transaction = await models.sequelize.transaction();
       const userId = request.auth.decoded ? request.auth.decoded.id : request.params.userId;
 
-      const { payload } = request;
+      const { payload } = request.payload;
       const { companyBasicData, investeeTranslation } = payload;
       companyBasicData.companiesBasicDataTranslation.languageId = request.pre.languageId;
       investeeTranslation.languageId = request.pre.languageId;

@@ -49,7 +49,7 @@ module.exports = {
   create: async function (request, reply) {
     try {
       const language = request.pre.languageId;
-      const { payload } = request;
+      const { payload } = request.payload;
       payload.investeeId = request.params.investeeId;
       payload.createdBy = request.auth.decoded.id;
       payload.languageId = language;
