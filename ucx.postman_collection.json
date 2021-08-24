@@ -256,6 +256,54 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "investee shareholder (ownership)",
+			"item": [
+				{
+					"name": "create shareholer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjI5NzkyNjM1LCJleHAiOjE2Mjk4NzkwMzV9.kisDw-_04A1MZ2kvRFEh8PJUEmlQX7QTXahRo_Fpr60",
+								"type": "text"
+							},
+							{
+								"key": "headers.accept-language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 1,\r\n        \"investeeId\": 1\r\n    },\r\n    \"payload\": {\r\n        \"email\": \"hareholder@gmail.com\",\r\n        \"gender\": \"M\",\r\n        \"ownershipTranslation\": {\r\n            \"shareholderName\": \"ahmed salah\",\r\n            \"phoneNumber\": \"01013848807\",\r\n            \"dob\": \"2020-5-5\",\r\n            \"ownedShares\": 10000,\r\n            \"value\": 1000,\r\n            \"percent\": 40\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/1/investees/1/ownerships",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"1",
+								"investees",
+								"1",
+								"ownerships"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
