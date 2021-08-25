@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"ahmed\",\r\n    \"phoneNumber\": \"52145855\",\r\n    \"country\": \"egypt\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"confirmationPassword\": \"123456\",\r\n    \"interests\": [\"Advisory firm\"],\r\n    \"companyName\": \"company name\",\r\n    \"position_in_company\": \"manager\",\r\n    \"website_of_company\": \"test\",\r\n    \"minimum_investment_amount\": 10,\r\n    \"maximun_investment_amount\": 30,\r\n    \"target_country\": \"Egypt\",\r\n    \"target_sectors\": \"egypt\"\r\n}",
+							"raw": "{\r\n    \"name\": \"ahmed\",\r\n    \"phoneNumber\": \"52145855\",\r\n    \"country\": \"egypt\",\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"confirmationPassword\": \"123456\",\r\n    \"interests\": [\"Advisory firm\"],\r\n    \"companyName\": \"company name\",\r\n    \"position_in_company\": \"manager\",\r\n    \"website_of_company\": \"test\",\r\n    \"minimum_investment_amount\": 10,\r\n    \"maximun_investment_amount\": 30,\r\n    \"target_country\": \"Egypt\",\r\n    \"target_sectors\": \"egypt\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -298,6 +298,54 @@
 								"investees",
 								"1",
 								"ownerships"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "investee auditor",
+			"item": [
+				{
+					"name": "create auditor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjI5ODgxNDExLCJleHAiOjE2Mjk5Njc4MTF9.PmWmbEu-iILFw8_qPFcIcW1zDEzRctxCIQv55lqTr8E",
+								"type": "text"
+							},
+							{
+								"key": "headers.accept-language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 1,\r\n        \"companyId\": 2\r\n    },\r\n    \"payload\": {\r\n        \"email\": \"test@gmail.com\",\r\n        \"auditorTranslation\": {\r\n            \"name\": \"mohammed\",\r\n            \"address\": {\r\n                \"city\": \"cairo\"\r\n            },\r\n            \"phoneNumber\": \"010254856657\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/1/investees/1/auditors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"1",
+								"investees",
+								"1",
+								"auditors"
 							]
 						}
 					},

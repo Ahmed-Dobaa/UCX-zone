@@ -45,21 +45,21 @@ module.exports = {
     let transaction;
     try {
       const language= request.pre.languageId;
-      request.payload.investeeId = request.params.companyId;
+      // request.payload.investeeId = request.params.companyId;
       request.payload.createdBy = request.auth.decoded.id;
-      const foundInvesteeCompanies = await models.investee.findOne({ where: { id: request.params.companyId } });
+      const foundInvesteeCompanies = await models.investee.findOne({ where: { companyId: request.params.companyId } }); // id
 
       if(_.isEmpty(foundInvesteeCompanies)) {
 
         return Boom.notFound('The Investee Company Is Not Found, You have to create It First');
       }
-
+      request.payload.investeeId = foundInvesteeCompanies.id;
       transaction = await models.sequelize.transaction();
 
       const createdAuditor = await models.investeeAuditor.create(request.payload, { transaction });
-      request.payload.auditorTranslation.languageId = language;
-      request.payload.auditorTranslation.investeeAuditorId = createdAuditor.id;
-      const createdAuditorTranslation = await models.investeeAuditorTranslation.create(request.payload.auditorTranslation, { transaction });
+      request.payload.payload.auditorTranslation.languageId = language;
+      request.payload.payload.auditorTranslation.investeeAuditorId = createdAuditor.id;
+      const createdAuditorTranslation = await models.investeeAuditorTranslation.create(request.payload.payload.auditorTranslation, { transaction });
       await transaction.commit();
 
       return reply.response(_.assign(createdAuditor.toJSON(), { auditorTranslation: createdAuditorTranslation.toJSON() })).code(201);
