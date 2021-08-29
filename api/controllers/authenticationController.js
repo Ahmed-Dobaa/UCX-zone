@@ -33,10 +33,8 @@ module.exports = {
       const privateAttributes = ['password', 'activationToken', 'secret', 'country'];
 
       createdUser = _.omit(createdUser.dataValues, privateAttributes);
-
-      await Mailer.sendUserActivationMail(request.payload.email, activationToken);
-
-      return reply.response(createdUser).code(201);
+      // await Mailer.sendUserActivationMail(request.payload.email, activationToken);
+     return reply.response(createdUser).code(201);
     }
     catch (e) {
       console.log('error', e);
