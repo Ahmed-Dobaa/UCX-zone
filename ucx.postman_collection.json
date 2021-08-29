@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"companyName\": \"company name\",\r\n    \"website_of_company\": \"test\",\r\n    \"country\": \"egypt\",\r\n    \"target_country\": \"Egypt\",\r\n    \"target_sectors\": \"egypt\",\r\n    \"minimum_investment_amount\": 10,\r\n    \"maximun_investment_amount\": 30,\r\n    \"name\": \"ahmed\",\r\n    \"position_in_company\": \"manager\",\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"phoneNumber\": \"52145855\",\r\n    \"password\": \"123456\",\r\n    \"confirmationPassword\": \"123456\",\r\n    \"interests\": [\"Advisory firm\"],\r\n    \"nationality\": \"Egypt\",\r\n    \"annual_sales\": 1000,\r\n    \"estimated_company_value\": 5821,\r\n    \"required_investment_amount\": 514,\r\n    \"description\": \"description\"\r\n}",
+							"raw": "{\r\n    \"companyName\": \"company name\",\r\n    \"website_of_company\": \"test\",\r\n    \"country\": \"egypt\",\r\n    \"target_country\": \"Egypt\",\r\n    \"target_sectors\": \"egypt\",\r\n    \"minimum_investment_amount\": 10,\r\n    \"maximun_investment_amount\": 30,\r\n    \"name\": \"ahmed\",\r\n    \"position_in_company\": \"manager\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"phoneNumber\": \"52145855\",\r\n    \"password\": \"123456\",\r\n    \"confirmationPassword\": \"123456\",\r\n    \"interests\": [\"Advisory firm\"],\r\n    \"nationality\": \"Egypt\",\r\n    \"annual_sales\": 1000,\r\n    \"estimated_company_value\": 5821,\r\n    \"required_investment_amount\": 514,\r\n    \"description\": \"description\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

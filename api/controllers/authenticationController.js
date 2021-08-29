@@ -121,7 +121,7 @@ module.exports = {
           }, foundUser.secret, payload.stayLoggedIn, agent.toJSON());
           await userService.saveAccessToken(foundUser.id, accessToken, accessToken, agent.toJSON());
 
-          return reply.response({ accessToken: accessToken }).header('Authorization', accessToken);
+          return reply.response({ accessToken: accessToken, user_info: foundUser }).header('Authorization', accessToken);
         }
       }
 
@@ -142,7 +142,7 @@ module.exports = {
       }, foundUser.secret, payload.stayLoggedIn, agent.toJSON());
       await userService.saveAccessToken(foundUser.id, accessToken, accessToken, agent.toJSON());
 
-      return reply.response({ accessToken: accessToken }).header('Authorization', accessToken);
+      return reply.response({ accessToken: accessToken, user_info: foundUser }).header('Authorization', accessToken);
     }
     catch (e) {
       console.log('Error', e);
