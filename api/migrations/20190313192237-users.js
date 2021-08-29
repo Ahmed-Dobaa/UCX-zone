@@ -1,5 +1,7 @@
 'use strict';
 
+const sequelize = require('sequelize');
+
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('users', {
     id: {
@@ -28,6 +30,26 @@ module.exports = {
       type: Sequelize.STRING(100),
       allowNull: true
     },
+    nationality: {
+      type: Sequelize.STRING(100),
+      allowNull: true
+    },
+    annual_sales: {
+       type: Sequelize.INTEGER(11),
+       allowNull: true
+    },
+    estimated_company_value: {
+      type: Sequelize.INTEGER(11),
+      allowNull: true
+    },
+    required_investment_amount: {
+      type: Sequelize.INTEGER(11),
+      allowNull: true
+     },
+     description: {
+      type: Sequelize.STRING(1000),
+      allowNull: true
+     },
     email: {
       type: Sequelize.STRING(255),
       allowNull: true,

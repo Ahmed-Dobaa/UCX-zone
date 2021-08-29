@@ -126,6 +126,26 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: true
     },
+    nationality: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    annual_sales: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+   },
+   estimated_company_value: {
+    type: DataTypes.INTEGER(11),
+    allowNull: true
+   },
+   required_investment_amount: {
+    type: DataTypes.INTEGER(11),
+    allowNull: true
+   },
+   description: {
+    type: DataTypes.STRING(1000),
+    allowNull: true
+   },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,

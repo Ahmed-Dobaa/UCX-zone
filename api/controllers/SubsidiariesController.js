@@ -46,8 +46,9 @@ module.exports = {
     try {
       const { companyId } = request.params;
       const { payload } = request;
-      Company = await models.companiesBasicData.findOne({ where: { registration_id_no: payload.registration_id_no } });
-
+      Company = await models.companiesBasicDataTranslation.findOne({ where: { registrationIdNo: payload.payload.registration_id_no } });
+      console.log(Company)
+      // companiesBasicData
       if(!_.isEmpty(Company)) { // If company already exists, just add the relation to companies_relations table.
 
         if(Company.id === companyId) { // End user might sent request.param.companyId == foundCompay.id to avoid that do this check.
@@ -71,15 +72,14 @@ module.exports = {
 
         return reply.response({}).code(HTTP_SUCCESS_CODE);
       }
-
       // If company doesn't exist, then create the company, add the relation to companies_relations table and send role request.
       transaction = await models.sequelize.transaction();
-      Company = await models.companiesBasicData.create(payload, { transaction });
+      Company = await models.companiesBasicData.create(payload.payload, { transaction });
 
       await models.companies_relations.create({
         parentId: companyId,
         childId: Company.id,
-        sharePercentage: payload.sharePercentage
+        sharePercentage: payload.payload.sharePercentage
       }, { transaction });
       await transaction.commit();
 

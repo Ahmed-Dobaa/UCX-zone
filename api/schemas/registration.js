@@ -22,6 +22,11 @@ module.exports = {
     minimum_investment_amount: Joi.number().required(),
     maximun_investment_amount: Joi.number().required(),
     target_country: Joi.string(),
-    target_sectors: Joi.string()
+    target_sectors: Joi.string(),
+    nationality: Joi.string().optional(),
+    annual_sales: Joi.number().optional(),
+    estimated_company_value: Joi.number().optional(),
+    required_investment_amount: Joi.number().optional(),
+    description: Joi.string().optional()
   }
 };
