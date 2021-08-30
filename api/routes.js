@@ -826,7 +826,7 @@ module.exports = [
     method: 'POST',
     options: {
       payload: { allow: ['application/json'] },
-      auth: 'jwt',
+      auth: false, //'jwt',
       description: 'Create investee capital',
       app: { allowedPermission: { resource: 'investeeCapitals', action: 'create' } },
       pre: [
@@ -936,7 +936,7 @@ module.exports = [
     method: 'POST',
     options: {
       payload: { allow: ['application/json'] },
-      auth: 'jwt',
+      auth: false, //'jwt',
       description: 'Create investee ownership',
       app: { allowedPermission: { resource: 'investeeOwnerships', action: 'create' } },
       pre: [
@@ -1061,7 +1061,7 @@ module.exports = [
         // { method: helperService.authorizeUser },
         { method: helperService.getLanguageId, assign: 'languageId' }
       ],
-      auth: 'jwt',
+      auth: false, //'jwt',
       validate: createBoardOfDirectorsPositionSchema,
       handler: boardOfDirectorsPositionsController.create
     }
@@ -1143,7 +1143,7 @@ module.exports = [
     options: {
       payload: { allow: ['application/json'] },
       description: 'create new Director',
-      auth: 'jwt',
+      auth: false, //'jwt',
       app: { allowedPermission: { resource: 'investeeDirectors', action: 'create' } },
       pre: [
         // { method: helperService.authorizeUser },

@@ -51,7 +51,7 @@ module.exports = {
       const language = request.pre.languageId;
       const { payload } = request.payload;
       payload.investeeId = request.params.investeeId;
-      payload.createdBy = request.auth.decoded.id;
+      payload.createdBy = 15, //request.auth.decoded.id;
       payload.languageId = language;
       const foundInvesteeCompany = await models.investee.findOne({ where: { id: request.params.investeeId } });
 

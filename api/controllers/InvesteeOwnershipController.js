@@ -87,7 +87,7 @@ module.exports = {
 
 
       request.payload.investeeId = request.params.investeeId;
-      request.payload.createdBy = request.auth.decoded.id;
+      request.payload.createdBy = 15; // request.auth.decoded.id;
       const createdOwnership = await models.ownerships.create(request.payload.payload, { transaction });
       const createdInvesteeOwnerships = await models.investeeOwnerships.create({
         ownershipId: createdOwnership.id,
