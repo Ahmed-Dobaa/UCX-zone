@@ -1329,7 +1329,7 @@ module.exports = [
     method: 'post',
     options: {
       payload: { allow: ['application/json'] },
-      auth: 'jwt',
+      auth: false, //'jwt',
       description: 'create new investee auditor',
       app: { allowedPermission: { resource: 'investeeAuditors', action: 'create' } },
       pre: [

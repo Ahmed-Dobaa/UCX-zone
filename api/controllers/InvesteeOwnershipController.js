@@ -92,7 +92,7 @@ module.exports = {
       const createdInvesteeOwnerships = await models.investeeOwnerships.create({
         ownershipId: createdOwnership.id,
         investeeId: foundInvesteeCompanies.id,
-        createdBy: request.auth.decoded.id,
+        createdBy: 15 //request.auth.decoded.id,
       }, { transaction });
 
 
