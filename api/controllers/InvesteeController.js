@@ -204,6 +204,7 @@ module.exports = {
       const checkRegistrationIdNo = await models.companiesBasicDataTranslation.findOne( { where: {
                  registrationIdNo: companyBasicData.companiesBasicDataTranslation.registrationIdNo }})
 
+      // check if this registration id number exist or not
       if(checkRegistrationIdNo){
         return reply.response({status: 406, message: "This registration id number already exist"}).code(406);
       }
