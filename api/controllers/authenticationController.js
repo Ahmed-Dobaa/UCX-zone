@@ -55,7 +55,7 @@ module.exports = {
 
       await models.users.update({ 'active': 1, 'activationToken': null ,'emailVerifiedAt': new Date() }, { where: { id: foundUser.id } });
 
-      return reply.response().code(200);
+      return reply.response({status: 200, message: "User activated"}).code(200);
     }
     catch (e) {
       console.log('Error', e);
@@ -93,6 +93,10 @@ module.exports = {
 
       if(_.isEmpty(foundUser) || !foundUser.validPassword(payload.password)) {
         return Boom.unauthorized('Wrong Email Or Password');
+      }
+
+      if(foundUser.active === 0) {
+        return Boom.unauthorized('Please confirm your email');
       }
 
       if(foundUser.twoFactorAuthentication && request.headers['x-opt']) {
