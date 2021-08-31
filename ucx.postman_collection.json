@@ -374,7 +374,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 1,\r\n        \"companyId\": 2\r\n    },\r\n    \"payload\": {\r\n        \"name\": \"sub\",\r\n        \"registrationIdNo\": \"21548\",\r\n        \"registrationOffice\": \"cairo\",\r\n        \"sector\": \"tech\",\r\n        \"subSector\": \"mobiles\",\r\n        \"company_purpose\": \"money\",\r\n        \"products_or_services\": \"software\",\r\n        \"legalForm\": \"test\",\r\n        \"country\": \"egypt\",\r\n        \"city\": \"cairo\",\r\n        \"other_addresses\": \"test\",\r\n        \"phone_numbers\": \"01155467899\",\r\n        \"relationToCompany\": \"manager\",\r\n        \"sharePercentage\": 20,\r\n        \"haveManagementRight\": \"1\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 15,\r\n        \"companyId\": 2\r\n    },\r\n    \"payload\": {\r\n        \"name\": \"sub\",\r\n        \"registrationIdNo\": \"21548\",\r\n        \"registrationOffice\": \"cairo\",\r\n        \"sector\": \"tech\",\r\n        \"subSector\": \"mobiles\",\r\n        \"company_purpose\": \"money\",\r\n        \"products_or_services\": \"software\",\r\n        \"legalForm\": \"test\",\r\n        \"country\": \"egypt\",\r\n        \"city\": \"cairo\",\r\n        \"other_addresses\": \"test\",\r\n        \"phone_numbers\": \"01155467899\",\r\n        \"relationToCompany\": \"manager\",\r\n        \"sharePercentage\": 20,\r\n        \"haveManagementRight\": \"1\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -382,7 +382,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/company/2/subsidiaries",
+							"raw": "http://localhost:12225/users/15/company/2/subsidiaries",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -390,7 +390,7 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"15",
 								"company",
 								"2",
 								"subsidiaries"
@@ -442,6 +442,60 @@
 								"investees",
 								"12",
 								"incomes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "attachement",
+			"item": [
+				{
+					"name": "create attachement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept-language",
+								"value": "en",
+								"type": "text"
+							},
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsIm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ1Y3hAdWN4LmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjMwMzk1MjI2LCJleHAiOjE2MzA0ODE2MjZ9.h28pRs-nlwxpi4YlrHSow1-NOI7VkQodeZvcJoy-lAs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/SOFT ZONE/Desktop/Capture.PNG"
+								},
+								{
+									"key": "attachmentTypeId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/15/investees/2/attachments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"15",
+								"investees",
+								"2",
+								"attachments"
 							]
 						}
 					},

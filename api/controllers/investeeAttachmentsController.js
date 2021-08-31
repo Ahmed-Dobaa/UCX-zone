@@ -38,7 +38,7 @@ module.exports = {
     const relativePath = `uploads/investee/${request.params.companyId}/`;
     const fileName = `${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
     const fullPath = path.join(__dirname, '../', relativePath);
-
+      console.log("here")
     try {
 
       const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif',
@@ -62,7 +62,7 @@ module.exports = {
       await fsPromises.mkdir(fullPath, { recursive: true });
       await fsPromises.access(fullPath, fs.constants.W_OK);
       await request.payload.file.pipe(fs.createWriteStream(`${fullPath}${fileName}`));
-      request.payload.createdBy = request.auth.decoded.id;
+      request.payload.createdBy = request.params.userId; //request.auth.decoded.id;
       request.payload.companyId = request.params.companyId;
       request.payload.attachmentPath = `${relativePath}${fileName}`;
       const createdInvesteeAttachmentsType = await models.investeeAttachments.create(request.payload);

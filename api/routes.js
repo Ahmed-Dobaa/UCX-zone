@@ -1508,7 +1508,7 @@ module.exports = [
         parse: true, // The parse property determines if the incoming payload gets parsed
         allow: ['multipart/form-data']
       },
-      auth: 'jwt',
+      auth: false, // 'jwt',
       description: 'create new investee attachment',
       app: { allowedPermission: { resource: 'investeeAttachments', action: 'create' } },
       pre: [
