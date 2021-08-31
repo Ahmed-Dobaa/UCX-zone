@@ -46,7 +46,7 @@ module.exports = {
       const language = request.pre.languageId;
       const { payload } = request;
       payload.investeeId = request.params.investeeId;
-      payload.createdBy = request.auth.decoded.id;
+      payload.createdBy = request.params.userId; // request.auth.decoded.id;
       payload.languageId = language;
       const foundInvesteeCompany = await models.investee.findOne({ where: { id: request.params.investeeId } });
 
@@ -65,17 +65,18 @@ module.exports = {
       }
 
       transaction = await models.sequelize.transaction();
-      const createdInvesteeIncome = await models.investeeIncomes.create(payload, { transaction });
-      payload.languageId = language;
-      payload.investeeIncomeId = createdInvesteeIncome.id;
-      const createdInvesteeIncomeTranslation = await models.investeeIncomeTranslation.create(payload, { transaction });
-
+      const createdInvesteeIncome = await models.investeeIncomes.create(payload);
+      payload.payload.languageId = language;
+      payload.payload.investeeIncomeId = createdInvesteeIncome.id;
+      const createdInvesteeIncomeTranslation = await models.investeeIncomeTranslation.create(payload.payload);
+         console.log("created")
       return reply.response(_.set(createdInvesteeIncome.dataValues, 'translation', createdInvesteeIncomeTranslation.dataValues)).code(201);
     }
     catch (e) {
       console.log('error', e);
 
       if(transaction) {
+        console.log("here")
         await transaction.rollback();
       }
 

@@ -1909,7 +1909,7 @@ module.exports = [
     method: 'post',
     options: {
       payload: { allow: ['application/json'] },
-      auth: 'jwt',
+      auth: false, //'jwt',
       description: 'create new investee income',
       app: { allowedPermission: { resource: 'investeeIncomes', action: 'create' } },
       pre: [

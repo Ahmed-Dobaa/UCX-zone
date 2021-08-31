@@ -50,7 +50,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"ucx@ucx.com\",\r\n    \"password\": \"Aa@12345\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -125,7 +125,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjI5NzkyNjM1LCJleHAiOjE2Mjk4NzkwMzV9.kisDw-_04A1MZ2kvRFEh8PJUEmlQX7QTXahRo_Fpr60",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsIm5hbWUiOiJhaG1lZCIsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJhY3RpdmUiOjAsImlhdCI6MTYzMDMwODIyOSwiZXhwIjoxNjMwMzk0NjI5fQ.79Mh7iW3zhqPi8mnvwd-_Zoi8R5mbLr5DXA9X-QUAEg",
 								"type": "text"
 							},
 							{
@@ -136,7 +136,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": { \"userId\" :1 },\r\n    \"payload\": {\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"4235158542531\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"otherAddresses\": [\"Alex\"],\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"params\": { \"userId\" : 16 },\r\n    \"payload\": {\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"4235158542531\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"otherAddresses\": [\"Alex\"],\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -144,7 +144,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees",
+							"raw": "http://localhost:12225/users/16/investees",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -152,7 +152,7 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"16",
 								"investees"
 							]
 						}
@@ -171,7 +171,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjI5NzkyNjM1LCJleHAiOjE2Mjk4NzkwMzV9.kisDw-_04A1MZ2kvRFEh8PJUEmlQX7QTXahRo_Fpr60",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsIm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ1Y3hAdWN4LmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjMwMzEwNzI2LCJleHAiOjE2MzAzOTcxMjZ9.ILQiz0gFtpJUI-660s55ugdXRTmG7_b34VnvrWpyYbE",
 								"type": "text"
 							},
 							{
@@ -182,7 +182,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 1,\r\n        \"investeeId\": 1\r\n    },\r\n    \"payload\": {\r\n        \"capitalCurrencyId\": 1,\r\n        \"issuedCapital\": 1000,\r\n        \"paidInCapital\": 200000,\r\n        \"currentTotalShares\": 3000000,\r\n        \"bookValue\": 254855,\r\n        \"authorizedCapital\": 251144\r\n    }\r\n}",
+							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 15,\r\n        \"investeeId\": 14\r\n    },\r\n    \"payload\": {\r\n         \"authorizedCapital\": \"يش\",\r\n\"bookValue\": 22,\r\n\"capitalCurrencyId\": 54,\r\n\"currentTotalShares\": 22,\r\n\"issuedCapital\": 41,\r\n\"paidInCapital\": 22\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -190,7 +190,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees/1/capitals",
+							"raw": "http://localhost:12225/users/15/investees/14/capitals",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -198,9 +198,9 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"15",
 								"investees",
-								"1",
+								"14",
 								"capitals"
 							]
 						}
@@ -219,7 +219,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjI5NzkyNjM1LCJleHAiOjE2Mjk4NzkwMzV9.kisDw-_04A1MZ2kvRFEh8PJUEmlQX7QTXahRo_Fpr60",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsIm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ1Y3hAdWN4LmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjMwMzA4NjE0LCJleHAiOjE2MzAzOTUwMTR9.CZOK8DwaZvbZYkrjehKmHBWAGCPrPldgM3qnvSgH-TE",
 								"type": "text"
 							},
 							{
@@ -230,7 +230,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 1,\r\n        \"investeeId\": 1\r\n    },\r\n    \"payload\": {\r\n        \"email\": \"test@gmail.com\",\r\n        \"boardOfDirectorTranslation\": {\r\n            \"name\": \"ahmed\",\r\n            \"position\": \"Manager\",\r\n            \"phoneNumber\": \"01013848807\"\r\n        }\r\n    }\r\n}",
+							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 15,\r\n        \"investeeId\": 7\r\n    },\r\n    \"payload\": {\r\n        \"email\": \"test@gmail.com\",\r\n        \"boardOfDirectorTranslation\": {\r\n            \"name\": \"ahmed\",\r\n            \"position\": \"Manager\",\r\n            \"phoneNumber\": \"01013848807\"\r\n        }\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -238,7 +238,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees/1/directors",
+							"raw": "http://localhost:12225/users/15/investees/7/directors",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -246,9 +246,9 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"15",
 								"investees",
-								"1",
+								"7",
 								"directors"
 							]
 						}
@@ -363,7 +363,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjI5OTc4NDA3LCJleHAiOjE2MzAwNjQ4MDd9.lcpCDFicPalWD1j6o_y5MJuyBDP70gqslPf7Vj8z-CE",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsIm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ1Y3hAdWN4LmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjMwMzk1MjI2LCJleHAiOjE2MzA0ODE2MjZ9.h28pRs-nlwxpi4YlrHSow1-NOI7VkQodeZvcJoy-lAs",
 								"type": "text"
 							},
 							{
@@ -394,6 +394,54 @@
 								"company",
 								"2",
 								"subsidiaries"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "investee income (financial)",
+			"item": [
+				{
+					"name": "create investee income (financial)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsIm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ1Y3hAdWN4LmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjMwMzk1MjI2LCJleHAiOjE2MzA0ODE2MjZ9.h28pRs-nlwxpi4YlrHSow1-NOI7VkQodeZvcJoy-lAs",
+								"type": "text"
+							},
+							{
+								"key": "accept-language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 15,\r\n        \"investeeId\": 12\r\n    },\r\n    \"payload\": {\r\n        \"year\": 2021,\r\n        \"Sales\": 1000,\r\n        \"COGS\": 2000,\r\n        \"GeneralAndAdministrativeExpense\": 52201,\r\n        \"SellingExpense\": 544,\r\n        \"Interest\": 144,\r\n        \"Tax\": 14,\r\n        \"depreciation\": 12,\r\n        \"otherExpenses\": 89,\r\n        \"otherRevenues\": 54\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/15/investees/12/incomes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"15",
+								"investees",
+								"12",
+								"incomes"
 							]
 						}
 					},
