@@ -201,6 +201,13 @@ module.exports = {
       investeeTranslation.languageId = request.pre.languageId;
 
       // check first that company basic data exist or not.
+      const checkRegistrationIdNo = await models.companiesBasicDataTranslation.findOne( { where: {
+                 registrationIdNo: companyBasicData.companiesBasicDataTranslation.registrationIdNo }})
+
+      if(checkRegistrationIdNo){
+        return reply.response({status: 406, message: "This registration id number already exist"}).code(406);
+      }
+
       const createdCompanyBasicData = await models.companiesBasicData.create(payload.companyBasicData, { transaction });
       companyBasicData.companiesBasicDataTranslation.companyBasicDataId = createdCompanyBasicData.id;
       await models.companiesBasicDataTranslation.create(companyBasicData.companiesBasicDataTranslation, { transaction });
