@@ -1716,7 +1716,7 @@ module.exports = [
     path: '/users/{userId}/company/{companyId}/subsidiaries',
     method: 'POST',
     options: {
-      auth: 'jwt',
+      auth: false, //'jwt',
       description: 'Create subsidiary Company',
       app: { allowedPermission: { resource: 'companySubsidiaries', action: 'create' } },
       // pre: [

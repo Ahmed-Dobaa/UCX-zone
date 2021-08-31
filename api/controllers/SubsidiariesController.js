@@ -47,7 +47,6 @@ module.exports = {
       const { companyId } = request.params;
       const { payload } = request;
       Company = await models.companiesBasicDataTranslation.findOne({ where: { registrationIdNo: payload.payload.registration_id_no } });
-      console.log(Company)
       // companiesBasicData
       if(!_.isEmpty(Company)) { // If company already exists, just add the relation to companies_relations table.
 
