@@ -99,7 +99,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "company",
@@ -141,7 +142,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "investee",
@@ -164,7 +166,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": { \"userId\" : 16 },\r\n    \"payload\": {\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"4235158542531\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"otherAddresses\": [\"Alex\"],\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"params\": { \"userId\" : 15 },\r\n    \"payload\": {\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"42351585451\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"otherAddresses\": [\"Alex\"],\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -172,7 +174,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/16/investees",
+							"raw": "http://localhost:12225/users/15/investees",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -180,14 +182,15 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"16",
+								"15",
 								"investees"
 							]
 						}
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "investee capital",
@@ -235,7 +238,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "investee board director",
@@ -283,7 +287,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "investee shareholder (ownership)",
@@ -331,7 +336,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "investee auditor",
@@ -379,7 +385,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "subsidiary",
@@ -427,7 +434,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "investee income (financial)",
@@ -450,7 +458,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 15,\r\n        \"investeeId\": 12\r\n    },\r\n    \"payload\": {\r\n        \"year\": 2021,\r\n        \"Sales\": 1000,\r\n        \"COGS\": 2000,\r\n        \"GeneralAndAdministrativeExpense\": 52201,\r\n        \"SellingExpense\": 544,\r\n        \"Interest\": 144,\r\n        \"Tax\": 14,\r\n        \"depreciation\": 12,\r\n        \"otherExpenses\": 89,\r\n        \"otherRevenues\": 54\r\n    }\r\n}",
+							"raw": "[\n\t{\n\t\t\"year\": 2032,\n        \"Sales\": 1000,\n        \"COGS\": 2000,\n        \"GeneralAndAdministrativeExpense\": 52201,\n        \"SellingExpense\": 544,\n        \"Interest\": 144,\n        \"Tax\": 14,\n        \"depreciation\": 12,\n        \"otherExpenses\": 89,\n        \"otherRevenues\": 54\n\t},\n\t{\n\t\t\"year\": 2033,\n        \"Sales\": 1000,\n        \"COGS\": 2000,\n        \"GeneralAndAdministrativeExpense\": 52201,\n        \"SellingExpense\": 544,\n        \"Interest\": 144,\n        \"Tax\": 14,\n        \"depreciation\": 12,\n        \"otherExpenses\": 89,\n        \"otherRevenues\": 54\n\t},\n\t{\n\t\t\"year\": 2034,\n        \"Sales\": 1000,\n        \"COGS\": 2000,\n        \"GeneralAndAdministrativeExpense\": 52201,\n        \"SellingExpense\": 544,\n        \"Interest\": 144,\n        \"Tax\": 14,\n        \"depreciation\": 12,\n        \"otherExpenses\": 89,\n        \"otherRevenues\": 54\n\t}\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -475,7 +483,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "attachement",
@@ -509,7 +518,10 @@
 									"value": "1",
 									"type": "text"
 								}
-							]
+							],
+							"options": {
+								"formdata": {}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:12225/users/15/investees/2/attachments",
@@ -529,7 +541,9 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }

@@ -44,32 +44,38 @@ module.exports = {
     let transaction;
     try {
       const language = request.pre.languageId;
-      const { payload } = request;
-      payload.investeeId = request.params.investeeId;
-      payload.createdBy = request.params.userId; // request.auth.decoded.id;
-      payload.languageId = language;
+      // const { payload } = request;
       const foundInvesteeCompany = await models.investee.findOne({ where: { id: request.params.investeeId } });
 
       if(_.isEmpty(foundInvesteeCompany)) {
 
         return Boom.notFound('The Investee Company income Is Not Found');
       }
+      for(let i = 0; i < request.payload.length; i++){
+        const investeeIncome = await models.investeeIncomes.findOne({
+          where: { investeeId: request.params.investeeId },
+          include: [{ association: 'incomeTranslation', required: true, where: { languageId: language, year: request.payload[i].year } }]
+        });
 
-      const investeeIncome = await models.investeeIncomes.findOne({
-        where: { investeeId: request.params.investeeId },
-        include: [{ association: 'incomeTranslation', required: true, where: { languageId: language, year: request.payload.year } }]
-      });
-
-      if(!_.isEmpty(investeeIncome)) {
-        return Boom.notFound(`Investee company income for ${request.payload.year} already created before, it can be updated only.`);
+        if(!_.isEmpty(investeeIncome)) {
+          return Boom.notFound(`Investee company income for ${request.payload[i].year} already created before, it can be updated only.`);
+        }
       }
+      let createdInvesteeIncomeTranslation;
+      const investee= {createdBy: request.params.userId, investeeId: request.params.investeeId} ;
 
       transaction = await models.sequelize.transaction();
-      const createdInvesteeIncome = await models.investeeIncomes.create(payload);
-      payload.payload.languageId = language;
-      payload.payload.investeeIncomeId = createdInvesteeIncome.id;
-      const createdInvesteeIncomeTranslation = await models.investeeIncomeTranslation.create(payload.payload);
-         console.log("created")
+      const createdInvesteeIncome = await models.investeeIncomes.create(investee);
+      for(let i = 0; i < request.payload.length; i++){
+        console.log("for")
+        request.payload[i].investeeId = request.params.investeeId;
+        request.payload[i].createdBy = request.params.userId; // request.auth.decoded.id;
+        request.payload[i].languageId = language;
+
+        request.payload[i].investeeIncomeId = createdInvesteeIncome.id;
+        createdInvesteeIncomeTranslation = await models.investeeIncomeTranslation.create(request.payload[i]);
+
+      }
       return reply.response(_.set(createdInvesteeIncome.dataValues, 'translation', createdInvesteeIncomeTranslation.dataValues)).code(201);
     }
     catch (e) {
