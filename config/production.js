@@ -4,7 +4,7 @@ module.exports = {
   frontEnd: { host: '' },
   connection: {
     host: '135.181.62.49',
-    // port: 80, //process.env.PORT,
+    port: 80, //process.env.PORT,
     protocol: 'https:'  //|| 80
     // tls: {
     //   key: '',
