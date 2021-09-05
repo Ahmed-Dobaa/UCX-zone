@@ -1,7 +1,7 @@
 module.exports = {
   frontEnd: { host: 'http://localhost/frontEnd' },
   connection: {
-    host: 'localhost',
+    host: '135.181.62.49', //localhost',
     port: process.env.PORT || 12225,
     tls: null
   },
