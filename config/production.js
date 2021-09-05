@@ -3,7 +3,7 @@ const fs = require('fs');
 module.exports = {
   frontEnd: { host: '' },
   connection: {
-    host: 'ucxzoni.herokuapp.com',
+    host: '135.181.62.49',
     // port: 80, //process.env.PORT,
     protocol: 'https:'  //|| 80
     // tls: {
