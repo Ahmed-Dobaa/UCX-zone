@@ -10,10 +10,10 @@ module.exports = {
     abortEarly: false
   },
   database: {
-    database: 'sql5431252', //'',
-    username: 'sql5431252', //'root',
-    password: 'JmeY3URIRj', //'12345',
-    host: 'sql5.freemysqlhosting.net', //'127.0.0.1',
+    database: 'ucxzone_ucxz',//'sql5431252', //'',
+    username: 'ucxzone_remote', //'sql5431252', //'root',
+    password: 'wW4Fds9v', //'JmeY3URIRj', //'12345',
+    host: 'localhost', //'sql5.freemysqlhosting.net', //'127.0.0.1',
     port: 3306,
     dialect: 'mysql',
     debug: true,
