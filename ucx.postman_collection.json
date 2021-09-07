@@ -53,7 +53,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"Aa@12345\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -61,13 +61,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://135.181.62.49:12225/login",
+							"raw": "http://localhost:12225/login",
 							"protocol": "http",
 							"host": [
-								"135",
-								"181",
-								"62",
-								"49"
+								"localhost"
 							],
 							"port": "12225",
 							"path": [
@@ -564,6 +561,61 @@
 								"investees",
 								"2",
 								"attachments"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "investment proposal",
+			"item": [
+				{
+					"name": "create investment proposal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept-language",
+								"value": "en",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDksIm5hbWUiOiJBaG1lZCIsImVtYWlsIjoiZW5nYWhtZWRkb2JhYUBnbWFpbC5jb20iLCJhY3RpdmUiOjEsImlhdCI6MTYzMTAxNTU0MSwiZXhwIjoxNjMxMTAxOTQxfQ.G4dxgQ6tYKpR9Kbgh-fxP_TlOXV1_Zjtoezuv0iwYAs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"investmentTypeId\": 1,\n    \"currencyId\": 2,\n    \"investmentProposalTranslation\": {\n    \t\"title\": \"test\",\n    \t\"description\": \"test\",\n    \t\"minInvestment\": 10,\n    \t\"currentValueOfCompany\": 50,\n    \t\"valueOfTheInvestmentRequired\": 20,\n    \t\"PurposeOfTheRequiredInvestment\": \"test\",\n    \t\"validTill\": \"2021-12-25\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/15/investees/2/investmentproposals",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"15",
+								"investees",
+								"2",
+								"investmentproposals"
 							]
 						}
 					},

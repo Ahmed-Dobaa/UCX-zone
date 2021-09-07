@@ -1800,13 +1800,13 @@ module.exports = [
     path: '/users/{userId}/investees/{investeeId}/investmentproposals',
     method: 'POST',
     options: {
-      payload: {
-        maxBytes: 2097152, // maximum payload size in bytes (2M)
-        output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
-        parse: true, // The parse property determines if the incoming payload gets parsed
-        allow: ['multipart/form-data']
-      },
-      auth: 'jwt',
+      // payload: {
+      //   maxBytes: 2097152, // maximum payload size in bytes (2M)
+      //   output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
+      //   parse: true, // The parse property determines if the incoming payload gets parsed
+      //   allow: ['multipart/form-data']
+      // },
+      auth: false, //'jwt',
       description: 'Create investment proposal for investee',
       app: { allowedPermission: { resource: 'investeeInvestmentProposals', action: 'create' } },
       pre: [

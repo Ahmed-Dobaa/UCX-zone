@@ -166,6 +166,7 @@ module.exports = {
     }
   },
   create: async function (request, reply) {
+    console.log("here")
     let uploadImageExtension = null, relativePath= null, fileName = null, fullPath= null;
     let transaction;
     try {
@@ -186,7 +187,7 @@ module.exports = {
       }
 
       payload.investeeId = request.params.investeeId;
-      payload.createdBy = request.auth.decoded.id;
+      payload.createdBy = request.params.userId; //request.auth.decoded.id;
       const foundInvestee = await models.investee.findOne({ where: { id: request.params.investeeId } });
 
       if(_.isEmpty(foundInvestee)) {
