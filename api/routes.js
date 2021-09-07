@@ -590,7 +590,7 @@ module.exports = [
     path: '/company',
     method: 'GET',
     options: {
-      auth: 'jwt',
+      auth: false, //'jwt',
       description: 'Get all companies in the system',
       app: { allowedPermission: { resource: 'companies', action: 'findAll' } },
       // pre: [

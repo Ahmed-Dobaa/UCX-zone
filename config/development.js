@@ -1,7 +1,7 @@
 module.exports = {
   frontEnd: { host: 'http://localhost/frontEnd' },
   connection: {
-    host: '135.181.62.49', //localhost',
+    host: 'localhost', //'135.181.62.49', //
     port: process.env.PORT || 12225,
     tls: null
   },
@@ -10,10 +10,10 @@ module.exports = {
     abortEarly: false
   },
   database: {
-    database: 'ucxzone_ucxz',//'sql5431252', //'',
-    username: 'ucxzone_remote', //'sql5431252', //'root',
-    password: 'wW4Fds9v', //'JmeY3URIRj', //'12345',
-    host: 'localhost', //'sql5.freemysqlhosting.net', //'127.0.0.1',
+    database: 'sql5431252', //'ucxzone_ucxz',//
+    username: 'sql5431252', //'ucxzone_remote', //
+    password: 'JmeY3URIRj', //'wW4Fds9v', //
+    host: 'sql5.freemysqlhosting.net', //'localhost', //
     port: 3306,
     dialect: 'mysql',
     debug: true,

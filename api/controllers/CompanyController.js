@@ -10,7 +10,8 @@ module.exports = {
     try {
       const foundCompanies = await models.companiesBasicData.findAll({
         include: [
-          { model: models.investee, as: 'investeeCompany' }
+          { model: models.investee, as: 'investeeCompany' },
+          { model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }
         ]
       });
 
