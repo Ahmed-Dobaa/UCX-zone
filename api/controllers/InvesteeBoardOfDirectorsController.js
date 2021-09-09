@@ -51,7 +51,7 @@ module.exports = {
       const { payload } = request.payload;
       const language = request.pre.languageId;
       payload.investeeId = request.params.investeeId;
-      payload.createdBy = 15; //request.auth.decoded.id;
+      payload.createdBy = request.params.userId; // 15; //request.auth.decoded.id;
       const foundInvesteeCompanies = await models.investee.findOne({ where: { id: request.params.investeeId } });
 
       if(_.isEmpty(foundInvesteeCompanies)) {
@@ -164,7 +164,7 @@ module.exports = {
       }
       await transaction.commit();
 
-      return reply.response().code(200);
+      return reply.response({status: 200, message: "updated successfully"}).code(200);
     }
     catch (e) {
       console.log('error', e);

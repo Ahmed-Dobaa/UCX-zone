@@ -1175,7 +1175,7 @@ module.exports = [
     options: {
       payload: { allow: ['application/json'] },
       description: 'update specific Director by its id',
-      auth: 'jwt',
+      auth: false, //'jwt',
       app: { allowedPermission: { resource: 'investeeDirectors', action: 'update' } },
       pre: [
         // { method: helperService.authorizeUser },

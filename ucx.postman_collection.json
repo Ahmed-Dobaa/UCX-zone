@@ -369,7 +369,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 15,\r\n        \"investeeId\": 7\r\n    },\r\n    \"payload\": {\r\n        \"email\": \"test@gmail.com\",\r\n        \"boardOfDirectorTranslation\": {\r\n            \"name\": \"ahmed\",\r\n            \"position\": \"Manager\",\r\n            \"phoneNumber\": \"01013848807\"\r\n        }\r\n    }\r\n}",
+							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 1,\r\n        \"investeeId\": 1\r\n    },\r\n    \"payload\": {\r\n        \"email\": \"test@gmail.com\",\r\n        \"boardOfDirectorTranslation\": {\r\n            \"name\": \"ahmed\",\r\n            \"position\": \"Manager\",\r\n            \"phoneNumber\": \"01013848807\"\r\n        }\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -377,7 +377,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/15/investees/7/directors",
+							"raw": "http://localhost:12225/users/1/investees/1/directors",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -385,10 +385,55 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"15",
+								"1",
 								"investees",
-								"7",
+								"1",
 								"directors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update investee board director",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"email\": \"test@gml.com\",\r\n        \"boardOfDirectorTranslation\": {\r\n            \"name\": \"ahmed salah\",\r\n            \"position\": \"Manager\"\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/1/investees/1/directors/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"1",
+								"investees",
+								"1",
+								"directors",
+								"2"
 							]
 						}
 					},
