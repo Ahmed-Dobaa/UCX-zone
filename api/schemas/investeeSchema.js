@@ -69,29 +69,30 @@ module.exports = {
     payload: {
       companyBasicData: {
         isConfidential: Joi.boolean().default(false).label('is confidential'),
-        sector: Joi.number(),
-        subSector: Joi.number().allow(null).label('sub sector'),
-        legalForm: Joi.number().label('legal form'),
+        sector: Joi.string(),
+        subSector: Joi.string().allow(null).label('sub sector'),
+        legalForm: Joi.string().label('legal form'),
         companiesBasicDataTranslation: {
           name: Joi.string().example('test company'),
-          registrationIdNo: Joi.string().label('registration id number').example('4235158542531'),
-          registrationOffice: Joi.string().label('registration office').example('Cairo office'),
+          // registrationIdNo: Joi.string().label('registration id number').example('4235158542531'),
+          // registrationOffice: Joi.string().label('registration office').example('Cairo office'),
           companyPurpose: Joi.string().label('company purpose').example('Money Laundry'),
           productsOrServices: Joi.string().label('products or services').example('Mobile Software'),
           address: Joi.object({
             streetNumber: Joi.string().label('street number').example('102'),
-            streetName: Joi.string().required().label('street name').example('Abu El-Ella main road'),
-            governorate: Joi.string().required().example('El-Zamalek'),
-            city: Joi.string().required().example('Cairo'),
-            country: Joi.string().required().example('Egypt')
+            streetName: Joi.string().label('street name').example('Abu El-Ella main road'),
+            governorate: Joi.string().example('El-Zamalek'),
+            city: Joi.string().example('Cairo'),
+            country: Joi.string().example('Egypt')
           }).required(),
-          otherAddresses: Joi.array().items(address).min(0).label('other address'),
+          // otherAddresses: Joi.array().items(address).min(0).label('other address'),
           YearOfEstablishment: Joi.string().label('Year Of Establishment'),
+          // relationToCompany: Joi.string().required().label('relation to company').example('Manager')
         }
       },
       investeeTranslation: { phoneNumbers: Joi.string().label('phone number').example('01155467899') },
       avatar: Joi.any().allow(['', null]),
-      website: Joi.string().uri().allow(['', null]),
+      website: Joi.string().allow(['', null]), //.uri()
     }
   },
 };

@@ -23,13 +23,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://135.181.62.49:12225/register",
+							"raw": "http://localhost:12225/register",
 							"protocol": "http",
 							"host": [
-								"135",
-								"181",
-								"62",
-								"49"
+								"localhost"
 							],
 							"port": "12225",
 							"path": [
@@ -53,7 +50,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"Aa@12345\"\r\n}",
+							"raw": "{\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -81,7 +78,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"activationCode\": \"Fcgn7s\"\r\n}",
+							"raw": "{\r\n        \"activationCode\": \"2FGtpw\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -89,13 +86,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://135.181.62.49:12225/activate",
+							"raw": "http://localhost:12225/activate",
 							"protocol": "http",
 							"host": [
-								"135",
-								"181",
-								"62",
-								"49"
+								"localhost"
 							],
 							"port": "12225",
 							"path": [
@@ -184,14 +178,14 @@
 								"type": "text"
 							},
 							{
-								"key": "headers.accept-language",
+								"key": "accept-language",
 								"value": "en",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": { \"userId\" : 15 },\r\n    \"payload\": {\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"42351585451\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"otherAddresses\": [\"Alex\"],\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"params\": { \"userId\" : 1 },\r\n    \"payload\": {\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"423585451\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"otherAddresses\": [\"Alex\"],\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -199,7 +193,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/15/investees",
+							"raw": "http://localhost:12225/users/1/investees",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -207,8 +201,51 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"15",
+								"1",
 								"investees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update investee company",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept-language",
+								"value": "en",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"test update\",\r\n            \"subSector\": \"test update\",\r\n            \"legalForm\": \"test update\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucxzone\",  \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"otherAddresses\": [\"Alex\"],\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013555555\" },\r\n      \"website\": \"URL@url.co\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/1/investees/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"1",
+								"investees",
+								"1"
 							]
 						}
 					},

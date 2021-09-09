@@ -358,26 +358,26 @@ module.exports = {
 
       await models.investee.update({ phoneNumbers: payload.phoneNumbers }, { where: { id: investeeId }, transaction });
 
-      if(!_.isEmpty(request.payload.avatar)) {
-        const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif'];
-        const uploadImageExtension = path.extname(request.payload.avatar.hapi.filename);
-        const relativePath = `uploads/investees/avatars/${investeeId}-${moment().valueOf()}-${uploadImageExtension}`;
-        const fullPath = path.join(__dirname, '../', relativePath);
+      // if(!_.isEmpty(request.payload.avatar)) {
+      //   const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif'];
+      //   const uploadImageExtension = path.extname(request.payload.avatar.hapi.filename);
+      //   const relativePath = `uploads/investees/avatars/${investeeId}-${moment().valueOf()}-${uploadImageExtension}`;
+      //   const fullPath = path.join(__dirname, '../', relativePath);
 
-        if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
+      //   if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
 
-          return Boom.badRequest(`allowed images extension are  ${allowedExtensions.join(' , ')}`);
-        }
+      //     return Boom.badRequest(`allowed images extension are  ${allowedExtensions.join(' , ')}`);
+      //   }
 
         // await fs.promises.mkdir(path.join(__dirname, '../', 'uploads/investees/avatars/'), { recursive: true });
         // await fs.promises.access(path.join(__dirname, '../', 'uploads/investees/avatars/'), fs.constants.W_OK);
 
-        await request.payload.avatar.pipe(fs.createWriteStream(fullPath));
-        await models.investee.update({ avatar: relativePath }, { where: { id: investeeId }, transaction });
-      }
+      //   await request.payload.avatar.pipe(fs.createWriteStream(fullPath));
+      //   await models.investee.update({ avatar: relativePath }, { where: { id: investeeId }, transaction });
+      // }
       await transaction.commit();
 
-      return reply.response().code(200);
+      return reply.response({status: 200, message: "updated successfully"}).code(200);
     }
     catch (e) {
       console.log('error', e);
