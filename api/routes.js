@@ -879,7 +879,7 @@ module.exports = [
     method: 'PUT',
     options: {
       payload: { allow: ['application/json'] },
-      auth: 'jwt',
+      auth: false, // 'jwt',
       description: 'Update investee capital',
       app: { allowedPermission: { resource: 'investeeCapitals', action: 'update' } },
       pre: [

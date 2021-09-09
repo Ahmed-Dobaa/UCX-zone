@@ -51,7 +51,7 @@ module.exports = {
       const language = request.pre.languageId;
       const { payload } = request.payload;
       payload.investeeId = request.params.investeeId;
-      payload.createdBy = 15, //request.auth.decoded.id;
+      payload.createdBy = request.params.userId, //15, //request.auth.decoded.id;
       payload.languageId = language;
       const foundInvesteeCompany = await models.investee.findOne({ where: { id: request.params.investeeId } });
 
@@ -149,7 +149,7 @@ module.exports = {
         }
       });
 
-      return reply.response().code(204);
+      return reply.response({status: 200, message: "updated successfully"}).code(200);
     }
     catch (e) {
       console.log('error', e);

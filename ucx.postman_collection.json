@@ -275,7 +275,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 15,\r\n        \"investeeId\": 14\r\n    },\r\n    \"payload\": {\r\n         \"authorizedCapital\": \"يش\",\r\n\"bookValue\": 22,\r\n\"capitalCurrencyId\": 54,\r\n\"currentTotalShares\": 22,\r\n\"issuedCapital\": 41,\r\n\"paidInCapital\": 22\r\n    }\r\n}",
+							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 1,\r\n        \"investeeId\": 1\r\n    },\r\n    \"payload\": {\r\n         \"authorizedCapital\": \"يش\",\r\n\t\t\"bookValue\": 22,\r\n\t\t\"capitalCurrencyId\": 54,\r\n\t\t\"currentTotalShares\": 22,\r\n\t\t\"issuedCapital\": 41,\r\n\t\t\"paidInCapital\": 22\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -283,7 +283,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/15/investees/14/capitals",
+							"raw": "http://localhost:12225/users/1/investees/1/capitals",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -291,10 +291,55 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"15",
+								"1",
 								"investees",
-								"14",
+								"1",
 								"capitals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update investee capital",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept.language",
+								"value": "en",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"authorizedCapital\": \"test\",\r\n\t\"bookValue\": 1,\r\n\t\"currentTotalShares\": 1,\r\n\t\"issuedCapital\": 1,\r\n\t\"paidInCapital\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/1/investees/1/capitals/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"1",
+								"investees",
+								"1",
+								"capitals",
+								"1"
 							]
 						}
 					},
