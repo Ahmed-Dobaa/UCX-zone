@@ -98,7 +98,7 @@ module.exports = {
       if(foundUser.active === 0) {
         return Boom.unauthorized('Please confirm your email');
       }
-
+      const user_companies = await models.companiesBasicData.findAll({ where: { user_id: foundUser.id } });
       if(foundUser.twoFactorAuthentication && request.headers['x-opt']) {
 
         if(_.isNil(request.headers['x-opt']) && !_.isNumber(parseInt(request.headers['x-opt']))) {
@@ -110,7 +110,6 @@ module.exports = {
 
           return Boom.unauthorized('Invalid 2FA code');
         }
-
         if(!_.isEmpty(foundUser) && foundUser.twoFactorAuthentication && parseInt(request.headers['x-opt']) === parseInt(foundUser.twoFactorAuthenticationCode)) {
 
           await models.users.update({ twoFactorAuthenticationCode: null }, { where: { id: foundUser.id } });
@@ -122,8 +121,7 @@ module.exports = {
             active: foundUser.active
           }, foundUser.secret, payload.stayLoggedIn, agent.toJSON());
           await userService.saveAccessToken(foundUser.id, accessToken, accessToken, agent.toJSON());
-
-          return reply.response({ accessToken: accessToken, user_info: foundUser }).header('Authorization', accessToken);
+          return reply.response({ accessToken: accessToken, user_info: foundUser, userCompanies: user_companies }).header('Authorization', accessToken);
         }
       }
 
@@ -143,8 +141,7 @@ module.exports = {
         active: foundUser.active
       }, foundUser.secret, payload.stayLoggedIn, agent.toJSON());
       await userService.saveAccessToken(foundUser.id, accessToken, accessToken, agent.toJSON());
-
-      return reply.response({ accessToken: accessToken, user_info: foundUser }).header('Authorization', accessToken);
+      return reply.response({ accessToken: accessToken, user_info: foundUser, user_companies: user_companies }).header('Authorization', accessToken);
     }
     catch (e) {
       console.log('Error', e);

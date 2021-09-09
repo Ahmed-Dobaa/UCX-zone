@@ -8,6 +8,10 @@ module.exports = {
       primaryKey: true,
       autoIncrement: true,
     },
+    user_id: {
+      type: Sequelize.INTEGER,
+      allowNull: true
+    },
     isConfidential: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
