@@ -715,7 +715,7 @@ module.exports = [
     path: '/users/{userId}/investees',
     method: 'GET',
     options: {
-      auth: 'jwt',
+      auth: false, //'jwt',
       description: 'Get all investee companies for that user',
       // app: { allowedPermission: { resource: 'investees', action: 'findAll' } },
       pre: [
@@ -744,7 +744,7 @@ module.exports = [
     path: '/users/{userId}/investees/{id}',
     method: 'GET',
     options: {
-      auth: 'jwt',
+      auth: false, //'jwt',
       description: 'Get specific investee companies for that user by its it',
       // app: { allowedPermission: { resource: 'investees', action: 'findOne' } },
       pre: [

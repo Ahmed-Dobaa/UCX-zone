@@ -6,7 +6,7 @@ const _ = require('lodash');
 const moment = require('moment');
 const fs = require('fs');
 const { fn, col } = require('sequelize');
-
+let investeeCapital = require('./InvesteeCapitalController');
 const errorService = require(path.join(__dirname, '../','services/errorService'));
 
 const models = require(path.join(__dirname, '../models/index'));
@@ -180,7 +180,50 @@ module.exports = {
         ]
       });
 
-      return reply.response(foundInvesteeCompanies || {}).code(200);
+      const capital = await models.investeeCapital.findOne({ where: {investeeId: request.params.id}})
+
+      const director = await models.investeeBoardOfDirectors.findOne({
+        where: { investeeId: request.params.id },
+        include: [{ association: 'boardOfDirectorTranslation', where: { languageId: languageId }, required: true }]
+      });
+
+      let investeeOwnership = await models.investeeOwnerships.findOne({
+        where: { investeeId: request.params.id }});
+
+      const investeeOwnershipTranslation = await models.investeeOwnershipTranslation.findOne({
+        where: { investeeOwnershipId: investeeOwnership.id }});
+
+        investeeOwnership = {investeeOwnership, "investeeOwnershipTranslation": investeeOwnershipTranslation.dataValues}
+
+        const investeeAuditor = await models.investeeAuditor.findOne({
+          where: { investeeId: request.params.id },
+          include: [{ association: 'auditorTranslation', where: { languageId: languageId }, required: true }]
+        });
+
+        const subsidiary = await models.companies_relations.findOne({
+          where: { parentId: foundInvesteeCompanies.companyId}, // childId: request.params.id },
+          include: [{ model: models.companiesBasicData, as: 'basicData', required: true }]
+        });
+
+        let investeeIncome = await models.investeeIncomes.findOne(
+          {where: { investeeId: request.params.id }});
+
+        const investeeIncomeTranslation = await models.investeeIncomeTranslation.findAll(
+            {where: { investeeIncomeId: investeeIncome.id }});
+
+        investeeIncome = { investeeIncome, investeeIncomeTranslation}
+
+        const investeeAttachment = await models.investeeAttachments.findOne({ where: { companyId: foundInvesteeCompanies.companyId    }, raw: true });
+
+        const investeeInvestmentProposal = await models.investeeInvestmentProposals.findOne({
+          where: { investeeId: request.params.id },
+          include: [{ association: 'investeeInvestmentProposalTranslation', where: { languageId: languageId }, required: true }]
+        });
+
+        return reply.response({status: 200, company_data: foundInvesteeCompanies, capital: capital,
+                    board_director: director, investee_ownership: investeeOwnership, investee_auditor: investeeAuditor,
+                    subsidiary: subsidiary, financial: investeeIncome, investee_attachment: investeeAttachment,
+                    investee_proposal: investeeInvestmentProposal }|| {}).code(200);
     }
     catch (e) {
       console.log('error', e);
