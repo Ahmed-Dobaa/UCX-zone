@@ -181,7 +181,7 @@ module.exports = {
       });
 
       const capital = await models.investeeCapital.findOne({ where: {investeeId: request.params.id}})
-
+ console.log("here")
       const director = await models.investeeBoardOfDirectors.findOne({
         where: { investeeId: request.params.id },
         include: [{ association: 'boardOfDirectorTranslation', where: { languageId: languageId }, required: true }]
@@ -189,11 +189,13 @@ module.exports = {
 
       let investeeOwnership = await models.investeeOwnerships.findOne({
         where: { investeeId: request.params.id }});
+      let investeeOwnershipTranslation;
+      if(investeeOwnership != null){
+         investeeOwnershipTranslation = await models.investeeOwnershipTranslation.findOne({
+          where: { investeeOwnershipId: investeeOwnership.id }});
+          investeeOwnership = {investeeOwnership, "investeeOwnershipTranslation": investeeOwnershipTranslation.dataValues}
+      }
 
-      const investeeOwnershipTranslation = await models.investeeOwnershipTranslation.findOne({
-        where: { investeeOwnershipId: investeeOwnership.id }});
-
-        investeeOwnership = {investeeOwnership, "investeeOwnershipTranslation": investeeOwnershipTranslation.dataValues}
 
         const investeeAuditor = await models.investeeAuditor.findOne({
           where: { investeeId: request.params.id },
@@ -208,9 +210,11 @@ module.exports = {
         let investeeIncome = await models.investeeIncomes.findOne(
           {where: { investeeId: request.params.id }});
 
-        const investeeIncomeTranslation = await models.investeeIncomeTranslation.findAll(
-            {where: { investeeIncomeId: investeeIncome.id }});
-
+          let investeeIncomeTranslation;
+          if(investeeIncome != null){
+             investeeIncomeTranslation = await models.investeeIncomeTranslation.findAll(
+              {where: { investeeIncomeId: investeeIncome.id }});
+          }
         investeeIncome = { investeeIncome, investeeIncomeTranslation}
 
         const investeeAttachment = await models.investeeAttachments.findOne({ where: { companyId: foundInvesteeCompanies.companyId    }, raw: true });
