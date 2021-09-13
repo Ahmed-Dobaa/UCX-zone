@@ -54,8 +54,8 @@ module.exports = {
         description: Joi.string().required().label('value Of The Investment Required'),
         minInvestment: Joi.number().positive().required().label('value Of The Investment Required'),
         currentValueOfCompany: Joi.number().positive().required().label('value Of The Investment Required'),
-        valueOfTheInvestmentRequired: Joi.string().label('value Of The Investment Required'),
-        PurposeOfTheRequiredInvestment: Joi.number().positive().label('Purpose Of The Required Investment'),
+        valueOfTheInvestmentRequired: Joi.number().label('value Of The Investment Required'),
+        PurposeOfTheRequiredInvestment: Joi.string().label('Purpose Of The Required Investment'),
         validTill: Joi.date().min(moment().format('YYYY-MM-DDTHH:mm:ss[Z]')).label('valid Till'),
       }
     }

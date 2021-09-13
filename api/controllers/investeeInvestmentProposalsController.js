@@ -279,17 +279,17 @@ module.exports = {
       const { payload } = request;
       const language = request.pre.languageId;
 
-      if(payload.file) {
-        uploadImageExtension = path.extname(request.payload.file.hapi.filename);
-        relativePath = `uploads/investee/${request.params.companyId}/investmentProposals/`;
-        fileName = `${moment().valueOf()}-${uploadImageExtension}`;
-        fullPath = path.join(__dirname, '../', relativePath);
-        const allowedExtensions = ['.ods', '.xlr', '.xls', '.xlsx', '.doc', '.odt', '.pdf', '.wpd'];
+      // if(payload.file) {
+      //   uploadImageExtension = path.extname(request.payload.file.hapi.filename);
+      //   relativePath = `uploads/investee/${request.params.companyId}/investmentProposals/`;
+      //   fileName = `${moment().valueOf()}-${uploadImageExtension}`;
+      //   fullPath = path.join(__dirname, '../', relativePath);
+      //   const allowedExtensions = ['.ods', '.xlr', '.xls', '.xlsx', '.doc', '.odt', '.pdf', '.wpd'];
 
-        if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
-          return Boom.badRequest(`allowed file extension are  ${allowedExtensions.join(' , ')}`);
-        }
-      }
+      //   if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
+      //     return Boom.badRequest(`allowed file extension are  ${allowedExtensions.join(' , ')}`);
+      //   }
+      // }
 
       const foundInvesteeInvestmentProposal = await models.investeeInvestmentProposals.findOne({ where: { id: request.params.id }, raw: true });
 
@@ -297,30 +297,30 @@ module.exports = {
         return Boom.badRequest('Investee investment proposal You Try To Update Does Not Exist');
       }
 
-      if(payload.file) {
-        await fsPromises.mkdir(fullPath, { recursive: true });
-        await fsPromises.access(fullPath, fs.constants.W_OK);
-        await payload.file.pipe(fs.createWriteStream(`${fullPath}${fileName}`));
-        payload.attachmentPath = `${relativePath}${fileName}`;
-      }
+      // if(payload.file) {
+      //   await fsPromises.mkdir(fullPath, { recursive: true });
+      //   await fsPromises.access(fullPath, fs.constants.W_OK);
+      //   await payload.file.pipe(fs.createWriteStream(`${fullPath}${fileName}`));
+      //   payload.attachmentPath = `${relativePath}${fileName}`;
+      // }
 
       transaction = await models.sequelize.transaction();
       await models.investeeInvestmentProposals.update(payload, { where: { id: request.params.id }, transaction });
 
-      if(!_.isEmpty(payload.managementTranslation)) {
+      // if(!_.isEmpty(payload.managementTranslation)) {
         payload.investmentProposalTranslation.langauegeId = language;
         await models.investeeInvestmentProposalTranslation.update(payload.investmentProposalTranslation,
           { where: { id: payload.investmentProposalTranslation.id }, transaction });
 
-      }
+      // }
 
       await transaction.commit();
 
-      return reply.response().code(200);
+      return reply.response({ status: 200, message: "Updated successfully"}).code(200);
     }
     catch (e) {
       console.log('error', e);
-      fs.unlinkSync(path.join(__dirname, '../', fullPath, fileName));
+      // fs.unlinkSync(path.join(__dirname, '../', fullPath, fileName));
 
       if(transaction) {
         await transaction.rollback();

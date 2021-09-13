@@ -105,7 +105,7 @@ module.exports = {
       await models.investeeAttachments.update({ attachmentPath: `${relativePath}${fileName}` }, { where: { id: request.params.id } });
       await fsPromises.unlink(path.join(__dirname, '../', foundInvesteeAttachmentsType.attachmentPath));
 
-      return reply.response().code(200);
+      return reply.response({ status: 200, message: "Updated successfully"}).code(200);
     }
     catch (e) {
       console.log('error', e);

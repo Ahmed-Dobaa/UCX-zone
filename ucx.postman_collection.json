@@ -235,7 +235,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/5/investees/9",
+							"raw": "http://localhost:12225/users/5/investees/8",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -245,7 +245,7 @@
 								"users",
 								"5",
 								"investees",
-								"9"
+								"8"
 							]
 						}
 					},
@@ -368,7 +368,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"authorizedCapital\": \"test\",\r\n\t\"bookValue\": 1,\r\n\t\"currentTotalShares\": 1,\r\n\t\"issuedCapital\": 1,\r\n\t\"paidInCapital\": 1\r\n}",
+							"raw": "{\r\n\t\"authorizedCapital\": \"test\",\r\n\t\"bookValue\": 1,\r\n\t\"currentTotalShares\": 1,\r\n\t\"issuedCapital\": 1,\r\n\t\"paidInCapital\": 1\r\n}\r\n \r\n// userId - investeeId - capital id",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -462,7 +462,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"email\": \"test@gml.com\",\r\n        \"boardOfDirectorTranslation\": {\r\n            \"name\": \"ahmed salah\",\r\n            \"position\": \"Manager\",\r\n            \"phoneNumber\": \"01013848807\"\r\n        }\r\n}",
+							"raw": "{\r\n        \"email\": \"test@gml.com\",\r\n        \"boardOfDirectorTranslation\": {\r\n            \"name\": \"ahmed salah\",\r\n            \"position\": \"Manager\",\r\n            \"phoneNumber\": \"01013848807\"\r\n        }\r\n}\r\n\r\n// user id - investee id - director id",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -556,7 +556,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"gender\": \"M\",\r\n        \"ownershipTranslation\": {\r\n            \"shareholderName\": \"ahmed salah\",\r\n            \"phoneNumber\": \"01013848807\",\r\n            \"dob\": \"2000-05-05\",\r\n            \"ownedShares\": 10000,\r\n            \"value\": 1000,\r\n            \"percent\": 40\r\n  }\r\n}\r\n  \r\n",
+							"raw": "{\r\n        \"gender\": \"M\",\r\n        \"ownershipTranslation\": {\r\n            \"shareholderName\": \"ahmed salah\",\r\n            \"phoneNumber\": \"01013848807\",\r\n            \"dob\": \"2000-05-05\",\r\n            \"ownedShares\": 10000,\r\n            \"value\": 1000,\r\n            \"percent\": 40\r\n  }\r\n}\r\n\r\n// user id - investee id - ownership id\r\n  \r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -650,7 +650,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"email\": \"test@l.com\",\r\n        \"auditorTranslation\": {\r\n        \t\"id\": 3,\r\n            \"name\": \"mohammeddddddddddddddd\",\r\n            \"address\": {\r\n                \"city\": \"cairo\"\r\n            },\r\n            \"phoneNumber\": \"010254856657\"\r\n        }\r\n}",
+							"raw": "{\r\n        \"email\": \"test@l.com\",\r\n        \"auditorTranslation\": {\r\n        \t\"id\": 3,\r\n            \"name\": \"mohammeddddddddddddddd\",\r\n            \"address\": {\r\n                \"city\": \"cairo\"\r\n            },\r\n            \"phoneNumber\": \"010254856657\"\r\n        }\r\n}\r\n\r\n// user id - investee id - auditor id",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -744,7 +744,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"sharePercentage\": 200,\r\n        \"haveManagementRight\": \"1\"\r\n    \r\n}",
+							"raw": "{\r\n        \"sharePercentage\": 200,\r\n        \"haveManagementRight\": \"1\"\r\n    \r\n}\r\n\r\n\r\n// user id - investee id - company id",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -818,6 +818,51 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "update investee income",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n\t{\n\t\t\"year\": 2021,\n        \"Sales\": 1000,\n        \"COGS\": 2000,\n        \"GeneralAndAdministrativeExpense\": 52201,\n        \"SellingExpense\": 544,\n        \"Interest\": 144,\n        \"Tax\": 14,\n        \"depreciation\": 12,\n        \"otherExpenses\": 89,\n        \"otherRevenues\": 54\n\t}\n\t\n\t// user id - investee id - financial id\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/5/investees/9/incomes/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"5",
+								"investees",
+								"9",
+								"incomes",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -876,6 +921,63 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "update attachment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/SOFT ZONE/Desktop/Capture.PNG"
+								},
+								{
+									"key": "/// user id - company id - attach id",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/5/investees/9/attachments/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"5",
+								"investees",
+								"9",
+								"attachments",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -927,6 +1029,51 @@
 								"investees",
 								"1",
 								"investmentproposals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update investment proposal",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"investmentTypeId\": 1,\n    \"currencyId\": 1,\n    \"investmentProposalTranslation\": {\n    \t\"id\": 2,\n    \t\"title\": \"ahmed\",\n    \t\"description\": \"ahmed\",\n    \t\"minInvestment\": 10,\n    \t\"currentValueOfCompany\": 50,\n    \t\"valueOfTheInvestmentRequired\": 20,\n    \t\"PurposeOfTheRequiredInvestment\": \"ahmed\",\n    \t\"validTill\": \"2021-12-25\"\n    }\n}\n\n// user id - investee id - investment proposal id",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/5/investees/9/investmentproposals/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"5",
+								"investees",
+								"9",
+								"investmentproposals",
+								"2"
 							]
 						}
 					},

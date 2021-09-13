@@ -163,7 +163,7 @@ module.exports = {
 
       await models.investeeIncomeTranslation.update(payload, { where: { id: foundInvesteeIncome.incomeTranslation.id } });
 
-      return reply.response().code(200);
+      return reply.response({ status: 200, message: "Updated successfully"}).code(200);
     }
     catch (e) {
       console.log('error', e);

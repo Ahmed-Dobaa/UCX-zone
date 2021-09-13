@@ -1560,7 +1560,7 @@ module.exports = [
         allow: ['multipart/form-data']
       },
       description: 'update specific investee attachment by its id',
-      auth: 'jwt',
+      auth: false, //'jwt',
       app: { allowedPermission: { resource: 'investeeAttachments', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
@@ -1857,12 +1857,12 @@ module.exports = [
     path: '/users/{userId}/investees/{investeeId}/investmentproposals/{id}',
     method: 'PUT',
     options: {
-      payload: {
-        maxBytes: 2097152, // maximum payload size in bytes (2M)
-        output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
-        parse: true, // The parse property determines if the incoming payload gets parsed
-        allow: ['multipart/form-data']
-      },
+      // payload: {
+      //   maxBytes: 2097152, // maximum payload size in bytes (2M)
+      //   output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
+      //   parse: true, // The parse property determines if the incoming payload gets parsed
+      //   allow: ['multipart/form-data']
+      // },
       description: 'update specific investment proposal by its id',
       auth: false, //'jwt',
       app: { allowedPermission: { resource: 'investeeInvestmentProposals', action: 'update' } },
@@ -1957,7 +1957,7 @@ module.exports = [
     options: {
       payload: { allow: ['application/json'] },
       description: 'update specific investee income by its id',
-      auth: 'jwt',
+      auth: false, //'jwt',
       app: { allowedPermission: { resource: 'investeeIncomes', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
