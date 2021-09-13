@@ -58,9 +58,9 @@ module.exports = {
       transaction = await models.sequelize.transaction();
 
       const createdAuditor = await models.investeeAuditor.create(request.payload, { transaction });
-      request.payload.payload.auditorTranslation.languageId = language;
-      request.payload.payload.auditorTranslation.investeeAuditorId = createdAuditor.id;
-      const createdAuditorTranslation = await models.investeeAuditorTranslation.create(request.payload.payload.auditorTranslation, { transaction });
+      request.payload.auditorTranslation.languageId = language;
+      request.payload.auditorTranslation.investeeAuditorId = createdAuditor.id;
+      const createdAuditorTranslation = await models.investeeAuditorTranslation.create(request.payload.auditorTranslation, { transaction });
       await transaction.commit();
 
       return reply.response(_.assign(createdAuditor.toJSON(), { auditorTranslation: createdAuditorTranslation.toJSON() })).code(201);
