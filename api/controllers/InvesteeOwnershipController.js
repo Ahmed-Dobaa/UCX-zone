@@ -231,7 +231,7 @@ module.exports = {
       }
       await transaction.commit();
 
-      return reply.response().code(200);
+      return reply.response({ status: 200, message: "Updated successfully"}).code(200);
     }
     catch (e) {
       console.log('error', e);

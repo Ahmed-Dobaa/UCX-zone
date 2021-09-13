@@ -235,7 +235,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees/1",
+							"raw": "http://localhost:12225/users/5/investees/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -243,9 +243,9 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"5",
 								"investees",
-								"1"
+								"9"
 							]
 						}
 					},
@@ -284,7 +284,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees/1",
+							"raw": "http://localhost:12225/users/1/investees/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -294,7 +294,7 @@
 								"users",
 								"1",
 								"investees",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -376,7 +376,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees/1/capitals/1",
+							"raw": "http://localhost:12225/users/5/investees/9/capitals/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -384,11 +384,11 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"5",
 								"investees",
-								"1",
+								"9",
 								"capitals",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -462,7 +462,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"email\": \"test@gml.com\",\r\n        \"boardOfDirectorTranslation\": {\r\n            \"name\": \"ahmed salah\",\r\n            \"position\": \"Manager\"\r\n        }\r\n}",
+							"raw": "{\r\n        \"email\": \"test@gml.com\",\r\n        \"boardOfDirectorTranslation\": {\r\n            \"name\": \"ahmed salah\",\r\n            \"position\": \"Manager\",\r\n            \"phoneNumber\": \"01013848807\"\r\n        }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -470,7 +470,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees/1/directors/2",
+							"raw": "http://localhost:12225/users/5/investees/9/directors/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -478,11 +478,11 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"5",
 								"investees",
-								"1",
+								"9",
 								"directors",
-								"2"
+								"3"
 							]
 						}
 					},
@@ -532,6 +532,51 @@
 								"investees",
 								"1",
 								"ownerships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update ownership",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"gender\": \"M\",\r\n        \"ownershipTranslation\": {\r\n            \"shareholderName\": \"ahmed salah\",\r\n            \"phoneNumber\": \"01013848807\",\r\n            \"dob\": \"2000-05-05\",\r\n            \"ownedShares\": 10000,\r\n            \"value\": 1000,\r\n            \"percent\": 40\r\n  }\r\n}\r\n  \r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/5/investees/9/ownerships/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"5",
+								"investees",
+								"9",
+								"ownerships",
+								"3"
 							]
 						}
 					},

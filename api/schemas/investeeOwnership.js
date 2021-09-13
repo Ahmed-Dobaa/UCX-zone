@@ -48,7 +48,8 @@ module.exports = {
       ownershipTranslation: {
         shareholderName: Joi.string().label('shareholder name').example('Greg'),
         phoneNumber: Joi.string().allow('', null).optional().label('phone number').example(22765927),
-        dob: Joi.date().format('YYYY-MM-DD').raw().max(moment().subtract(18, 'year').format('MM-DD-YYYY'))
+        dob: Joi.date().format('YYYY-MM-DD').raw()
+        // .max(moment().subtract(18, 'year').format('MM-DD-YYYY'))
           .label('date of birth').example(moment().subtract(18, 'year').format('MM-DD-YYYY')),
         ownedShares: Joi.number().positive().label('owned shares').example(1000),
         value: Joi.number().positive().label('value').example(1000),
