@@ -185,7 +185,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": { \"userId\" : 1 },\r\n    \"payload\": {\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"423585451\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"otherAddresses\": [\"Alex\"],\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n}",
+							"raw": "{\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"4235851\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -193,7 +193,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees",
+							"raw": "http://localhost:12225/users/5/investees",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -201,7 +201,7 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"5",
 								"investees"
 							]
 						}
@@ -324,7 +324,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 1,\r\n        \"investeeId\": 1\r\n    },\r\n    \"payload\": {\r\n         \"authorizedCapital\": \"يش\",\r\n\t\t\"bookValue\": 22,\r\n\t\t\"capitalCurrencyId\": 54,\r\n\t\t\"currentTotalShares\": 22,\r\n\t\t\"issuedCapital\": 41,\r\n\t\t\"paidInCapital\": 22\r\n    }\r\n}",
+							"raw": "{\r\n        \"authorizedCapital\": \"يش\",\r\n\t\t\"bookValue\": 22,\r\n\t\t\"capitalCurrencyId\": 54,\r\n\t\t\"currentTotalShares\": 22,\r\n\t\t\"issuedCapital\": 41,\r\n\t\t\"paidInCapital\": 22\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -332,7 +332,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees/1/capitals",
+							"raw": "http://localhost:12225/users/5/investees/8/capitals",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -340,9 +340,9 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"5",
 								"investees",
-								"1",
+								"8",
 								"capitals"
 							]
 						}
@@ -418,7 +418,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 1,\r\n        \"investeeId\": 1\r\n    },\r\n    \"payload\": {\r\n        \"email\": \"test@gmail.com\",\r\n        \"boardOfDirectorTranslation\": {\r\n            \"name\": \"ahmed\",\r\n            \"position\": \"Manager\",\r\n            \"phoneNumber\": \"01013848807\"\r\n        }\r\n    }\r\n}",
+							"raw": "{\r\n        \"email\": \"test@gmail.com\",\r\n        \"boardOfDirectorTranslation\": {\r\n            \"name\": \"ahmed\",\r\n            \"position\": \"Manager\",\r\n            \"phoneNumber\": \"01013848807\"\r\n        }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -426,7 +426,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees/1/directors",
+							"raw": "http://localhost:12225/users/5/investees/8/directors",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -434,9 +434,9 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"5",
 								"investees",
-								"1",
+								"8",
 								"directors"
 							]
 						}
@@ -512,7 +512,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 1,\r\n        \"investeeId\": 1\r\n    },\r\n    \"payload\": {\r\n        \"gender\": \"M\",\r\n        \"ownershipTranslation\": {\r\n            \"shareholderName\": \"ahmed salah\",\r\n            \"phoneNumber\": \"01013848807\",\r\n            \"dob\": \"2020-5-5\",\r\n            \"ownedShares\": 10000,\r\n            \"value\": 1000,\r\n            \"percent\": 40\r\n        }\r\n    }\r\n}",
+							"raw": "{\r\n\t\"email\": \"asssss@gmail.com\",\r\n        \"gender\": \"M\",\r\n        \"ownershipTranslation\": {\r\n            \"shareholderName\": \"ahmed salah\",\r\n            \"phoneNumber\": \"01013848807\",\r\n            \"dob\": \"2020-05-05\",\r\n            \"ownedShares\": 10000,\r\n            \"value\": 1000,\r\n            \"percent\": 40\r\n        }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -520,7 +520,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees/1/ownerships",
+							"raw": "http://localhost:12225/users/5/investees/8/ownerships",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -528,9 +528,9 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"5",
 								"investees",
-								"1",
+								"8",
 								"ownerships"
 							]
 						}
@@ -606,7 +606,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 5,\r\n        \"investeeId\": 9\r\n    },\r\n    \"payload\": {\r\n        \"email\": \"test@gmail.com\",\r\n        \"auditorTranslation\": {\r\n            \"name\": \"mohammed\",\r\n            \"address\": {\r\n                \"city\": \"cairo\"\r\n            },\r\n            \"phoneNumber\": \"010254856657\"\r\n        }\r\n    }\r\n}",
+							"raw": "{\r\n        \"email\": \"test@gmail.com\",\r\n        \"auditorTranslation\": {\r\n            \"name\": \"mohammed\",\r\n            \"address\": {\r\n                \"city\": \"cairo\"\r\n            },\r\n            \"phoneNumber\": \"010254856657\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -614,7 +614,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/5/investees/9/auditors",
+							"raw": "http://localhost:12225/users/5/investees/8/auditors",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -624,7 +624,7 @@
 								"users",
 								"5",
 								"investees",
-								"9",
+								"8",
 								"auditors"
 							]
 						}

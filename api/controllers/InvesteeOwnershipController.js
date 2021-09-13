@@ -88,7 +88,7 @@ module.exports = {
 
       request.payload.investeeId = request.params.investeeId;
       request.payload.createdBy = 15; // request.auth.decoded.id;
-      const createdOwnership = await models.ownerships.create(request.payload.payload, { transaction });
+      const createdOwnership = await models.ownerships.create(request.payload, { transaction });
       const createdInvesteeOwnerships = await models.investeeOwnerships.create({
         ownershipId: createdOwnership.id,
         investeeId: foundInvesteeCompanies.id,
@@ -96,26 +96,26 @@ module.exports = {
       }, { transaction });
 
 
-      request.payload.payload.ownershipTranslation.languageId = request.pre.languageId;
-      request.payload.payload.ownershipTranslation.investeeOwnershipId= createdOwnership.id;
-      await models.investeeOwnershipTranslation.create(request.payload.payload.ownershipTranslation, { transaction });
+      request.payload.ownershipTranslation.languageId = request.pre.languageId;
+      request.payload.ownershipTranslation.investeeOwnershipId= createdOwnership.id;
+      await models.investeeOwnershipTranslation.create(request.payload.ownershipTranslation, { transaction });
       let accessToken = null;
       let ownershipUser = null;
 
       const user = await models.users.findOne({ where: { email: request.payload.email } });
 
-      if(request.payload.payload.email && _.isEmpty(user)) {
+      if(request.payload.email && _.isEmpty(user)) {
 
         accessToken = jwtService.generateUserAccessToken({
           scope: 'invitation',
           email: request.payload.email
         }, config.jwt.authKey);
         ownershipUser = {
-          name: request.payload.payload.ownershipTranslation.shareholderName,
-          phoneNumber: request.payload.payload.ownershipTranslation.phoneNumber,
-          email: request.payload.payload.email,
-          dob: request.payload.payload.ownershipTranslation.dob,
-          gender: request.payload.payload.gender,
+          name: request.payload.ownershipTranslation.shareholderName,
+          phoneNumber: request.payload.ownershipTranslation.phoneNumber,
+          email: request.payload.email,
+          dob: request.payload.ownershipTranslation.dob,
+          gender: request.payload.gender,
           activationToken: accessToken,
           secret: userService.generateActivationToken(),
           active: 0

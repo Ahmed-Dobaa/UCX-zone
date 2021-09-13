@@ -12,7 +12,7 @@ module.exports = {
       paidInCapital: Joi.number().positive().label('paid in capital').example(1000),
       currentTotalShares: Joi.number().positive().label('current total shares').example(100),
       bookValue: Joi.number().positive().label('book Value').example(10),
-      authorizedCapital: Joi.number().positive().label('authorized capital').example(1000)
+      authorizedCapital: Joi.string().label('authorized capital').example(1000)
     }
   },
   translateSchema: {

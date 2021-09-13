@@ -242,22 +242,22 @@ module.exports = {
       transaction = await models.sequelize.transaction();
       const userId = request.auth.decoded ? request.auth.decoded.id : request.params.userId;
 
-      const { payload } = request.payload;
+      const { payload } = request;
       const { companyBasicData, investeeTranslation } = payload;
       companyBasicData.companiesBasicDataTranslation.languageId = request.pre.languageId;
       investeeTranslation.languageId = request.pre.languageId;
-
+console.log(payload)
       // check first that company basic data exist or not.
       const checkRegistrationIdNo = await models.companiesBasicDataTranslation.findOne( { where: {
                  registrationIdNo: companyBasicData.companiesBasicDataTranslation.registrationIdNo }})
-
+  console.log("here")
       // check if this registration id number exist or not
       if(checkRegistrationIdNo){
         return reply.response({status: 406, message: "This registration id number already exist"}).code(406);
       }
-      payload.companyBasicData["user_id"] = request.params.userId;
-
-      const createdCompanyBasicData = await models.companiesBasicData.create(payload.companyBasicData, { transaction });
+      companyBasicData["user_id"] = request.params.userId;
+  console.log("there")
+      const createdCompanyBasicData = await models.companiesBasicData.create(companyBasicData, { transaction });
       companyBasicData.companiesBasicDataTranslation.companyBasicDataId = createdCompanyBasicData.id;
       await models.companiesBasicDataTranslation.create(companyBasicData.companiesBasicDataTranslation, { transaction });
       const code = `${moment().format('YYMM')}${new Date().valueOf()}`;
@@ -266,29 +266,29 @@ module.exports = {
       await models.investeeTranslation.create(investeeTranslation, { transaction });
       await models.usersInvestees.create({ userId: userId , investeeId: createdInvestee.id, roleId: 2 }, { transaction });
 
-      if(!_.isEmpty(request.payload.avatar)) {
-        const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif'];
-        const uploadImageExtension = path.extname(request.payload.avatar.hapi.filename);
-        const relativePath = `uploads/investees/avatars/${createdInvestee.id}-${moment().valueOf()}-${uploadImageExtension}`;
-        const fullPath = path.join(__dirname, '../', relativePath);
+      // if(!_.isEmpty(request.payload.avatar)) {
+      //   const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif'];
+      //   const uploadImageExtension = path.extname(request.payload.avatar.hapi.filename);
+      //   const relativePath = `uploads/investees/avatars/${createdInvestee.id}-${moment().valueOf()}-${uploadImageExtension}`;
+      //   const fullPath = path.join(__dirname, '../', relativePath);
 
-        if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
+      //   if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
 
-          return Boom.badRequest(`allowed images extension are  ${allowedExtensions.join(' , ')}`);
-        }
+      //     return Boom.badRequest(`allowed images extension are  ${allowedExtensions.join(' , ')}`);
+      //   }
 
         // await fs.promises.mkdir(path.join(__dirname, '../', 'uploads/investees/avatars/'), { recursive: true });
         // await fs.promises.access(path.join(__dirname, '../', 'uploads/investees/avatars/'), fs.constants.W_OK);
 
-        await request.payload.avatar.pipe(fs.createWriteStream(fullPath));
-        await models.investee.update({ avatar: relativePath }, { where: { id: createdInvestee.id }, transaction });
-      }
+        // await request.payload.avatar.pipe(fs.createWriteStream(fullPath));
+        // await models.investee.update({ avatar: relativePath }, { where: { id: createdInvestee.id }, transaction });
+      // }
 
-      // await models.request_Role_company.create({
-      //   userId: userId,
-      //   companyId: createdInvestee.id,
-      //   requestedRole: payload.relationToCompany
-      // }, { transaction });
+      await models.request_Role_company.create({
+        userId: userId,
+        companyId: createdInvestee.id,
+        requestedRole: companyBasicData.companiesBasicDataTranslation.relationToCompany
+      }, { transaction });
 
       await transaction.commit();
       payload.id = createdInvestee.id;

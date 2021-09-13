@@ -14,9 +14,9 @@ module.exports = {
     payload: {
       companyBasicData: {
         isConfidential: Joi.boolean().default(false).label('is confidential'),
-        sector: Joi.number().required(),
-        subSector: Joi.number().allow(null).label('sub sector'),
-        legalForm: Joi.number().label('legal form'),
+        sector: Joi.string().required(),
+        subSector: Joi.string().allow(null).label('sub sector'),
+        legalForm: Joi.string().label('legal form'),
         companiesBasicDataTranslation: {
           name: Joi.string().required().example('test company'),
           registrationIdNo: Joi.string().allow(null, '').label('registration id number').example('4235158542531'),
@@ -30,13 +30,13 @@ module.exports = {
             city: Joi.string().allow(null, '').example('Cairo'),
             country: Joi.string().required().example('Egypt')
           }).required(),
-          otherAddresses: Joi.array().items(address).min(0).label('other address'),
+          otherAddresses: Joi.string().optional().label('other address'), // .array()
           YearOfEstablishment: Joi.string().allow(null, '').label('Year Of Establishment'),
         }
       },
       investeeTranslation: { phoneNumbers: Joi.string().allow(null, '').label('phone number').example('01155467899'), },
       avatar: Joi.any().allow(['', null]),
-      website: Joi.string().uri().allow(['', null]),
+      website: Joi.string().allow(['', null]), // .uri()
       // relationToCompany: Joi.string().required().label('relation to company').example('Manager')
     }
   },
