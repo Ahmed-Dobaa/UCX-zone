@@ -934,6 +934,36 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "country",
+			"item": [
+				{
+					"name": "get all countries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:12225/countries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"countries"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "currency",
+			"item": [],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}
