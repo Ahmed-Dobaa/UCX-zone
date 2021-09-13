@@ -4,7 +4,7 @@ module.exports = {
   createSchema: {
     params: {
       userId: Joi.number().description('the id of the user'),
-      companyId: Joi.number().description('the id of the company')
+      investeeId: Joi.number().description('the id of the company') // companyId
     },
     payload: {
       email: Joi.string().allow(null),
@@ -39,7 +39,7 @@ module.exports = {
   updateSchema: {
     params: {
       userId: Joi.number().required().description('the id of the user'),
-      companyId: Joi.number().required().description('the id of the company'),
+      investeeId: Joi.number().required().description('the id of the company'), // companyId
       auditorId: Joi.number().required().description('the id of the auditor')
     },
     payload: {
@@ -48,11 +48,11 @@ module.exports = {
         id: Joi.number().required(),
         name: Joi.string().example('test company'),
         address: Joi.object().keys({
-          streetNumber: Joi.string().required().example('102'),
-          streetName: Joi.string().required().example('Abu El-Ella main road'),
-          governorate: Joi.string().required().example('El-Zamalek'),
-          city: Joi.string().required().example('Cairo'),
-          country: Joi.string().required().example('Egypt')
+          streetNumber: Joi.string().optional().example('102'),
+          streetName: Joi.string().optional().example('Abu El-Ella main road'),
+          governorate: Joi.string().optional().example('El-Zamalek'),
+          city: Joi.string().optional().example('Cairo'),
+          country: Joi.string().optional().example('Egypt')
         }),
         phoneNumber: Joi.string().label('phone Number')
       }

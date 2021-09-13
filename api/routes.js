@@ -1325,7 +1325,7 @@ module.exports = [
     }
   },
   {
-    path: '/users/{userId}/investees/{companyId}/auditors',
+    path: '/users/{userId}/investees/{investeeId}/auditors',
     method: 'post',
     options: {
       payload: { allow: ['application/json'] },
@@ -1371,13 +1371,13 @@ module.exports = [
       handler: investeeAuditorsController.findOne
     }
   },
-  {
-    path: '/users/{userId}/investees/{companyId}/auditors/{auditorId}',
+  {                                  // companyId
+    path: '/users/{userId}/investees/{investeeId}/auditors/{auditorId}',
     method: 'put',
     options: {
       payload: { allow: ['application/json'] },
       description: 'get specific investee auditor by its id',
-      auth: 'jwt',
+      auth: false, //'jwt',
       app: { allowedPermission: { resource: 'investeeAuditors', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
@@ -1757,7 +1757,7 @@ module.exports = [
     method: 'PUT',
     options: {
       description: 'update specific subsidiary by its id for a specific user id',
-      auth: 'jwt',
+      auth: false, //'jwt',
       app: { allowedPermission: { resource: 'companySubsidiaries', action: 'update' } },
       // pre: [
       //   // { method: helperService.authorizeUser }

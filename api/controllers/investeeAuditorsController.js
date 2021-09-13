@@ -46,9 +46,10 @@ module.exports = {
     try {
       const language= request.pre.languageId;
       // request.payload.investeeId = request.params.companyId;
-      request.payload.createdBy = 15; //request.auth.decoded.id;
-      const foundInvesteeCompanies = await models.investee.findOne({ where: { companyId: request.params.companyId } }); // id
-
+      request.payload.createdBy = request.params.userId; //request.auth.decoded.id;
+      console.log(request.params.investeeId)
+      const foundInvesteeCompanies = await models.investee.findOne({ where: { id: request.params.investeeId } }); // id
+//companyId: request.params.companyId
       if(_.isEmpty(foundInvesteeCompanies)) {
 
         return Boom.notFound('The Investee Company Is Not Found, You have to create It First');
@@ -135,7 +136,6 @@ module.exports = {
     try {
       const language = request.pre.languageId;
       const foundAuditor = await models.investeeAuditor.findOne({ where: { id: request.params.auditorId }, raw: true });
-
       if(_.isEmpty(foundAuditor)) {
 
         return Boom.notFound('Investee Auditor You Try To Update does Not Exist, You have to create It First');
@@ -150,8 +150,9 @@ module.exports = {
         await models.investeeAuditorTranslation.update(request.payload.auditorTranslation,
           { where: { id: request.payload.auditorTranslation.id }, transaction });
       }
+      await transaction.commit();
 
-      return reply.response().code(200);
+      return reply.response({ status: 200, message: "Updated successfully"}).code(200);
     }
     catch (e) {
       console.log('error', e);

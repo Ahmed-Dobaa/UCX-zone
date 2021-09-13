@@ -116,7 +116,7 @@ module.exports = {
         }
       });
 
-      return reply.response(updatedCompany).code(HTTP_SUCCESS_CODE);
+      return reply.response({ status: 200, message: "Updated successfully"}).code(HTTP_SUCCESS_CODE);
     }
     catch (e) {
       console.log('error', e);
