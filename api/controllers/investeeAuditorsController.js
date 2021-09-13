@@ -148,7 +148,7 @@ module.exports = {
         request.payload.auditorTranslation.languageId = language;
 
         await models.investeeAuditorTranslation.update(request.payload.auditorTranslation,
-          { where: { id: request.payload.auditorTranslation.id }, transaction });
+          { where: { id: request.params.auditorTranslationId }, transaction });  // payload.auditorTranslation.id
       }
       await transaction.commit();
 

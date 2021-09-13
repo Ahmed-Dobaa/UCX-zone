@@ -40,12 +40,14 @@ module.exports = {
     params: {
       userId: Joi.number().required().description('the id of the user'),
       investeeId: Joi.number().required().description('the id of the company'), // companyId
-      auditorId: Joi.number().required().description('the id of the auditor')
+      auditorId: Joi.number().required().description('the id of the auditor'),
+      auditorTranslationId: Joi.number().required().description('the id of the auditor translation')
+
     },
     payload: {
       email: Joi.string(),
       auditorTranslation: {
-        id: Joi.number().required(),
+        // id: Joi.number().required(),
         name: Joi.string().example('test company'),
         address: Joi.object().keys({
           streetNumber: Joi.string().optional().example('102'),

@@ -650,7 +650,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"email\": \"test@l.com\",\r\n        \"auditorTranslation\": {\r\n        \t\"id\": 3,\r\n            \"name\": \"mohammeddddddddddddddd\",\r\n            \"address\": {\r\n                \"city\": \"cairo\"\r\n            },\r\n            \"phoneNumber\": \"010254856657\"\r\n        }\r\n}\r\n\r\n// user id - investee id - auditor id",
+							"raw": "{\r\n        \"email\": \"test@l.com\",\r\n        \"auditorTranslation\": {\r\n            \"name\": \"modddddddd\",\r\n            \"address\": {\r\n                \"city\": \"cairo\"\r\n            },\r\n            \"phoneNumber\": \"010254856657\"\r\n        }\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -658,7 +658,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/5/investees/9/auditors/3",
+							"raw": "http://localhost:12225/users/5/investees/9/auditors/3/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -670,6 +670,7 @@
 								"investees",
 								"9",
 								"auditors",
+								"3",
 								"3"
 							]
 						}

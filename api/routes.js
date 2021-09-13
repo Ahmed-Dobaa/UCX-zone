@@ -1372,7 +1372,7 @@ module.exports = [
     }
   },
   {                                  // companyId
-    path: '/users/{userId}/investees/{investeeId}/auditors/{auditorId}',
+    path: '/users/{userId}/investees/{investeeId}/auditors/{auditorId}/{auditorTranslationId}',
     method: 'put',
     options: {
       payload: { allow: ['application/json'] },
