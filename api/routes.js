@@ -1870,7 +1870,7 @@ module.exports = [
     }
   },
   {
-    path: '/users/{userId}/investees/{investeeId}/investmentproposals/{id}',
+    path: '/users/{userId}/investees/{investeeId}/investmentproposals/{id}/{transId}',
     method: 'PUT',
     options: {
       // payload: {

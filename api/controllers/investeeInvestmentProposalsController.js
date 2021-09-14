@@ -310,7 +310,7 @@ module.exports = {
       // if(!_.isEmpty(payload.managementTranslation)) {
         payload.investmentProposalTranslation.langauegeId = language;
         await models.investeeInvestmentProposalTranslation.update(payload.investmentProposalTranslation,
-          { where: { id: payload.investmentProposalTranslation.id }, transaction });
+          { where: { id: request.params.transId }, transaction }); //payload.investmentProposalTranslation.id
 
       // }
 

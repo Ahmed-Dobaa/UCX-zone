@@ -42,14 +42,15 @@ module.exports = {
     params: {
       userId: Joi.number().required().description('the id of the user'),
       investeeId: Joi.number().required().description('the id of the company'),
-      id: Joi.number().required().description('the id of the company')
+      id: Joi.number().required().description('the id of the company'),
+      transId: Joi.number().required().description('the id of the company'),
     },
     payload: {
       investmentTypeId: Joi.number().label('investment Type'),
       file: Joi.any(),
       currencyId: Joi.number().positive().required().label('currency'),
       investmentProposalTranslation: {
-        id: Joi.number().required(),
+        // id: Joi.number().required(),
         title: Joi.string().required().label('title'),
         description: Joi.string().required().label('value Of The Investment Required'),
         minInvestment: Joi.number().positive().required().label('value Of The Investment Required'),
