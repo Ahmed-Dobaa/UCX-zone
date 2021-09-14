@@ -694,14 +694,14 @@
 								"type": "text"
 							},
 							{
-								"key": "headers.accept-language",
+								"key": "accept-language",
 								"value": "en",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": {\r\n        \"userId\": 15,\r\n        \"companyId\": 2\r\n    },\r\n    \"payload\": {\r\n        \"name\": \"sub\",\r\n        \"registrationIdNo\": \"21548\",\r\n        \"registrationOffice\": \"cairo\",\r\n        \"sector\": \"tech\",\r\n        \"subSector\": \"mobiles\",\r\n        \"company_purpose\": \"money\",\r\n        \"products_or_services\": \"software\",\r\n        \"legalForm\": \"test\",\r\n        \"country\": \"egypt\",\r\n        \"city\": \"cairo\",\r\n        \"other_addresses\": \"test\",\r\n        \"phone_numbers\": \"01155467899\",\r\n        \"relationToCompany\": \"manager\",\r\n        \"sharePercentage\": 20,\r\n        \"haveManagementRight\": \"1\"\r\n    }\r\n}",
+							"raw": "{\r\n        \"name\": \"sub\",\r\n        \"registrationIdNo\": \"22\",\r\n        \"registrationOffice\": \"cairo\",\r\n        \"sector\": \"tech\",\r\n        \"subSector\": \"mobiles\",\r\n        \"companyPurpose\": \"money\",\r\n        \"productsOrServices\": \"software\",\r\n        \"legalForm\": \"test\",\r\n        \"address\": {\r\n        \"country\": \"egypt\",\r\n        \"city\": \"cairo\"\r\n        },\r\n        \"phone_numbers\": \"01155467899\",\r\n        \"relationToCompany\": \"manager\",\r\n        \"sharePercentage\": 20,\r\n        \"haveManagementRight\": \"1\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -709,7 +709,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/company/1/subsidiaries",
+							"raw": "http://localhost:12225/users/5/company/10/subsidiaries",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -717,9 +717,9 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"5",
 								"company",
-								"1",
+								"10",
 								"subsidiaries"
 							]
 						}

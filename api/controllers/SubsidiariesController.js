@@ -43,10 +43,12 @@ module.exports = {
   create: async (request, reply) => {
     let transaction;
     let Company = null;
+    let CompanyTranslation = null;
     try {
       const { companyId } = request.params;
       const { payload } = request;
-      Company = await models.companiesBasicDataTranslation.findOne({ where: { registrationIdNo: payload.payload.registration_id_no } });
+      payload.user_id = request.params.userId;
+      Company = await models.companiesBasicDataTranslation.findOne({ where: { registrationIdNo: payload.registrationIdNo } });
       // companiesBasicData
       if(!_.isEmpty(Company)) { // If company already exists, just add the relation to companies_relations table.
 
@@ -65,20 +67,25 @@ module.exports = {
           await models.companies_relations.create({
             parentId: companyId,
             childId: Company.id,
-            sharePercentage: payload.sharePercentage
+            sharePercentage: payload.sharePercentage,
+            haveManagementRight: payload.haveManagementRight
           });
         }
 
-        return reply.response({}).code(HTTP_SUCCESS_CODE);
+        return reply.response({ status: 200, message: "success"}).code(HTTP_SUCCESS_CODE);
       }
       // If company doesn't exist, then create the company, add the relation to companies_relations table and send role request.
       transaction = await models.sequelize.transaction();
-      Company = await models.companiesBasicData.create(payload.payload, { transaction });
+      Company = await models.companiesBasicData.create(payload, { transaction });
+      payload.companyBasicDataId = Company.id;
+      payload.languageId = request.pre.languageId;
+       CompanyTranslation = await models.companiesBasicDataTranslation.create(payload, { transaction });
 
       await models.companies_relations.create({
         parentId: companyId,
         childId: Company.id,
-        sharePercentage: payload.payload.sharePercentage
+        sharePercentage: payload.sharePercentage,
+        haveManagementRight: payload.haveManagementRight
       }, { transaction });
       await transaction.commit();
 

@@ -32,7 +32,7 @@ module.exports = {
       country: Joi.string().example('Egypt'),
       city: Joi.string().example('Cairo'),
       address: address,
-      other_addresses: Joi.array().items(address).label('other address'),
+      // other_addresses: Joi.array().items(address).label('other address'),
       phone_numbers: Joi.string().label('phone number').example('01155467899'),
       relationToCompany: Joi.string().label('relation to company').example('Manager'),
       sharePercentage: Joi.number().label('percentage of shares for the parent company in this child company').example('20'),

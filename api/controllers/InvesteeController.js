@@ -246,7 +246,7 @@ module.exports = {
       const { companyBasicData, investeeTranslation } = payload;
       companyBasicData.companiesBasicDataTranslation.languageId = request.pre.languageId;
       investeeTranslation.languageId = request.pre.languageId;
-console.log(payload)
+
       // check first that company basic data exist or not.
       const checkRegistrationIdNo = await models.companiesBasicDataTranslation.findOne( { where: {
                  registrationIdNo: companyBasicData.companiesBasicDataTranslation.registrationIdNo }})

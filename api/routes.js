@@ -1722,6 +1722,7 @@ module.exports = [
       // pre: [
       //   // { method: helperService.authorizeUser }
       // ],
+      pre: [{ method: helperService.getLanguageId, assign: 'languageId' }],
       validate: subsidiarySchema.createSchema,
       handler: subsidiariesCompanyController.create
     }
