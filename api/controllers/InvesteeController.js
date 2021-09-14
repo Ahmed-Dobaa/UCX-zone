@@ -203,7 +203,14 @@ module.exports = {
 
         const subsidiary = await models.companies_relations.findOne({
           where: { parentId: foundInvesteeCompanies.companyId}, // childId: request.params.id },
-          include: [{ model: models.companiesBasicData, as: 'basicData', required: true }]
+          include: [{ model: models.companiesBasicData, as: 'basicData', required: true,
+          include: [
+            {
+              association: 'companiesBasicDataTranslation',
+              required: true,
+              where: { languageId: languageId }
+            }
+          ] }]
         });
 
         let investeeIncome = await models.investeeIncomes.findOne(
