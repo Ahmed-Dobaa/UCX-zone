@@ -50,7 +50,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"Aa@12345\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -160,6 +160,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get user companies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:12225/user/5/company",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"user",
+								"5",
+								"company"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -257,7 +278,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees",
+							"raw": "http://localhost:12225/users/5/investees",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -265,7 +286,7 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"5",
 								"investees"
 							]
 						}
@@ -284,7 +305,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees/3",
+							"raw": "http://localhost:12225/users/5/investees/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -292,9 +313,9 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"5",
 								"investees",
-								"3"
+								"9"
 							]
 						}
 					},

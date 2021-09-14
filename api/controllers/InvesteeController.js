@@ -181,7 +181,6 @@ module.exports = {
       });
 
       const capital = await models.investeeCapital.findOne({ where: {investeeId: request.params.id}})
- console.log("here")
       const director = await models.investeeBoardOfDirectors.findOne({
         where: { investeeId: request.params.id },
         include: [{ association: 'boardOfDirectorTranslation', where: { languageId: languageId }, required: true }]

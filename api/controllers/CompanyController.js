@@ -22,6 +22,24 @@ module.exports = {
       return Boom.badImplementation('An internal server error occurred');
     }
   },
+
+  findAllUserCompanies: async function (request, reply) {
+    try {
+      const foundCompanies = await models.companiesBasicData.findAll({
+        where: {user_id: request.params.userId},
+        include: [
+          { model: models.investee, as: 'investeeCompany' },
+          { model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }
+        ]
+      });
+
+      return reply.response(foundCompanies).code(200);
+    }
+    catch (e) {
+      console.log('error', e);
+      return Boom.badImplementation('An internal server error occurred');
+    }
+  },
   findOne: async (request, reply) => {
     try {
       const companyId = request.params.companyId;
