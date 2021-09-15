@@ -206,7 +206,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"4235851\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n",
+							"raw": "{\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"885\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -305,7 +305,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:12225/users/5/investees/9",
+							"raw": "http://localhost:12225/users/5/investees/8",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -315,7 +315,7 @@
 								"users",
 								"5",
 								"investees",
-								"9"
+								"8"
 							]
 						}
 					},
@@ -860,7 +860,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\n\t{\n\t\t\"year\": 2021,\n        \"Sales\": 1000,\n        \"COGS\": 2000,\n        \"GeneralAndAdministrativeExpense\": 52201,\n        \"SellingExpense\": 544,\n        \"Interest\": 144,\n        \"Tax\": 14,\n        \"depreciation\": 12,\n        \"otherExpenses\": 89,\n        \"otherRevenues\": 54\n\t}\n\t\n\t// user id - investee id - financial id\n",
+							"raw": "[\n\t{\n\t\t\"year\": 2025,\n        \"Sales\": 1000,\n        \"COGS\": 2000,\n        \"GeneralAndAdministrativeExpense\": 52201,\n        \"SellingExpense\": 544,\n        \"Interest\": 144,\n        \"Tax\": 14,\n        \"depreciation\": 12,\n        \"otherExpenses\": 89,\n        \"otherRevenues\": 54\n\t}\n]\t",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -974,6 +974,11 @@
 									"value": "",
 									"type": "text",
 									"disabled": true
+								},
+								{
+									"key": "attachmentTypeId",
+									"value": "2",
+									"type": "text"
 								}
 							],
 							"options": {
@@ -1075,7 +1080,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"investmentTypeId\": 1,\n    \"currencyId\": 1,\n    \"investmentProposalTranslation\": {\n    \t\"id\": 2,\n    \t\"title\": \"ahmed\",\n    \t\"description\": \"ahmed\",\n    \t\"minInvestment\": 10,\n    \t\"currentValueOfCompany\": 50,\n    \t\"valueOfTheInvestmentRequired\": 20,\n    \t\"PurposeOfTheRequiredInvestment\": \"ahmed\",\n    \t\"validTill\": \"2021-12-25\"\n    }\n}\n\n// user id - investee id - investment proposal id",
+							"raw": "{\n\t\"investmentTypeId\": 1,\n    \"currencyId\": 1,\n    \"investmentProposalTranslation\": {\n    \t\"title\": \"ahmed\",\n    \t\"description\": \"ahmed\",\n    \t\"minInvestment\": 10,\n    \t\"currentValueOfCompany\": 50,\n    \t\"valueOfTheInvestmentRequired\": 20,\n    \t\"PurposeOfTheRequiredInvestment\": \"ahmed\",\n    \t\"validTill\": \"2021-12-25\"\n    }\n}\n\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1083,7 +1088,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/5/investees/9/investmentproposals/2",
+							"raw": "http://localhost:12225/users/5/investees/9/investmentproposals/2/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1095,6 +1100,7 @@
 								"investees",
 								"9",
 								"investmentproposals",
+								"2",
 								"2"
 							]
 						}

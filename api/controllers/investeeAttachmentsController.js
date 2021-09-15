@@ -38,7 +38,7 @@ module.exports = {
     const relativePath = `uploads/investee/${request.params.companyId}/`;
     const fileName = `${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
     const fullPath = path.join(__dirname, '../', relativePath);
-      console.log("here")
+
     try {
 
       const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif',
@@ -102,7 +102,7 @@ module.exports = {
 
       await fsPromises.access(fullPath, fs.constants.W_OK);
       await request.payload.file.pipe(fs.createWriteStream(`${fullPath}${fileName}`));
-      await models.investeeAttachments.update({ attachmentPath: `${relativePath}${fileName}` }, { where: { id: request.params.id } });
+      await models.investeeAttachments.update({ attachmentPath: `${relativePath}${fileName}`, attachmentTypeId: request.payload.attachmentTypeId }, { where: { id: request.params.id } });
       await fsPromises.unlink(path.join(__dirname, '../', foundInvesteeAttachmentsType.attachmentPath));
 
       return reply.response({ status: 200, message: "Updated successfully"}).code(200);

@@ -153,7 +153,7 @@ module.exports = {
 
       const foundInvesteeIncome = await models.investeeIncomes.findOne({
         where: { id: request.params.id },
-        include: [{ association: 'incomeTranslation', required: true, where: { languageId: language } }]
+        // include: [{ association: 'incomeTranslation', required: true, where: { languageId: language } }]
       });
 
       if(_.isEmpty(foundInvesteeIncome)) {
@@ -161,7 +161,13 @@ module.exports = {
         return Boom.notFound('Investee company income You Try To Update does Not Exist');
       }
 
-      await models.investeeIncomeTranslation.update(payload, { where: { id: foundInvesteeIncome.incomeTranslation.id } });
+      let incomeTranslation  = await models.investeeIncomeTranslation.findAll({
+        where: {investeeIncomeId: foundInvesteeIncome.id}});
+
+        for(let i= 0; i < payload.length; i++){
+          await models.investeeIncomeTranslation.update(payload[i], { where: { id: incomeTranslation[i].id } });
+        }
+
 
       return reply.response({ status: 200, message: "Updated successfully"}).code(200);
     }
