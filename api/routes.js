@@ -1421,7 +1421,7 @@ module.exports = [
     path: '/investeeAttachmentsTypes',
     method: 'get',
     options: {
-      auth: 'jwt',
+      auth: false, //'jwt',
       description: 'get all investee attachments types',
       // app: { allowedPermission: { resource: 'investeeAttachmentsTypes', action: 'findAll' } },
       // pre: [

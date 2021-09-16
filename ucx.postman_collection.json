@@ -977,7 +977,7 @@
 								},
 								{
 									"key": "attachmentTypeId",
-									"value": "2",
+									"value": "5",
 									"type": "text"
 								}
 							],
@@ -1138,6 +1138,31 @@
 		{
 			"name": "currency",
 			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "investee attachments types",
+			"item": [
+				{
+					"name": "get all attachments type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:12225/investeeAttachmentsTypes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"investeeAttachmentsTypes"
+							]
+						}
+					},
+					"response": []
+				}
+			],
 			"protocolProfileBehavior": {}
 		}
 	],
