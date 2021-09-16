@@ -305,7 +305,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:12225/users/5/investees/8",
+							"raw": "http://localhost:12225/users/5/investees/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -315,7 +315,7 @@
 								"users",
 								"5",
 								"investees",
-								"8"
+								"9"
 							]
 						}
 					},
@@ -1157,6 +1157,91 @@
 							"port": "12225",
 							"path": [
 								"investeeAttachmentsTypes"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "investee balance",
+			"item": [
+				{
+					"name": "insert investee balance",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"year\": 2019,\n\t\"fixedAssets\": 52,\n\t\"currentAssets\": 2,\n\t\"currentLiabilities\": 5,\n\t\"longTermLiabilities\": 8\n}\n\n// user id - investee id",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/5/investees/9/balancestatements",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"5",
+								"investees",
+								"9",
+								"balancestatements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update investee balance",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"year\": 2010,\n\t\"fixedAssets\": 5,\n\t\"currentAssets\": 2555,\n\t\"currentLiabilities\": 5,\n\t\"longTermLiabilities\": 8\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:12225/users/5/investees/9/balancestatements/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "12225",
+							"path": [
+								"users",
+								"5",
+								"investees",
+								"9",
+								"balancestatements",
+								"1"
 							]
 						}
 					},

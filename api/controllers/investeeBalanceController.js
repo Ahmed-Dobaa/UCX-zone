@@ -48,7 +48,7 @@ module.exports = {
       const { payload } = request;
 
       payload.investeeId = request.params.investeeId;
-      payload.createdBy = request.auth.decoded.id;
+      payload.createdBy = request.params.userId; //auth.decoded.id;
 
       const foundInvesteeCompanies = await models.investee.findOne({ where: { id: request.params.investeeId } });
 
@@ -66,7 +66,7 @@ module.exports = {
         return Boom.badRequest(`Investee balance for ${request.payload.year} already created before, it can be updated only.`);
       }
 
-      const createdInvesteeBalance = await models.investeeBalances.create({ investeeId: request.params.investeeId, createdBy: request.auth.decoded.id });
+      const createdInvesteeBalance = await models.investeeBalances.create({ investeeId: request.params.investeeId, createdBy: request.params.userId});
       payload.languageId = language;
       payload.investeeBalanceId = createdInvesteeBalance.id;
       const createdInvesteeBalanceTranslation = await models.investeeBalanceTranslation.create(payload);
@@ -130,7 +130,7 @@ module.exports = {
       }
       await models.investeeBalanceTranslation.update(request.payload, { where: { id: foundInvesteeBalance.balanceTranslation.id } });
 
-      return reply.response().code(200);
+      return reply.response({status: 200, message: "Updated successfully"}).code(200);
     }
     catch (e) {
       console.log('error', e);

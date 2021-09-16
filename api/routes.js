@@ -1654,7 +1654,7 @@ module.exports = [
     method: 'post',
     options: {
       payload: { allow: ['application/json'] },
-      auth: 'jwt',
+      auth: false, //'jwt',
       description: 'create new investee balance statement',
       app: { allowedPermission: { resource: 'investeeBalances', action: 'create' } },
       pre: [
@@ -1702,7 +1702,7 @@ module.exports = [
     options: {
       payload: { allow: ['application/json'] },
       description: 'update specific investee balance statement by its id',
-      auth: 'jwt',
+      auth: false, //'jwt',
       app: { allowedPermission: { resource: 'investeeBalances', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },

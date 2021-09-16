@@ -221,7 +221,14 @@ module.exports = {
              investeeIncomeTranslation = await models.investeeIncomeTranslation.findAll(
               {where: { investeeIncomeId: investeeIncome.id }});
           }
-        investeeIncome = { investeeIncome, investeeIncomeTranslation}
+
+          let investeeBalance = await models.investeeBalances.findOne(
+            {
+              where: { investeeId: request.params.id },
+              include: { association: 'balanceTranslation', required: true, where: { languageId: languageId } }
+            });
+
+        investeeIncome = { investeeIncome, investeeIncomeTranslation, investeeBalance}
 
         const investeeAttachment = await models.investeeAttachments.findOne({ where: { companyId: foundInvesteeCompanies.companyId    }, raw: true });
 
