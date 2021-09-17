@@ -1661,7 +1661,7 @@ module.exports = [
         // // { method: helperService.authorizeUser },
         { method: helperService.getLanguageId, assign: 'languageId' }
       ],
-      validate: investeeBalance.createSchema,
+      // validate: investeeBalance.createSchema,
       handler: investeeBalanceController.create
     }
   },
@@ -1708,7 +1708,7 @@ module.exports = [
         // // { method: helperService.authorizeUser },
         { method: helperService.getLanguageId, assign: 'languageId' }
       ],
-      validate: investeeBalance.updateSchema,
+      // validate: investeeBalance.updateSchema,
       handler: investeeBalanceController.update
     }
   },

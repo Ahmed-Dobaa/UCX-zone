@@ -78,7 +78,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"activationCode\": \"2FGtpw\"\r\n}",
+							"raw": "{\r\n        \"activationCode\": \"cA5YBn\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -214,7 +214,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/5/investees",
+							"raw": "http://localhost:12225/users/1/investees",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -222,7 +222,7 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"5",
+								"1",
 								"investees"
 							]
 						}
@@ -1182,7 +1182,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"year\": 2019,\n\t\"fixedAssets\": 52,\n\t\"currentAssets\": 2,\n\t\"currentLiabilities\": 5,\n\t\"longTermLiabilities\": 8\n}\n\n// user id - investee id",
+							"raw": "[\n\t{\n\t\"year\": 2019,\n\t\"fixedAssets\": 52,\n\t\"currentAssets\": 2,\n\t\"currentLiabilities\": 5,\n\t\"longTermLiabilities\": 8\n},\n{\n\t\"year\": 2020,\n\t\"fixedAssets\": 52,\n\t\"currentAssets\": 2,\n\t\"currentLiabilities\": 5,\n\t\"longTermLiabilities\": 8\n}\n]\n\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1190,7 +1190,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/5/investees/9/balancestatements",
+							"raw": "http://localhost:12225/users/11/investees/22/balancestatements",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1198,9 +1198,9 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"5",
+								"11",
 								"investees",
-								"9",
+								"22",
 								"balancestatements"
 							]
 						}
@@ -1221,7 +1221,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"year\": 2010,\n\t\"fixedAssets\": 5,\n\t\"currentAssets\": 2555,\n\t\"currentLiabilities\": 5,\n\t\"longTermLiabilities\": 8\n}\n\n",
+							"raw": "[\n\t{\n\t\"year\": 2010,\n\t\"fixedAssets\": 52,\n\t\"currentAssets\": 2,\n\t\"currentLiabilities\": 5,\n\t\"longTermLiabilities\": 8\n},\n{\n\t\"year\": 2011,\n\t\"fixedAssets\": 52,\n\t\"currentAssets\": 2,\n\t\"currentLiabilities\": 5,\n\t\"longTermLiabilities\": 8\n}\n]\n\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1229,7 +1229,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/5/investees/9/balancestatements/1",
+							"raw": "http://localhost:12225/users/11/investees/22/balancestatements/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1237,11 +1237,11 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"5",
+								"11",
 								"investees",
-								"9",
+								"22",
 								"balancestatements",
-								"1"
+								"2"
 							]
 						}
 					},

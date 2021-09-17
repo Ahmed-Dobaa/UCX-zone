@@ -67,9 +67,14 @@ module.exports = {
       }
 
       const createdInvesteeBalance = await models.investeeBalances.create({ investeeId: request.params.investeeId, createdBy: request.params.userId});
-      payload.languageId = language;
-      payload.investeeBalanceId = createdInvesteeBalance.id;
-      const createdInvesteeBalanceTranslation = await models.investeeBalanceTranslation.create(payload);
+
+      let createdInvesteeBalanceTranslation= null
+      for(let i = 0; i < payload.length; i++){
+          payload[i].languageId = language;
+          payload[i].investeeBalanceId = createdInvesteeBalance.id;
+         createdInvesteeBalanceTranslation = await models.investeeBalanceTranslation.create(payload[i]);
+      }
+
 
       return reply.response(_.set(createdInvesteeBalance.dataValues, 'translation', createdInvesteeBalanceTranslation.dataValues)).code(201);
     }
@@ -120,15 +125,22 @@ module.exports = {
     try {
       const language = request.pre.languageId;
       const foundInvesteeBalance = await models.investeeBalances.findOne({
-        where: { id: request.params.id },
-        include: [{ association: 'balanceTranslation', required: true, where: { languageId: language } }]
+        where: { id: request.params.id }
+        // include: [{ association: 'balanceTranslation', required: true, where: { languageId: language } }]
       });
 
       if(_.isEmpty(foundInvesteeBalance)) {
 
         return Boom.notFound('Investee balance You Try To Update Does Not Exist');
       }
-      await models.investeeBalanceTranslation.update(request.payload, { where: { id: foundInvesteeBalance.balanceTranslation.id } });
+      const foundInvesteeBalanceTranslation = await models.investeeBalanceTranslation.findAll({
+        where: { investeeBalanceId: foundInvesteeBalance.id}
+      });
+
+      for(let i = 0; i < request.payload.length; i++){
+        await models.investeeBalanceTranslation.update(request.payload[i], { where: { id: foundInvesteeBalanceTranslation[i].id } });
+      }
+
 
       return reply.response({status: 200, message: "Updated successfully"}).code(200);
     }

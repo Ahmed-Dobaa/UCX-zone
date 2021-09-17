@@ -7,7 +7,7 @@ module.exports = {
       userId: Joi.number().required().example('17'),
       investeeId: Joi.number().required().example('17')
     },
-    payload: {
+    payload: [{
       year: Joi.number().max(parseInt(moment().subtract(1, 'year').format('YYYY'))).required()
         .label('year'),
       fixedAssets: Joi.number().max(parseInt(moment().subtract(1, 'year').format('YYYY'))).required()
@@ -15,7 +15,7 @@ module.exports = {
       currentAssets: Joi.number().positive().required().label('current Assets'),
       currentLiabilities: Joi.number().positive().required().label('current Liabilities'),
       longTermLiabilities: Joi.number().positive().required().label('long Term Liabilities')
-    }
+    }]
   },
   translateSchema: {
     params: {
