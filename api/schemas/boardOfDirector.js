@@ -13,7 +13,7 @@ module.exports = {
       boardOfDirectorTranslation: Joi.object().keys({
         name: Joi.string().min(3).max(50).example('Abu El-Ella').description('Director name.'),
         position: Joi.string().example('manager'),
-        phoneNumber: Joi.string().allow('', null).optional().label('phone number').example(22765927)
+        phoneNumber: Joi.number().allow('', null).optional().label('phone number').example(22765927)
       })
     }
   },
@@ -39,7 +39,7 @@ module.exports = {
         // id: Joi.number().required(),
         name: Joi.string().min(3).max(50).example('Abu El-Ella').description('Director name.'),
         position: Joi.string().example('manager'),
-        phoneNumber: Joi.string().allow('', null).label('phone number').example(22765927)
+        phoneNumber: Joi.number().allow('', null).label('phone number').example(22765927)
       }
     }
   }

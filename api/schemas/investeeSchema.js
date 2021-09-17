@@ -30,11 +30,11 @@ module.exports = {
             city: Joi.string().allow(null, '').example('Cairo'),
             country: Joi.string().required().example('Egypt')
           }).required(),
-          otherAddresses: Joi.string().optional().label('other address'), // .array()
+          otherAddresses: Joi.array().optional().label('other address'), // .array()
           YearOfEstablishment: Joi.string().allow(null, '').label('Year Of Establishment'),
         }
       },
-      investeeTranslation: { phoneNumbers: Joi.string().allow(null, '').label('phone number').example('01155467899'), },
+      investeeTranslation: { phoneNumbers: Joi.number().allow(null, '').label('phone number').example('01155467899'), },
       avatar: Joi.any().allow(['', null]),
       website: Joi.string().allow(['', null]), // .uri()
       // relationToCompany: Joi.string().required().label('relation to company').example('Manager')
@@ -90,7 +90,7 @@ module.exports = {
           // relationToCompany: Joi.string().required().label('relation to company').example('Manager')
         }
       },
-      investeeTranslation: { phoneNumbers: Joi.string().label('phone number').example('01155467899') },
+      investeeTranslation: { phoneNumbers: Joi.number().label('phone number').example('01155467899') },
       avatar: Joi.any().allow(['', null]),
       website: Joi.string().allow(['', null]), //.uri()
     }

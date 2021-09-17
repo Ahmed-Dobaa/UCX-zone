@@ -26,18 +26,18 @@ module.exports = {
       registrationOffice: Joi.string().label('registration office').example('Cairo office'),
       sector: Joi.string().example('Technology'),
       subSector: Joi.string().label('sub sector').example('Mobiles'),
-      company_purpose: Joi.string().label('company purpose').example('Money Laundry'),
+      company_purpose: Joi.string().optional().label('company purpose').example('Money Laundry'),
       products_or_services: Joi.string().label('products or services').example('Mobile Software'),
       legalForm: Joi.string().label('legal form').example('Mobile Software'),
       country: Joi.string().example('Egypt'),
       city: Joi.string().example('Cairo'),
-      address: address,
+      address: Joi.string(), ////address.optional(),
       // other_addresses: Joi.array().items(address).label('other address'),
-      phone_numbers: Joi.string().label('phone number').example('01155467899'),
+      phone_numbers: Joi.number().label('phone number').example('01155467899'),
       relationToCompany: Joi.string().label('relation to company').example('Manager'),
-      sharePercentage: Joi.number().label('percentage of shares for the parent company in this child company').example('20'),
-      haveManagementRight: Joi.string().valid('0', '1').label('percentage of shares for the parent company in this child company').example('0')
-    }
+      sharePercentage: Joi.number().label('percentage of shares for the parent company in this child company'),
+      haveManagementRight: Joi.boolean().label('Management right of shares for the parent company in this child company').example('0')
+    }  //.valid('0', '1')
   },
   updateSchema: {
     params: {
@@ -47,7 +47,7 @@ module.exports = {
     },
     payload: {
       sharePercentage: Joi.number().label('percentage of shares for the parent company in this child company').example('20'),
-      haveManagementRight: Joi.string().valid('0', '1').required().label('percentage of shares for the parent company in this child company').example('0')
-    }
+      haveManagementRight: Joi.string().required().label('percentage of shares for the parent company in this child company').example('0')
+    } //string()
   }
 };

@@ -17,7 +17,7 @@ module.exports = {
           city: Joi.string().example('Cairo'),
           country: Joi.string().example('Egypt')
         }),
-        phoneNumber: Joi.string().label('phone Number')
+        phoneNumber: Joi.number().label('phone Number')
       })
     }
   },
@@ -56,7 +56,7 @@ module.exports = {
           city: Joi.string().optional().example('Cairo'),
           country: Joi.string().optional().example('Egypt')
         }),
-        phoneNumber: Joi.string().label('phone Number')
+        phoneNumber: Joi.number().label('phone Number')
       }
     }
   }

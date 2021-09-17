@@ -14,7 +14,7 @@ module.exports = {
       gender: Joi.string().valid('M', 'F').example('M'),
       ownershipTranslation: {
         shareholderName: Joi.string().label('shareholder name').example('Greg'),
-        phoneNumber: Joi.string().allow('', null).optional().label('phone number').example(22765927),
+        phoneNumber: Joi.number().allow('', null).optional().label('phone number').example(22765927),
         dob: Joi.date().format('YYYY-MM-DD')
           .label('date of birth'),
         ownedShares: Joi.number().positive().label('owned shares').example(1000),
@@ -47,7 +47,7 @@ module.exports = {
       gender: Joi.string(),
       ownershipTranslation: {
         shareholderName: Joi.string().label('shareholder name').example('Greg'),
-        phoneNumber: Joi.string().allow('', null).optional().label('phone number').example(22765927),
+        phoneNumber: Joi.number().allow('', null).optional().label('phone number').example(22765927),
         dob: Joi.date().format('YYYY-MM-DD').raw()
         // .max(moment().subtract(18, 'year').format('MM-DD-YYYY'))
           .label('date of birth').example(moment().subtract(18, 'year').format('MM-DD-YYYY')),

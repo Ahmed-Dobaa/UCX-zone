@@ -46,7 +46,7 @@ module.exports = {
       const language = request.pre.languageId;
       // const { payload } = request;
       const foundInvesteeCompany = await models.investee.findOne({ where: { id: request.params.investeeId } });
-
+console.log(foundInvesteeCompany);
       if(_.isEmpty(foundInvesteeCompany)) {
 
         return Boom.notFound('The Investee Company income Is Not Found');
