@@ -92,12 +92,13 @@ module.exports = {
       const foundUser = await models.users.findOne({ where: { email: payload.email } });
 
       if(_.isEmpty(foundUser) || !foundUser.validPassword(payload.password)) {
-        return Boom.unauthorized('Wrong Email Or Password');
+        return Boom.unauthorized('Wrong Email Or Password')
       }
 
       if(foundUser.active === 0) {
-        return Boom.response('Please confirm your email').code(406)
+        return reply.response({status: 406, error: 'Please confirm your email'}).code(200)
       }
+
       const user_companies = await models.companiesBasicData.findAll({ where: { user_id: foundUser.id } });
       if(foundUser.twoFactorAuthentication && request.headers['x-opt']) {
 
@@ -121,7 +122,7 @@ module.exports = {
             active: foundUser.active
           }, foundUser.secret, payload.stayLoggedIn, agent.toJSON());
           await userService.saveAccessToken(foundUser.id, accessToken, accessToken, agent.toJSON());
-          return reply.response({ accessToken: accessToken, user_info: foundUser, userCompanies: user_companies }).header('Authorization', accessToken);
+          return reply.response({status: 200, accessToken: accessToken, user_info: foundUser, userCompanies: user_companies }).header('Authorization', accessToken);
         }
       }
 
@@ -141,7 +142,7 @@ module.exports = {
         active: foundUser.active
       }, foundUser.secret, payload.stayLoggedIn, agent.toJSON());
       await userService.saveAccessToken(foundUser.id, accessToken, accessToken, agent.toJSON());
-      return reply.response({ accessToken: accessToken, user_info: foundUser, user_companies: user_companies }).header('Authorization', accessToken);
+      return reply.response({status: 200, accessToken: accessToken, user_info: foundUser, user_companies: user_companies }).header('Authorization', accessToken);
     }
     catch (e) {
       console.log('Error', e);
