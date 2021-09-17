@@ -13,7 +13,8 @@ module.exports = {
     password: Joi.string().example('123456'),
     confirmationPassword: Joi.string().valid(Joi.ref('password')).options({ language: { any: { allowOnly: '!!Passwords do not match', } } }).example('123456'),
     interests: Joi.array().items(
-      Joi.string().valid(['Investor','Company Looking For Investors', 'Advisory firm', 'Selling shareholder'])
+      Joi.string()
+      //.valid(['Investor','Company Looking For Investors', 'Advisory firm', 'Selling shareholder'])
     ).min(1).unique().required(),
     companyName: Joi.string().allow(null, '').label('company name'),
     position_in_company: Joi.string().allow(null, '').label('position in company'),
