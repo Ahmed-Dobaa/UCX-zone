@@ -96,7 +96,7 @@ module.exports = {
       }
 
       if(foundUser.active === 0) {
-        return Boom.unauthorized('Please confirm your email');
+        return Boom.unauthorized('Please confirm your email').code(406)
       }
       const user_companies = await models.companiesBasicData.findAll({ where: { user_id: foundUser.id } });
       if(foundUser.twoFactorAuthentication && request.headers['x-opt']) {
