@@ -50,7 +50,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"Aa@12345\"\r\n}",
+							"raw": "{\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"A12345\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -305,7 +305,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:12225/users/5/investees/9",
+							"raw": "http://localhost:12225/users/12/investees/23",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -313,9 +313,9 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"5",
+								"12",
 								"investees",
-								"9"
+								"23"
 							]
 						}
 					},
@@ -389,7 +389,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"authorizedCapital\": \"test\",\r\n\t\"bookValue\": 1,\r\n\t\"currentTotalShares\": 1,\r\n\t\"issuedCapital\": 1,\r\n\t\"paidInCapital\": 1\r\n}\r\n \r\n// userId - investeeId - capital id",
+							"raw": "{\r\n\t\"authorizedCapital\": \"test\",\r\n\t\"bookValue\": 1,\r\n\t\"currentTotalShares\": 1,\r\n\t\"issuedCapital\": 1,\r\n\t\"paidInCapital\": 1\r\n}\r\n \r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -439,7 +439,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"email\": \"test@gmail.com\",\r\n        \"boardOfDirectorTranslation\": {\r\n            \"name\": \"ahmed\",\r\n            \"position\": \"Manager\",\r\n            \"phoneNumber\": \"01013848807\"\r\n        }\r\n}",
+							"raw": "[\n\t{\n        \"email\": \"tes@gmail.com\",\n        \"boardOfDirectorTranslation\": {\n            \"name\": \"ahmed\",\n            \"position\": \"Manager\",\n            \"phoneNumber\": \"01013848807\"\n        }\n},\n    {\n        \"email\": \"test@gmail.com\",\n        \"boardOfDirectorTranslation\": {\n            \"name\": \"ahmed\",\n            \"position\": \"Manager\",\n            \"phoneNumber\": \"01013848807\"\n        }\n}\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -447,7 +447,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/5/investees/8/directors",
+							"raw": "http://localhost:12225/users/12/investees/23/directors",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -455,9 +455,9 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"5",
+								"12",
 								"investees",
-								"8",
+								"23",
 								"directors"
 							]
 						}
@@ -722,7 +722,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"name\": \"sub\",\r\n        \"registrationIdNo\": \"22\",\r\n        \"registrationOffice\": \"cairo\",\r\n        \"sector\": \"tech\",\r\n        \"subSector\": \"mobiles\",\r\n        \"companyPurpose\": \"money\",\r\n        \"productsOrServices\": \"software\",\r\n        \"legalForm\": \"test\",\r\n        \"address\": {\r\n        \"country\": \"egypt\",\r\n        \"city\": \"cairo\"\r\n        },\r\n        \"phone_numbers\": \"01155467899\",\r\n        \"relationToCompany\": \"manager\",\r\n        \"sharePercentage\": 20,\r\n        \"haveManagementRight\": \"1\"\r\n    \r\n}",
+							"raw": "\r\n\r\n{\r\n\t\"city\": \"Egypt\",\r\n\"companyPurpose\": \"money\",\r\n\"country\": \"Egypt\",\r\n\"haveManagementRight\": true,\r\n\"legalForm\": \"Partnership Limited by Shares\",\r\n\"name\": \"test\",\r\n\"addresses\": \"kjhbv\",\r\n\"phone_numbers\": 1013848807,\r\n\"products_or_services\": \"software\",\r\n\"registrationIdNo\": \"25\",\r\n\"registrationOffice\": \"Egypt\",\r\n\"relationToCompany\": \"Decision maker (from the board of directors)\",\r\n\"sector\": \"Egypt\",\r\n\"sharePercentage\": 5,\r\n\"subSector\": \"Egypt\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -730,7 +730,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/5/company/10/subsidiaries",
+							"raw": "http://localhost:12225/users/12/company/35/subsidiaries",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -738,9 +738,9 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"5",
+								"12",
 								"company",
-								"10",
+								"35",
 								"subsidiaries"
 							]
 						}

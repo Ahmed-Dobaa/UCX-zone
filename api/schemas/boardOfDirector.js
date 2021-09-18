@@ -8,14 +8,14 @@ module.exports = {
       investeeId: Joi.number().description('the id of the investee'),
       userId: Joi.number().description('the id of the user')
     },
-    payload: {
+    payload: [{
       email: Joi.string().allow('', null).email().optional().example('test@abc.com'),
       boardOfDirectorTranslation: Joi.object().keys({
         name: Joi.string().min(3).max(50).example('Abu El-Ella').description('Director name.'),
         position: Joi.string().example('manager'),
         phoneNumber: Joi.number().allow('', null).optional().label('phone number').example(22765927)
       })
-    }
+    }]
   },
   translateSchema: {
     payload: {

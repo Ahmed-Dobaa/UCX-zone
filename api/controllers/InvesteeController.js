@@ -201,7 +201,7 @@ module.exports = {
           include: [{ association: 'auditorTranslation', where: { languageId: languageId }, required: true }]
         });
 
-        const subsidiary = await models.companies_relations.findOne({
+        let subsidiary = await models.companies_relations.findOne({
           where: { parentId: foundInvesteeCompanies.companyId}, // childId: request.params.id },
           include: [{ model: models.companiesBasicData, as: 'basicData', required: true,
           include: [
@@ -210,8 +210,14 @@ module.exports = {
               required: true,
               where: { languageId: languageId }
             }
-          ] }]
+          ]
+         }]
         });
+       let investeeTranslation = await models.investeeTranslation.findOne({
+         where: { investeeId: request.params.id}
+       })
+
+       subsidiary.investeeTranslation = investeeTranslation;
 
         let investeeIncome = await models.investeeIncomes.findOne(
           {where: { investeeId: request.params.id }});

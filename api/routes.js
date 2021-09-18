@@ -1164,7 +1164,7 @@ module.exports = [
         // { method: helperService.authorizeUser },
         { method: helperService.getLanguageId, assign: 'languageId' }
       ],
-      validate: boardOfDirector.createSchema,
+      // validate: boardOfDirector.createSchema,
       handler: investeeBoardOfDirectorsController.create
     }
   },

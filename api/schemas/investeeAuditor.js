@@ -10,13 +10,14 @@ module.exports = {
       email: Joi.string().allow(null),
       auditorTranslation: Joi.object().keys({
         name: Joi.string().example('test company'),
-        address: Joi.object().keys({
-          streetNumber: Joi.string().example('102'),
-          streetName: Joi.string().example('Abu El-Ella main road'),
-          governorate: Joi.string().example('El-Zamalek'),
-          city: Joi.string().example('Cairo'),
-          country: Joi.string().example('Egypt')
-        }),
+        address: Joi.string(),
+        //keys({
+        //   streetNumber: Joi.string().example('102'),
+        //   streetName: Joi.string().example('Abu El-Ella main road'),
+        //   governorate: Joi.string().example('El-Zamalek'),
+        //   city: Joi.string().example('Cairo'),
+        //   country: Joi.string().example('Egypt')
+        // }),
         phoneNumber: Joi.number().label('phone Number')
       })
     }
@@ -49,13 +50,14 @@ module.exports = {
       auditorTranslation: {
         // id: Joi.number().required(),
         name: Joi.string().example('test company'),
-        address: Joi.object().keys({
-          streetNumber: Joi.string().optional().example('102'),
-          streetName: Joi.string().optional().example('Abu El-Ella main road'),
-          governorate: Joi.string().optional().example('El-Zamalek'),
-          city: Joi.string().optional().example('Cairo'),
-          country: Joi.string().optional().example('Egypt')
-        }),
+        address: Joi.string(),
+        // .keys({
+        //   streetNumber: Joi.string().optional().example('102'),
+        //   streetName: Joi.string().optional().example('Abu El-Ella main road'),
+        //   governorate: Joi.string().optional().example('El-Zamalek'),
+        //   city: Joi.string().optional().example('Cairo'),
+        //   country: Joi.string().optional().example('Egypt')
+        // }),
         phoneNumber: Joi.number().label('phone Number')
       }
     }
