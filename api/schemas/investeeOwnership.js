@@ -19,7 +19,9 @@ module.exports = {
           .label('date of birth'),
         ownedShares: Joi.number().positive().label('owned shares').example(1000),
         value: Joi.number().positive().label('value').example(1000),
-        percent: Joi.number().positive().label('percent').example(50)
+        percent: Joi.number().positive().label('percent').example(50),
+        email: Joi.string(),
+        gender: Joi.string()
       }
     }
   },
@@ -54,6 +56,8 @@ module.exports = {
         ownedShares: Joi.number().positive().label('owned shares').example(1000),
         value: Joi.number().positive().label('value').example(1000),
         percent: Joi.number().positive().label('percent').example(50),
+        email: Joi.string(),
+        gender: Joi.string()
       }
     }
   }

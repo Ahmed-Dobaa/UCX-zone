@@ -12,6 +12,14 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: false
     },
+    gender: {
+      type: DataTypes.STRING(7),
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
     languageId: {
       type: DataTypes.INTEGER(11).UNSIGNED,
       allowNull: false,

@@ -40,6 +40,14 @@ module.exports = {
       type: Sequelize.DECIMAL,
       allowNull: false
     },
+    gender: {
+      type: Sequelize.STRING(7),
+      allowNull: false
+    },
+    email: {
+      type: Sequelize.STRING(50),
+      allowNull: false
+    },
     createdAt: {
       type: Sequelize.DATE,
       allowNull: false,
