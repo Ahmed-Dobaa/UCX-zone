@@ -11,7 +11,7 @@ module.exports = {
     },
     payload: {
       email: Joi.string().allow('', null).email().optional().example('test@abc.com'),
-      gender: Joi.string().valid('M', 'F').example('M'),
+      gender: Joi.string(),
       ownershipTranslation: {
         shareholderName: Joi.string().label('shareholder name').example('Greg'),
         phoneNumber: Joi.number().allow('', null).optional().label('phone number').example(22765927),

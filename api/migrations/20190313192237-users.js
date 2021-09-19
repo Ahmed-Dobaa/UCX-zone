@@ -86,7 +86,7 @@ module.exports = {
       allowNull: true
     },
     gender: {
-      type: Sequelize.ENUM('M','F'),
+      type: Sequelize.STRING(10),
       allowNull: true
     },
     password: {

@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: true
     },
     gender: {
-      type: DataTypes.ENUM('M','F'),
+      type: DataTypes.STRING(10),
       allowNull: true
     },
     createdAt: {
