@@ -225,7 +225,7 @@ module.exports = {
         // let investeeBalance = await models.investeeBalances.findOne(
         //   {where: { investeeId: request.params.id }});
 
-          let investeeIncomeTranslation, balanceTranslation;
+          let investeeIncomeTranslation, balanceTranslation, investeeBalanceTranslation;
           if(investeeIncome != null){
              investeeIncomeTranslation = await models.investeeIncomeTranslation.findAll(
               {where: { investeeIncomeId: investeeIncome.id }});
@@ -234,17 +234,34 @@ module.exports = {
               //   {where: { investeeBalanceId: investeeBalance.id }});
           }
 
-          // for(let i = 0; i < investeeIncomeTranslation.length; i++){
-          //   investeeIncomeTranslation[i]["balanceTranslation"] = balanceTranslation[i];
-          //   investeeIncomeTranslation[i].balanceTranslation = balanceTranslation[i];
-          // }
+
           let investeeBalance = await models.investeeBalances.findOne(
             {
               where: { investeeId: request.params.id },
-              include: { association: 'balanceTranslation', required: true, where: { languageId: languageId } }
+              // include: { association: 'balanceTranslation', required: true, where: { languageId: languageId } }
             });
 
-        investeeIncome = { investeeIncome, investeeIncomeTranslation, investeeBalance}
+            if(investeeBalance != null){
+              investeeBalanceTranslation = await models.investeeBalanceTranslation.findAll(
+               {where: { investeeBalanceId: investeeBalance.id }});
+
+               // balanceTranslation = await models.investeeBalanceTranslation.findAll(
+               //   {where: { investeeBalanceId: investeeBalance.id }});
+           }
+
+           for(let i = 0; i < investeeBalanceTranslation.length; i++){
+            console.log(investeeBalanceTranslation[i].fixedAssets);
+            investeeIncomeTranslation[i].fixedAssets = investeeBalanceTranslation[i].fixedAssets;
+            investeeIncomeTranslation[i].currentAssets = investeeBalanceTranslation[i].currentAssets;
+            investeeIncomeTranslation[i].currentLiabilities = investeeBalanceTranslation[i].currentLiabilities;
+            investeeIncomeTranslation[i].longTermLiabilities = investeeBalanceTranslation[i].longTermLiabilities;
+            console.log("inside")
+            console.log(investeeIncomeTranslation[i])
+            // investeeIncomeTranslation[i].balanceTranslation = investeeBalanceTranslation[i];
+          }
+          console.log(investeeIncomeTranslation)
+
+        investeeIncome = { investeeIncome, investeeIncomeTranslation, investeeBalance, investeeBalanceTranslation}
 
         const investeeAttachment = await models.investeeAttachments.findOne({ where: { companyId: foundInvesteeCompanies.companyId    }, raw: true });
 

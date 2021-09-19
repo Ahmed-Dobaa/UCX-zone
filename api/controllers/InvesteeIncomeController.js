@@ -41,12 +41,12 @@ module.exports = {
     }
   },
   create: async function (request, reply) {
+    console.log("insert")
     let transaction;
     try {
       const language = request.pre.languageId;
       // const { payload } = request;
       const foundInvesteeCompany = await models.investee.findOne({ where: { id: request.params.investeeId } });
-console.log(foundInvesteeCompany);
       if(_.isEmpty(foundInvesteeCompany)) {
 
         return Boom.notFound('The Investee Company income Is Not Found');
@@ -63,7 +63,7 @@ console.log(foundInvesteeCompany);
       }
       let createdInvesteeIncomeTranslation;
       const investee= {createdBy: request.params.userId, investeeId: request.params.investeeId} ;
-
+   console.log("here")
       transaction = await models.sequelize.transaction();
       const createdInvesteeIncome = await models.investeeIncomes.create(investee);
       for(let i = 0; i < request.payload.length; i++){
