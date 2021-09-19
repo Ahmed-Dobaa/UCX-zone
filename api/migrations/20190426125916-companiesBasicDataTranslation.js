@@ -29,6 +29,10 @@ module.exports = {
         type: Sequelize.STRING(100),
         allowNull: true
       },
+      phoneNumbers: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false
+      },
       companyPurpose: {
         type: Sequelize.TEXT,
         allowNull: false

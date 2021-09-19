@@ -32,6 +32,7 @@ module.exports = {
           //   city: Joi.string().allow(null, '').example('Cairo'),
           //   country: Joi.string().required().example('Egypt')
           // }).required(),
+          phoneNumbers: Joi.number().allow(null, ''),
           otherAddresses: Joi.array().optional().label('other address'), // .array()
           YearOfEstablishment: Joi.string().allow(null, '').label('Year Of Establishment'),
         }
@@ -92,6 +93,7 @@ module.exports = {
           // // otherAddresses: Joi.array().items(address).min(0).label('other address'),
           YearOfEstablishment: Joi.string().label('Year Of Establishment'),
           // relationToCompany: Joi.string().required().label('relation to company').example('Manager')
+          phoneNumbers: Joi.number().allow(null, '')
         }
       },
       investeeTranslation: { phoneNumbers: Joi.number().label('phone number').example('01155467899') },
