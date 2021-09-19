@@ -21,7 +21,7 @@ module.exports = {
       allowNull: false
     },
     address: {
-      type: Sequelize.STRING(1000), //JSON,
+      type: Sequelize.STRING(1000),
       allowNull: false
     },
     phoneNumber: {

@@ -46,7 +46,7 @@ module.exports = {
       default: null
     },
     validTill: {
-      type: Sequelize.DATE,
+      type: Sequelize.STRING(50),
       allowNull: false
     },
     createdAt: {

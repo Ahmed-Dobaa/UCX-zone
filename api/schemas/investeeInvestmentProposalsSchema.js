@@ -20,7 +20,7 @@ module.exports = {
         currentValueOfCompany: Joi.number().positive().label('value Of The Investment Required'),
         valueOfTheInvestmentRequired: Joi.number().positive().label('value Of The Investment Required'),
         PurposeOfTheRequiredInvestment: Joi.string().label('Purpose Of The Required Investment'),
-        validTill: Joi.date().min(moment().format('YYYY-MM-DDTHH:mm:ss[Z]')).required().label('valid Till'),
+        validTill: Joi.string() //.min(moment().format('YYYY-MM-DDTHH:mm:ss[Z]')).required().label('valid Till'),
       }
     }
   },
@@ -34,7 +34,7 @@ module.exports = {
         currentValueOfCompany: Joi.number().positive().required().label('value Of The Investment Required'),
         valueOfTheInvestmentRequired: Joi.number().positive().required().label('value Of The Investment Required'),
         PurposeOfTheRequiredInvestment: Joi.string().required().label('Purpose Of The Required Investment'),
-        validTill: Joi.date().min(moment().format('YYYY-MM-DDTHH:mm:ss[Z]')).required().label('valid Till'),
+        validTill: Joi.date() //.min(moment().format('YYYY-MM-DDTHH:mm:ss[Z]')).required().label('valid Till'),
       }
     }
   },
@@ -57,7 +57,7 @@ module.exports = {
         currentValueOfCompany: Joi.number().positive().required().label('value Of The Investment Required'),
         valueOfTheInvestmentRequired: Joi.number().label('value Of The Investment Required'),
         PurposeOfTheRequiredInvestment: Joi.string().label('Purpose Of The Required Investment'),
-        validTill: Joi.date().min(moment().format('YYYY-MM-DDTHH:mm:ss[Z]')).label('valid Till'),
+        validTill: Joi.string() //.min(moment().format('YYYY-MM-DDTHH:mm:ss[Z]')).label('valid Till'),
       }
     }
   }

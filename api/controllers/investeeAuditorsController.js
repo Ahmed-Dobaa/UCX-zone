@@ -47,7 +47,6 @@ module.exports = {
       const language= request.pre.languageId;
       // request.payload.investeeId = request.params.companyId;
       request.payload.createdBy = request.params.userId; //request.auth.decoded.id;
-      console.log(request.params.investeeId)
       const foundInvesteeCompanies = await models.investee.findOne({ where: { id: request.params.investeeId } }); // id
 //companyId: request.params.companyId
       if(_.isEmpty(foundInvesteeCompanies)) {
@@ -60,6 +59,7 @@ module.exports = {
       const createdAuditor = await models.investeeAuditor.create(request.payload, { transaction });
       request.payload.auditorTranslation.languageId = language;
       request.payload.auditorTranslation.investeeAuditorId = createdAuditor.id;
+      console.log(request.payload.auditorTranslation)
       const createdAuditorTranslation = await models.investeeAuditorTranslation.create(request.payload.auditorTranslation, { transaction });
       await transaction.commit();
 
