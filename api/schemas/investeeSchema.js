@@ -18,18 +18,20 @@ module.exports = {
         subSector: Joi.string().allow(null).label('sub sector'),
         legalForm: Joi.string().label('legal form'),
         companiesBasicDataTranslation: {
+          city: Joi.string().allow(null, '').example('Cairo'),
+          country: Joi.string().required().example('Egypt'),
           name: Joi.string().required().example('test company'),
           registrationIdNo: Joi.string().allow(null, '').label('registration id number').example('4235158542531'),
           registrationOffice: Joi.string().allow(null, '').label('registration office').example('Cairo office'),
           companyPurpose: Joi.string().label('company purpose').example('Money Laundry'),
           productsOrServices: Joi.string().allow(null, '').label('products or services').example('Mobile Software'),
-          address: Joi.object({
-            streetNumber: Joi.string().allow(null, '').label('street number').example('102'),
-            streetName: Joi.string().allow(null, '').label('street name').example('Abu El-Ella main road'),
-            governorate: Joi.string().allow(null, '').example('El-Zamalek'),
-            city: Joi.string().allow(null, '').example('Cairo'),
-            country: Joi.string().required().example('Egypt')
-          }).required(),
+          // address: Joi.object({
+          //   streetNumber: Joi.string().allow(null, '').label('street number').example('102'),
+          //   streetName: Joi.string().allow(null, '').label('street name').example('Abu El-Ella main road'),
+          //   governorate: Joi.string().allow(null, '').example('El-Zamalek'),
+          //   city: Joi.string().allow(null, '').example('Cairo'),
+          //   country: Joi.string().required().example('Egypt')
+          // }).required(),
           otherAddresses: Joi.array().optional().label('other address'), // .array()
           YearOfEstablishment: Joi.string().allow(null, '').label('Year Of Establishment'),
         }
@@ -78,14 +80,16 @@ module.exports = {
           // registrationOffice: Joi.string().label('registration office').example('Cairo office'),
           companyPurpose: Joi.string().label('company purpose').example('Money Laundry'),
           productsOrServices: Joi.string().label('products or services').example('Mobile Software'),
-          address: Joi.object({
-            streetNumber: Joi.string().label('street number').example('102'),
-            streetName: Joi.string().label('street name').example('Abu El-Ella main road'),
-            governorate: Joi.string().example('El-Zamalek'),
-            city: Joi.string().example('Cairo'),
-            country: Joi.string().example('Egypt')
-          }).required(),
-          // otherAddresses: Joi.array().items(address).min(0).label('other address'),
+          city: Joi.string().allow(null, '').example('Cairo'),
+          country: Joi.string().required().example('Egypt'),
+          // address: Joi.object({
+          //   streetNumber: Joi.string().label('street number').example('102'),
+          //   streetName: Joi.string().label('street name').example('Abu El-Ella main road'),
+          //   governorate: Joi.string().example('El-Zamalek'),
+          //   city: Joi.string().example('Cairo'),
+          //   country: Joi.string().example('Egypt')
+          // }).required(),
+          // // otherAddresses: Joi.array().items(address).min(0).label('other address'),
           YearOfEstablishment: Joi.string().label('Year Of Establishment'),
           // relationToCompany: Joi.string().required().label('relation to company').example('Manager')
         }

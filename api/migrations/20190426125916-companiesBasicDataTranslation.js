@@ -37,7 +37,15 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true
       },
-      address: {
+      // address: {
+      //   type: Sequelize.STRING(1000), //JSON,
+      //   allowNull: false
+      // },
+      country: {
+        type: Sequelize.STRING(1000), //JSON,
+        allowNull: false
+      },
+      city: {
         type: Sequelize.STRING(1000), //JSON,
         allowNull: false
       },

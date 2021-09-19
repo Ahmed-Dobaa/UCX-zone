@@ -37,8 +37,18 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    address: {
-      type: DataTypes.JSON,
+    // address: {
+    //   type: DataTypes.JSON,
+    //   allowNull: false
+    // },
+
+    country: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+
+    city: {
+      type: DataTypes.STRING(100),
       allowNull: false
     },
     otherAddresses: {
