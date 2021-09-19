@@ -32,6 +32,7 @@ module.exports = {
           //   city: Joi.string().allow(null, '').example('Cairo'),
           //   country: Joi.string().required().example('Egypt')
           // }).required(),
+          main_address: Joi.string(),
           phoneNumbers: Joi.number().allow(null, ''),
           otherAddresses: Joi.array().optional().label('other address'), // .array()
           YearOfEstablishment: Joi.string().allow(null, '').label('Year Of Establishment'),
@@ -83,6 +84,7 @@ module.exports = {
           productsOrServices: Joi.string().label('products or services').example('Mobile Software'),
           city: Joi.string().allow(null, '').example('Cairo'),
           country: Joi.string().required().example('Egypt'),
+          main_address: Joi.string(),
           // address: Joi.object({
           //   streetNumber: Joi.string().label('street number').example('102'),
           //   streetName: Joi.string().label('street name').example('Abu El-Ella main road'),
