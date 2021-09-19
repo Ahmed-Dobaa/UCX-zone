@@ -47,7 +47,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
     },
     phoneNumbers: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.STRING(12),
       allowNull: false
     },
     city: {

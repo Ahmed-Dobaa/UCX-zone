@@ -30,7 +30,7 @@ module.exports = {
         allowNull: true
       },
       phoneNumbers: {
-        type: Sequelize.INTEGER(11),
+        type: Sequelize.STRING(12),
         allowNull: false
       },
       companyPurpose: {
