@@ -766,7 +766,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"sharePercentage\": 200,\r\n        \"haveManagementRight\": \"1\"\r\n    \r\n}\r\n\r\n\r\n// user id -  company id - child company id",
+							"raw": "{\r\n        \"sharePercentage\": 200,\r\n        \"haveManagementRight\": \"1\",\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"test update\",\r\n            \"subSector\": \"test update\",\r\n            \"legalForm\": \"test update\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucxzone\",  \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"otherAddresses\": [\"Alex\"],\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013555555\" },\r\n      \"website\": \"URL@url.co\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

@@ -47,7 +47,7 @@ module.exports = {
     },
     payload: {
       sharePercentage: Joi.number().label('percentage of shares for the parent company in this child company').example('20'),
-      haveManagementRight: Joi.string().required().label('percentage of shares for the parent company in this child company').example('0')
+      haveManagementRight: Joi.boolean().required().label('percentage of shares for the parent company in this child company').example('0')
     } //string()
   }
 };

@@ -123,6 +123,10 @@ module.exports = {
         }
       });
 
+      // let dataTranslation = await models.companiesBasicDataTranslation.findOne({ where: { id: request.params.companyId }});
+      await models.companiesBasicData.update(payload.companyBasicData, { where: { id: request.params.id }, transaction });
+      await models.companiesBasicData.update(payload.companyBasicData.companiesBasicDataTranslation, { where: { companyBasicDataId: request.params.id }, transaction });
+
       return reply.response({ status: 200, message: "Updated successfully"}).code(HTTP_SUCCESS_CODE);
     }
     catch (e) {
