@@ -249,7 +249,8 @@ module.exports = {
                //   {where: { investeeBalanceId: investeeBalance.id }});
            }
 
-           for(let i = 0; i < investeeBalanceTranslation.length; i++){
+        if(investeeIncome != null){
+          for(let i = 0; i < investeeBalanceTranslation.length; i++){
             console.log(investeeBalanceTranslation[i].fixedAssets);
             investeeIncomeTranslation[i].fixedAssets = investeeBalanceTranslation[i].fixedAssets;
             investeeIncomeTranslation[i].currentAssets = investeeBalanceTranslation[i].currentAssets;
@@ -259,7 +260,8 @@ module.exports = {
             console.log(investeeIncomeTranslation[i])
             // investeeIncomeTranslation[i].balanceTranslation = investeeBalanceTranslation[i];
           }
-          console.log(investeeIncomeTranslation)
+
+        }
 
         investeeIncome = { investeeIncome, investeeIncomeTranslation, investeeBalance, investeeBalanceTranslation}
 
