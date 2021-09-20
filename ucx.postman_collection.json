@@ -50,7 +50,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"A12345\"\r\n}",
+							"raw": "{\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -115,13 +115,13 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjI5NzI2Nzc5LCJleHAiOjE2Mjk4MTMxNzl9.KZngYGSpJNmRmjz57r7ufu7kx5fWqqZCH7IcobRQPRw",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJlbmdhaG1lZGRvYmFhQGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjMyMTYyMzA5LCJleHAiOjE2MzIyNDg3MDl9.0csvWzKzZgvg_C-wSgpwLjZL5BDpLrCmF1Bnff5vBKw",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"params\": {\"userId\":1},\r\n    \"payload\": {\r\n        \"isConfidential\": \"true\",\r\n       \"companyBasicData\": {\r\n        \"name\": \"ucx\",  \r\n        \"registrationIdNo\": \"4235158542531\",  \r\n        \"registrationOffice\": \"Cairo\", \r\n        \"sector\": \"Technology\",\r\n        \"subSector\": \"Mobiles\",  \r\n        \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n        \"productsOrServices\": \"Software\",\r\n        \"legalForm\": \"Mobile Software\",  \r\n        \"address\":  \"{ city: cairo, country: egypt }\",\r\n        \"otherAddresses\": [\"Alex\"],\r\n        \"phoneNumbers\": \"01155467899\",\r\n        \"languageId\": 1,\r\n        \"YearOfEstablishment\": \"2021\",\r\n        \"relationToCompany\": \"Manager\"\r\n    }\r\n    \r\n    }\r\n}",
+							"raw": "{\r\n \r\n        \"isConfidential\": \"true\",\r\n       \"companyBasicData\": {\r\n        \"name\": \"ucx\",  \r\n        \"registrationIdNo\": \"4235158542531\",  \r\n        \"registrationOffice\": \"Cairo\", \r\n        \"sector\": \"Technology\",\r\n        \"subSector\": \"Mobiles\",  \r\n        \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n        \"productsOrServices\": \"Software\",\r\n        \"legalForm\": \"Mobile Software\",  \r\n        \"address\":  \"{ city: cairo, country: egypt }\",\r\n        \"otherAddresses\": [\"Alex\"],\r\n        \"phoneNumbers\": \"01155467899\",\r\n        \"languageId\": 1,\r\n        \"YearOfEstablishment\": \"2021\",\r\n        \"relationToCompany\": \"Manager\"\r\n    }\r\n    \r\n    }\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -129,14 +129,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/company",
+							"raw": "http://localhost:12225/company/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "12225",
 							"path": [
-								"company"
+								"company",
+								"1"
 							]
 						}
 					},
@@ -195,7 +196,7 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsIm5hbWUiOiJhaG1lZCIsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJhY3RpdmUiOjAsImlhdCI6MTYzMDMwODIyOSwiZXhwIjoxNjMwMzk0NjI5fQ.79Mh7iW3zhqPi8mnvwd-_Zoi8R5mbLr5DXA9X-QUAEg",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJlbmdhaG1lZGRvYmFhQGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjMyMTYyMzA5LCJleHAiOjE2MzIyNDg3MDl9.0csvWzKzZgvg_C-wSgpwLjZL5BDpLrCmF1Bnff5vBKw",
 								"type": "text"
 							},
 							{
@@ -278,7 +279,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:12225/users/5/investees",
+							"raw": "http://localhost:12225/users/1/investees",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -286,7 +287,7 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"5",
+								"1",
 								"investees"
 							]
 						}
@@ -722,7 +723,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n\r\n{\r\n\t\"city\": \"Egypt\",\r\n\"companyPurpose\": \"money\",\r\n\"country\": \"Egypt\",\r\n\"haveManagementRight\": true,\r\n\"legalForm\": \"Partnership Limited by Shares\",\r\n\"name\": \"test\",\r\n\"addresses\": \"kjhbv\",\r\n\"phone_numbers\": 1013848807,\r\n\"products_or_services\": \"software\",\r\n\"registrationIdNo\": \"25\",\r\n\"registrationOffice\": \"Egypt\",\r\n\"relationToCompany\": \"Decision maker (from the board of directors)\",\r\n\"sector\": \"Egypt\",\r\n\"sharePercentage\": 5,\r\n\"subSector\": \"Egypt\"\r\n}",
+							"raw": "\r\n\r\n{\r\n\t\"city\": \"Egypt\",\r\n\"companyPurpose\": \"money\",\r\n\"phoneNumbers\": \"01013844485\",\r\n\"main_address\": \"cairo\",\r\n\"country\": \"Egypt\",\r\n\"haveManagementRight\": 1,\r\n\"legalForm\": \"Partnership Limited by Shares\",\r\n\"name\": \"test\",\r\n\"addresses\": \"kjhbv\",\r\n\"phone_numbers\": 1013848807,\r\n\"products_or_services\": \"software\",\r\n\"registrationIdNo\": \"2595255\",\r\n\"registrationOffice\": \"Egypt\",\r\n\"relationToCompany\": \"Decision maker (from the board of directors)\",\r\n\"sector\": \"Egypt\",\r\n\"sharePercentage\": 5,\r\n\"subSector\": \"Egypt\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -730,7 +731,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/12/company/35/subsidiaries",
+							"raw": "http://localhost:12225/users/1/company/1/subsidiaries",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -738,9 +739,9 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"12",
+								"1",
 								"company",
-								"35",
+								"1",
 								"subsidiaries"
 							]
 						}
@@ -766,7 +767,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"sharePercentage\": 200,\r\n        \"haveManagementRight\": \"1\",\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"test update\",\r\n            \"subSector\": \"test update\",\r\n            \"legalForm\": \"test update\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucxzone\",  \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"otherAddresses\": [\"Alex\"],\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013555555\" },\r\n      \"website\": \"URL@url.co\"\r\n    \r\n}",
+							"raw": "{\r\n        \"sharePercentage\": 200,\r\n        \"haveManagementRight\": 1,\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"test update\",\r\n            \"subSector\": \"test update\",\r\n            \"legalForm\": \"test update\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucxzone\",  \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"address\":  { \"city\": \"cairo\", \"country\": \"egypt\" },\r\n                \"otherAddresses\": [\"Alex\"],\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013555555\" },\r\n      \"website\": \"URL@url.co\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -774,7 +775,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/company/1/subsidiaries/2",
+							"raw": "http://localhost:12225/users/1/company/1/subsidiaries/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -786,7 +787,7 @@
 								"company",
 								"1",
 								"subsidiaries",
-								"2"
+								"3"
 							]
 						}
 					},

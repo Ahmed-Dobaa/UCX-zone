@@ -36,7 +36,7 @@ module.exports = {
       phone_numbers: Joi.number().label('phone number').example('01155467899'),
       relationToCompany: Joi.string().label('relation to company').example('Manager'),
       sharePercentage: Joi.number().label('percentage of shares for the parent company in this child company'),
-      haveManagementRight: Joi.boolean().label('Management right of shares for the parent company in this child company').example('0')
+      haveManagementRight: Joi.number().label('Management right of shares for the parent company in this child company').example('0')
     }  //.valid('0', '1')
   },
   updateSchema: {
@@ -47,7 +47,7 @@ module.exports = {
     },
     payload: {
       sharePercentage: Joi.number().label('percentage of shares for the parent company in this child company').example('20'),
-      haveManagementRight: Joi.boolean().required().label('percentage of shares for the parent company in this child company').example('0')
+      haveManagementRight: Joi.number().required().label('percentage of shares for the parent company in this child company').example('0')
     } //string()
   }
 };

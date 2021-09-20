@@ -21,9 +21,9 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
     },
     haveManagementRight: {
-      type: DataTypes.STRING(5), //ENUM('0', '1'),
+      type: DataTypes.INTEGER(5), //ENUM('0', '1'),
       allowNull: true,
-      default: '0',
+      default: 0,
     },
     createdAt: {
       type: DataTypes.DATE,

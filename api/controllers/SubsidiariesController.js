@@ -81,6 +81,11 @@ module.exports = {
       payload.languageId = request.pre.languageId;
        CompanyTranslation = await models.companiesBasicDataTranslation.create(payload, { transaction });
 
+       let investeePayload = {companyId: Company.id,
+                              code: '123456789',
+                            createdBy: request.params.userId}
+                            console.log(Company.id)
+      let investee = await models.investee.create(investeePayload, { transaction });
       await models.companies_relations.create({
         parentId: companyId,
         childId: Company.id,
@@ -102,6 +107,7 @@ module.exports = {
     }
   },
   update: async function (request, reply) {
+   let transaction = await models.sequelize.transaction();
     try {
       const { payload } = request;
       const { companyId, id } = request.params;
@@ -122,11 +128,12 @@ module.exports = {
           childId: id
         }
       });
-
+   console.log(payload.companyBasicData.companiesBasicDataTranslation);
+   console.log(request.params.id)
       // let dataTranslation = await models.companiesBasicDataTranslation.findOne({ where: { id: request.params.companyId }});
       await models.companiesBasicData.update(payload.companyBasicData, { where: { id: request.params.id }, transaction });
-      await models.companiesBasicData.update(payload.companyBasicData.companiesBasicDataTranslation, { where: { companyBasicDataId: request.params.id }, transaction });
-
+      await models.companiesBasicDataTranslation.update(payload.companyBasicData.companiesBasicDataTranslation, { where: { companyBasicDataId: request.params.id }, transaction });
+      await transaction.commit();
       return reply.response({ status: 200, message: "Updated successfully"}).code(HTTP_SUCCESS_CODE);
     }
     catch (e) {
