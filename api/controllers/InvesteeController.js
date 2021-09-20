@@ -179,7 +179,9 @@ module.exports = {
           }
         ]
       });
-
+console.log("---------------------")
+console.log(foundInvesteeCompanies)
+console.log(foundInvesteeCompanies.companyId)
       const capital = await models.investeeCapital.findOne({ where: {investeeId: request.params.id}})
       const director = await models.investeeBoardOfDirectors.findOne({
         where: { investeeId: request.params.id },

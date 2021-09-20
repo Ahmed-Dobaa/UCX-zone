@@ -86,6 +86,9 @@ module.exports = {
                             createdBy: request.params.userId}
                             console.log(Company.id)
       let investee = await models.investee.create(investeePayload, { transaction });
+      payload.investeeId = investee.id;
+      let investeeTrans = await models.investeeTranslation.create(payload, { transaction });
+
       await models.companies_relations.create({
         parentId: companyId,
         childId: Company.id,
@@ -128,11 +131,11 @@ module.exports = {
           childId: id
         }
       });
-   console.log(payload.companyBasicData.companiesBasicDataTranslation);
-   console.log(request.params.id)
+  //  console.log(payload.companyBasicData.companiesBasicDataTranslation);
+  //  console.log(request.params.id)
       // let dataTranslation = await models.companiesBasicDataTranslation.findOne({ where: { id: request.params.companyId }});
-      await models.companiesBasicData.update(payload.companyBasicData, { where: { id: request.params.id }, transaction });
-      await models.companiesBasicDataTranslation.update(payload.companyBasicData.companiesBasicDataTranslation, { where: { companyBasicDataId: request.params.id }, transaction });
+      await models.companiesBasicData.update(payload, { where: { id: request.params.id }, transaction });
+      await models.companiesBasicDataTranslation.update(payload, { where: { companyBasicDataId: request.params.id }, transaction });
       await transaction.commit();
       return reply.response({ status: 200, message: "Updated successfully"}).code(HTTP_SUCCESS_CODE);
     }
