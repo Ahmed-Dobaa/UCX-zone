@@ -209,7 +209,7 @@ module.exports = {
       const { payload } = request;
       const ownershipId = request.params.id;
       const foundInvesteeOwnership = await models.ownerships.findOne({ where: { id: ownershipId }, raw: true });
-      console.log(foundInvesteeOwnership);
+      // console.log(foundInvesteeOwnership);
       if(_.isEmpty(foundInvesteeOwnership)) {
 
         return Boom.notFound('Ownership You Try To Update Does Not Exist');
