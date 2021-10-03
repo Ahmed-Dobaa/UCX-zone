@@ -10,7 +10,7 @@ useragent(true);
 module.exports = {
   find: async function (request, reply) {
     try {
-      const foundSectors = await models.sectors.findAll({ include: [{ association: 'sectorsTranslation', required: true, where: { languageId: request.pre.languageId } }] });
+      const foundSectors = await models.sectors.findAll({ include: [{ association: 'sectorsTranslation', required: true }] });
       return reply.response(foundSectors).code(200);
     }
     catch (e) {

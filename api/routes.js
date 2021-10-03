@@ -391,11 +391,10 @@ module.exports = [
     path: '/sectors',
     method: 'get',
     options: {
-      description: 'list all sectors and support pagination',
-    //  pre: [{ method: helperService.getLanguageId, assign: 'languageId' }],
-      auth: 'jwt',
+      auth: false,
       handler: sectorsController.find
     }
+
   },
   {
     path: '/sectors/{id}',
@@ -403,7 +402,7 @@ module.exports = [
     options: {
       description: 'get specific sector by its id',
    //   pre: [{ method: helperService.getLanguageId, assign: 'languageId' }],
-      auth: 'jwt',
+      // auth: 'jwt',
       validate: { params: sectorSchema.updateSchema.params },
       handler: sectorsController.findOne
     }
@@ -448,7 +447,7 @@ module.exports = [
         // { method: helperService.authorizeUser },
       //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
-      auth: 'jwt',
+      // auth: 'jwt',
       validate: sectorSchema.updateScehema,
       handler: sectorsController.update
     }
