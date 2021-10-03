@@ -163,9 +163,12 @@ module.exports = {
         await models.userForgetPassword.upsert({ userId: foundUser.id, forgetToken: forgetToken, createdAt: moment().format('YYYY-MM-DD hh:mm:ss'), revoked: '0' }, { transaction });
         await Mailer.sendUserforgetPasswordMail(payload.email, forgetToken);
         await transaction.commit();
+        return reply.response({"message": "Please, check your email"}).code(200);
       }
+   else{
+    return reply.response({"message": "This email is not exist"}).code(406);
+   }
 
-      return reply.response().code(204);
     }
     catch (e) {
       console.log('error', e);

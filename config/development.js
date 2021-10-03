@@ -67,17 +67,18 @@ sqsarIKHAZpbtc2Ia0Bhf6EWQ9GTX8nTqUcs/idabbnUrLGTOMD8eh40+O/uSCiS
 tK1RnKm/YRnvqyOoAv63CPD9yrGHUmWEW0mHjQvhLojAnfuH4DkNP1VZ+jArDovS
 mpPwKPXrtRdSMAgz/qiYyoyBvBSoIg/E7yWcHQ==
 -----END CERTIFICATE-----
-` }
+`
+     }
   },
   joi: {
     allowUnknown: true,
     abortEarly: false
   },
   database: {
-    database: 'ucxzone_ucxz',//'sql5431252', //'ucxzone_ucxz',//
-    username: 'ucxzone_remote', //'sql5431252', //'ucxzone_remote', //
-    password: 'wW4Fds9v', //'JmeY3URIRj', //'wW4Fds9v', //
-    host: 'localhost', //'sql5.freemysqlhosting.net', //'localhost', //
+    database: 'ucxzone_ucxz',//'sql5431252', //
+    username: 'ucxzone_remote', //'sql5431252', //
+    password: 'wW4Fds9v', //'JmeY3URIRj', //
+    host: 'localhost', //'sql5.freemysqlhosting.net', //
     port: 3306,
     dialect: 'mysql',
     debug: true,
