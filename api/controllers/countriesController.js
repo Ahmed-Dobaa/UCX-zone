@@ -15,7 +15,7 @@ module.exports = {
           {
             association: 'countriesTranslation',
             required: true,
-            where: { languageId: request.pre.languageId }
+            // where: { languageId: request.pre.languageId }
           }
         ]
       });
