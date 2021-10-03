@@ -64,6 +64,7 @@ const investmentTypeController = require('./controllers/investmentTypeController
 const investorManagementController = require('./controllers/investorManagementController');
 
 const Joi = require('joi');
+const CurrencyController = require('./controllers/CurrencyController');
 
 module.exports = [
   {
@@ -388,13 +389,20 @@ module.exports = [
     }
   },
   {
+    path: '/currencies',
+    method: 'get',
+    options: {
+      auth: false,
+      handler: CurrencyController.find
+    }
+  },
+  {
     path: '/sectors',
     method: 'get',
     options: {
       auth: false,
       handler: sectorsController.find
     }
-
   },
   {
     path: '/sectors/{id}',

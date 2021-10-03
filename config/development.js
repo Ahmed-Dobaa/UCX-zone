@@ -67,8 +67,7 @@ sqsarIKHAZpbtc2Ia0Bhf6EWQ9GTX8nTqUcs/idabbnUrLGTOMD8eh40+O/uSCiS
 tK1RnKm/YRnvqyOoAv63CPD9yrGHUmWEW0mHjQvhLojAnfuH4DkNP1VZ+jArDovS
 mpPwKPXrtRdSMAgz/qiYyoyBvBSoIg/E7yWcHQ==
 -----END CERTIFICATE-----
-`
-     }
+` }
   },
   joi: {
     allowUnknown: true,
