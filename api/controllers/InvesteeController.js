@@ -81,7 +81,7 @@ module.exports = {
   },
   findAll: async function (request, reply) {
     try {
-      const { languageId } = request.pre;
+      const  languageId  = 1; //request.pre;
       const limit = parseInt(request.query.per_page) || 25;
       const offset = parseInt((request.query.page-1) * request.query.per_page) || 0;
       const { name } = request.query;
@@ -161,7 +161,7 @@ module.exports = {
   },
   findOne: async (request, reply) => {
     try {
-      const { languageId } = request.pre;
+      const  languageId  = 1; // request.pre;
       const foundInvesteeCompanies = await models.investee.findOne({
         where: { id: request.params.id },
         include: [
@@ -253,14 +253,10 @@ console.log(foundInvesteeCompanies.companyId)
 
         if(investeeIncome != null){
           for(let i = 0; i < investeeBalanceTranslation.length; i++){
-            console.log(investeeBalanceTranslation[i].fixedAssets);
             investeeIncomeTranslation[i].fixedAssets = investeeBalanceTranslation[i].fixedAssets;
             investeeIncomeTranslation[i].currentAssets = investeeBalanceTranslation[i].currentAssets;
             investeeIncomeTranslation[i].currentLiabilities = investeeBalanceTranslation[i].currentLiabilities;
             investeeIncomeTranslation[i].longTermLiabilities = investeeBalanceTranslation[i].longTermLiabilities;
-            console.log("inside")
-            console.log(investeeIncomeTranslation[i])
-            // investeeIncomeTranslation[i].balanceTranslation = investeeBalanceTranslation[i];
           }
 
         }
@@ -287,15 +283,15 @@ console.log(foundInvesteeCompanies.companyId)
   },
   create: async (request, reply) => {
     let transaction;
-
+console.log("inside");
     try {
       transaction = await models.sequelize.transaction();
       const userId = request.auth.decoded ? request.auth.decoded.id : request.params.userId;
 
       const { payload } = request;
       const { companyBasicData, investeeTranslation } = payload;
-      companyBasicData.companiesBasicDataTranslation.languageId = request.pre.languageId;
-      investeeTranslation.languageId = request.pre.languageId;
+      companyBasicData.companiesBasicDataTranslation.languageId = 1;
+      investeeTranslation.languageId = 1;
 
       // check first that company basic data exist or not.
       let checkRegistrationIdNo = await models.companiesBasicDataTranslation.findOne( { where: {
@@ -306,7 +302,7 @@ console.log(foundInvesteeCompanies.companyId)
         await transaction.rollback();
         return reply.response({status: 406, message: "This registration id number already exist"}).code(406);
       }
-
+console.log("here");
       companyBasicData["user_id"] = request.params.userId;
       const createdCompanyBasicData = await models.companiesBasicData.create(companyBasicData, { transaction });
       companyBasicData.companiesBasicDataTranslation.companyBasicDataId = createdCompanyBasicData.id;
@@ -362,7 +358,7 @@ console.log(foundInvesteeCompanies.companyId)
     let transaction;
 
     try {
-      const language = request.pre.languageId;
+      const language = 1; // request.pre.languageId;
       const foundInvestee = await models.investee.findOne({
         where: { id: request.params.id },
         include: [
@@ -412,7 +408,7 @@ console.log(foundInvesteeCompanies.companyId)
   update: async (request, reply) => {
     let transaction;
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const investeeId = request.params.id;
       const { payload } = request;
       const foundInvesteeCompany = await models.investee.findOne({

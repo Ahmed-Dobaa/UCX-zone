@@ -67,10 +67,6 @@ module.exports = {
       collate: 'utf8_general_ci'
     });
 
-    return queryInterface.addConstraint('investorTranslation', ['investorId', 'languageId'], {
-      type: 'unique',
-      name: 'investorIdWithLanguageId'
-    });
   },
 
   down: (queryInterface, Sequelize) => queryInterface.dropTable('investorTranslation')

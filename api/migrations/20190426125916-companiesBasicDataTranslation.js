@@ -89,10 +89,6 @@ module.exports = {
       collate: 'utf8_general_ci'
     });
 
-    return queryInterface.addConstraint('companiesBasicDataTranslation', ['companyBasicDataId', 'languageId', 'registrationIdNo'], {
-      type: 'unique',
-      name: 'registrationIdNo'
-    });
   },
 
 

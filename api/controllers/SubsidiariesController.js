@@ -78,7 +78,7 @@ module.exports = {
       transaction = await models.sequelize.transaction();
       Company = await models.companiesBasicData.create(payload, { transaction });
       payload.companyBasicDataId = Company.id;
-      payload.languageId = request.pre.languageId;
+      payload.languageId = 1; //request.pre.languageId;
        CompanyTranslation = await models.companiesBasicDataTranslation.create(payload, { transaction });
 
        let investeePayload = {companyId: Company.id,

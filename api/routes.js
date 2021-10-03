@@ -305,7 +305,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'countries', action: 'find' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }//
       ],
       auth: false,
       handler: countriesController.find
@@ -319,7 +319,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'countries', action: 'findOne' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+    //    { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       auth: 'jwt',
       validate: { params: countrySchema.updateSchema.params },
@@ -335,7 +335,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'countries', action: 'create' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+    //    { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       auth: 'jwt',
       validate: countrySchema.createSchema,
@@ -350,7 +350,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'countries', action: 'translate' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+   //     { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       auth: 'jwt',
       validate: countrySchema.translateSchema,
@@ -366,7 +366,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'countries', action: 'update' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+  //     { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: countrySchema.updateSchema,
       handler: countriesController.update
@@ -380,7 +380,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'countries', action: 'delete' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       auth: 'jwt',
       validate: { params: countrySchema.updateSchema.params },
@@ -392,7 +392,7 @@ module.exports = [
     method: 'get',
     options: {
       description: 'list all sectors and support pagination',
-      pre: [{ method: helperService.getLanguageId, assign: 'languageId' }],
+    //  pre: [{ method: helperService.getLanguageId, assign: 'languageId' }],
       auth: 'jwt',
       handler: sectorsController.find
     }
@@ -402,7 +402,7 @@ module.exports = [
     method: 'get',
     options: {
       description: 'get specific sector by its id',
-      pre: [{ method: helperService.getLanguageId, assign: 'languageId' }],
+   //   pre: [{ method: helperService.getLanguageId, assign: 'languageId' }],
       auth: 'jwt',
       validate: { params: sectorSchema.updateSchema.params },
       handler: sectorsController.findOne
@@ -417,7 +417,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'sectors', action: 'create' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+    //    { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       auth: 'jwt',
       validate: sectorSchema.createSchema,
@@ -431,7 +431,7 @@ module.exports = [
       description: 'update specific sector translation by its id',
       app: { allowedPermission: { resource: 'sectors', action: 'translate' } },
       pre: [// { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+    //    { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       auth: 'jwt',
       validate: countrySchema.updateScehema,
@@ -446,7 +446,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'sectors', action: 'update' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       auth: 'jwt',
       validate: sectorSchema.updateScehema,
@@ -461,7 +461,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'sectors', action: 'delete' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       auth: 'jwt',
       validate: { params: sectorSchema.updateSchema.params },
@@ -706,7 +706,6 @@ module.exports = [
       //   allow: ['multipart/form-data']
       // },
       // app: { allowedPermission: { resource: 'investees', action: 'create' } },
-      pre: [{ method: helperService.getLanguageId, assign: 'languageId' }],
       validate: investeeSchema.createSchema,
       handler: investeeController.create
     }
@@ -735,7 +734,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investees', action: 'findAll' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: { userId: Joi.string().required().example('16').description('the id of the user') } },
       handler: investeeController.findAll
@@ -750,7 +749,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investees', action: 'findAll' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       handler: investeeController.findAllForLoggedInUser
     }
@@ -764,7 +763,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investees', action: 'findOne' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -790,7 +789,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investees', action: 'update' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeSchema.updateSchema,
       handler: investeeController.update
@@ -805,7 +804,7 @@ module.exports = [
       auth: 'jwt',
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -825,7 +824,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeCapitals', action: 'find' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+    //    { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -846,7 +845,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeCapitals', action: 'create' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeCapitalSchema.createSchema,
       handler: investeeCapitalController.create
@@ -862,7 +861,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeCapitals', action: 'translate' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeCapitalSchema.translateSchema,
       handler: investeeCapitalController.translate
@@ -877,7 +876,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeCapitals', action: 'findOne' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -899,7 +898,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeCapitals', action: 'update' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+    //    { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeCapitalSchema.updateSchema,
       handler: investeeCapitalController.update
@@ -914,7 +913,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeCapitals', action: 'delete' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+    //    { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -935,7 +934,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeOwnerships', action: 'find' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -956,7 +955,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeOwnerships', action: 'create' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeOwnershipSchema.createSchema,
       handler: investeeOwnershipController.create
@@ -972,7 +971,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeOwnerships', action: 'translate' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeOwnershipSchema.translateSchema,
       handler: investeeOwnershipController.translate
@@ -987,7 +986,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeOwnerships', action: 'findOne' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -1009,7 +1008,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeOwnerships', action: 'update' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeOwnershipSchema.updateSchema,
       handler: investeeOwnershipController.update
@@ -1024,7 +1023,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeOwnerships', action: 'delete' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -1045,7 +1044,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'directorsPositions', action: 'find' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       handler: boardOfDirectorsPositionsController.find
     }
@@ -1059,7 +1058,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'directorsPositions', action: 'findOne' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+   //     { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: { id: Joi.number().required().description('the id of the Director position') } },
       handler: boardOfDirectorsPositionsController.findOne
@@ -1074,7 +1073,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'directorsPositions', action: 'create' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       auth: false, //'jwt',
       validate: createBoardOfDirectorsPositionSchema,
@@ -1089,7 +1088,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'directorsPositions', action: 'update' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       auth: 'jwt',
       validate: updateBoardOfDirectorsPositionSchema,
@@ -1120,7 +1119,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeDirectors', action: 'find' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -1140,7 +1139,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeDirectors', action: 'findOne' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -1162,7 +1161,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeDirectors', action: 'create' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       // validate: boardOfDirector.createSchema,
       handler: investeeBoardOfDirectorsController.create
@@ -1178,7 +1177,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeDirectors', action: 'translate' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: boardOfDirector.translateSchema,
       handler: investeeBoardOfDirectorsController.translate
@@ -1194,7 +1193,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeDirectors', action: 'update' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: boardOfDirector.updateSchema,
       handler: investeeBoardOfDirectorsController.update
@@ -1209,7 +1208,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeDirectors', action: 'delete' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -1230,7 +1229,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeManagements', action: 'findAll' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -1251,7 +1250,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeManagements', action: 'create' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeManagement.createSchema ,
       handler: investeeManagementsController.create
@@ -1267,7 +1266,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeManagements', action: 'translate' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeManagement.translateSchema ,
       handler: investeeManagementsController.translate
@@ -1282,7 +1281,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeManagements', action: 'findOne' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investeeManagement.params },
       handler: investeeManagementsController.findOne
@@ -1298,7 +1297,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeManagements', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeManagement.updateSchema,
       handler: investeeManagementsController.update
@@ -1313,7 +1312,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeManagements', action: 'delete' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investeeManagement.params },
       handler: investeeManagementsController.delete
@@ -1328,7 +1327,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeAuditors', action: 'findAll' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -1349,7 +1348,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeAuditors', action: 'create' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeAuditor.createSchema,
       handler: investeeAuditorsController.create
@@ -1365,7 +1364,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeAuditors', action: 'translate' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeAuditor.translateSchema,
       handler: investeeAuditorsController.translate
@@ -1380,7 +1379,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeAuditors', action: 'findOne' } },
       pre: [
         // // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investeeAuditor.params },
       handler: investeeAuditorsController.findOne
@@ -1396,7 +1395,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeAuditors', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeAuditor.updateSchema,
       handler: investeeAuditorsController.update
@@ -1411,7 +1410,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeAuditors', action: 'delete' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investeeAuditor.params },
       handler: investeeAuditorsController.delete
@@ -1441,7 +1440,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeAttachmentsTypes', action: 'create' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeAttachmentsTypes.create,
       handler: investeeAttachmentsTypesController.create
@@ -1472,7 +1471,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeAttachmentsTypes', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeAttachmentsTypes.update,
       handler: investeeAttachmentsTypesController.update
@@ -1487,7 +1486,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeAttachmentsTypes', action: 'delete' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: { id: Joi.number().required().description('the id of the type') } },
       handler: investeeAttachmentsTypesController.delete
@@ -1502,7 +1501,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeAttachments', action: 'findAll' } },
       pre: [
         // // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -1528,7 +1527,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeAttachments', action: 'create' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -1552,7 +1551,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeAttachments', action: 'findOne' } },
       pre: [
         // // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -1579,7 +1578,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeAttachments', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -1601,7 +1600,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeAttachments', action: 'delete' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: {
         params: {
@@ -1629,7 +1628,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeAttachments', action: 'download' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       handler: investeeAttachmentsController.download
     }
@@ -1643,7 +1642,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeBalances', action: 'findAll' } },
       pre: [
         // // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investeeBalance.createSchema.params },
       handler: investeeBalanceController.findAll
@@ -1659,7 +1658,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeBalances', action: 'create' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       // validate: investeeBalance.createSchema,
       handler: investeeBalanceController.create
@@ -1674,7 +1673,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeBalances', action: 'findOne' } },
       pre: [
         // // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investeeBalance.updateSchema.params },
       handler: investeeBalanceController.findOne
@@ -1690,7 +1689,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeBalances', action: 'translate' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeBalance.translateSchema,
       handler: investeeBalanceController.translate
@@ -1706,7 +1705,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeBalances', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       // validate: investeeBalance.updateSchema,
       handler: investeeBalanceController.update
@@ -1721,7 +1720,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeBalances', action: 'delete' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investeeBalance.updateSchema.params },
       handler: investeeBalanceController.delete
@@ -1737,7 +1736,7 @@ module.exports = [
       // pre: [
       //   // { method: helperService.authorizeUser }
       // ],
-      pre: [{ method: helperService.getLanguageId, assign: 'languageId' }],
+    //  pre: [{ method: helperService.getLanguageId, assign: 'languageId' }],
       validate: subsidiarySchema.createSchema,
       handler: subsidiariesCompanyController.create
     }
@@ -1806,7 +1805,7 @@ module.exports = [
       //  { allowedPermission: { resource: 'investeeInvestmentProposals', action: 'findAll' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investeeInvestmentProposalsSchema.createSchema.params },
       handler: investeeInvestmentProposalsController.findAllForSpecificInvestee
@@ -1827,7 +1826,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeInvestmentProposals', action: 'create' } },
       pre: [
         // // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeInvestmentProposalsSchema.createSchema,
       handler: investeeInvestmentProposalsController.create
@@ -1848,7 +1847,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeInvestmentProposals', action: 'translate' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeInvestmentProposalsSchema.translateSchema,
       handler: investeeInvestmentProposalsController.translate
@@ -1863,7 +1862,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeInvestmentProposals', action: 'findOne' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investeeInvestmentProposalsSchema.updateSchema.params },
       handler: investeeInvestmentProposalsController.findOne
@@ -1884,7 +1883,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeInvestmentProposals', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeInvestmentProposalsSchema.updateSchema,
       handler: investeeInvestmentProposalsController.update
@@ -1899,7 +1898,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeInvestmentProposals', action: 'delete' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investeeInvestmentProposalsSchema.updateSchema.params },
       handler: investeeInvestmentProposalsController.delete
@@ -1914,7 +1913,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeIncomes', action: 'find' } },
       pre: [
         // // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investeeIncome.createSchema.params },
       handler: investeeIncomeController.find
@@ -1930,7 +1929,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeIncomes', action: 'create' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       // validate: investeeIncome.createSchema,
       handler: investeeIncomeController.create
@@ -1945,7 +1944,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeIncomes', action: 'findOne' } },
       pre: [
         // // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investeeIncome.updateSchema.params },
       handler: investeeIncomeController.findOne
@@ -1961,7 +1960,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeIncomes', action: 'translate' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeIncome.translateSchema,
       handler: investeeIncomeController.translate
@@ -1977,7 +1976,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeIncomes', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investeeIncome.updateScehema,
       handler: investeeIncomeController.update
@@ -1992,7 +1991,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeIncomes', action: 'delete' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investeeIncome.updateSchema.params },
       handler: investeeIncomeController.delete
@@ -2007,7 +2006,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investor', action: 'create' } },
       pre: [
         // // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investor.createSchema,
       handler: investorController.create
@@ -2022,7 +2021,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investor', action: 'translate' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investor.translateSchema,
       handler: investorController.translate
@@ -2037,7 +2036,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investor', action: 'findAll' } },
       pre: [
         // // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investor.createSchema.params },
       handler: investorController.findAll
@@ -2052,7 +2051,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investors', action: 'findAll' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       handler: investorController.findAllForLoggedInUser
     }
@@ -2066,7 +2065,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investor', action: 'findOne' } },
       pre: [
         // // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: investor.updateSchema.params },
       handler: investorController.findOne
@@ -2308,7 +2307,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investeeRequestService', action: 'create' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: serviceRequestSchema.createSchema,
       handler: serviceRequestController.create
@@ -2375,7 +2374,7 @@ module.exports = [
       // app: { allowedPermission: { resource: 'investeeRequestService', action: 'findAllServicesRequests' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+       // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: { id: Joi.number().positive().min(1).required().example('16').description('the id of the user') } },
       handler: serviceRequestController.findAllServicesRequests
@@ -2471,7 +2470,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investmentType', action: 'create' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investmentTypeSchema.create,
       handler: investmentTypeController.create
@@ -2500,7 +2499,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investmentTypes', action: 'findOne' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: { params: { id: Joi.string().required().example('16').description('the id of the sub user') } },
       handler: investmentTypeController.findOne
@@ -2514,7 +2513,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investmentTypes', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       auth: 'jwt',
       validate: investmentTypeSchema.update,
@@ -2545,7 +2544,7 @@ module.exports = [
       //  { allowedPermission: { resource: 'investeeInvestmentProposals', action: 'findAll' } },
       pre: [
         // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       handler: investeeInvestmentProposalsController.findAll
     }
@@ -2589,7 +2588,7 @@ module.exports = [
       app: { allowedPermission: { resource: 'investorManagement', action: 'create' } },
       pre: [
         // // // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       validate: investorManagementSchema.createSchema,
       handler: investorManagementController.create

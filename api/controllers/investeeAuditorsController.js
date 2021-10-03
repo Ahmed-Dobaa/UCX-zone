@@ -11,7 +11,7 @@ const errorService = require(path.join(__dirname, '../','services/errorService')
 module.exports = {
   findAll: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const foundAuditors = await models.investeeAuditor.findAndCountAll({
         where: { investeeId: request.params.companyId },
         include: [{ association: 'auditorTranslation', where: { languageId: language }, required: true }]
@@ -27,7 +27,7 @@ module.exports = {
   },
   findOne: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const foundAuditor = await models.investeeAuditor.findOne({
         where: { id: request.params.auditorId },
         include: [{ association: 'auditorTranslation', where: { languageId: language }, required: true }]
@@ -44,7 +44,7 @@ module.exports = {
   create: async function (request, reply) {
     let transaction;
     try {
-      const language= request.pre.languageId;
+      const language= 1; //request.pre.languageId;
       // request.payload.investeeId = request.params.companyId;
       request.payload.createdBy = request.params.userId; //request.auth.decoded.id;
       const foundInvesteeCompanies = await models.investee.findOne({ where: { id: request.params.investeeId } }); // id
@@ -78,7 +78,7 @@ module.exports = {
   translate: async function (request, reply) {
     let transaction;
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const foundInvestee = await models.investee.findOne({
         where: { id: request.params.companyId },
         include: [
@@ -134,7 +134,7 @@ module.exports = {
   update: async function (request, reply) {
     let transaction;
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const foundAuditor = await models.investeeAuditor.findOne({ where: { id: request.params.auditorId }, raw: true });
       if(_.isEmpty(foundAuditor)) {
 

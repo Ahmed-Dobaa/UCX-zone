@@ -7,13 +7,13 @@ const useragent = require('useragent');
 useragent(true);
 
 const models = require(path.join(__dirname, '../models/index'));
-const errorService = require(path.join(__dirname, '../','services/errorService'));
+const errorService = require(path.join(__dirname, '../','services/errorService'))
 
 module.exports = {
   find: async function (request, reply) {
     try {
 
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const foundInvesteeCapital = await models.investeeCapital.findOne({
         where: { investeeId: request.params.investeeId, languageId: language },
         raw: true
@@ -29,7 +29,7 @@ module.exports = {
   },
   findOne: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const foundInvesteeCapital = await models.investeeCapital.findOne({
         where: {
           id: request.params.id,
@@ -48,7 +48,7 @@ module.exports = {
   },
   create: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const { payload } = request;
       payload.investeeId = request.params.investeeId;
       payload.createdBy = request.params.userId, //15, //request.auth.decoded.id;
@@ -84,7 +84,7 @@ module.exports = {
   },
   translate: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
 
       const foundInvesteeCompany = await models.investee.findOne({
         where: { id: request.params.investeeId },
@@ -125,7 +125,7 @@ module.exports = {
   update: async function (request, reply) {
     try {
 
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const { payload } = request;
       payload.languageId = language;
 

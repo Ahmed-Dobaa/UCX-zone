@@ -10,7 +10,7 @@ const errorService = require(path.join(__dirname, '../','services/errorService')
 module.exports = {
   find: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const sequelizeQuery = qsToSequelizeQuery(request.query, models.investee.attributes);
       sequelizeQuery.include.push({ association: 'incomeTranslation', required: true, where: { languageId: language } });
       const foundInvesteeIncomes = await models.investeeIncomes.findAndCountAll(sequelizeQuery);
@@ -25,7 +25,7 @@ module.exports = {
   },
   findOne: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const foundInvesteeIncome = await models.investeeIncomes.findOne(
         {
           where: { id: request.params.id },
@@ -44,7 +44,7 @@ module.exports = {
     console.log("insert")
     let transaction;
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       // const { payload } = request;
       const foundInvesteeCompany = await models.investee.findOne({ where: { id: request.params.investeeId } });
       if(_.isEmpty(foundInvesteeCompany)) {
@@ -93,7 +93,7 @@ module.exports = {
     let transaction;
 
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const { payload } = request;
       const foundInvestee = await models.investee.findOne({
         where: { id: request.params.investeeId },
@@ -148,7 +148,7 @@ module.exports = {
   update: async function (request, reply) {
     try {
 
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const { payload } = request;
 
       const foundInvesteeIncome = await models.investeeIncomes.findOne({

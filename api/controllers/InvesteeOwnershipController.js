@@ -17,7 +17,7 @@ module.exports = {
   find: async function (request, reply) {
 
     try {
-      const language= request.pre.languageId;
+      const language= 1; //request.pre.languageId;
       const foundInvesteeOwnerships = await models.ownerships.findAndCountAll({
         include: [
           {
@@ -45,7 +45,7 @@ module.exports = {
   findOne: async function (request, reply) {
     try {
 
-      const language= request.pre.languageId;
+      const language= 1; //request.pre.languageId;
       const foundInvesteeOwnership = await models.ownerships.findOne({
         where: { id: request.params.id },
         include: [
@@ -96,7 +96,7 @@ module.exports = {
       }, { transaction });
 
 
-      request.payload.ownershipTranslation.languageId = request.pre.languageId;
+      request.payload.ownershipTranslation.languageId = 1; //request.pre.languageId;
       request.payload.ownershipTranslation.investeeOwnershipId= createdOwnership.id;
       await models.investeeOwnershipTranslation.create(request.payload.ownershipTranslation, { transaction });
       let accessToken = null;
@@ -149,7 +149,7 @@ module.exports = {
     let transaction;
 
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const foundInvestee = await models.investee.findOne({
         where: { id: request.params.investeeId },
         include: [
@@ -205,7 +205,7 @@ module.exports = {
     let transaction;
     try {
 
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const { payload } = request;
       const ownershipId = request.params.id;
       const foundInvesteeOwnership = await models.ownerships.findOne({ where: { id: ownershipId }, raw: true });

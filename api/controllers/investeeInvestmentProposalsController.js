@@ -13,7 +13,7 @@ const errorService = require(path.join(__dirname, '../','services/errorService')
 module.exports = {
   findAllForSpecificInvestee: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; // request.pre.languageId;
       const limit = parseInt(request.query.per_page) || 25;
       const offset = parseInt((request.query.page-1) * request.query.per_page) || 0;
       const foundInvesteeInvestmentProposals = await models.investeeInvestmentProposals.findAndCountAll({
@@ -69,7 +69,7 @@ module.exports = {
   },
   findAll: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const limit = parseInt(request.query.per_page) || 25;
       const offset = parseInt((request.query.page-1) * request.query.per_page) || 0;
       const { valueOfTheInvestmentRequired } = request.query;
@@ -151,7 +151,7 @@ module.exports = {
   },
   findOne: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const foundInvesteeInvestmentProposal = await models.investeeInvestmentProposals.findOne({
         where: { id: request.params.id },
         include: [{ association: 'investeeInvestmentProposalTranslation', where: { languageId: language }, required: true }]
@@ -170,7 +170,7 @@ module.exports = {
     let uploadImageExtension = null, relativePath= null, fileName = null, fullPath= null;
     let transaction;
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const { payload } = request;
 
       if(payload.file) {
@@ -224,7 +224,7 @@ module.exports = {
   },
   translate: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const { payload } = request;
       const foundInvestee = await models.investee.findOne({
         where: { id: request.params.companyId },
@@ -277,7 +277,7 @@ module.exports = {
     let transaction;
     try {
       const { payload } = request;
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
 
       // if(payload.file) {
       //   uploadImageExtension = path.extname(request.payload.file.hapi.filename);

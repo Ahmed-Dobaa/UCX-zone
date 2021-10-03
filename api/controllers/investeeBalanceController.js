@@ -10,7 +10,7 @@ const errorService = require(path.join(__dirname, '../','services/errorService')
 module.exports = {
   findAll: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const sequelizeQuery = qsToSequelizeQuery(request.query, models.investee.attributes);
       sequelizeQuery.include.push({ association: 'balanceTranslation', required: true, where: { languageId: language } });
       const foundInvesteeBalances = await models.investeeBalances.findAndCountAll(sequelizeQuery);
@@ -25,7 +25,7 @@ module.exports = {
   },
   findOne: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const sequelizeQuery = qsToSequelizeQuery(request.query, models.investee.attributes);
       sequelizeQuery.include.push({ association: 'balanceTranslation', required: true, where: { languageId: language } });
       const foundInvesteeBalance = await models.investeeBalances.findOne(
@@ -44,7 +44,7 @@ module.exports = {
   },
   create: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const { payload } = request;
 
       payload.investeeId = request.params.investeeId;
@@ -86,7 +86,7 @@ module.exports = {
   },
   translate: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const { payload } = request;
 
       payload.investeeId = request.params.investeeId;
@@ -123,7 +123,7 @@ module.exports = {
   },
   update: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const foundInvesteeBalance = await models.investeeBalances.findOne({
         where: { id: request.params.id }
         // include: [{ association: 'balanceTranslation', required: true, where: { languageId: language } }]

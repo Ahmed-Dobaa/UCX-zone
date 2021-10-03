@@ -14,7 +14,7 @@ module.exports = {
   find: async function (request, reply) {
     try {
 
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const foundDirectors = await models.investeeBoardOfDirectors.findAndCountAll({
         where: { investeeId: request.params.investeeId },
         include: [{ association: 'boardOfDirectorTranslation', where: { languageId: language }, required: true }]
@@ -30,7 +30,7 @@ module.exports = {
   },
   findOne: async function (request, reply) {
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const foundDirector = await models.investeeBoardOfDirectors.findOne({
         where: { id: request.params.id },
         include: [{ association: 'boardOfDirectorTranslation', where: { languageId: language }, required: true }]
@@ -49,7 +49,7 @@ module.exports = {
     try {
 
       const { payload } = request;
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       payload.investeeId = request.params.investeeId;
       payload.createdBy = request.params.userId; // 15; //request.auth.decoded.id;
       const foundInvesteeCompanies = await models.investee.findOne({ where: { id: request.params.investeeId } });
@@ -83,7 +83,7 @@ module.exports = {
     let transaction;
 
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const foundInvestee = await models.investee.findOne({
         where: { id: request.params.investeeId },
         include: [
@@ -141,7 +141,7 @@ module.exports = {
     try {
 
       const { payload } = request;
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       const directorId = request.params.id;
       const foundDirector = await models.investeeBoardOfDirectors.findOne({
         where: { id: directorId },
