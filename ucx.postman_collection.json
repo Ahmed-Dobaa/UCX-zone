@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"companyName\": \"company name\",\r\n    \"website_of_company\": \"test\",\r\n    \"country\": \"egypt\",\r\n    \"target_country\": \"Egypt\",\r\n    \"target_sectors\": \"egypt\",\r\n    \"minimum_investment_amount\": 10,\r\n    \"maximun_investment_amount\": 30,\r\n    \"name\": \"ahmed\",\r\n    \"position_in_company\": \"manager\",\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"phoneNumber\": \"52145855\",\r\n    \"password\": \"123456\",\r\n    \"confirmationPassword\": \"123456\",\r\n    \"interests\": [\"Advisory firm\"],\r\n    \"nationality\": \"Egypt\",\r\n    \"annual_sales\": 1000,\r\n    \"estimated_company_value\": 5821,\r\n    \"required_investment_amount\": 514,\r\n    \"description\": \"description\"\r\n}",
+							"raw": "{\r\n    \"companyName\": \"company name\",\r\n    \"website_of_company\": \"test\",\r\n    \"country\": \"egypt\",\r\n    \"target_country\": [\"Egypt\", \"dadada\",\"dada\"],\r\n    \"target_sectors\": [\"egypt\",\"fa\", \"cairo\"],\r\n    \"minimum_investment_amount\": 10,\r\n    \"maximun_investment_amount\": 30,\r\n    \"name\": \"ahmed\",\r\n    \"position_in_company\": \"manager\",\r\n    \"email\": \"enghea@gmail.com\",\r\n    \"phoneNumber\": \"123456\",\r\n    \"password\": \"123456\",\r\n    \"confirmationPassword\": \"123456\",\r\n    \"interests\": [\"Advisory firm\"],\r\n    \"nationality\": \"Egypt\",\r\n    \"annual_sales\": 1000,\r\n    \"estimated_company_value\": 5821,\r\n    \"required_investment_amount\": 514,\r\n    \"description\": \"description\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -23,12 +23,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/register",
+							"raw": "http://localhost:2053/register",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "12225",
+							"port": "2053",
 							"path": [
 								"register"
 							]
@@ -50,7 +50,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"123456789\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -58,12 +58,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/login",
+							"raw": "http://localhost:2053/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "12225",
+							"port": "2053",
 							"path": [
 								"login"
 							]
@@ -78,7 +78,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"activationCode\": \"cA5YBn\"\r\n}",
+							"raw": "{\r\n        \"activationCode\": \"3tnFa\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -86,14 +86,89 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/activate",
+							"raw": "http://135.181.62.49:8000/activate",
+							"protocol": "http",
+							"host": [
+								"135",
+								"181",
+								"62",
+								"49"
+							],
+							"port": "8000",
+							"path": [
+								"activate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forget password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"engahmeddobaa@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2053/password/recovery",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "12225",
+							"port": "2053",
 							"path": [
-								"activate"
+								"password",
+								"recovery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"secret_code\": \"2vQEU1\",\n\t\"password\": \"123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2053/password/reset",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"password",
+								"reset"
 							]
 						}
 					},
@@ -129,7 +204,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/company/1",
+							"raw": "http://localhost:12225/company/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -137,7 +212,7 @@
 							"port": "12225",
 							"path": [
 								"company",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -149,12 +224,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:12225/company",
-							"protocol": "http",
+							"raw": "https://ns232.devonil.com:2009/company",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"ns232",
+								"devonil",
+								"com"
 							],
-							"port": "12225",
+							"port": "2009",
 							"path": [
 								"company"
 							]
@@ -215,7 +292,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees",
+							"raw": "http://localhost:12225/users/2/investees",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -223,7 +300,7 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"2",
 								"investees"
 							]
 						}
@@ -306,7 +383,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees/1",
+							"raw": "http://localhost:12225/users/2/investees/14",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -314,9 +391,9 @@
 							"port": "12225",
 							"path": [
 								"users",
-								"1",
+								"2",
 								"investees",
-								"1"
+								"14"
 							]
 						}
 					},
@@ -928,10 +1005,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees/1/attachments",
+							"raw": "http://135.181.62.49:12225/users/1/investees/1/attachments",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"135",
+								"181",
+								"62",
+								"49"
 							],
 							"port": "12225",
 							"path": [
@@ -1118,14 +1198,23 @@
 					"name": "get all countries",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"url": {
-							"raw": "http://localhost:12225/countries",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/countries",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
-							"port": "12225",
+							"port": "2053",
 							"path": [
 								"countries"
 							]
@@ -1138,7 +1227,29 @@
 		},
 		{
 			"name": "currency",
-			"item": [],
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://platform.ucx.zone:2053/currencies",
+							"protocol": "https",
+							"host": [
+								"platform",
+								"ucx",
+								"zone"
+							],
+							"port": "2053",
+							"path": [
+								"currencies"
+							]
+						}
+					},
+					"response": []
+				}
+			],
 			"protocolProfileBehavior": {}
 		},
 		{
@@ -1243,6 +1354,33 @@
 								"22",
 								"balancestatements",
 								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "sectors",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://platform.ucx.zone:2053/sectors",
+							"protocol": "https",
+							"host": [
+								"platform",
+								"ucx",
+								"zone"
+							],
+							"port": "2053",
+							"path": [
+								"sectors"
 							]
 						}
 					},

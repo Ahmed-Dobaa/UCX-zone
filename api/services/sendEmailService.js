@@ -7,6 +7,7 @@ const path = require('path');
 const fs = require('fs');
 const util = require('util');
 const userService = require(path.join(__dirname, './userService'));
+const models = require(path.join(__dirname, '../models/index'));
 
 const sendMail = async function (mailOptions) {
   // create reusable transporter object using the default SMTP transport
@@ -51,17 +52,19 @@ module.exports.sendUserforgetPasswordMail = async function (emailTo, token) {
   const userForgetPasswordMailTemplate = await util.promisify(fs.readFile)(path.join(__dirname, '../templates/userForgetPasswordMailTemplate.html'), 'utf8');
   const template = handlebars.compile(userForgetPasswordMailTemplate);
   const activationToken = userService.generateActivationToken();
+  await models.users.update({ secret: activationToken }, { where: { email: emailTo } });
   const htmlToSend = template({
     emailTo: emailTo,
-    activationLink: `<a href="${ config.frontEnd.host }/authentication/resetpassword?token=${token}" style="border: 0 solid #4e78f1; border-radius: 6px; color: #FFFFFF; display: inline-block; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: bold; line-height: 1.3; margin: 0; padding: 13px 0; text-align: center; text-decoration: none; width: 100%" target="_blank"><b class="text-center" style="color: white; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 300; letter-spacing: 1px; line-height: 1.3; margin: 0; padding: 0; text-align: center" align="center">Please use this secret code "${activationToken}" to reset your password</b> </a>`
+    activationLink: activationToken
   });
-
+// <a href="${ config.frontEnd.host }/authentication/resetpassword?token=${token}"
   // setup email data with unicode symbols
   const mailOptions = {
     from: `support 👻 <${config.mailing.from}>`, // sender address
     to: emailTo, // list of receivers
     subject: 'forget password email ✔', // Subject line
-    text: 'Hello world?\n'+'Use those credentials for login\n'+'Email: '+emailTo, // plain text body
+    emailTo: emailTo,
+    // html: `Hello ${emailTo}\n Please use this secret key\n ${activationToken}\n to reset your password`//'Hello ${emailTo}?\n'+'Use those credentials for login\n'+'Email: '+emailTo, // plain text body
     html: htmlToSend // html body
   };
 

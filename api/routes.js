@@ -136,6 +136,17 @@ module.exports = [
     }
   },
   {
+    path: '/password/reset',
+    method: 'POST',
+    options: {
+      payload: { allow: ['application/json'], },
+      description: 'change password',
+      // validate: changepasswordSchema,
+      auth: false,
+      handler: authenticationController.resetPassword
+    }
+  },
+  {
     path: '/password/set',
     method: 'POST',
     options: {

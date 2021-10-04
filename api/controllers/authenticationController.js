@@ -5,6 +5,8 @@ const path = require('path');
 const _ = require('lodash');
 const moment = require('moment');
 const useragent = require('useragent');
+const bcrypt = require('bcryptjs');
+
 useragent(true);
 
 const jwtService = require(path.join(__dirname, '../services/jwtService'));
@@ -29,6 +31,8 @@ module.exports = {
       payload.secret = userService.generateActivationToken();
       payload.locationInfo = request.location;
       payload.generalRole = 12;
+      request.payload.target_country = request.payload.target_country.toString();
+      request.payload.target_sectors = request.payload.target_sectors.toString();
       let createdUser = await models.users.create(request.payload);
       const privateAttributes = ['password', 'activationToken', 'secret', 'country'];
 
@@ -177,6 +181,23 @@ module.exports = {
         transaction.rollback();
       }
       throw Boom.notImplemented(e);
+    }
+  },
+  resetPassword: async function(request, reply) {
+    let transaction = null;
+    try {
+      transaction = await models.sequelize.transaction();
+    const user =  await models.users.findOne({ where : {secret: request.payload.secret_code }});
+    if(user){
+      const _password = bcrypt.hashSync(request.payload.password, bcrypt.genSaltSync(10));
+      await models.users.update({password: _password}, { where : {secret: request.payload.secret_code }, transaction});
+      await transaction.commit();
+      return reply.response({status: 200, message: "Password updated successfully"}).code(200);
+    }
+      return reply.response({status: 404, message: "This secret code is invalid"}).code(404);
+
+    } catch (error) {
+
     }
   },
   changePassword: async function (request, reply) {

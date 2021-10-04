@@ -27,7 +27,7 @@ module.exports = {
       allowNull: true
     },
     target_sectors: {
-      type: Sequelize.STRING(100),
+      type: Sequelize.STRING(1000),
       allowNull: true
     },
     nationality: {

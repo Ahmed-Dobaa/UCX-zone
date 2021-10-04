@@ -123,7 +123,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: true
     },
     target_sectors: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.JSON, //STRING(100),
       allowNull: true
     },
     nationality: {
