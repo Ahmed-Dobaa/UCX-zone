@@ -169,9 +169,9 @@ module.exports = {
         await transaction.commit();
         return reply.response({"status": 200, "message": "Please, check your email"}).code(200);
       }
-   else{
+      await transaction.rollback();
     return reply.response({"status": 406,"message": "This email is not exist"}).code(406);
-   }
+
 
     }
     catch (e) {
