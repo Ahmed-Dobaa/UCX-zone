@@ -8,7 +8,7 @@ module.exports = {
   payload: {
     name: Joi.string().min(3, 'utf8').required().label('user name').example('test user'),
     phoneNumber: Joi.string().required().label('phone number').example(22765927),
-    country: Joi.string().optional(),
+    country: Joi.string().optional().allow(null, ''),
     email: Joi.string().email().required().example('test@abc.com'),
     password: Joi.string().example('123456'),
     confirmationPassword: Joi.string().valid(Joi.ref('password')).options({ language: { any: { allowOnly: '!!Passwords do not match', } } }).example('123456'),
