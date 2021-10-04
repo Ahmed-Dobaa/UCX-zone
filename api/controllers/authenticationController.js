@@ -194,6 +194,7 @@ module.exports = {
       await transaction.commit();
       return reply.response({status: 200, message: "Password updated successfully"}).code(200);
     }
+      await transaction.rollback();
       return reply.response({status: 406, message: "This secret code is invalid"}).code(406);
 
     } catch (error) {
