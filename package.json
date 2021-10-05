@@ -16,6 +16,7 @@
         "lint": "eslint . -c .eslintrc --ext .js.json --fix"
     },
     "dependencies": {
+        "axios": "^0.22.0",
         "bcryptjs": "^2.4.3",
         "boom": "^7.3.0",
         "config": "^3.0.1",
@@ -40,6 +41,7 @@
         "moment": "^2.24.0",
         "mrhorse": "^3.0.1",
         "mysql2": "^1.6.5",
+        "node-fetch": "^3.0.0",
         "nodemailer": "^5.1.1",
         "pm2": "^5.1.1",
         "qs": "^6.7.0",

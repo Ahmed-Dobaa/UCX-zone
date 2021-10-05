@@ -4,7 +4,10 @@ const Boom = require('boom');
 const _ = require('lodash');
 const path = require('path');
 const models = require(path.join(__dirname, '../models/index'));
+const axios = require('axios');
+
 const useragent = require('useragent');
+const { payload } = require('../schemas/registration');
 useragent(true);
 
 module.exports = {
@@ -28,6 +31,29 @@ module.exports = {
       return Boom.badImplementation('An internal server error occurred');
     }
   },
+
+  getAllWorldCountries: async function (request, reply) {
+    let transaction;
+
+    const response = await axios.get('https://parseapi.back4app.com/classes/Country?limit=10&order=name,code&keys=name,code,phone',
+    {
+      headers: {
+        'X-Parse-Application-Id': 'mxsebv4KoWIGkRntXwyzg6c6DhKWQuit8Ry9sHja', // This is the fake app's application id
+        'X-Parse-Master-Key': 'TpO0j3lG2PmEVMXlKYQACoOXKQrL3lwM0HwR9dbH', // This is the fake app's readonly master key
+      }
+    })
+
+    transaction = await models.sequelize.transaction();
+
+    for(let i = 0; i < await response.data.results.length; i++){
+      let payload = { code: response.data.results[i].phone }
+      let createdCountry = await models.countries.create(payload,{ transaction });
+      await models.countriesTranslation.create({ countryId: createdCountry.id,languageId: 1,name: response.data.results[i].name }, { transaction });
+    }
+    await transaction.commit();
+    return reply.response({message: "created"}).code(201);
+  },
+
   findOne: async function (request, reply) {
     try {
       const foundCountry = await models.countries.findOne({

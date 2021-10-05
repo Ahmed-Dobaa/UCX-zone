@@ -324,6 +324,20 @@ module.exports = [
     }
   },
   {
+    path: '/worldCountries',
+    method: 'get',
+    options: {
+      description: 'list all countries and support pagination',
+      // app: { allowedPermission: { resource: 'countries', action: 'find' } },
+      pre: [
+        // // { method: helperService.authorizeUser },
+      //  { method: helperService.getLanguageId, assign: 'languageId' }//
+      ],
+      auth: false,
+      handler: countriesController.getAllWorldCountries
+    }
+  },
+  {
     path: '/countries/{id}',
     method: 'get',
     options: {
