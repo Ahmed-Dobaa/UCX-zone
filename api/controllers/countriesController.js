@@ -35,7 +35,7 @@ module.exports = {
   getAllWorldCountries: async function (request, reply) {
     let transaction;
 
-    const response = await axios.get('https://parseapi.back4app.com/classes/Country?limit=10&order=name,code&keys=name,code,phone',
+    const response = await axios.get('https://parseapi.back4app.com/classes/Country?limit=206&order=name,code&keys=name,code,phone',
     {
       headers: {
         'X-Parse-Application-Id': 'mxsebv4KoWIGkRntXwyzg6c6DhKWQuit8Ry9sHja', // This is the fake app's application id
@@ -46,7 +46,7 @@ module.exports = {
     transaction = await models.sequelize.transaction();
 
     for(let i = 0; i < await response.data.results.length; i++){
-      let payload = { code: response.data.results[i].phone }
+      let payload = { code: "+" + response.data.results[i].phone }
       let createdCountry = await models.countries.create(payload,{ transaction });
       await models.countriesTranslation.create({ countryId: createdCountry.id,languageId: 1,name: response.data.results[i].name }, { transaction });
     }
