@@ -8,14 +8,21 @@ const _ = require('lodash');
 module.exports = {
   findAll: async function (request, reply) {
     try {
-      const foundCompanies = await models.companiesBasicData.findAll({
+      var foundCompanies = await models.companiesBasicData.findAll({
         where: {deleted: 0},
         include: [
-          { model: models.investee, as: 'investeeCompany' },
+          { model: models.investee, as: 'investeeCompany',
+           include:
+             { model: models.investeeInvestmentProposals, as: 'investmentProposals',
+            include:
+              { model:  models.investeeInvestmentProposalTranslation, as: "investeeInvestmentProposalTranslation"
+             }
+          }
+         },
           { model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }
         ]
       });
-
+      foundCompanies.push(foundCompanies[0].investeeCompany.investmentProposals[0])
       return reply.response(foundCompanies).code(200);
     }
     catch (e) {

@@ -36,6 +36,10 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.DECIMAL,
       allowNull: false
     },
+    average_annual_sales: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
     PurposeOfTheRequiredInvestment: {
       type: DataTypes.STRING(255),
       allowNull: false
