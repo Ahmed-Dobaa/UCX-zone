@@ -46,6 +46,11 @@ module.exports = function (sequelize, DataTypes) {
     deletedAt: {
       type: DataTypes.DATE,
       allowNull: true,
+    },
+    deleted: {
+      type: DataTypes.INTEGER,
+      default: 0,
+      allowNull: true,
     }
   }, { tableName: 'companiesBasicData', paranoid: true });
 

@@ -9,6 +9,7 @@ module.exports = {
   findAll: async function (request, reply) {
     try {
       const foundCompanies = await models.companiesBasicData.findAll({
+        where: {deleted: 0},
         include: [
           { model: models.investee, as: 'investeeCompany' },
           { model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }
@@ -98,13 +99,25 @@ module.exports = {
   delete: async (request, reply) => {
     try {
       const companyId = request.params.companyId;
-      await models.companiesBasicData.destroy({ where: { id: companyId } });
-      return reply.response().code(204);
+      await models.companiesBasicData.update({deleted: 1},{ where: { id: companyId } });
+      return reply.response({status: 202, message: "deleted successfully"}).code(202);
     }
     catch (e) {
       console.log('error', e);
       return Boom.badImplementation('An internal server error occurred');
     }
-  }
+  },
+
+  // delete: async (request, reply) => {
+  //   try {
+  //     const companyId = request.params.companyId;
+  //     await models.companiesBasicData.destroy({ where: { id: companyId } });
+  //     return reply.response().code(204);
+  //   }
+  //   catch (e) {
+  //     console.log('error', e);
+  //     return Boom.badImplementation('An internal server error occurred');
+  //   }
+  // }
 };
 

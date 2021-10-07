@@ -694,7 +694,7 @@ module.exports = [
       // pre: [
       //   // { method: helperService.authorizeUser }
       // ],
-      auth: 'jwt',
+      auth: false, //'jwt',
       validate: { params: { companyId: Joi.number().required().description('the id of the company') } },
       handler: companyController.delete
     }

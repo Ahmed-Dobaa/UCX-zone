@@ -224,14 +224,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://ns232.devonil.com:2009/company",
-							"protocol": "https",
+							"raw": "http://localhost:2053/company",
+							"protocol": "http",
 							"host": [
-								"ns232",
-								"devonil",
-								"com"
+								"localhost"
 							],
-							"port": "2009",
+							"port": "2053",
 							"path": [
 								"company"
 							]
@@ -255,6 +253,26 @@
 								"user",
 								"5",
 								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete company",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2053/company/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"company",
+								"1"
 							]
 						}
 					},
@@ -292,15 +310,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/2/investees",
+							"raw": "http://localhost:2053/users/1/investees",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "12225",
+							"port": "2053",
 							"path": [
 								"users",
-								"2",
+								"1",
 								"investees"
 							]
 						}
@@ -356,15 +374,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees",
+							"raw": "http://localhost:2053/users/2/investees",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "12225",
+							"port": "2053",
 							"path": [
 								"users",
-								"1",
+								"2",
 								"investees"
 							]
 						}
@@ -1217,6 +1235,27 @@
 							"port": "2053",
 							"path": [
 								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all world countries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://platform.ucx.zone:2053/worldCountries",
+							"protocol": "https",
+							"host": [
+								"platform",
+								"ucx",
+								"zone"
+							],
+							"port": "2053",
+							"path": [
+								"worldCountries"
 							]
 						}
 					},

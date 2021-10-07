@@ -45,6 +45,11 @@ module.exports = {
     deletedAt: {
       type: Sequelize.DATE,
       allowNull: true,
+    },
+    deleted: {
+      type: Sequelize.INTEGER,
+      default: 0,
+      allowNull: true,
     }
   },{
     freezeTableName: true,
