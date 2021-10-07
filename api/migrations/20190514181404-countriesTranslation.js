@@ -16,6 +16,10 @@ module.exports = {
       type: Sequelize.INTEGER(11).UNSIGNED,
       allowNull: false,
     },
+    country_type: {
+      type: Sequelize.STRING(100),
+      allowNull: true,
+    },
     name: {
       type: Sequelize.STRING(45),
       allowNull: false,

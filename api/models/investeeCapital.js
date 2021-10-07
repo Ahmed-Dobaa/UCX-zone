@@ -28,6 +28,22 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.DECIMAL,
       allowNull: false,
     },
+    shareholder_equity: {
+      type: DataTypes.DECIMAL,
+      allowNull: true
+    },
+    share_book_value: {
+      type: DataTypes.DECIMAL,
+      allowNull: true
+    },
+    estimated_company_value: {
+      type: DataTypes.DECIMAL,
+      allowNull: true
+    },
+    share_market_value: {
+      type: DataTypes.DECIMAL,
+      allowNull: true
+    },
     currentTotalShares: {
       type: DataTypes.DECIMAL,
       allowNull: false,

@@ -11,18 +11,27 @@ module.exports = {
       var foundCompanies = await models.companiesBasicData.findAll({
         where: {deleted: 0},
         include: [
-          { model: models.investee, as: 'investeeCompany',
-           include:
-             { model: models.investeeInvestmentProposals, as: 'investmentProposals',
-            include:
-              { model:  models.investeeInvestmentProposalTranslation, as: "investeeInvestmentProposalTranslation"
-             }
-          }
-         },
+          { model: models.investee, as: 'investeeCompany'},
           { model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }
         ]
       });
-      foundCompanies.push(foundCompanies[0].investeeCompany.investmentProposals[0])
+      for(let i = 0; i < foundCompanies.length; i++){
+        let investeeInvestmentProposal = await models.investeeInvestmentProposals.findOne({
+          where: { investeeId: foundCompanies[i].investeeCompany.id },
+         include: {
+           model : models.investeeInvestmentProposalTranslation, as: "investeeInvestmentProposalTranslation"
+         }})
+         if(investeeInvestmentProposal){
+          foundCompanies[i].dataValues.average_annual_sales = investeeInvestmentProposal.dataValues.investeeInvestmentProposalTranslation.average_annual_sales;
+          foundCompanies[i].dataValues.estimated_company_value = investeeInvestmentProposal.dataValues.investeeInvestmentProposalTranslation.currentValueOfCompany;
+          foundCompanies[i].dataValues.required_investment = investeeInvestmentProposal.dataValues.investeeInvestmentProposalTranslation.valueOfTheInvestmentRequired;
+         }else{
+          foundCompanies[i].dataValues.average_annual_sales = "0";
+          foundCompanies[i].dataValues.estimated_company_value = "0";
+          foundCompanies[i].dataValues.required_investment = "0";
+         }
+
+        }
       return reply.response(foundCompanies).code(200);
     }
     catch (e) {

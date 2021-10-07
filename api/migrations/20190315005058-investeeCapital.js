@@ -32,6 +32,22 @@ module.exports = {
       type: Sequelize.DECIMAL,
       allowNull: false,
     },
+    shareholder_equity: {
+      type: Sequelize.DECIMAL,
+      allowNull: true
+    },
+    share_book_value: {
+      type: Sequelize.DECIMAL,
+      allowNull: true
+    },
+    estimated_company_value: {
+      type: Sequelize.DECIMAL,
+      allowNull: true
+    },
+    share_market_value: {
+      type: Sequelize.DECIMAL,
+      allowNull: true
+    },
     bookValue: {
       type: Sequelize.DECIMAL,
       allowNull: false,
