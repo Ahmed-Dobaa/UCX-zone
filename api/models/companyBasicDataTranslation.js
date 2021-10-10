@@ -58,6 +58,14 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: false
     },
+    website: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
     otherAddresses: {
       type: DataTypes.JSON,
       allowNull: true,

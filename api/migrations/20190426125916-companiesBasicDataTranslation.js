@@ -57,6 +57,14 @@ module.exports = {
         type: Sequelize.STRING(1000), //JSON,
         allowNull: false
       },
+      website: {
+        type: Sequelize.STRING(100),
+        allowNull: false
+      },
+      email: {
+        type: Sequelize.STRING(100),
+        allowNull: false
+      },
       otherAddresses: {
         type: Sequelize.STRING(1000), //JSON,
         allowNull: true,

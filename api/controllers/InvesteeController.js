@@ -300,7 +300,6 @@ console.log("inside");
         await transaction.rollback();
         return reply.response({status: 406, message: "This registration id number already exist"}).code(406);
       }
-console.log("here");
       companyBasicData["user_id"] = request.params.userId;
       const createdCompanyBasicData = await models.companiesBasicData.create(companyBasicData, { transaction });
       companyBasicData.companiesBasicDataTranslation.companyBasicDataId = createdCompanyBasicData.id;

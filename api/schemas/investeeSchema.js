@@ -36,6 +36,8 @@ module.exports = {
           phoneNumbers: Joi.number().allow(null, ''),
           otherAddresses: Joi.array().optional().label('other address'), // .array()
           YearOfEstablishment: Joi.string().allow(null, '').label('Year Of Establishment'),
+          website: Joi.string(),
+          email: Joi.string()
         }
       },
       investeeTranslation: { phoneNumbers: Joi.number().allow(null, '').label('phone number').example('01155467899'), },
