@@ -20,7 +20,8 @@ module.exports = {
         currentValueOfCompany: Joi.number().positive().label('value Of The Investment Required'),
         valueOfTheInvestmentRequired: Joi.number().positive().label('value Of The Investment Required'),
         PurposeOfTheRequiredInvestment: Joi.string().label('Purpose Of The Required Investment'),
-        validTill: Joi.string() //.min(moment().format('YYYY-MM-DDTHH:mm:ss[Z]')).required().label('valid Till'),
+        validTill: Joi.string(), //.min(moment().format('YYYY-MM-DDTHH:mm:ss[Z]')).required().label('valid Till'),
+        average_annual_sales: Joi.number().positive()
       }
     }
   },
@@ -57,7 +58,8 @@ module.exports = {
         currentValueOfCompany: Joi.number().positive().required().label('value Of The Investment Required'),
         valueOfTheInvestmentRequired: Joi.number().label('value Of The Investment Required'),
         PurposeOfTheRequiredInvestment: Joi.string().label('Purpose Of The Required Investment'),
-        validTill: Joi.string() //.min(moment().format('YYYY-MM-DDTHH:mm:ss[Z]')).label('valid Till'),
+        validTill: Joi.string(), //.min(moment().format('YYYY-MM-DDTHH:mm:ss[Z]')).label('valid Till'),
+        average_annual_sales: Joi.number().positive()
       }
     }
   }
