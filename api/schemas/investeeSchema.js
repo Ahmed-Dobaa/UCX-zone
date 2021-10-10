@@ -87,6 +87,8 @@ module.exports = {
           city: Joi.string().allow(null, '').example('Cairo'),
           country: Joi.string().required().example('Egypt'),
           main_address: Joi.string(),
+          website: Joi.string(),
+          email: Joi.string(),
           // address: Joi.object({
           //   streetNumber: Joi.string().label('street number').example('102'),
           //   streetName: Joi.string().label('street name').example('Abu El-Ella main road'),
