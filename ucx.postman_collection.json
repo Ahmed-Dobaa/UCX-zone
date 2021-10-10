@@ -196,7 +196,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \r\n        \"isConfidential\": \"true\",\r\n       \"companyBasicData\": {\r\n        \"name\": \"ucx\",  \r\n        \"registrationIdNo\": \"4235158542531\",  \r\n        \"registrationOffice\": \"Cairo\", \r\n        \"sector\": \"Technology\",\r\n        \"subSector\": \"Mobiles\",  \r\n        \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n        \"productsOrServices\": \"Software\",\r\n        \"legalForm\": \"Mobile Software\",  \r\n        \"address\":  \"{ city: cairo, country: egypt }\",\r\n        \"otherAddresses\": [\"Alex\"],\r\n        \"phoneNumbers\": \"01155467899\",\r\n        \"languageId\": 1,\r\n        \"YearOfEstablishment\": \"2021\",\r\n        \"relationToCompany\": \"Manager\"\r\n    }\r\n    \r\n    }\r\n",
+							"raw": "{\r\n \r\n        \"isConfidential\": \"true\",\r\n       \"companyBasicData\": {\r\n        \"name\": \"ucx\",  \r\n        \"registrationIdNo\": \"4238542531\",  \r\n        \"registrationOffice\": \"Cairo\", \r\n        \"sector\": \"Technology\",\r\n        \"subSector\": \"Mobiles\",  \r\n        \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n        \"productsOrServices\": \"Software\",\r\n        \"legalForm\": \"Mobile Software\",  \r\n        \"address\":  \"{ city: cairo, country: egypt }\",\r\n        \"otherAddresses\": [\"Alex\"],\r\n        \"phoneNumbers\": \"01155467899\",\r\n        \"languageId\": 1,\r\n        \"YearOfEstablishment\": \"2021\",\r\n        \"relationToCompany\": \"Manager\",\r\n        \"website\": \"test\",\r\n        \"email\": \"ahmed\"\r\n    }\r\n    \r\n    }\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -204,15 +204,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/company/2",
+							"raw": "http://localhost:2053/company",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "12225",
+							"port": "2053",
 							"path": [
-								"company",
-								"2"
+								"company"
 							]
 						}
 					},
@@ -264,15 +263,17 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2053/company/1",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/company/2",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
 								"company",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -302,7 +303,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"885\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"city\": \"cairo\",\r\n                \"country\": \"egypt\",\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\",\r\n                \"phoneNumbers\" : \"01013848807\",\r\n                \"main_address\": \"cairo\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n",
+							"raw": "{\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"85\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"city\": \"cairo\",\r\n                \"country\": \"egypt\",\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\",\r\n                \"phoneNumbers\" : \"01013848807\",\r\n                \"main_address\": \"cairo\",\r\n                \"website\": \"test\",\r\n                \"email\": \"ahmed\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -310,10 +311,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:2053/users/1/investees",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/users/1/investees",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
@@ -441,7 +444,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"authorizedCapital\": \"يش\",\r\n\t\t\"bookValue\": 22,\r\n\t\t\"capitalCurrencyId\": 54,\r\n\t\t\"currentTotalShares\": 22,\r\n\t\t\"issuedCapital\": 41,\r\n\t\t\"paidInCapital\": 22\r\n}",
+							"raw": "{\r\n\t\t\"bookValue\": 22,\r\n\t\t\"capitalCurrencyId\": 54,\r\n\t\t\"currentTotalShares\": 22,\r\n\t\t\"issuedCapital\": 41,\r\n\t\t\"paidInCapital\": 22,\r\n\t\t\"marketVal\": 5,\r\n\t\t\"estimatedVal\": 5,\r\n\t\t\"shareParVal\": 6,\r\n\t\t\"equity\": 9\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -449,17 +452,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/5/investees/8/capitals",
+							"raw": "http://localhost:2053/users/1/investees/1/capitals",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "12225",
+							"port": "2053",
 							"path": [
 								"users",
-								"5",
+								"1",
 								"investees",
-								"8",
+								"1",
 								"capitals"
 							]
 						}
@@ -629,7 +632,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"email\": \"asssss@gmail.com\",\r\n        \"gender\": \"M\",\r\n        \"ownershipTranslation\": {\r\n            \"shareholderName\": \"ahmed salah\",\r\n            \"phoneNumber\": \"01013848807\",\r\n            \"dob\": \"2020-05-05\",\r\n            \"ownedShares\": 10000,\r\n            \"value\": 1000,\r\n            \"percent\": 40,\r\n            \"email\": \"asssss@gmail.com\",\r\n        \"gender\": \"M\"\r\n        }\r\n}",
+							"raw": "{\r\n\t\"email\": \"asssss@gmail.com\",\r\n        \"gender\": \"M\",\r\n        \"ownershipTranslation\": {\r\n            \"shareholderName\": \"ahmed salah\",\r\n            \"phoneNumber\": \"01013848807\",\r\n            \"dob\": \"2020-05-05\",\r\n            \"ownedShares\": 10000,\r\n            \"percent\": 40,\r\n            \"email\": \"asssss@gmail.com\"\r\n        }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -637,17 +640,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/5/investees/8/ownerships",
+							"raw": "http://localhost:2053/users/1/investees/1/ownerships",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "12225",
+							"port": "2053",
 							"path": [
 								"users",
-								"5",
+								"1",
 								"investees",
-								"8",
+								"1",
 								"ownerships"
 							]
 						}
@@ -1135,7 +1138,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"investmentTypeId\": 1,\n    \"currencyId\": 2,\n    \"investmentProposalTranslation\": {\n    \t\"title\": \"test\",\n    \t\"description\": \"test\",\n    \t\"minInvestment\": 10,\n    \t\"currentValueOfCompany\": 50,\n    \t\"valueOfTheInvestmentRequired\": 20,\n    \t\"PurposeOfTheRequiredInvestment\": \"test\",\n    \t\"validTill\": \"2021-12-25\"\n    }\n}",
+							"raw": "{\n\t\"investmentTypeId\": 1,\n    \"currencyId\": 2,\n    \"investmentProposalTranslation\": {\n    \t\"title\": \"test\",\n    \t\"description\": \"test\",\n    \t\"minInvestment\": 10,\n    \t\"currentValueOfCompany\": 50,\n    \t\"valueOfTheInvestmentRequired\": 20,\n    \t\"PurposeOfTheRequiredInvestment\": \"test\",\n    \t\"validTill\": \"2021-12-25\",\n    \t\"average_annual_sales\": 5 \n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1143,12 +1146,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:12225/users/1/investees/1/investmentproposals",
+							"raw": "http://localhost:2053/users/1/investees/1/investmentproposals",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "12225",
+							"port": "2053",
 							"path": [
 								"users",
 								"1",

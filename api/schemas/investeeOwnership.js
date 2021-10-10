@@ -18,10 +18,10 @@ module.exports = {
         dob: Joi.date().format('YYYY-MM-DD')
           .label('date of birth'),
         ownedShares: Joi.number().positive().label('owned shares').example(1000),
-        value: Joi.number().positive().label('value').example(1000),
+        // value: Joi.number().positive().label('value').example(1000),
         percent: Joi.number().positive().label('percent').example(50),
         email: Joi.string(),
-        gender: Joi.string()
+        // gender: Joi.string()
       }
     }
   },
@@ -54,10 +54,10 @@ module.exports = {
         // .max(moment().subtract(18, 'year').format('MM-DD-YYYY'))
           .label('date of birth').example(moment().subtract(18, 'year').format('MM-DD-YYYY')),
         ownedShares: Joi.number().positive().label('owned shares').example(1000),
-        value: Joi.number().positive().label('value').example(1000),
+        // value: Joi.number().positive().label('value').example(1000),
         percent: Joi.number().positive().label('percent').example(50),
         email: Joi.string(),
-        gender: Joi.string()
+        // gender: Joi.string()
       }
     }
   }

@@ -14,7 +14,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     gender: {
       type: DataTypes.STRING(7),
-      allowNull: false
+      allowNull: true
     },
     email: {
       type: DataTypes.STRING(50),
@@ -42,7 +42,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     value: {
       type: DataTypes.DECIMAL,
-      allowNull: false
+      allowNull: true
     },
     percent: {
       type: DataTypes.DECIMAL,

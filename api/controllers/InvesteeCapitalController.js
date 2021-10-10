@@ -71,7 +71,10 @@ module.exports = {
 
         return Boom.badRequest('Investee company capital already created before, it can be updated only.');
       }
-
+      payload.share_market_value =  request.payload.marketVal;
+      payload.estimated_company_value = request.payload.estimatedVal;
+      payload.share_par_value = request.payload.shareParVal;
+      payload.shareholder_equity = request.payload.equity;
       const createdInvesteeCapital = await models.investeeCapital.create(payload);
 
       return reply.response(createdInvesteeCapital).code(201);

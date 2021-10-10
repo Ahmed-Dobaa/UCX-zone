@@ -32,7 +32,7 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.DECIMAL,
       allowNull: true
     },
-    share_book_value: {
+    share_par_value: {
       type: DataTypes.DECIMAL,
       allowNull: true
     },

@@ -10,9 +10,13 @@ module.exports = {
       capitalCurrencyId: Joi.number().positive().label('capital currency id').example(89),
       issuedCapital: Joi.number().positive().label('issued capital').example(1000),
       paidInCapital: Joi.number().positive().label('paid in capital').example(1000),
+      shareholder_equity: Joi.number().positive(),
       currentTotalShares: Joi.number().positive().label('current total shares').example(100),
+      share_par_value: Joi.number().positive(),
       bookValue: Joi.number().positive().label('book Value').example(10),
-      authorizedCapital: Joi.string().label('authorized capital').example(1000)
+      estimated_company_value: Joi.number().positive(),
+      share_market_value: Joi.number().positive()
+      // authorizedCapital: Joi.string().label('authorized capital').example(1000)
     }
   },
   translateSchema: {
@@ -34,9 +38,14 @@ module.exports = {
       capitalCurrencyId: Joi.number().positive().label('capital currency id').example(89),
       issuedCapital: Joi.number().positive().label('issued capital').example(1000),
       paidInCapital: Joi.number().positive().label('paid in capital').example(1000),
+      shareholder_equity: Joi.number().positive(),
+      share_par_value: Joi.number().positive(),
       currentTotalShares: Joi.number().positive().label('current total shares').example(100),
       bookValue: Joi.number().positive().label('book Value').example(10),
-      authorizedCapital: Joi.string().label('authorized capital').example(1000)
+      estimated_company_value: Joi.number().positive(),
+      share_market_value: Joi.number().positive()
+
+      // authorizedCapital: Joi.string().label('authorized capital').example(1000)
     }
   }
 
