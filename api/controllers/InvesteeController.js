@@ -331,7 +331,7 @@ console.log("inside");
       await models.request_Role_company.create({
         userId: userId,
         companyId: createdInvestee.id,
-        requestedRole: companyBasicData.companiesBasicDataTranslation.relationToCompany
+        requestedRole: " "
       }, { transaction });
 
       await transaction.commit();
