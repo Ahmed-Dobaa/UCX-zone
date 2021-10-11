@@ -53,6 +53,14 @@ module.exports = {
       type: Sequelize.STRING(50),
       allowNull: false
     },
+    currency: {
+      type: Sequelize.STRING(20),
+      allowNull: true
+    },
+    EBITDA: {
+      type: Sequelize.INTEGER,
+      allowNull: true
+    },
     createdAt: {
       type: Sequelize.DATE,
       allowNull: false,

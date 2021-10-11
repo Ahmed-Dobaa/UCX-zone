@@ -53,6 +53,14 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(50),
       allowNull: false
     },
+    currency: {
+      type: DataTypes.STRING(20),
+      allowNull: true
+    },
+    EBITDA: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
