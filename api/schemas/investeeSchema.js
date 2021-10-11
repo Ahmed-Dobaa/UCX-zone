@@ -33,7 +33,7 @@ module.exports = {
           //   country: Joi.string().required().example('Egypt')
           // }).required(),
           main_address: Joi.string(),
-          phoneNumbers: Joi.number().allow(null, ''),
+          phoneNumbers: Joi.string().allow(null, ''),
           otherAddresses: Joi.array().optional().label('other address'), // .array()
           YearOfEstablishment: Joi.string().allow(null, '').label('Year Of Establishment'),
           website: Joi.string(),
@@ -99,10 +99,10 @@ module.exports = {
           // // otherAddresses: Joi.array().items(address).min(0).label('other address'),
           YearOfEstablishment: Joi.string().label('Year Of Establishment'),
           // relationToCompany: Joi.string().required().label('relation to company').example('Manager')
-          phoneNumbers: Joi.number().allow(null, '')
+          phoneNumbers: Joi.string().allow(null, '')
         }
       },
-      investeeTranslation: { phoneNumbers: Joi.number().label('phone number').example('01155467899') },
+      investeeTranslation: { phoneNumbers: Joi.string().label('phone number').example('01155467899') },
       avatar: Joi.any().allow(['', null]),
       website: Joi.string().allow(['', null]), //.uri()
     }
