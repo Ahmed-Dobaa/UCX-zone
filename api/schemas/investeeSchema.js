@@ -40,7 +40,7 @@ module.exports = {
           email: Joi.string()
         }
       },
-      investeeTranslation: { phoneNumbers: Joi.number().allow(null, '').label('phone number').example('01155467899'), },
+      investeeTranslation: { phoneNumbers: Joi.string().allow(null, '').label('phone number').example('01155467899'), },
       avatar: Joi.any().allow(['', null]),
       website: Joi.string().allow(['', null]), // .uri()
       // relationToCompany: Joi.string().required().label('relation to company').example('Manager')
