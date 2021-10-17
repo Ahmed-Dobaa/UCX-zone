@@ -20,6 +20,10 @@ module.exports = {
       type: Sequelize.STRING(100),
       allowNull: false
     },
+    email: {
+      type: Sequelize.STRING(100),
+      allowNull: false
+    },
     representativeFor: {
       type: Sequelize.STRING(100),
       allowNull: false

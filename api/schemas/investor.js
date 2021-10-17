@@ -12,11 +12,17 @@ module.exports = {
   createSchema: {
     params: { userId: Joi.number().positive().required().example('17') },
     payload: {
-      type: Joi.string().required().valid(['C', 'I']),
       companyBasicData: Joi.object().keys({
         isConfidential: Joi.boolean().default(false).label('is confidential'),
         companiesBasicDataTranslation: {
           name: Joi.string().required(),
+          city: Joi.string().allow(null, '').example('Cairo'),
+          country: Joi.string().required().example('Egypt'),
+          main_address: Joi.string(),
+          phoneNumbers: Joi.string().allow(null, ''),
+          // otherAddresses: Joi.array().optional().label('other address'), // .array()
+          website: Joi.string(),
+          email: Joi.string(),
           // registrationIdNo: Joi.string().required().label('registration id number'),
           // registrationOffice: Joi.string().required().label('registration office'),
           // sector: Joi.string().required(),
@@ -24,29 +30,33 @@ module.exports = {
           companyPurpose: Joi.string().allow(null, '').label('Description'),
           // productsOrServices: Joi.string().required().label('products or services'),
           // legalForm: Joi.string().required().label('legal form'),
-          address: address,
-          otherAddresses: Joi.array().items(address).min(0).label('other address'),
+          // address: address,
+          // otherAddresses: Joi.array().items(address).min(0).label('other address'),
           // YearOfEstablishment: Joi.string().required().label('Year Of Establishment'),
-        },
-      }).when('type', {
-        is: 'C',
-        then: Joi.required()
-      }),
+        }}),
+      // }).when('type', {
+      //   is: 'C',
+      //   then: Joi.required()
+      // }),
       investor: {
+        type: Joi.string().required(), //.valid(['C', 'I']),
         turnoverRangeId: Joi.number().positive().label('Turnover Range'),
         investorTranslation: Joi.object().keys({
-          phoneNumbers: Joi.string().required().label('Phone Number'),
+          // phoneNumbers: Joi.string().required().label('Phone Number'),
           investmentStrategy: Joi.string().allow(null, '').label('Investment Criteria'),
           // investmentVolume: Joi.number().positive().required().label('investment volume'),
           // investmentTicketSize: Joi.number().positive().required().label('Investment Ticket Size'),
           minTicketSize: Joi.number().positive().description('minimum The Ticket Size'),
           maxTicketSize: Joi.number().positive().description('maximum The Ticket Size'),
-          targetedSectorsIds: Joi.array().items(Joi.number().positive()).min(1).unique().required().label('Targeted Sectors'),
-          targetedCountriesIds: Joi.array().items(Joi.number().positive()).min(1).unique().required().label('Targeted Countries'),
+          target_countries: Joi.array(),
+        target_sectors: Joi.array(),
+          // targetedSectorsIds: Joi.array().items(Joi.number().positive()).min(1).unique().required().label('Targeted Sectors'),
+          // targetedCountriesIds: Joi.array().items(Joi.number().positive()).min(1).unique().required().label('Targeted Countries'),
           // financialInvestment: Joi.string().allow(null, '').optional().label('financial investment'),
           // significantInvestment: Joi.string().allow(null, '').optional().label('significant investment').example('lorum ipsum lorum ipsom'),
           // servicesInvestment: Joi.string().allow(null, '').optional().label('services investment').example('lorum ipsum lorum ipsom')
         }),
+
         website: Joi.string().uri().allow(['', null]),
         // .or('financialInvestment', 'significantInvestment', 'servicesInvestment').required()
       }

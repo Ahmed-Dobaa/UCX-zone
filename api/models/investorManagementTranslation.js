@@ -1,5 +1,7 @@
 /* jshint indent: 2 */
 
+const { truncate } = require('lodash');
+
 module.exports = function (sequelize, DataTypes) {
   const investorManagementTranslation = sequelize.define('investorManagementTranslation', {
     id: {
@@ -20,13 +22,17 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: false
     },
+    email: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
     position: {
       type: DataTypes.STRING(11),
       allowNull: false,
     },
     representativeFor: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: true
     },
     phoneNumber: {
       type: DataTypes.STRING(20),

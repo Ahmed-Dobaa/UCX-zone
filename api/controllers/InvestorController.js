@@ -93,43 +93,56 @@ module.exports = {
     let transaction;
     let company = null;
     try {
-      const language = request.pre.languageId;
+      const language = 1; //request.pre.languageId;
       let { investor } = request.payload;
       const { investorTranslation } = request.payload.investor;
       const userId = request.auth.decoded ? request.auth.decoded.id : request.params.userId;
       investor.createdBy = userId;
-      investor.type = request.payload.type;
+      investor.type = request.payload.investor.type;
       investorTranslation.languageId= language;
 
-      if(request.payload.type === 'I') {
-        const foundInvestor = await models.investor.findOne({ where: { createdBy: userId, type: 'I' } });
+      // if(request.payload.type === 'I') {
+      //   const foundInvestor = await models.investor.findOne({ where: { createdBy: userId, type: 'I' } });
 
-        if(!_.isEmpty(foundInvestor)) {
-          return Boom.badRequest('You Already Have Individual Investor, You Can Not Create Two');
-        }
-      }
+      //   if(!_.isEmpty(foundInvestor)) {
+      //     return Boom.badRequest('You Already Have Individual Investor, You Can Not Create Two');
+      //   }
+      // }
 
       transaction = await models.sequelize.transaction();
 
-      if(request.payload.type === 'C') { // If company already exists, just add the investor data in its table.
+      if(request.payload.investor.type === 'Company') { // If company already exists, just add the investor data in its table.
         const { companiesBasicDataTranslation } = request.payload.companyBasicData;
 
         // company = await models.companiesBasicDataTranslation.findOne({ where: { registrationIdNo: companiesBasicDataTranslation.registrationIdNo } });
 
         // if(_.isEmpty(company)) {
-        company = await models.companiesBasicData.create({ isConfidential: request.payload.companyBasicData.isConfidential }, { transaction });
+        company = await models.companiesBasicData.create({ isConfidential: request.payload.companyBasicData.isConfidential,
+                                                           createdBy: userId,
+                                                          user_id: userId }, { transaction });
         companiesBasicDataTranslation.companyBasicDataId= company.id;
         companiesBasicDataTranslation.languageId = language;
         await models.companiesBasicDataTranslation.create(companiesBasicDataTranslation, { transaction });
         // }
         investor.companyId = company.id;
       }
-      console.log('investor', investor);
       investor = await models.investor.create(investor, { transaction });
       investorTranslation.investorId= investor.id;
+      investorTranslation.phoneNumbers = request.payload.companyBasicData.companiesBasicDataTranslation.phoneNumbers;
       await models.investorTranslation.create(investorTranslation, { transaction });
-      await investor.addTargetedCountries(investorTranslation.targetedCountriesIds);
-      await investor.addTargetedSectors(investorTranslation.targetedSectorsIds);
+      console.log(request.payload.target_countries)
+      let targetCountries = {"investorId": investor.id, "countryId": request.payload.investor.investorTranslation.target_countries};
+      await models.investorTargetedCountries.create(targetCountries, { transaction });
+      let targetedSectors = {"investorId": investor.id, "sectorId": request.payload.investor.investorTranslation.target_sectors}
+      await models.investorTargetedSectors.create(targetedSectors, { transaction });
+      let management = await models.investorManagement.create({"investorId": investor.id, "email": request.payload.investor_management.email,
+                                 "createdBy": userId }, { transaction });
+      await models.investorManagementTranslation.create({"investorManagementId": management.id, "languageId": language,
+                                 "name": request.payload.investor_management.investorManagementTranslation.name,
+                                 "position": request.payload.investor_management.investorManagementTranslation.position,
+                                 "phoneNumber": request.payload.investor_management.investorManagementTranslation.phoneNumber }, { transaction });
+      // await investor.addTargetedCountries(investorTranslation.targetedCountriesIds);
+      // await investor.addTargetedSectors(investorTranslation.targetedSectorsIds);
       await models.usersInvestors.create({ userId: userId, investorId: investor.id, roleId: 8 }, { transaction });
       await transaction.commit();
 
