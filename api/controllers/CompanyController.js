@@ -15,22 +15,28 @@ module.exports = {
           { model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }
         ]
       });
+
       for(let i = 0; i < foundCompanies.length; i++){
-        let investeeInvestmentProposal = await models.investeeInvestmentProposals.findOne({
-          where: { investeeId: foundCompanies[i].investeeCompany.id },
-         include: {
-           model : models.investeeInvestmentProposalTranslation, as: "investeeInvestmentProposalTranslation"
-         }})
-         if(investeeInvestmentProposal){
-          foundCompanies[i].dataValues.average_annual_sales = investeeInvestmentProposal.dataValues.investeeInvestmentProposalTranslation.average_annual_sales;
-          foundCompanies[i].dataValues.estimated_company_value = investeeInvestmentProposal.dataValues.investeeInvestmentProposalTranslation.currentValueOfCompany;
-          foundCompanies[i].dataValues.required_investment = investeeInvestmentProposal.dataValues.investeeInvestmentProposalTranslation.valueOfTheInvestmentRequired;
-         }else{
+        if(foundCompanies[i].type === 'investee'){
+          let investeeInvestmentProposal = await models.investeeInvestmentProposals.findOne({
+            where: { investeeId: foundCompanies[i].investeeCompany.id },
+           include: {
+             model : models.investeeInvestmentProposalTranslation, as: "investeeInvestmentProposalTranslation"
+           }})
+           if(investeeInvestmentProposal){
+            foundCompanies[i].dataValues.average_annual_sales = investeeInvestmentProposal.dataValues.investeeInvestmentProposalTranslation.average_annual_sales;
+            foundCompanies[i].dataValues.estimated_company_value = investeeInvestmentProposal.dataValues.investeeInvestmentProposalTranslation.currentValueOfCompany;
+            foundCompanies[i].dataValues.required_investment = investeeInvestmentProposal.dataValues.investeeInvestmentProposalTranslation.valueOfTheInvestmentRequired;
+           }else{
+            foundCompanies[i].dataValues.average_annual_sales = "0";
+            foundCompanies[i].dataValues.estimated_company_value = "0";
+            foundCompanies[i].dataValues.required_investment = "0";
+           }
+        }else{
           foundCompanies[i].dataValues.average_annual_sales = "0";
           foundCompanies[i].dataValues.estimated_company_value = "0";
           foundCompanies[i].dataValues.required_investment = "0";
-         }
-
+          }
         }
       return reply.response(foundCompanies).code(200);
     }
