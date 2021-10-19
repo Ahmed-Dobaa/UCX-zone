@@ -74,6 +74,36 @@ module.exports = {
       return errorService.wrapError(e, 'An internal server error occurred');
     }
   },
+  findAllInvestors: async function (request, reply) {
+    try {
+      const language = 1; //request.pre.languageId;
+      const foundCompanies = await models.investor.findAll({
+        // where: {user_id: request.params.userId},
+        include: [
+          { model: models.investorTranslation, as: 'investorTranslation' },
+          { model: models.companiesBasicData, as: 'company',
+              include: [{ model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }] }
+         ]
+      });
+
+      for(let i = 0; i < foundCompanies.length; i++){
+        let countries = await models.investorTargetedCountries.findAll({where: {investorId: foundCompanies[i].id}})
+        let sectors = await models.investorTargetedSectors.findAll({where: {investorId: foundCompanies[i].id}})
+        foundCompanies[i].dataValues["countries"] = countries[0];
+        foundCompanies[i].dataValues["sectors"] = sectors[0];
+      }
+      // const sequelizeQuery = qsToSequelizeQuery(request.query, models.investor.attributes, models.investor.associations);
+      // const foundInvestorCompanies = await models.investor.scope({ method: ['includeRelations', sequelizeQuery, language] }).findAndCountAll();
+
+      // const foundInvestorCompanies = await models.investor.findAndCountAll();
+      return reply.response(foundCompanies).code(200);
+    }
+    catch (e) {
+      console.log('error', e);
+
+      return errorService.wrapError(e, 'An internal server error occurred');
+    }
+  },
   findOne: async (request, reply) => {
     try {
       const language = request.pre.languageId;
@@ -130,11 +160,13 @@ module.exports = {
       investorTranslation.investorId= investor.id;
       investorTranslation.phoneNumbers = request.payload.companyBasicData.companiesBasicDataTranslation.phoneNumbers;
       await models.investorTranslation.create(investorTranslation, { transaction });
-      console.log(request.payload.target_countries)
+
       let targetCountries = {"investorId": investor.id, "countryId": request.payload.investor.investorTranslation.target_countries};
       await models.investorTargetedCountries.create(targetCountries, { transaction });
+
       let targetedSectors = {"investorId": investor.id, "sectorId": request.payload.investor.investorTranslation.target_sectors}
       await models.investorTargetedSectors.create(targetedSectors, { transaction });
+
       let management = await models.investorManagement.create({"investorId": investor.id, "email": request.payload.investor_management.email,
                                  "createdBy": userId }, { transaction });
       await models.investorManagementTranslation.create({"investorManagementId": management.id, "languageId": language,

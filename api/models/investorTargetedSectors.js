@@ -15,7 +15,7 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.INTEGER(11).UNSIGNED,
         allowNull: true
       },
-      countryId: {
+      sectorId: {
         type: DataTypes.INTEGER(11).UNSIGNED,
         allowNull: true
       },

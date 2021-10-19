@@ -546,35 +546,35 @@ module.exports = [
       handler: authenticationController.deactivateUser
     }
   },
-  {
-    path: '/users/{id}/avatar',
-    method: 'POST',
-    options: {
-      auth: 'jwt',
-      payload: {
-        maxBytes: 2097152, // maximum payload size in bytes (2M)
-        output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
-        parse: true, // The parse property determines if the incoming payload gets parsed
-        allow: ['multipart/form-data']
-      },
-      validate: {
-        params: { id: Joi.number().required().description('the id of user to get its avatar') },
-        payload: { avatar: Joi.any().required().description('Image File') }
-      },
-      description: 'user Change his current avatar',
-      handler: userController.uploadAvatar
-    }
-  },
-  {
-    path: '/users/{id}/avatar',
-    method: 'get',
-    options: {
-      auth: false,
-      description: 'Get current user avatar',
-      validate: { params: { id: Joi.number().required().description('the id of user to get its avatar'), } },
-      handler: userController.getAvatar
-    }
-  },
+  // {
+  //   path: '/users/{id}/avatar',
+  //   method: 'POST',
+  //   options: {
+  //     auth: 'jwt',
+  //     payload: {
+  //       maxBytes: 2097152, // maximum payload size in bytes (2M)
+  //       output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
+  //       parse: true, // The parse property determines if the incoming payload gets parsed
+  //       allow: ['multipart/form-data']
+  //     },
+  //     validate: {
+  //       params: { id: Joi.number().required().description('the id of user to get its avatar') },
+  //       payload: { avatar: Joi.any().required().description('Image File') }
+  //     },
+  //     description: 'user Change his current avatar',
+  //     handler: userController.uploadAvatar
+  //   }
+  // },
+  // {
+  //   path: '/users/{id}/avatar',
+  //   method: 'get',
+  //   options: {
+  //     auth: false,
+  //     description: 'Get current user avatar',
+  //     validate: { params: { id: Joi.number().required().description('the id of user to get its avatar'), } },
+  //     handler: userController.getAvatar
+  //   }
+  // },
   {
     path: '/users/{id}/password',
     method: 'put',
@@ -742,6 +742,25 @@ module.exports = [
       handler: investeeController.create
     }
   },
+  // {
+  //   path: '/users/{id}/avatar',
+  //   method: 'POST',
+  //   options: {
+  //     auth: 'jwt',
+  //     payload: {
+  //       maxBytes: 2097152, // maximum payload size in bytes (2M)
+  //       output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
+  //       parse: true, // The parse property determines if the incoming payload gets parsed
+  //       allow: ['multipart/form-data']
+  //     },
+  //     validate: {
+  //       params: { id: Joi.number().required().description('the id of user to get its avatar') },
+  //       payload: { avatar: Joi.any().required().description('Image File') }
+  //     },
+  //     description: 'user Change his current avatar',
+  //     handler: investeeController.uploadAvatar
+  //   }
+  // },
   {
     path: '/users/{userId}/investees/{id}/translate',
     method: 'POST',
@@ -2072,6 +2091,21 @@ module.exports = [
       ],
       validate: { params: investor.createSchema.params },
       handler: investorController.findAll
+    }
+  },
+  {
+    path: '/investors',
+    method: 'GET',
+    options: {
+      auth: false,
+      description: 'Get all investors for that user',
+      // app: { allowedPermission: { resource: 'investor', action: 'findAll' } },
+      pre: [
+        // // // { method: helperService.authorizeUser },
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      // validate: { params: investor.createSchema.params },
+      handler: investorController.findAllInvestors
     }
   },
   {

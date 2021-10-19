@@ -57,6 +57,10 @@ module.exports = {
         type: Sequelize.STRING(1000), //JSON,
         allowNull: false
       },
+      img: {
+        type: Sequelize.STRING(100),
+        allowNull: true
+      },
       website: {
         type: Sequelize.STRING(100),
         allowNull: false

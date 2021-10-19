@@ -513,5 +513,36 @@ console.log("inside");
 
       return Boom.badImplementation('An internal server error occurred');
     }
-  }
+  },
+
+  // uploadCompanyImg: async function (request, reply) {
+  //   const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif'];
+  //   const uploadImageExtension = path.extname(request.payload.avatar.hapi.filename);
+  //   const relativePath = `uploads/company/${request.params.id}-${moment().valueOf()}-${uploadImageExtension}`;
+  //   const fullPath = path.join(__dirname, '../', relativePath);
+  //   let oldPath = null;
+  //   try {
+
+  //     if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
+
+  //       return Boom.badRequest(`allowed images extension are  ${allowedExtensions.join(' , ')}`);
+  //     }
+
+  //     const foundUser = await models.companiesBasicDataTranslation.findOne({ where: { companiesBasicDataId: request.params.id }, raw: true });
+  //     oldPath = foundUser.img;
+  //     await request.payload.avatar.pipe(fs.createWriteStream(fullPath));
+  //     await models.companiesBasicDataTranslation.update({ img: relativePath }, { where: { companiesBasicDataId: request.params.id } });
+
+  //     return reply.response({ message: "updated"}).code(201);
+  //   }
+  //   catch (e) {
+  //     console.log('error', e);
+  //     fs.unlinkSync(path.join(__dirname, '../', oldPath));
+
+  //     return Boom.badImplementation('An internal server error occurred');
+  //   }
+
+  // }
 };
+
+

@@ -1472,6 +1472,25 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2053/investors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"investors"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
