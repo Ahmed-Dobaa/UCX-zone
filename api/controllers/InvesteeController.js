@@ -281,7 +281,6 @@ module.exports = {
   },
   create: async (request, reply) => {
     let transaction;
-console.log("inside");
     try {
       transaction = await models.sequelize.transaction();
       const userId = request.auth.decoded ? request.auth.decoded.id : request.params.userId;
@@ -301,6 +300,7 @@ console.log("inside");
         return reply.response({status: 406, message: "This registration id number already exist"}).code(406);
       }
       companyBasicData["user_id"] = request.params.userId;
+      companyBasicData.type = 'investee';
       const createdCompanyBasicData = await models.companiesBasicData.create(companyBasicData, { transaction });
       companyBasicData.companiesBasicDataTranslation.companyBasicDataId = createdCompanyBasicData.id;
       await models.companiesBasicDataTranslation.create(companyBasicData.companiesBasicDataTranslation, { transaction });

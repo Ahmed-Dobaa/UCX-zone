@@ -29,6 +29,10 @@ module.exports = {
       type: Sequelize.STRING(100), //.INTEGER(10).UNSIGNED,
       allowNull: true
     },
+    type: {
+      type: Sequelize.STRING(20),
+      allowNull: true
+    },
     verifiedAt: {
       type: Sequelize.DATE,
       allowNull: true

@@ -141,7 +141,7 @@ module.exports = {
 
       transaction = await models.sequelize.transaction();
 
-      if(request.payload.investor.type === 'Company') { // If company already exists, just add the investor data in its table.
+      if(request.payload.investor.type === 'InstitutionalInvestor') { // If company already exists, just add the investor data in its table.
         const { companiesBasicDataTranslation } = request.payload.companyBasicData;
 
         // company = await models.companiesBasicDataTranslation.findOne({ where: { registrationIdNo: companiesBasicDataTranslation.registrationIdNo } });
@@ -149,7 +149,7 @@ module.exports = {
         // if(_.isEmpty(company)) {
         company = await models.companiesBasicData.create({ isConfidential: request.payload.companyBasicData.isConfidential,
                                                            createdBy: userId,
-                                                          user_id: userId }, { transaction });
+                                                          user_id: userId, type: 'investor' }, { transaction });
         companiesBasicDataTranslation.companyBasicDataId= company.id;
         companiesBasicDataTranslation.languageId = language;
         await models.companiesBasicDataTranslation.create(companiesBasicDataTranslation, { transaction });
@@ -158,7 +158,7 @@ module.exports = {
       }
       investor = await models.investor.create(investor, { transaction });
       investorTranslation.investorId= investor.id;
-      investorTranslation.phoneNumbers = request.payload.companyBasicData.companiesBasicDataTranslation.phoneNumbers;
+      investorTranslation.phoneNumbers = '010'; //request.payload.companyBasicData.companiesBasicDataTranslation.phoneNumbers;
       await models.investorTranslation.create(investorTranslation, { transaction });
 
       let targetCountries = {"investorId": investor.id, "countryId": request.payload.investor.investorTranslation.target_countries};
