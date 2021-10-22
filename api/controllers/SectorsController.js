@@ -18,6 +18,15 @@ module.exports = {
       return Boom.badImplementation('An internal server error occurred');
     }
   },
+  sectors: async function (request, reply) {
+      try {
+           const sectors = await models.sectorsTranslation.findAll({ order: [['name', 'ASC']] })
+           return reply.response(sectors).code(200);
+      } catch (error) {
+
+      }
+  },
+
   findOne: async function (request, reply) {
     try {
       const foundSector = await models.sectors.findOne({

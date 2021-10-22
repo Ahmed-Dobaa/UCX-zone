@@ -430,6 +430,14 @@ module.exports = [
     }
   },
   {
+    path: '/sector',
+    method: 'get',
+    options: {
+      auth: false,
+      handler: sectorsController.sectors
+    }
+  },
+  {
     path: '/sectors/{id}',
     method: 'get',
     options: {

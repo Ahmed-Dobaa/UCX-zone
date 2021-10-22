@@ -1446,6 +1446,25 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "sectors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2053/sector",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"sector"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
