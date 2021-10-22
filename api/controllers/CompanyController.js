@@ -21,6 +21,7 @@ module.exports = {
   },
 
   findAll: async function (request, reply) {
+    let progress = null;
     try {
       var foundCompanies = await models.companiesBasicData.findAll({
         where: {deleted: 0},
@@ -29,7 +30,7 @@ module.exports = {
           { model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }
         ]
       });
-
+      console.log("here");
       for(let i = 0; i < foundCompanies.length; i++){
         if(foundCompanies[i].type === 'investee'){
           let investeeInvestmentProposal = await models.investeeInvestmentProposals.findOne({
@@ -46,12 +47,46 @@ module.exports = {
             foundCompanies[i].dataValues.estimated_company_value = "0";
             foundCompanies[i].dataValues.required_investment = "0";
            }
+           progress = 30;
+           const capitals = await models.investeeCapital.findAll({
+            where: { investeeId: foundCompanies[i].investeeCompany.id }
+          });
+          const directors = await models.investeeBoardOfDirectors.findAll({
+            where: { investeeId: foundCompanies[i].investeeCompany.id }})
+          const ownerShip = await models.investeeOwnerships.findOne({
+              where: { investeeId: foundCompanies[i].investeeCompany.id }});
+          const auditor = await models.investeeAuditor.findOne({
+                where: { investeeId: foundCompanies[i].investeeCompany.id }})
+          const subsidiary  = await models.companies_relations.findOne({
+            where: { parentId: foundCompanies[i].investeeCompany.companyId}})
+          if(capitals.length > 0){
+            progress = progress + 10;
+          }
+          if(directors.length > 0){
+            progress = progress + 10;
+          }
+          if(ownerShip != null){
+            progress = progress + 10;
+          }
+          if(auditor!= null){
+            progress = progress + 10;
+          }
+          if(subsidiary!= null){
+            progress = progress + 10;
+          }
+
+
+          foundCompanies[i].dataValues["progress"] = progress;
         }else{
           foundCompanies[i].dataValues.average_annual_sales = "0";
           foundCompanies[i].dataValues.estimated_company_value = "0";
           foundCompanies[i].dataValues.required_investment = "0";
+          progress = 100;
+          foundCompanies[i].dataValues["progress"] = progress;
           }
+
         }
+
       return reply.response(foundCompanies).code(200);
     }
     catch (e) {
