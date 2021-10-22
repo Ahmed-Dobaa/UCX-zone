@@ -78,7 +78,7 @@ module.exports = {
     try {
       const language = 1; //request.pre.languageId;
       const foundCompanies = await models.investor.findAll({
-        // where: {user_id: request.params.userId},
+         where: {deleted: 0 },
         include: [
           { model: models.investorTranslation, as: 'investorTranslation' },
           { model: models.companiesBasicData, as: 'company',
@@ -322,5 +322,9 @@ module.exports = {
     const result = await models.investor.update({ follow: foundFollowing }, { where: { id: request.params.investorId } });
 
     return reply.response(result).code(200);
+  },
+  deleteInvestor: async function (request, reply) {
+    const result = await models.investor.update({ deleted: 1 }, { where: { id: request.params.investorId } });
+    return reply.response({message: "Deleted successfully"}).code(200);
   }
 };

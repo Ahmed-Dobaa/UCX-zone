@@ -46,6 +46,10 @@ module.exports = function (sequelize, DataTypes) {
     deletedAt: {
       type: DataTypes.DATE,
       allowNull: true,
+    },
+    deleted: {
+      type: DataTypes.INTEGER(1),
+      allowNull: true
     }
   },
   {

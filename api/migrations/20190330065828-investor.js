@@ -43,6 +43,11 @@ module.exports = {
     deletedAt: {
       type: Sequelize.DATE,
       allowNull: true,
+    },
+    deleted: {
+      type: Sequelize.INTEGER(1),
+      allowNull: true,
+      default: 0
     }
   },{
     charset: 'utf8',
