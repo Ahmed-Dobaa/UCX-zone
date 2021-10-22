@@ -278,6 +278,25 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2053/count",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"count"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -303,7 +322,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"85\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"city\": \"cairo\",\r\n                \"country\": \"egypt\",\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\",\r\n                \"phoneNumbers\" : \"01013848807\",\r\n                \"main_address\": \"cairo\",\r\n                \"website\": \"test\",\r\n                \"email\": \"ahmed\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n",
+							"raw": "{\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"859668\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"city\": \"cairo\",\r\n                \"country\": \"egypt\",\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\",\r\n                \"phoneNumbers\" : \"01013848807\",\r\n                \"main_address\": \"cairo\",\r\n                \"website\": \"test\",\r\n                \"email\": \"ahmed\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -377,7 +396,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2053/users/2/investees",
+							"raw": "http://localhost:2053/users/1/investees",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -385,7 +404,7 @@
 							"port": "2053",
 							"path": [
 								"users",
-								"2",
+								"1",
 								"investees"
 							]
 						}
@@ -1415,12 +1434,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://platform.ucx.zone:2053/sectors",
-							"protocol": "https",
+							"raw": "http://localhost:2053/sectors",
+							"protocol": "http",
 							"host": [
-								"platform",
-								"ucx",
-								"zone"
+								"localhost"
 							],
 							"port": "2053",
 							"path": [
@@ -1450,7 +1467,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"companyBasicData\": {\n\t\t\"isConfidential\": false,\n\t\t\"companiesBasicDataTranslation\": {\n\t\t\t\"name\": \"investor test\",\n                \"phoneNumbers\" : \"01013848807\",\n                \"main_address\": \"cairo\",\n                \"website\": \"test\",\n                \"email\": \"ahmed\",\n                 \"city\": \"cairo\",\n                \"country\": \"egypt\",\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\"\n\n\t\t}\n\t},\n\t\"investor\": {\n\t\t\"type\": \"Company\",\n\t\t\"turnoverRangeId\": 50,\n\t\t\"investorTranslation\": {\n\t\t\t\"investmentStrategy\": \"ghad\",\n\t\t\t\"minTicketSize\": 5,\n\t\t\t\"maxTicketSize\": 5,\n\t\t\t\"target_countries\": [1, 2, 3],\n        \t\"target_sectors\": [1,2,5]\n\t\t}\n\t},\n\t\"investor_management\": {\n\t\t\"email\": \"ahmed\",\n\t\t\"investorManagementTranslation\": {\n\t\t\t\"name\": \"test\",\n\t\t\t\"position\": \"test\",\n\t\t\t\"phoneNumber\": \"fsff\"\n\t\t\t\n\t\t}\n\t}\n}",
+							"raw": "{\n\t\"companyBasicData\": {\n\t\t\"isConfidential\": false,\n\t\t\"companiesBasicDataTranslation\": {\n\t\t\t\"name\": \"investor test\",\n                \"phoneNumbers\" : \"01013848807\",\n                \"main_address\": \"cairo\",\n                \"website\": \"test\",\n                \"email\": \"ahmed\",\n                 \"city\": \"cairo\",\n                \"country\": \"egypt\",\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\"\n\n\t\t}\n\t},\n\t\"investor\": {\n\t\t\"type\": \"InstitutionalInvestor\",\n\t\t\"turnoverRangeId\": 50,\n\t\t\"investorTranslation\": {\n\t\t\t\"investmentStrategy\": \"ghad\",\n\t\t\t\"minTicketSize\": 5,\n\t\t\t\"maxTicketSize\": 5,\n\t\t\t\"target_countries\": [1, 2, 3],\n        \t\"target_sectors\": [1,2,5]\n\t\t}\n\t},\n\t\"investor_management\": {\n\t\t\"email\": \"ahmed\",\n\t\t\"investorManagementTranslation\": {\n\t\t\t\"name\": \"test\",\n\t\t\t\"position\": \"test\",\n\t\t\t\"phoneNumber\": \"fsff\"\n\t\t\t\n\t\t}\n\t}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1458,10 +1475,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:2053/users/1/investor",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/users/1/investor",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
@@ -1479,10 +1498,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2053/investors",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/investors",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [

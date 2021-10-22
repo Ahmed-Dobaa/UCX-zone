@@ -631,6 +631,19 @@ module.exports = [
       handler: companyController.findAll
     }
   },
+  {
+    path: '/count',
+    method: 'GET',
+    options: {
+      auth: false, //'jwt',
+      description: 'Get all companies in the system',
+      app: { allowedPermission: { resource: 'companies', action: 'count' } },
+      // pre: [
+      //   // { method: helperService.authorizeUser }
+      // ],
+      handler: companyController.count
+    }
+  },
 
   {
     path: '/user/{userId}/company',

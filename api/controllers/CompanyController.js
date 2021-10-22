@@ -6,6 +6,20 @@ const models = require(path.join(__dirname, '../models/index'));
 const _ = require('lodash');
 
 module.exports = {
+  count: async function (request, reply) {
+    try {
+      const companies = await models.companiesBasicData.findAndCountAll({});
+      const investors = await models.investor.findAndCountAll({});
+      const users = await models.users.findAndCountAll({});
+      return reply.response({companies_count: companies.count,
+                             investors_count: investors.count,
+                             users_count: users.count}).code(200);
+    } catch (error) {
+     console.log(error)
+    }
+
+  },
+
   findAll: async function (request, reply) {
     try {
       var foundCompanies = await models.companiesBasicData.findAll({
