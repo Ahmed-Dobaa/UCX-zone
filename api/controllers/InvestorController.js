@@ -167,12 +167,14 @@ module.exports = {
       let targetedSectors = {"investorId": investor.id, "sectorId": request.payload.investor.investorTranslation.target_sectors}
       await models.investorTargetedSectors.create(targetedSectors, { transaction });
 
-      let management = await models.investorManagement.create({"investorId": investor.id, "email": request.payload.investor_management.email,
+      if(request.payload.investor.type === 'InstitutionalInvestor'){
+        let management = await models.investorManagement.create({"investorId": investor.id, "email": request.payload.investor_management.email,
                                  "createdBy": userId }, { transaction });
       await models.investorManagementTranslation.create({"investorManagementId": management.id, "languageId": language,
                                  "name": request.payload.investor_management.investorManagementTranslation.name,
                                  "position": request.payload.investor_management.investorManagementTranslation.position,
                                  "phoneNumber": request.payload.investor_management.investorManagementTranslation.phoneNumber }, { transaction });
+      }
       // await investor.addTargetedCountries(investorTranslation.targetedCountriesIds);
       // await investor.addTargetedSectors(investorTranslation.targetedSectorsIds);
       await models.usersInvestors.create({ userId: userId, investorId: investor.id, roleId: 8 }, { transaction });

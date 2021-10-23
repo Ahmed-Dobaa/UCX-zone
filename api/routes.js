@@ -2080,7 +2080,7 @@ module.exports = [
         // // // { method: helperService.authorizeUser },
       //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
-      validate: investor.createSchema,
+      // validate: investor.createSchema,
       handler: investorController.create
     }
   },
