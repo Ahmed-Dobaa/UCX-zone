@@ -90,13 +90,21 @@ module.exports = {
 
       for(let i = 0; i < foundCompanies.length; i++){
         var array = foundCompanies[i].turnoverRangeId.split(",");
-
-        console.log(array);
         foundCompanies[i].turnoverRangeId = array;
         let countries = await models.investorTargetedCountries.findAll({where: {investorId: foundCompanies[i].id}})
         let sectors = await models.investorTargetedSectors.findAll({where: {investorId: foundCompanies[i].id}})
+      if(countries.length != 0){
+        var countroy = countries[0].countryId.split(",");
+        countries[0] = countroy;
         foundCompanies[i].dataValues["countries"] = countries[0];
+      }
+      if(sectors.length != 0){
+        var sector = sectors[0].sectorId.split(",");
+        sectors[0] = sector;
+
         foundCompanies[i].dataValues["sectors"] = sectors[0];
+      }
+
       }
       // const sequelizeQuery = qsToSequelizeQuery(request.query, models.investor.attributes, models.investor.associations);
       // const foundInvestorCompanies = await models.investor.scope({ method: ['includeRelations', sequelizeQuery, language] }).findAndCountAll();
@@ -171,6 +179,19 @@ module.exports = {
       investorTranslation.phoneNumbers = '010'; //request.payload.companyBasicData.companiesBasicDataTranslation.phoneNumbers;
       await models.investorTranslation.create(investorTranslation, { transaction });
 
+      let countries = [];
+       for(let i = 0; i < request.payload.investor.investorTranslation.target_countries.length; i++){
+        countries.push(request.payload.investor.investorTranslation.target_countries[i].name)
+       }
+       request.payload.investor.investorTranslation.target_countries = null
+       request.payload.investor.investorTranslation.target_countries = countries;
+
+       let sectors = [];
+       for(let i = 0; i < request.payload.investor.investorTranslation.target_sectors.length; i++){
+        sectors.push(request.payload.investor.investorTranslation.target_sectors[i].name)
+       }
+       request.payload.investor.investorTranslation.target_sectors = null
+       request.payload.investor.investorTranslation.target_sectors = sectors;
       let targetCountries = {"investorId": investor.id, "countryId": request.payload.investor.investorTranslation.target_countries};
       await models.investorTargetedCountries.create(targetCountries, { transaction });
 
