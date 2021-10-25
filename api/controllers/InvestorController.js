@@ -89,6 +89,10 @@ module.exports = {
       });
 
       for(let i = 0; i < foundCompanies.length; i++){
+        var array = foundCompanies[i].turnoverRangeId.split(",");
+
+        console.log(array);
+        foundCompanies[i].turnoverRangeId = array;
         let countries = await models.investorTargetedCountries.findAll({where: {investorId: foundCompanies[i].id}})
         let sectors = await models.investorTargetedSectors.findAll({where: {investorId: foundCompanies[i].id}})
         foundCompanies[i].dataValues["countries"] = countries[0];
@@ -132,7 +136,12 @@ module.exports = {
       investor.createdBy = userId;
       investor.type = request.payload.investor.type;
       investorTranslation.languageId= language;
-
+      let arr = [];
+       for(let i = 0; i < investor.turnoverRangeId.length; i++){
+        arr.push(investor.turnoverRangeId[i].name)
+       }
+       investor.turnoverRangeId = null
+       investor.turnoverRangeId = arr;
       // if(request.payload.type === 'I') {
       //   const foundInvestor = await models.investor.findOne({ where: { createdBy: userId, type: 'I' } });
 
@@ -143,9 +152,8 @@ module.exports = {
 
       transaction = await models.sequelize.transaction();
 
-      if(request.payload.investor.type === 'InstitutionalInvestor') { // If company already exists, just add the investor data in its table.
+      if(request.payload.investor.type === 'Institutional Investor') { // If company already exists, just add the investor data in its table.
         const { companiesBasicDataTranslation } = request.payload.companyBasicData;
-
         // company = await models.companiesBasicDataTranslation.findOne({ where: { registrationIdNo: companiesBasicDataTranslation.registrationIdNo } });
 
         // if(_.isEmpty(company)) {
@@ -169,7 +177,7 @@ module.exports = {
       let targetedSectors = {"investorId": investor.id, "sectorId": request.payload.investor.investorTranslation.target_sectors}
       await models.investorTargetedSectors.create(targetedSectors, { transaction });
 
-      if(request.payload.investor.type === 'InstitutionalInvestor'){
+      if(request.payload.investor.type === 'Institutional Investor'){
         let management = await models.investorManagement.create({"investorId": investor.id, "email": request.payload.investor_management.email,
                                  "createdBy": userId }, { transaction });
       await models.investorManagementTranslation.create({"investorManagementId": management.id, "languageId": language,
