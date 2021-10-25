@@ -24,6 +24,10 @@ module.exports = {
       type: Sequelize.INTEGER(11),
       allowNull: true,
     },
+    img:{
+      type: Sequelize.STRING(100),
+      allowNull: true
+    },
     follow: {
       type: Sequelize.STRING(1000), //JSON,
       allowNull: true,

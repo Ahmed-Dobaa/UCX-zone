@@ -3,6 +3,8 @@
 const Boom = require('boom');
 const _ = require('lodash');
 const path = require('path');
+const moment = require('moment');
+const fs = require('fs');
 
 const qsToSequelizeQuery = require(path.join(__dirname, '../','services/qsToSequelizeQuery'));
 const errorService = require(path.join(__dirname, '../','services/errorService'));
@@ -247,6 +249,51 @@ module.exports = {
       }
 
       return errorService.wrapError(e, 'An internal server error occurred');
+    }
+  },
+  uploadInvestorImg: async function (request, reply) {
+    const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif'];
+    const uploadImageExtension = path.extname(request.payload.img.hapi.filename);
+    const relativePath = `uploads/investors/${request.params.id}-${moment().valueOf()}-${uploadImageExtension}`;
+    const fullPath = path.join(__dirname, '../', relativePath);
+    let oldPath = null;
+    try {
+
+      if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
+
+        return Boom.badRequest(`allowed images extension are  ${allowedExtensions.join(' , ')}`);
+      }
+
+      const foundInvestor = await models.investor.findOne({ where: { id: request.params.id }, raw: true });
+      oldPath = foundInvestor.img;
+      await request.payload.img.pipe(fs.createWriteStream(fullPath));
+      await models.investor.update({ img: relativePath }, { where: { id: request.params.id } });
+
+      return reply.response({message: "Image uploaded successfully"}).code(201);
+    }
+    catch (e) {
+      console.log('error', e);
+      fs.unlinkSync(path.join(__dirname, '../', oldPath));
+
+      return Boom.badImplementation('An internal server error occurred');
+    }
+  },
+  getInvestorImg: async function (request, reply) {
+    try {
+      let avatarFullPath = null; // path.join(__dirname, '../../uploads/default.png');
+      const foundInvestor = await models.investor.findOne({ where: { id: request.params.id }, raw: true });
+      console.log(foundInvestor.img)
+      // if(_.get(foundInvestor, 'img')) {
+        avatarFullPath = path.join(__dirname, '../../', foundInvestor.img);
+        //  avatarFullPath = path.join(__dirname, '../../uploads/investors/1-1635148747703-.png') //foundInvestor.img);
+      // }  '../../',
+
+      return reply.response(avatarFullPath).code(200);
+    }
+    catch (e) {
+      console.log('error', e);
+
+      return Boom.badImplementation('An internal server error occurred');
     }
   },
   translate: async (request, reply) => {

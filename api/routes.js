@@ -554,35 +554,35 @@ module.exports = [
       handler: authenticationController.deactivateUser
     }
   },
-  // {
-  //   path: '/users/{id}/avatar',
-  //   method: 'POST',
-  //   options: {
-  //     auth: 'jwt',
-  //     payload: {
-  //       maxBytes: 2097152, // maximum payload size in bytes (2M)
-  //       output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
-  //       parse: true, // The parse property determines if the incoming payload gets parsed
-  //       allow: ['multipart/form-data']
-  //     },
-  //     validate: {
-  //       params: { id: Joi.number().required().description('the id of user to get its avatar') },
-  //       payload: { avatar: Joi.any().required().description('Image File') }
-  //     },
-  //     description: 'user Change his current avatar',
-  //     handler: userController.uploadAvatar
-  //   }
-  // },
-  // {
-  //   path: '/users/{id}/avatar',
-  //   method: 'get',
-  //   options: {
-  //     auth: false,
-  //     description: 'Get current user avatar',
-  //     validate: { params: { id: Joi.number().required().description('the id of user to get its avatar'), } },
-  //     handler: userController.getAvatar
-  //   }
-  // },
+  {
+    path: '/users/{id}/avatar',
+    method: 'POST',
+    options: {
+      auth: 'jwt',
+      payload: {
+        maxBytes: 2097152, // maximum payload size in bytes (2M)
+        output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
+        parse: true, // The parse property determines if the incoming payload gets parsed
+        allow: ['multipart/form-data']
+      },
+      validate: {
+        params: { id: Joi.number().required().description('the id of user to get its avatar') },
+        payload: { avatar: Joi.any().required().description('Image File') }
+      },
+      description: 'user Change his current avatar',
+      handler: userController.uploadAvatar
+    }
+  },
+  {
+    path: '/users/{id}/avatar',
+    method: 'get',
+    options: {
+      auth: false,
+      description: 'Get current user avatar',
+      validate: { params: { id: Joi.number().required().description('the id of user to get its avatar'), } },
+      handler: userController.getAvatar
+    }
+  },
   {
     path: '/users/{id}/password',
     method: 'put',
@@ -2082,6 +2082,35 @@ module.exports = [
       ],
       // validate: investor.createSchema,
       handler: investorController.create
+    }
+  },
+  {
+    path: '/investor/{id}/img',
+    method: 'PUT',
+    options: {
+      auth: false,
+      payload: {
+        maxBytes: 2097152, // maximum payload size in bytes (2M)
+        output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
+        parse: true, // The parse property determines if the incoming payload gets parsed
+        allow: ['multipart/form-data']
+      },
+      validate: {
+        params: { id: Joi.number().required().description('the id of investor') },
+        payload: { img: Joi.any().required().description('Image File') }
+      },
+      description: 'user Change his current avatar',
+      handler: investorController.uploadInvestorImg
+    }
+  },
+  {
+    path: '/investor/{id}/img',
+    method: 'get',
+    options: {
+      auth: false,
+      description: 'Get current investor img',
+      validate: { params: { id: Joi.number().required().description('the id of investor to get its img'), } },
+      handler: investorController.getInvestorImg
     }
   },
   {
