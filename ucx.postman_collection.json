@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"companyName\": \"company name\",\r\n    \"website_of_company\": \"test\",\r\n    \"country\": \"egypt\",\r\n    \"target_country\": [\"Egypt\", \"dadada\",\"dada\"],\r\n    \"target_sectors\": [\"egypt\",\"fa\", \"cairo\"],\r\n    \"minimum_investment_amount\": 10,\r\n    \"maximun_investment_amount\": 30,\r\n    \"name\": \"ahmed\",\r\n    \"position_in_company\": \"manager\",\r\n    \"email\": \"enghea@gmail.com\",\r\n    \"phoneNumber\": \"123456\",\r\n    \"password\": \"123456\",\r\n    \"confirmationPassword\": \"123456\",\r\n    \"interests\": [\"Advisory firm\"],\r\n    \"nationality\": \"Egypt\",\r\n    \"annual_sales\": 1000,\r\n    \"estimated_company_value\": 5821,\r\n    \"required_investment_amount\": 514,\r\n    \"description\": \"description\"\r\n}",
+							"raw": "{\r\n    \"companyName\": \"company name\",\r\n    \"website_of_company\": \"test\",\r\n    \"country\": \"egypt\",\r\n    \"target_country\": [\"Egypt\", \"dadada\",\"dada\"],\r\n    \"target_sectors\": [\"egypt\",\"fa\", \"cairo\"],\r\n    \"minimum_investment_amount\": 10,\r\n    \"maximun_investment_amount\": 30,\r\n    \"name\": \"ahmed\",\r\n    \"position_in_company\": \"manager\",\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"phoneNumber\": \"123456\",\r\n    \"password\": \"Aa@12345\",\r\n    \"confirmationPassword\": \"Aa@12345\",\r\n    \"interests\": [\"Advisor\"],\r\n    \"nationality\": \"Egypt\",\r\n    \"annual_sales\": 1000,\r\n    \"estimated_company_value\": 5821,\r\n    \"required_investment_amount\": 514,\r\n    \"description\": \"description\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -50,7 +50,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"123456789\"\r\n}",
+							"raw": "{\r\n    \"email\": \"engahmeddobaa@gmail.com\",\r\n    \"password\": \"Aa@12345\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -78,7 +78,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"activationCode\": \"3tnFa\"\r\n}",
+							"raw": "{\r\n        \"activationCode\": \"YJ5S6j\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -86,15 +86,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://135.181.62.49:8000/activate",
+							"raw": "http://localhost:2053/activate",
 							"protocol": "http",
 							"host": [
-								"135",
-								"181",
-								"62",
-								"49"
+								"localhost"
 							],
-							"port": "8000",
+							"port": "2053",
 							"path": [
 								"activate"
 							]
@@ -223,10 +220,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2053/company",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/company",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
@@ -285,10 +284,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2053/count",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/count",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
@@ -1453,10 +1454,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2053/sector",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/sector",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
@@ -1486,7 +1489,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"companyBasicData\": {\n\t\t\"isConfidential\": false,\n\t\t\"companiesBasicDataTranslation\": {\n\t\t\t\"name\": \"investor test\",\n                \"phoneNumbers\" : \"01013848807\",\n                \"main_address\": \"cairo\",\n                \"website\": \"test\",\n                \"email\": \"ahmed\",\n                 \"city\": \"cairo\",\n                \"country\": \"egypt\",\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\"\n\n\t\t}\n\t},\n\t\"investor\": {\n\t\t\"type\": \"InstitutionalInvestor\",\n\t\t\"turnoverRangeId\": 50,\n\t\t\"investorTranslation\": {\n\t\t\t\"investmentStrategy\": \"ghad\",\n\t\t\t\"minTicketSize\": 5,\n\t\t\t\"maxTicketSize\": 5,\n\t\t\t\"target_countries\": [1, 2, 3],\n        \t\"target_sectors\": [1,2,5]\n\t\t}\n\t},\n\t\"investor_management\": {\n\t\t\"email\": \"ahmed\",\n\t\t\"investorManagementTranslation\": {\n\t\t\t\"name\": \"test\",\n\t\t\t\"position\": \"test\",\n\t\t\t\"phoneNumber\": \"fsff\"\n\t\t\t\n\t\t}\n\t}\n}",
+							"raw": "{\n\t\"companyBasicData\": {\n\t\t\"isConfidential\": false,\n\t\t\"companiesBasicDataTranslation\": {\n\t\t\t\"name\": \"investor test\",\n                \"phoneNumbers\" : \"01013848807\",\n                \"main_address\": \"cairo\",\n                \"website\": \"test\",\n                \"email\": \"ahmed\",\n                 \"city\": \"cairo\",\n                \"country\": \"egypt\",\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\"\n\n\t\t}\n\t},\n\t\"investor\": {\n\t\t\"type\": \"Institutional Investor\",\n\t\t\"turnoverRangeId\": [{ \"id\": 1, \"name\": \"less\"}, {\"id\": 1, \"name\": \"less than 1\"}],\n\t\t\"investorTranslation\": {\n\t\t\t\"investmentStrategy\": \"ghad\",\n\t\t\t\"minTicketSize\": 5,\n\t\t\t\"maxTicketSize\": 5,\n\t\t\t\"target_countries\": [{ \"id\": 1, \"name\": \"usa\"}, { \"id\": 1, \"name\": \"egypt\"}],\n        \t\"target_sectors\": [{ \"id\": 1, \"name\": \"usa\"}, { \"id\": 1, \"name\": \"usa\"}]\n\t\t}\n\t},\n\t\"investor_management\": [{\n\t\t\"email\": \"ahmed\",\n\t\t\"investorManagementTranslation\": {\n\t\t\t\"name\": \"test\",\n\t\t\t\"position\": \"test\",\n\t\t\t\"phoneNumber\": \"fsff\"\n\t\t\t\n\t\t}\n\t},\n\t{\n\t\t\"email\": \"ahmed\",\n\t\t\"investorManagementTranslation\": {\n\t\t\t\"name\": \"test\",\n\t\t\t\"position\": \"test\",\n\t\t\t\"phoneNumber\": \"fsff\"\n\t\t\t\n\t\t}\n\t}]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1494,12 +1497,10 @@
 							}
 						},
 						"url": {
-							"raw": "https://platform.ucx.zone:2053/users/1/investor",
-							"protocol": "https",
+							"raw": "http://localhost:2053/users/1/investor",
+							"protocol": "http",
 							"host": [
-								"platform",
-								"ucx",
-								"zone"
+								"localhost"
 							],
 							"port": "2053",
 							"path": [
@@ -1517,7 +1518,56 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://platform.ucx.zone:2053/investors",
+							"raw": "http://localhost:2053/investors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"investors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2053/deleteInvestor/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"deleteInvestor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload investor img",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "img",
+									"type": "file",
+									"src": "/C:/Users/SOFT ZONE/Desktop/Capture.PNG"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://platform.ucx.zone:2053/investor/13/img",
 							"protocol": "https",
 							"host": [
 								"platform",
@@ -1526,7 +1576,32 @@
 							],
 							"port": "2053",
 							"path": [
-								"investors"
+								"investor",
+								"13",
+								"img"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get investor img",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://platform.ucx.zone:2053/investor/13/img",
+							"protocol": "https",
+							"host": [
+								"platform",
+								"ucx",
+								"zone"
+							],
+							"port": "2053",
+							"path": [
+								"investor",
+								"13",
+								"img"
 							]
 						}
 					},

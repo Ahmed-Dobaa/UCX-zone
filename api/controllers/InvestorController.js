@@ -199,12 +199,14 @@ module.exports = {
       await models.investorTargetedSectors.create(targetedSectors, { transaction });
 
       if(request.payload.investor.type === 'Institutional Investor'){
-        let management = await models.investorManagement.create({"investorId": investor.id, "email": request.payload.investor_management.email,
-                                 "createdBy": userId }, { transaction });
-      await models.investorManagementTranslation.create({"investorManagementId": management.id, "languageId": language,
-                                 "name": request.payload.investor_management.investorManagementTranslation.name,
-                                 "position": request.payload.investor_management.investorManagementTranslation.position,
-                                 "phoneNumber": request.payload.investor_management.investorManagementTranslation.phoneNumber }, { transaction });
+        for(let i = 0; i < request.payload.investor_management.length; i++){
+          let management = await models.investorManagement.create({"investorId": investor.id, "email": request.payload.investor_management[i].email,
+          "createdBy": userId }, { transaction });
+                 await models.investorManagementTranslation.create({"investorManagementId": management.id, "languageId": language,
+          "name": request.payload.investor_management[i].investorManagementTranslation.name,
+          "position": request.payload.investor_management[i].investorManagementTranslation.position,
+          "phoneNumber": request.payload.investor_management[i].investorManagementTranslation.phoneNumber }, { transaction });
+        }
       }
       // await investor.addTargetedCountries(investorTranslation.targetedCountriesIds);
       // await investor.addTargetedSectors(investorTranslation.targetedSectorsIds);
