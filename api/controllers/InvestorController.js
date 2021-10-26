@@ -87,8 +87,10 @@ module.exports = {
               include: [{ model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }] }
          ]
       });
-
+      let avatarFullPath = null; // path.join(__dirname, '../../uploads/default.png');
+      // const foundInvestor = await models.investor.findOne({ where: { id: request.params.id }, raw: true });
       for(let i = 0; i < foundCompanies.length; i++){
+        foundCompanies[i].img = path.join(__dirname, '../../', foundCompanies[i].img);
         var array = foundCompanies[i].turnoverRangeId.split(",");
         foundCompanies[i].turnoverRangeId = array;
         let countries = await models.investorTargetedCountries.findAll({where: {investorId: foundCompanies[i].id}})
@@ -313,7 +315,6 @@ module.exports = {
     try {
       let avatarFullPath = null; // path.join(__dirname, '../../uploads/default.png');
       const foundInvestor = await models.investor.findOne({ where: { id: request.params.id }, raw: true });
-      console.log(foundInvestor.img)
       // if(_.get(foundInvestor, 'img')) {
         avatarFullPath = path.join(__dirname, '../../', foundInvestor.img);
         //  avatarFullPath = path.join(__dirname, '../../uploads/investors/1-1635148747703-.png') //foundInvestor.img);
