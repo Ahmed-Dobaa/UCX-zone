@@ -104,7 +104,7 @@ module.exports = [
     }
   },
   {
-    path: '/reSendActivationMail',
+    path: '/resendActivationEmail',
     method: 'post',
     options: {
       description: 'resend Activate mail',

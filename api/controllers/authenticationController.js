@@ -246,22 +246,20 @@ module.exports = {
       const foundUser = await models.users.findOne({ where: { email: request.payload.email }, raw: true });
 
       if(_.isEmpty(foundUser)) {
-        return Boom.unauthorized('This User Not Exist');
+        return reply.response({"status": 406,"message": "This email is not exist"}).code(406);
+        // return Boom.unauthorized('This User Not Exist');
       }
 
-      if(_.isEmpty(foundUser)) {
-        return Boom.unauthorized('This User Not Exist');
-      }
-
-      if(! foundUser.activationToken && foundUser.active) {
-        return Boom.unauthorized('This account activated before');
+      if(! foundUser.activationToken && foundUser.active === 1) {
+        return reply.response({"status": 406,"message": "This account activated before"}).code(406);
+        // return Boom.unauthorized('This account activated before');
       }
       const validToken = userService.generateActivationToken();
       await models.users.update({ activationToken: validToken }, { where: { id: foundUser.id } });
 
       Mailer.sendUserActivationMail(request.payload.email, validToken);
 
-      return reply.response().code(204);
+      return reply.response({"status": 200, "message": "Activation code sent, please check your email"}).code(200);
     }
     catch (e) {
       console.log('error', e);

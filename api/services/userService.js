@@ -8,15 +8,16 @@ const models = require(path.join(__dirname, '../models/index'));
 module.exports = {
   generateActivationToken: () => {
     const options = {
-      length: 6,
-      numbers: true,
+      length: 4,
+      // numbers: true,
       symbols: false,
-      excludeSimilarCharacters: true,
+      // excludeSimilarCharacters: true,
       exclude: '",./\\',
-      strict: true
+      // strict: true
     };
 
-    return generator.generate(options);
+    return Math.floor(100000 + Math.random() * 900000);
+ //    generator.generate(options);
   },
   generateTwoFactorAuthenticationCode: function () {
     return randomize('0', '6', undefined);

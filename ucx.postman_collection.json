@@ -78,7 +78,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"activationCode\": \"YJ5S6j\"\r\n}",
+							"raw": "{\r\n        \"activationCode\": \"180358\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -166,6 +166,41 @@
 							"path": [
 								"password",
 								"reset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resend activation email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"engahmeddobaa@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2053/resendActivationEmail",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"resendActivationEmail"
 							]
 						}
 					},
