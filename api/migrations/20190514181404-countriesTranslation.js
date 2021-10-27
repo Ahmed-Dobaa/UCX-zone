@@ -20,6 +20,10 @@ module.exports = {
       type: Sequelize.STRING(100),
       allowNull: true,
     },
+    flag: {
+      type: Sequelize.STRING(5),
+      allowNull: true,
+    },
     name: {
       type: Sequelize.STRING(45),
       allowNull: false,

@@ -25,6 +25,10 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: true,
     },
+    flag: {
+      type: DataTypes.STRING(5),
+      allowNull: true,
+    },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: true,

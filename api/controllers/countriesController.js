@@ -22,9 +22,9 @@ module.exports = {
           }
         ]
       });
-      for(let i = 0; i < foundCountries.length; i++){
-        foundCountries[i].countriesTranslation.dataValues["flag"] = (foundCountries[i].countriesTranslation.name.substring(0,2)).toLowerCase();
-      }
+      // for(let i = 0; i < foundCountries.length; i++){
+      //   foundCountries[i].countriesTranslation.dataValues["flag"] = (foundCountries[i].countriesTranslation.name.substring(0,2)).toLowerCase();
+      // }
       return reply.response(foundCountries).code(200);
     }
     catch (e) {
@@ -34,6 +34,23 @@ module.exports = {
     }
   },
 
+  updateFlag: async function (request, reply) {
+
+      const foundCountries = await models.countries.findAll({
+        include: [
+          {
+            association: 'countriesTranslation',
+            required: true,
+            // where: { languageId: request.pre.languageId }
+          }
+        ]
+      });
+      for(let i = 0; i < foundCountries.length; i++){
+        // foundCountries[i].countriesTranslation.dataValues["flag"] = ;
+        await models.countriesTranslation.update({ flag: (foundCountries[i].countriesTranslation.name.substring(0,2)).toLowerCase()}, { where: { countryId: foundCountries[i].id } });
+      }
+      return reply.response({message: "updated"}).code(200);
+  },
   getAllWorldCountries: async function (request, reply) {
     let transaction;
 

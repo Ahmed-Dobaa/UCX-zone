@@ -1279,18 +1279,16 @@
 						"header": [
 							{
 								"key": "Accept-Language",
-								"value": "en",
 								"type": "text",
+								"value": "en",
 								"disabled": true
 							}
 						],
 						"url": {
-							"raw": "https://platform.ucx.zone:2053/countries",
-							"protocol": "https",
+							"raw": "http://localhost:2053/countries",
+							"protocol": "http",
 							"host": [
-								"platform",
-								"ucx",
-								"zone"
+								"localhost"
 							],
 							"port": "2053",
 							"path": [
@@ -1316,6 +1314,26 @@
 							"port": "2053",
 							"path": [
 								"worldCountries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update flags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2053/countries/flags",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"countries",
+								"flags"
 							]
 						}
 					},
@@ -1553,10 +1571,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2053/investors",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/investors",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
