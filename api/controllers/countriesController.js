@@ -22,7 +22,9 @@ module.exports = {
           }
         ]
       });
-
+      for(let i = 0; i < foundCountries.length; i++){
+        foundCountries[i].countriesTranslation.dataValues["flag"] = (foundCountries[i].countriesTranslation.name.substring(0,2)).toLowerCase();
+      }
       return reply.response(foundCountries).code(200);
     }
     catch (e) {
