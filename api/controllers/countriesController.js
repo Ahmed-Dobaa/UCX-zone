@@ -51,10 +51,20 @@ module.exports = {
       }
       return reply.response({message: "updated"}).code(200);
   },
+  setTargetCountries: async function (request, reply){
+   let countries = ["Algeria", "Bahrain", "Egypt", "Iraq", "Jordan", "Kuwait", "Lebanon", "Libya", "Morocco", "Oman",
+  "Qatar", "Saudi Arabia", "Sudan", "Syria", "Tunisia", "United Arab Emirates", "Yemen"];
+  let count = 0;
+   for(let i = 0; i < countries.length; i++){
+    await models.countriesTranslation.update({country_type: "Headquarter_Target"}, { where: { name: countries[i] } });
+    count++;
+  }
+  return reply.response({message: `${count} country effected`}).code(200);
+  },
   getAllWorldCountries: async function (request, reply) {
     let transaction;
 
-    const response = await axios.get('https://parseapi.back4app.com/classes/Country?limit=206&order=name,code&keys=name,code,phone',
+    const response = await axios.get('https://parseapi.back4app.com/classes/Country?limit=300&order=name,code&keys=name,code,phone',
     {
       headers: {
         'X-Parse-Application-Id': 'mxsebv4KoWIGkRntXwyzg6c6DhKWQuit8Ry9sHja', // This is the fake app's application id

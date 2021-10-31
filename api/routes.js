@@ -368,6 +368,21 @@ module.exports = [
     }
   },
   {
+    path: '/countries/setTargetCountries',
+    method: 'get',
+    options: {
+      description: 'get specific country by its id',
+      // app: { allowedPermission: { resource: 'countries', action: 'findOne' } },
+      pre: [
+        // // { method: helperService.authorizeUser },
+    //    { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      auth: false,
+      // validate: { params: countrySchema.updateSchema.params },
+      handler: countriesController.setTargetCountries
+    }
+  },
+  {
     path: '/countries',
     method: 'post',
     options: {
