@@ -12,6 +12,14 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: false
     },
+    institutional_investor_type:{
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    institutional_investor_type_ar:{
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
     languageId: {
       type: DataTypes.INTEGER(11).UNSIGNED,
       allowNull: false,
