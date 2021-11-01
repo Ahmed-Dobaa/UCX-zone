@@ -16,6 +16,10 @@ module.exports = {
       type: Sequelize.INTEGER(11),
       allowNull: true
     },
+    institutional_investor_type:{
+      type: Sequelize.STRING(100),
+      allowNull: true
+    },
     createdBy: {
       type: Sequelize.INTEGER(11),
       allowNull: false,

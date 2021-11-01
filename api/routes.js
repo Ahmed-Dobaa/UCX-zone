@@ -42,6 +42,8 @@ const countriesController = require('./controllers/countriesController');
 const sectorsController = require('./controllers/SectorsController');
 const userController = require('./controllers/userController');
 const companyController = require('./controllers/CompanyController');
+const lookupMaster = require('./controllers/lookup_master');
+const lookupDetails = require('./controllers/lookup_details');
 const investeeController = require('./controllers/InvesteeController');
 const investeeCapitalController = require('./controllers/InvesteeCapitalController');
 const investeeOwnershipController = require('./controllers/InvesteeOwnershipController');
@@ -696,7 +698,32 @@ module.exports = [
       handler: companyController.findAllUserCompanies
     }
   },
-
+  {
+    path: '/lookupMaster',
+    method: 'GET',
+    options: {
+      auth: false, //'jwt',
+      description: 'Get all companies in the system',
+      app: { allowedPermission: { resource: 'lookup_master', action: 'findAll' } },
+      // pre: [
+      //   // { method: helperService.authorizeUser }
+      // ],
+      handler: lookupMaster.getAllLookup
+    }
+  },
+  {
+    path: '/lookupDetails/{masterId}',
+    method: 'GET',
+    options: {
+      auth: false, //'jwt',
+      description: 'Get all companies in the system',
+      app: { allowedPermission: { resource: 'lookup_master', action: 'findAll' } },
+      // pre: [
+      //   // { method: helperService.authorizeUser }
+      // ],
+      handler: lookupDetails.getLookupDetailBasedMaster
+    }
+  },
   {
     path: '/company/{companyId}',
     method: 'GET',

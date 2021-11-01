@@ -8,7 +8,7 @@ const _ = require('lodash');
 module.exports = {
   count: async function (request, reply) {
     try {
-      const companies = await models.companiesBasicData.findAndCountAll({});
+      const companies = await models.companiesBasicData.findAndCountAll({where: {type: "investee"}});
       const investors = await models.investor.findAndCountAll({});
       const users = await models.users.findAndCountAll({});
       return reply.response({companies_count: companies.count,
@@ -24,13 +24,12 @@ module.exports = {
     let progress = null;
     try {
       var foundCompanies = await models.companiesBasicData.findAll({
-        where: {deleted: 0},
+        where: {deleted: 0, type: "investee"},
         include: [
           { model: models.investee, as: 'investeeCompany'},
           { model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }
         ]
       });
-      console.log("here");
       for(let i = 0; i < foundCompanies.length; i++){
         if(foundCompanies[i].type === 'investee'){
           let investeeInvestmentProposal = await models.investeeInvestmentProposals.findOne({
@@ -98,7 +97,7 @@ module.exports = {
   findAllUserCompanies: async function (request, reply) {
     try {
       const foundCompanies = await models.companiesBasicData.findAll({
-        where: {user_id: request.params.userId},
+        where: {user_id: request.params.userId, type: "investee", deleted: 0},
         include: [
           { model: models.investee, as: 'investeeCompany' },
           { model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }
