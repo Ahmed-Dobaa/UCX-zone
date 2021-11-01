@@ -717,7 +717,7 @@ module.exports = [
     options: {
       auth: false, //'jwt',
       description: 'Get all companies in the system',
-      app: { allowedPermission: { resource: 'lookup_master', action: 'findAll' } },
+      app: { allowedPermission: { resource: 'lookup_details', action: 'findAll' } },
       // pre: [
       //   // { method: helperService.authorizeUser }
       // ],

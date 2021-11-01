@@ -9,7 +9,7 @@ module.exports = {
   getLookupDetailBasedMaster: async function (request, reply) {
     try {
         console.log(request.params.masterId);
-      const lookup_details = await models.lookup_details.findAll({where: {lookup_master_id: request.params.masterId}});
+      const lookup_details = await models.lookup_details.findAll({where: {lookup_master_id: Number(request.params.masterId)}});
       return reply.response(lookup_details).code(200);
     } catch (error) {
      console.log(error)
