@@ -255,12 +255,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://platform.ucx.zone:2053/company",
-							"protocol": "https",
+							"raw": "http://localhost:2053/company",
+							"protocol": "http",
 							"host": [
-								"platform",
-								"ucx",
-								"zone"
+								"localhost"
 							],
 							"port": "2053",
 							"path": [
@@ -276,15 +274,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:12225/user/5/company",
+							"raw": "http://localhost:2053/user/1/company",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "12225",
+							"port": "2053",
 							"path": [
 								"user",
-								"5",
+								"1",
 								"company"
 							]
 						}
@@ -319,12 +317,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://platform.ucx.zone:2053/count",
-							"protocol": "https",
+							"raw": "http://localhost:2053/count",
+							"protocol": "http",
 							"host": [
-								"platform",
-								"ucx",
-								"zone"
+								"localhost"
 							],
 							"port": "2053",
 							"path": [
@@ -1325,15 +1321,39 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2053/countries/flags",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/countries/flags",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
 								"countries",
 								"flags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "setTargetCountries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://platform.ucx.zone:2053/countries/setTargetCountries",
+							"protocol": "https",
+							"host": [
+								"platform",
+								"ucx",
+								"zone"
+							],
+							"port": "2053",
+							"path": [
+								"countries",
+								"setTargetCountries"
 							]
 						}
 					},
@@ -1657,6 +1677,85 @@
 								"investor",
 								"13",
 								"img"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "lookup master",
+			"item": [
+				{
+					"name": "get all lookup master",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2053/lookupMaster",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"lookupMaster"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "lookup detail",
+			"item": [
+				{
+					"name": "get lookup detail based master",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://platform.ucx.zone:2053/lookupDetails/1",
+							"protocol": "https",
+							"host": [
+								"platform",
+								"ucx",
+								"zone"
+							],
+							"port": "2053",
+							"path": [
+								"lookupDetails",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "city",
+			"item": [
+				{
+					"name": "get cities based country",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2053/cities/391",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"cities",
+								"391"
 							]
 						}
 					},

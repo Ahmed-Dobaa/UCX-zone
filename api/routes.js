@@ -67,6 +67,7 @@ const investorManagementController = require('./controllers/investorManagementCo
 
 const Joi = require('joi');
 const CurrencyController = require('./controllers/CurrencyController');
+const city = require('./controllers/CitiesController');
 
 module.exports = [
   {
@@ -722,6 +723,19 @@ module.exports = [
       //   // { method: helperService.authorizeUser }
       // ],
       handler: lookupDetails.getLookupDetailBasedMaster
+    }
+  },
+  {
+    path: '/cities/{countryId}',
+    method: 'GET',
+    options: {
+      auth: false, //'jwt',
+      description: 'Get all companies in the system',
+      app: { allowedPermission: { resource: 'cities', action: 'findAll' } },
+      // pre: [
+      //   // { method: helperService.authorizeUser }
+      // ],
+      handler: city.getCitiesBasedCountry
     }
   },
   {
