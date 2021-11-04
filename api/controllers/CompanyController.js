@@ -166,6 +166,22 @@ module.exports = {
       return Boom.badImplementation('An internal server error occurred');
     }
   },
+  translation: async (request, reply) => {
+    const company_basic_data = request.payload.company_basic_data;
+    const company_basic_data_translation = request.payload.company_basic_data_translation;
+    const director_management = request.payload.director_management;
+
+    const companyId = request.params.companyId;
+    const investeeId = request.params.investeeId;
+
+    await models.companiesBasicData.update(company_basic_data, { where: { id: companyId } });
+    await models.companiesBasicDataTranslation.update(company_basic_data_translation, { where: { companyBasicDataId: companyId } });
+
+    const director = await models.investeeBoardOfDirectors.findOne({ where: { investeeId: investeeId } });
+    await models.investeeBoardOfDirectorTranslation.update(director_management, { where: { investeeBoardOfDirectorsId: director.dataValues.id } });
+
+    return reply.response({status: 200, message_en: "Translated successfully", message_ar: "تمت الترجمة بنجاح"}).code(200);
+  },
   delete: async (request, reply) => {
     try {
       const companyId = request.params.companyId;

@@ -20,7 +20,15 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: false,
     },
+    name_ar: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
     position: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    position_ar: {
       type: DataTypes.STRING(50),
       allowNull: false
     },

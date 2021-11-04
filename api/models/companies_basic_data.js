@@ -22,11 +22,23 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(100), // INTEGER(10).UNSIGNED,
       allowNull: true
     },
+    sector_ar: {
+      type: DataTypes.STRING(100), // INTEGER(10).UNSIGNED,
+      allowNull: true
+    },
     subSector: {
       type: DataTypes.STRING(100), //.INTEGER(10).UNSIGNED,
       allowNull: true
     },
+    subSector_ar: {
+      type: DataTypes.STRING(100), //.INTEGER(10).UNSIGNED,
+      allowNull: true
+    },
     legalForm: {
+      type: DataTypes.STRING(100), //INTEGER(10).UNSIGNED,
+      allowNull: true
+    },
+    legatForm_ar: {
       type: DataTypes.STRING(100), //INTEGER(10).UNSIGNED,
       allowNull: true
     },

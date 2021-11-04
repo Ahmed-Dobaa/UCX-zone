@@ -329,6 +329,44 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "translation",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"company_basic_data\":{\n\t\t\"sector_ar\": \"بسبسبسبسبسب\",\n\t\t\"subSector_ar\": \"تيست\",\n\t\t\"legatForm_ar\": \"تيست\"\t\n\t},\n\t\"company_basic_data_translation\":{\n\t\t\"name_ar\": \"اسم\",\n\t\t\"main_address_ar\": \"بسبس\",\n\t\t\"companyPurpose_ar\": \"نت\",\n\t\t\"productsOrServices_ar\": \"يشيش\",\n\t\t\"city_ar\": \"يشي\",\n\t\t\"country_ar\": \"يشيش\",\n\t\t\"relationToCompany_ar\": \"يشيش\"\n\t},\n\t\"director_management\":{\n\t\t\"name_ar\": \"بس\",\n\t\t\"position_ar\": \"ييش\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2053/company/translation/1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"company",
+								"translation",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -1763,6 +1801,44 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "https://countriesnow.space/api/v0.1/countries/cities",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t    \"country\": \"USA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://countriesnow.space/api/v0.1/countries/cities",
+					"protocol": "https",
+					"host": [
+						"countriesnow",
+						"space"
+					],
+					"path": [
+						"api",
+						"v0.1",
+						"countries",
+						"cities"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}

@@ -778,6 +778,20 @@ module.exports = [
     }
   },
   {
+    path: '/company/translation/{companyId}/{investeeId}',
+    method: 'PUT',
+    options: {
+      description: 'update specific company by its id',
+      app: { allowedPermission: { resource: 'companies', action: 'update' } },
+      // pre: [
+      //   // { method: helperService.authorizeUser }
+      // ],
+      auth: false,
+      // validate: investeeSchema.createSchema,
+      handler: companyController.translation
+    }
+  },
+  {
     path: '/company/{companyId}',
     method: 'DELETE',
     options: {
