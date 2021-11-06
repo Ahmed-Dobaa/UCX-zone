@@ -792,6 +792,20 @@ module.exports = [
     }
   },
   {
+    path: '/cities',
+    method: 'GET',
+    options: {
+      description: 'update specific company by its id',
+      app: { allowedPermission: { resource: 'cities', action: 'update' } },
+      // pre: [
+      //   // { method: helperService.authorizeUser }
+      // ],
+      auth: false,
+      // validate: investeeSchema.createSchema,
+      handler: city.createCitiesBasedCountry
+    }
+  },
+  {
     path: '/company/{companyId}',
     method: 'DELETE',
     options: {
