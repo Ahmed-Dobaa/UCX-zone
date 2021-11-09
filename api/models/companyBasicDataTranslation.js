@@ -22,7 +22,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     name_ar: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: true
     },
     registrationIdNo: {
       type: DataTypes.STRING(45),
@@ -39,7 +39,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     companyPurpose_ar: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     },
     productsOrServices: {
       type: DataTypes.TEXT,
@@ -60,7 +60,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     country_ar: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: true
     },
     phoneNumbers: {
       type: DataTypes.STRING(12),
@@ -72,7 +72,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     main_address_ar: {
       type: DataTypes.STRING(1000),
-      allowNull: false
+      allowNull: true
     },
     city: {
       type: DataTypes.STRING(100),
@@ -80,7 +80,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     city_ar: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: true
     },
     img: {
       type: DataTypes.STRING(100),
