@@ -5,6 +5,128 @@ const path = require('path');
 const models = require(path.join(__dirname, '../models/index'));
 const _ = require('lodash');
 
+
+async function investeeData(investeeId){
+  try {
+    const  languageId  = 1; // request.pre;
+    const foundInvesteeCompanies = await models.investee.findOne({
+      where: { id: investeeId },
+      include: [
+        { association: 'investeeTranslation', required: true, where: { languageId: languageId } },
+        {
+          association: 'basicData',
+          required: true,
+          include: [
+            {
+              association: 'companiesBasicDataTranslation',
+              required: true,
+              where: { languageId: languageId }
+            }
+          ]
+        }
+      ]
+    });
+
+    const capital = await models.investeeCapital.findOne({ where: {investeeId: investeeId}})
+    const director = await models.investeeBoardOfDirectors.findOne({
+      where: { investeeId: investeeId },
+      include: [{ association: 'boardOfDirectorTranslation', where: { languageId: languageId }, required: true }]
+    });
+
+    let investeeOwnership = await models.investeeOwnerships.findOne({
+      where: { investeeId: investeeId }});
+    let investeeOwnershipTranslation;
+    if(investeeOwnership != null){
+       investeeOwnershipTranslation = await models.investeeOwnershipTranslation.findOne({
+        where: { investeeOwnershipId: investeeOwnership.id }});
+        investeeOwnership = {investeeOwnership, "investeeOwnershipTranslation": investeeOwnershipTranslation.dataValues}
+    }
+
+
+      const investeeAuditor = await models.investeeAuditor.findOne({
+        where: { investeeId: investeeId },
+        include: [{ association: 'auditorTranslation', where: { languageId: languageId }, required: true }]
+      });
+
+      let subsidiary = await models.companies_relations.findOne({
+        where: { parentId: foundInvesteeCompanies.companyId}, // childId: request.params.id },
+        include: [{ model: models.companiesBasicData, as: 'basicData', required: true,
+        include: [
+          {
+            association: 'companiesBasicDataTranslation',
+            required: true,
+            where: { languageId: languageId }
+          }
+        ]
+       }]
+      });
+     let investeeTranslation = await models.investeeTranslation.findOne({
+       where: { investeeId: investeeId}
+     })
+
+    //  subsidiary.investeeTranslation = investeeTranslation;
+
+      let investeeIncome = await models.investeeIncomes.findOne(
+        {where: { investeeId: investeeId }});
+
+      // let investeeBalance = await models.investeeBalances.findOne(
+      //   {where: { investeeId: request.params.id }});
+
+        let investeeIncomeTranslation, balanceTranslation, investeeBalanceTranslation;
+        if(investeeIncome != null){
+           investeeIncomeTranslation = await models.investeeIncomeTranslation.findAll(
+            {where: { investeeIncomeId: investeeIncome.id }});
+
+            // balanceTranslation = await models.investeeBalanceTranslation.findAll(
+            //   {where: { investeeBalanceId: investeeBalance.id }});
+        }
+
+
+        let investeeBalance = await models.investeeBalances.findOne(
+          {
+            where: { investeeId: investeeId },
+            // include: { association: 'balanceTranslation', required: true, where: { languageId: languageId } }
+          });
+
+          if(investeeBalance != null){
+            investeeBalanceTranslation = await models.investeeBalanceTranslation.findAll(
+             {where: { investeeBalanceId: investeeBalance.id }});
+
+             // balanceTranslation = await models.investeeBalanceTranslation.findAll(
+             //   {where: { investeeBalanceId: investeeBalance.id }});
+         }
+
+      if(investeeIncome != null){
+        for(let i = 0; i < investeeBalanceTranslation.length; i++){
+          investeeIncomeTranslation[i].fixedAssets = investeeBalanceTranslation[i].fixedAssets;
+          investeeIncomeTranslation[i].currentAssets = investeeBalanceTranslation[i].currentAssets;
+          investeeIncomeTranslation[i].currentLiabilities = investeeBalanceTranslation[i].currentLiabilities;
+          investeeIncomeTranslation[i].longTermLiabilities = investeeBalanceTranslation[i].longTermLiabilities;
+        }
+
+      }
+
+      investeeIncome = { investeeIncome, investeeIncomeTranslation, investeeBalance, investeeBalanceTranslation}
+
+      const investeeAttachment = await models.investeeAttachments.findOne({ where: { companyId: foundInvesteeCompanies.companyId    }, raw: true });
+
+      const investeeInvestmentProposal = await models.investeeInvestmentProposals.findOne({
+        where: { investeeId: investeeId },
+        include: [{ association: 'investeeInvestmentProposalTranslation', where: { languageId: languageId }, required: true }]
+      });
+
+      return ({company_data: foundInvesteeCompanies, capital: capital,
+                  board_director: director, investee_ownership: investeeOwnership, investee_auditor: investeeAuditor,
+                  subsidiary: subsidiary, financial: investeeIncome, investee_attachment: investeeAttachment,
+                  investee_proposal: investeeInvestmentProposal }|| {});
+  }
+  catch (e) {
+    console.log('error', e);
+
+    return errorService.wrapError(e, 'An internal server error occurred');
+  }
+}
+
 module.exports = {
   count: async function (request, reply) {
     try {
@@ -32,6 +154,8 @@ module.exports = {
       });
       for(let i = 0; i < foundCompanies.length; i++){
         if(foundCompanies[i].type === 'investee'){
+          let _investee = await investeeData(foundCompanies[i].investeeCompany.id);
+          foundCompanies[i].dataValues["_investee_view"] = _investee;
           let investeeInvestmentProposal = await models.investeeInvestmentProposals.findOne({
             where: { investeeId: foundCompanies[i].investeeCompany.id },
            include: {
@@ -93,6 +217,7 @@ module.exports = {
       return Boom.badImplementation('An internal server error occurred');
     }
   },
+
 
   findAllUserCompanies: async function (request, reply) {
     try {
