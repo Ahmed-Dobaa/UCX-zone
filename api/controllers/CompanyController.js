@@ -96,15 +96,17 @@ async function investeeData(investeeId){
              //   {where: { investeeBalanceId: investeeBalance.id }});
          }
 
-      if(investeeIncome != null || investeeBalanceTranslation != undefined){
+      if(investeeIncome != null ){
         console.log(investeeBalanceTranslation)
-        for(let i = 0; i < investeeBalanceTranslation.length; i++){
-          investeeIncomeTranslation[i].fixedAssets = investeeBalanceTranslation[i].fixedAssets;
-          investeeIncomeTranslation[i].currentAssets = investeeBalanceTranslation[i].currentAssets;
-          investeeIncomeTranslation[i].currentLiabilities = investeeBalanceTranslation[i].currentLiabilities;
-          investeeIncomeTranslation[i].longTermLiabilities = investeeBalanceTranslation[i].longTermLiabilities;
-        }
+        if(investeeBalanceTranslation != undefined){
+          for(let i = 0; i < investeeBalanceTranslation.length; i++){
+            investeeIncomeTranslation[i].fixedAssets = investeeBalanceTranslation[i].fixedAssets;
+            investeeIncomeTranslation[i].currentAssets = investeeBalanceTranslation[i].currentAssets;
+            investeeIncomeTranslation[i].currentLiabilities = investeeBalanceTranslation[i].currentLiabilities;
+            investeeIncomeTranslation[i].longTermLiabilities = investeeBalanceTranslation[i].longTermLiabilities;
+          }
 
+        }
       }
 
       investeeIncome = { investeeIncome, investeeIncomeTranslation, investeeBalance, investeeBalanceTranslation}
