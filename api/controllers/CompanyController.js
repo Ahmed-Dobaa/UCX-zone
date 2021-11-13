@@ -96,7 +96,7 @@ async function investeeData(investeeId){
              //   {where: { investeeBalanceId: investeeBalance.id }});
          }
 
-      if(investeeIncome != null){
+      if(investeeIncome != null || investeeBalanceTranslation != undefined){
         console.log(investeeBalanceTranslation)
         for(let i = 0; i < investeeBalanceTranslation.length; i++){
           investeeIncomeTranslation[i].fixedAssets = investeeBalanceTranslation[i].fixedAssets;
