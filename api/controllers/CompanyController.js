@@ -97,6 +97,7 @@ async function investeeData(investeeId){
          }
 
       if(investeeIncome != null){
+        console.log(investeeBalanceTranslation)
         for(let i = 0; i < investeeBalanceTranslation.length; i++){
           investeeIncomeTranslation[i].fixedAssets = investeeBalanceTranslation[i].fixedAssets;
           investeeIncomeTranslation[i].currentAssets = investeeBalanceTranslation[i].currentAssets;
