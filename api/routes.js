@@ -2364,17 +2364,17 @@ module.exports = [
     }
   },
   {
-    path: '/users/{userId}/investor/{investorId}/investees/{investeeId}/proposal/{id}/submitinterest',
+    path: '/investor/{investorId}/investees/{investeeId}/submitinterest',
     method: 'POST',
     options: {
-      auth: 'jwt',
+      auth: false,
       description: 'Create investor interest in investee proposal',
       app: { allowedPermission: { resource: 'investorSubmitInterest', action: 'create' } },
-      pre: [
-        // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
-      ],
-      validate: interestSubmition.createSchema,
+      // pre: [
+      //   // { method: helperService.authorizeUser },
+      //   { method: helperService.getLanguageId, assign: 'languageId' }
+      // ],
+      // validate: interestSubmition.createSchema,
       handler: investorInterestsSubmits.create
     }
   },

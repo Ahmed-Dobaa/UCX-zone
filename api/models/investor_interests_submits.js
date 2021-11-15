@@ -18,7 +18,11 @@ module.exports = function (sequelize, DataTypes) {
     },
     proposalId: {
       type: DataTypes.INTEGER(11),
-      allowNull: false
+      allowNull: true
+    },
+    investment_amount: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
     },
     minTicketSize: {
       type: DataTypes.DECIMAL,

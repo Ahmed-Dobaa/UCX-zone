@@ -58,10 +58,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:2053/login",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/login",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
@@ -255,10 +257,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2053/company",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/company",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
@@ -392,7 +396,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"859668\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"test lkmdklanmdak k kdnalk\",\r\n                \"productsOrServices\": \"Software\",\r\n                \"city\": \"cairo\",\r\n                \"country\": \"egypt\",\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\",\r\n                \"phoneNumbers\" : \"01013848807\",\r\n                \"main_address\": \"cairo\",\r\n                \"website\": \"test\",\r\n                \"email\": \"ahmed\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n",
+							"raw": "{\r\n        \"companyBasicData\": {\r\n            \"isConfidential\": \"true\",\r\n            \"sector\": \"Technology\",\r\n            \"subSector\": \"Mobiles\",\r\n            \"legalForm\": \"Mobile Software\", \r\n            \"companiesBasicDataTranslation\": {\r\n                \"name\": \"ucx\",  \r\n                \"registrationIdNo\": \"95422\",  \r\n                \"registrationOffice\": \"Cairo\", \r\n                \"companyPurpose\": \"fsfsfsf&#1576;&#1587;&#1576;&#1587;&\",\r\n                \"productsOrServices\": \"1610;&#1588;&#1610;&#1588;&#16\",\r\n                \"city\": \"233709\",\r\n                \"country\": \"225\",\r\n                \"YearOfEstablishment\": \"2021\",\r\n                \"relationToCompany\": \"Manager\",\r\n                \"phoneNumbers\" : \"+994-1013848801\",\r\n                \"main_address\": \"cairo\",\r\n                \"website\": \"http:11fs.com\",\r\n                \"email\": \"ahmed\"\r\n         } \r\n      },\r\n      \"avatar\": \"test\",\r\n      \"investeeTranslation\": { \"phoneNumbers\" : \"01013848807\" },\r\n      \"website\": \"URL\"\r\n    }\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -400,12 +404,10 @@
 							}
 						},
 						"url": {
-							"raw": "https://platform.ucx.zone:2053/users/1/investees",
-							"protocol": "https",
+							"raw": "http://localhost:2053/users/1/investees",
+							"protocol": "http",
 							"host": [
-								"platform",
-								"ucx",
-								"zone"
+								"localhost"
 							],
 							"port": "2053",
 							"path": [
@@ -493,12 +495,10 @@
 							}
 						],
 						"url": {
-							"raw": "https://platform.ucx.zone:2053/users/1/investees/1",
-							"protocol": "https",
+							"raw": "http://localhost:2053/users/1/investees/1",
+							"protocol": "http",
 							"host": [
-								"platform",
-								"ucx",
-								"zone"
+								"localhost"
 							],
 							"port": "2053",
 							"path": [
@@ -1629,12 +1629,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://platform.ucx.zone:2053/investors",
-							"protocol": "https",
+							"raw": "http://localhost:2053/investors",
+							"protocol": "http",
 							"host": [
-								"platform",
-								"ucx",
-								"zone"
+								"localhost"
 							],
 							"port": "2053",
 							"path": [
@@ -1785,15 +1783,103 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2053/cities/391",
+							"raw": "https://platform.ucx.zone:2053/cities/229",
+							"protocol": "https",
+							"host": [
+								"platform",
+								"ucx",
+								"zone"
+							],
+							"port": "2053",
+							"path": [
+								"cities",
+								"229"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createCitiesBasedCountry",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://platform.ucx.zone:2053/cities",
+							"protocol": "https",
+							"host": [
+								"platform",
+								"ucx",
+								"zone"
+							],
+							"port": "2053",
+							"path": [
+								"cities"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "users investors",
+			"item": [
+				{
+					"name": "get user investors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2053/userInvestor/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "2053",
 							"path": [
-								"cities",
-								"391"
+								"userInvestor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create investor interest",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"investment_amount\": 100,\n\t\"clarifications\": \"any thing\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2053/investor/2/investees/2/submitinterest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"investor",
+								"2",
+								"investees",
+								"2",
+								"submitinterest"
 							]
 						}
 					},
@@ -1816,7 +1902,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t    \"country\": \"USA\"\n}",
+					"raw": "{\n\t    \"country\": \"Argentina\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

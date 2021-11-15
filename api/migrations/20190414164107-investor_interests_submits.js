@@ -18,7 +18,11 @@ module.exports = {
     },
     proposalId: {
       type: Sequelize.INTEGER(11),
-      allowNull: false
+      allowNull: true
+    },
+    investment_amount: {
+      type: Sequelize.INTEGER(11),
+      allowNull: true
     },
     minTicketSize: {
       type: Sequelize.DECIMAL,
