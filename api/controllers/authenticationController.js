@@ -140,8 +140,9 @@ module.exports = {
 
       let investorData;
       let arr = [];
+      foundUser.dataValues["individual_investor"] = 0;
+      let individual_investor = 0;
         const investors = await models.usersInvestors.findAll({where: {userId: foundUser.id}});
-        console.log(investors);
         for(let i = 0; i < investors.length; i++){
           investorData = await models.investor.findAll({where: {id: investors[i].investorId, type: 'Institutional Investor'},
           include: [
@@ -151,6 +152,10 @@ module.exports = {
           if(investorData.length != 0){
             arr.push({investor_id: investorData[0].id, name: investorData[0].company.companiesBasicDataTranslation.name});
           }
+         individual_investor = await models.investor.findAll({where: {id: investors[i].investorId, type: 'Individual Investor'}});
+         if(individual_investor.length != 0){
+          foundUser.dataValues["individual_investor"] = individual_investor[0].id;
+         }
         }
 
       const agent = useragent.lookup(request.headers['user-agent']);
