@@ -64,6 +64,7 @@ const serviceRequestController = require('./controllers/ServiceRequestController
 const subUserController = require('./controllers/SubUserController');
 const investmentTypeController = require('./controllers/investmentTypeController');
 const investorManagementController = require('./controllers/investorManagementController');
+const userInvestorController = require('./controllers/usersInvestorController');
 
 const Joi = require('joi');
 const CurrencyController = require('./controllers/CurrencyController');
@@ -2210,6 +2211,15 @@ module.exports = [
       description: 'Get current investor img',
       validate: { params: { id: Joi.number().required().description('the id of investor to get its img'), } },
       handler: investorController.getInvestorImg
+    }
+  },
+  {
+    path: '/userInvestor/{userId}',
+    method: 'get',
+    options: {
+      auth: false,
+      description: 'Get current investor img',
+      handler: userInvestorController.getUserInvestors
     }
   },
   {

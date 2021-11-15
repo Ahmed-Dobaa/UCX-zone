@@ -138,6 +138,21 @@ module.exports = {
         return reply.response().code(206);
       }
 
+      let investorData;
+      let arr = [];
+        const investors = await models.usersInvestors.findAll({where: {userId: foundUser.id}});
+        console.log(investors);
+        for(let i = 0; i < investors.length; i++){
+          investorData = await models.investor.findAll({where: {id: investors[i].investorId, type: 'Institutional Investor'},
+          include: [
+            { model: models.companiesBasicData, as: 'company',
+                include: [{ model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }] }
+           ]});
+          if(investorData.length != 0){
+            arr.push({investor_id: investorData[0].id, name: investorData[0].company.companiesBasicDataTranslation.name});
+          }
+        }
+
       const agent = useragent.lookup(request.headers['user-agent']);
       const accessToken = jwtService.generateUserAccessToken({
         id: foundUser.id,
@@ -146,7 +161,8 @@ module.exports = {
         active: foundUser.active
       }, foundUser.secret, payload.stayLoggedIn, agent.toJSON());
       await userService.saveAccessToken(foundUser.id, accessToken, accessToken, agent.toJSON());
-      return reply.response({status: 200, accessToken: accessToken, user_info: foundUser, user_companies: user_companies }).header('Authorization', accessToken);
+      return reply.response({status: 200, accessToken: accessToken, user_info: foundUser, user_companies: user_companies,
+          user_investors: arr }).header('Authorization', accessToken);
     }
     catch (e) {
       console.log('Error', e);
