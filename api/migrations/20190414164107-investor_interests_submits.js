@@ -16,6 +16,10 @@ module.exports = {
       type: Sequelize.INTEGER(11),
       allowNull: false
     },
+    user_id:{
+      type: Sequelize.INTEGER(11),
+      allowNull: true
+    },
     proposalId: {
       type: Sequelize.INTEGER(11),
       allowNull: true

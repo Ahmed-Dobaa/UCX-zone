@@ -158,6 +158,42 @@ module.exports = {
          }
         }
 
+
+        ///////////////// interests
+
+        const foundSubmittedInterests = await models.investor_interests_submits.findAll({ where: { user_id: foundUser.id } });
+
+        for(let i = 0; i < foundSubmittedInterests.length; i++){
+          let foundInvesteeCompanies = await models.investee.findOne({
+            where: { id: foundSubmittedInterests[i].investeeId },
+            include: [
+              {
+                association: 'basicData',
+                required: true,
+                include: [
+                  {
+                    association: 'companiesBasicDataTranslation',
+                    required: true
+                  }
+                ]
+              }
+            ]
+          });
+          let investor = await models.investor.findOne({
+            where: { id: foundSubmittedInterests[i].investorId, deleted: 0 },
+            include: [
+             { model: models.companiesBasicData, as: 'company',
+                 include: [{ model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }] }
+            ]
+         });
+          foundSubmittedInterests[i].dataValues["investee_name_en"] = foundInvesteeCompanies.basicData.companiesBasicDataTranslation.name;
+          foundSubmittedInterests[i].dataValues["investee_name_ar"] = foundInvesteeCompanies.basicData.companiesBasicDataTranslation.name_ar;
+          foundSubmittedInterests[i].dataValues["investor_name_en"] = investor.company.companiesBasicDataTranslation.name;
+          foundSubmittedInterests[i].dataValues["investor_name_ar"] = investor.company.companiesBasicDataTranslation.name_ar;
+        }
+
+
+        ////////////////////////////
       const agent = useragent.lookup(request.headers['user-agent']);
       const accessToken = jwtService.generateUserAccessToken({
         id: foundUser.id,
@@ -167,7 +203,7 @@ module.exports = {
       }, foundUser.secret, payload.stayLoggedIn, agent.toJSON());
       await userService.saveAccessToken(foundUser.id, accessToken, accessToken, agent.toJSON());
       return reply.response({status: 200, accessToken: accessToken, user_info: foundUser, user_companies: user_companies,
-          user_investors: arr }).header('Authorization', accessToken);
+          user_investors: arr, interests: foundSubmittedInterests }).header('Authorization', accessToken);
     }
     catch (e) {
       console.log('Error', e);

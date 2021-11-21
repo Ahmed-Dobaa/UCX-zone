@@ -2379,17 +2379,18 @@ module.exports = [
     }
   },
   {
-    path: '/users/{userId}/investor/{investorId}/investees/{investeeId}/proposal/{id}/submitinterest',
+    // path: '/users/{userId}/investor/{investorId}/investees/{investeeId}/proposal/{id}/submitinterest',
+    path: '/users/{userId}/submitinterest',
     method: 'GET',
     options: {
-      auth: 'jwt',
+      auth: false,
       description: 'Get all interests made by this investor',
       // app: { allowedPermission: { resource: 'investorSubmitInterest', action: 'findAll' } },
-      pre: [
-        // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
-      ],
-      validate: { params: interestSubmition.createSchema.params },
+      // pre: [
+      //   // { method: helperService.authorizeUser },
+      //   { method: helperService.getLanguageId, assign: 'languageId' }
+      // ],
+      // validate: { params: interestSubmition.createSchema.params },
       handler: investorInterestsSubmits.findAll
     }
   },

@@ -58,12 +58,10 @@
 							}
 						},
 						"url": {
-							"raw": "https://platform.ucx.zone:2053/login",
-							"protocol": "https",
+							"raw": "http://localhost:2053/login",
+							"protocol": "http",
 							"host": [
-								"platform",
-								"ucx",
-								"zone"
+								"localhost"
 							],
 							"port": "2053",
 							"path": [
@@ -495,10 +493,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:2053/users/1/investees/1",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/users/1/investees/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
@@ -1868,10 +1868,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:2053/investor/2/investees/2/submitinterest",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/investor/2/investees/2/submitinterest",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
@@ -1879,6 +1881,27 @@
 								"2",
 								"investees",
 								"2",
+								"submitinterest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user interests",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2053/users/1/submitinterest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"users",
+								"1",
 								"submitinterest"
 							]
 						}

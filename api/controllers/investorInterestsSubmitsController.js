@@ -8,8 +8,36 @@ module.exports = {
   findAll: async function (request, reply) {
     try {
 
-      const foundSubmittedInterests = await models.investor_interests_submits.findAll({ where: { investorId: request.params.investorId } });
+      const foundSubmittedInterests = await models.investor_interests_submits.findAll({ where: { user_id: request.params.userId } });
 
+      for(let i = 0; i < foundSubmittedInterests.length; i++){
+        let foundInvesteeCompanies = await models.investee.findOne({
+          where: { id: foundSubmittedInterests[i].investeeId },
+          include: [
+            {
+              association: 'basicData',
+              required: true,
+              include: [
+                {
+                  association: 'companiesBasicDataTranslation',
+                  required: true
+                }
+              ]
+            }
+          ]
+        });
+        let investor = await models.investor.findOne({
+          where: { id: foundSubmittedInterests[i].investorId, deleted: 0 },
+          include: [
+           { model: models.companiesBasicData, as: 'company',
+               include: [{ model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }] }
+          ]
+       });
+        foundSubmittedInterests[i].dataValues["investee_name_en"] = foundInvesteeCompanies.basicData.companiesBasicDataTranslation.name;
+        foundSubmittedInterests[i].dataValues["investee_name_ar"] = foundInvesteeCompanies.basicData.companiesBasicDataTranslation.name_ar;
+        foundSubmittedInterests[i].dataValues["investor_name_en"] = investor.company.companiesBasicDataTranslation.name;
+        foundSubmittedInterests[i].dataValues["investor_name_ar"] = investor.company.companiesBasicDataTranslation.name_ar;
+      }
       return reply.response(foundSubmittedInterests || {}).code(200);
     }
     catch (e) {
