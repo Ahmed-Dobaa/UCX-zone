@@ -2364,7 +2364,7 @@ module.exports = [
     }
   },
   {
-    path: '/investor/{investorId}/investees/{investeeId}/submitinterest',
+    path: '/investor/{userId}/{investorId}/investees/{investeeId}/submitinterest',
     method: 'POST',
     options: {
       auth: false,

@@ -64,6 +64,7 @@ module.exports = {
       const createdInterestSubmit = await models.investor_interests_submits.create({
         investorId: request.params.investorId,
         investeeId: request.params.investeeId,
+        user_id: request.params.userId,
         // minTicketSize: request.payload.minTicketSize,
         // maxTicketSize: request.payload.maxTicketSize,
         // servicesValue: request.payload.servicesValue,
