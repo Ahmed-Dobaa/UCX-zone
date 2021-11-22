@@ -103,7 +103,7 @@ module.exports = {
       allowNull: false
     },
     interests: {
-      type: Sequelize.STRING(1000), //JSON,
+      type: Sequelize.STRING(100), //JSON,
       allowNull: false,
       // defaultValue: []
     },

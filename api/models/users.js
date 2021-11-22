@@ -71,9 +71,9 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
     },
     interests: {
-      type: DataTypes.JSON,
-      allowNull: true,
-      defaultValue: []
+      type: DataTypes.STRING(100),
+      allowNull: true
+      // defaultValue: []
     },
     activationToken: {
       type: DataTypes.STRING(255),

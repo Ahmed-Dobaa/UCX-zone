@@ -75,7 +75,7 @@ module.exports = {
           "phoneNumber": request.payload.advisor_management[i].advisorManagementTranslation.phoneNumber }, { transaction });
         }
 
-    //   await models.usersInvestors.create({ userId: userId, investorId: investor.id, roleId: 8 }, { transaction });
+      await models.usersAdvisors.create({ userId: userId, advisorId: advisor.id, roleId: 8 }, { transaction });
       await transaction.commit();
 
       return reply.response(request.payload).code(201);
