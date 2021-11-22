@@ -56,6 +56,7 @@ const investeeAttachmentsController = require('./controllers/investeeAttachments
 const investeeBalanceController = require('./controllers/investeeBalanceController');
 const subsidiariesCompanyController = require('./controllers/SubsidiariesController');
 const investorController = require('./controllers/InvestorController');
+const advisorController = require('./controllers/AdvisorController');
 const investorInterestsSubmits = require('./controllers/investorInterestsSubmitsController');
 const investeeInvestmentProposalsController = require('./controllers/investeeInvestmentProposalsController');
 const investeeIncomeController = require('./controllers/InvesteeIncomeController');
@@ -2182,6 +2183,21 @@ module.exports = [
       ],
       // validate: investor.createSchema,
       handler: investorController.create
+    }
+  },
+  {
+    path: '/users/{userId}/advisor',
+    method: 'POST',
+    options: {
+      auth: false,
+      description: 'Create advisor',
+      // app: { allowedPermission: { resource: 'investor', action: 'create' } },
+      pre: [
+        // // // { method: helperService.authorizeUser },
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      // validate: investor.createSchema,
+      handler: advisorController.create
     }
   },
   {
