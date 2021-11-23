@@ -2236,7 +2236,7 @@ module.exports = [
   },
   {
     path: '/deleteAdvisor/{advisorId}',
-    method: 'PUT',
+    method: 'DELETE',
     options: {
       auth: false,
       // description: 'Get all investors for that user',
