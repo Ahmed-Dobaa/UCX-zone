@@ -2235,6 +2235,21 @@ module.exports = [
     }
   },
   {
+    path: '/deleteAdvisor/{advisorId}',
+    method: 'PUT',
+    options: {
+      auth: false,
+      // description: 'Get all investors for that user',
+      // app: { allowedPermission: { resource: 'investor', action: 'findAll' } },
+      pre: [
+        // // // { method: helperService.authorizeUser },
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      // validate: { params: investor.createSchema.params },
+      handler: advisorController.deleteAdvisor
+    }
+  },
+  {
     path: '/investor/{id}/img',
     method: 'PUT',
     options: {

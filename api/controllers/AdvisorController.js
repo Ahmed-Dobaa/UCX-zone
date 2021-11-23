@@ -122,6 +122,7 @@ module.exports = {
     try {
       const language = 1; //request.pre.languageId;
       const foundCompanies = await models.Advisor.findAll({
+        where: {deleted: 0 },
         include: [
           { model: models.companiesBasicData, as: 'company',
               include: [{ model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }] }
@@ -155,6 +156,11 @@ module.exports = {
 
       return errorService.wrapError(e, 'An internal server error occurred');
     }
+  },
+
+  deleteAdvisor: async function (request, reply) {
+    const result = await models.Advisor.update({ deleted: 1 }, { where: { id: request.params.advisorId } });
+    return reply.response({message: "Deleted successfully"}).code(200);
   }
 
 };
