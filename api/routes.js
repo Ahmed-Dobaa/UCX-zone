@@ -2201,6 +2201,25 @@ module.exports = [
     }
   },
   {
+    path: '/advisor/{id}/img',
+    method: 'PUT',
+    options: {
+      auth: false,
+      payload: {
+        maxBytes: 2097152, // maximum payload size in bytes (2M)
+        output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
+        parse: true, // The parse property determines if the incoming payload gets parsed
+        allow: ['multipart/form-data']
+      },
+      validate: {
+        params: { id: Joi.number().required().description('the id of investor') },
+        payload: { img: Joi.any().required().description('Image File') }
+      },
+      description: 'user Change his current avatar',
+      handler: advisorController.uploadAdvisorImg
+    }
+  },
+  {
     path: '/investor/{id}/img',
     method: 'PUT',
     options: {

@@ -89,5 +89,34 @@ module.exports = {
 
       return errorService.wrapError(e, 'An internal server error occurred');
     }
+  },
+
+  uploadAdvisorImg: async function (request, reply) {
+    const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif'];
+    const uploadImageExtension = path.extname(request.payload.img.hapi.filename);
+    const relativePath = `uploads/advisors/${request.params.id}-${moment().valueOf()}-${uploadImageExtension}`;
+    const fullPath = path.join(__dirname, '../', relativePath);
+    let oldPath = null;
+    try {
+
+      if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
+
+        return Boom.badRequest(`allowed images extension are  ${allowedExtensions.join(' , ')}`);
+      }
+
+      const foundAdvisor = await models.Advisor.findOne({ where: { id: request.params.id }, raw: true });
+      oldPath = foundAdvisor.img;
+      await request.payload.img.pipe(fs.createWriteStream(fullPath));
+      await models.Advisor.update({ img: relativePath }, { where: { id: request.params.id } });
+
+      return reply.response({message: "Image uploaded successfully"}).code(201);
+    }
+    catch (e) {
+      console.log('error', e);
+      fs.unlinkSync(path.join(__dirname, '../', oldPath));
+
+      return Boom.badImplementation('An internal server error occurred');
+    }
   }
+
 };

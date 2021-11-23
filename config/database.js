@@ -1,8 +1,8 @@
 module.exports = {
-  database: 'ucxzone_ucxz', //'sql5431252', //
-  username: 'ucxzone_remote',  //'sql5431252', //
-  password: 'wW4Fds9v', //'JmeY3URIRj', //
-  host: 'localhost', //'sql5.freemysqlhosting.net', //
+  database: 'sql5431252', //'ucxzone_ucxz', //'sql5431252', //
+  username: 'sql5431252', //'ucxzone_remote',  //'sql5431252', //
+  password: 'JmeY3URIRj', //'wW4Fds9v', //'JmeY3URIRj', //
+  host: 'sql5.freemysqlhosting.net', //'localhost', //'sql5.freemysqlhosting.net', //
   port: 3306,
   dialect: 'mysql',
   debug: true,
