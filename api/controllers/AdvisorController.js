@@ -117,6 +117,44 @@ module.exports = {
 
       return Boom.badImplementation('An internal server error occurred');
     }
+  },
+  findAllAdvisors: async function (request, reply) {
+    try {
+      const language = 1; //request.pre.languageId;
+      const foundCompanies = await models.Advisor.findAll({
+        include: [
+          { model: models.companiesBasicData, as: 'company',
+              include: [{ model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }] }
+         ]
+      });
+      let avatarFullPath = null; // path.join(__dirname, '../../uploads/default.png');
+      // const foundInvestor = await models.investor.findOne({ where: { id: request.params.id }, raw: true });
+      for(let i = 0; i < foundCompanies.length; i++){
+        foundCompanies[i].img = path.join(__dirname, '../../', foundCompanies[i].img);
+        var array = foundCompanies[i].turnoverRangeId.split(",");
+        foundCompanies[i].turnoverRangeId = array;
+        let countries = await models.advisorTargetedCountries.findAll({where: {advisorId: foundCompanies[i].id}})
+        let sectors = await models.advisorTargetedSectors.findAll({where: {advisorId: foundCompanies[i].id}})
+      if(countries.length != 0){
+        var countroy = countries[0].countryId.split(",");
+        countries[0] = countroy;
+        foundCompanies[i].dataValues["countries"] = countries[0];
+      }
+      if(sectors.length != 0){
+        var sector = sectors[0].sectorId.split(",");
+        sectors[0] = sector;
+
+        foundCompanies[i].dataValues["sectors"] = sectors[0];
+      }
+
+      }
+      return reply.response(foundCompanies).code(200);
+    }
+    catch (e) {
+      console.log('error', e);
+
+      return errorService.wrapError(e, 'An internal server error occurred');
+    }
   }
 
 };

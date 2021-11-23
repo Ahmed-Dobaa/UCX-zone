@@ -69,5 +69,13 @@ module.exports = function (sequelize, DataTypes) {
     paranoid: true
   });
 
+  Advisor.associate = function (models) {
+    Advisor.belongsTo(models.companiesBasicData, { as: 'company', foreignKey: 'companyId' });
+    Advisor.belongsToMany(models.users, { as: 'users', through: 'usersAdvisors', foreignKey: 'advisorId', otherKey: 'userId' });
+    Advisor.belongsToMany(models.countries, { as: 'targetedCountries', through: 'advisorTargetedCountries', foreignKey: 'advisorId', otherKey: 'countryId' });
+    Advisor.belongsToMany(models.sectors, { as: 'targetedSectors', through: 'advisorTargetedSectors', foreignKey: 'advisorId', otherKey: 'sectorId' });
+  };
+
+
   return Advisor;
 };

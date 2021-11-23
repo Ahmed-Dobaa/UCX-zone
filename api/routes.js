@@ -2186,6 +2186,21 @@ module.exports = [
     }
   },
   {
+    path: '/advisors',
+    method: 'GET',
+    options: {
+      auth: false,
+      description: 'Get all advisors',
+      // app: { allowedPermission: { resource: 'investor', action: 'findAll' } },
+      pre: [
+        // // // { method: helperService.authorizeUser },
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      // validate: { params: investor.createSchema.params },
+      handler: advisorController.findAllAdvisors
+    }
+  },
+  {
     path: '/users/{userId}/advisor',
     method: 'POST',
     options: {

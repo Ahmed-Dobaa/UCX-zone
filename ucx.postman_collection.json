@@ -58,10 +58,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:2053/login",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/login",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
@@ -1966,16 +1968,37 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:2053/advisor/4/img",
+							"raw": "https://platform.ucx.zone:2053/advisor/2/img",
+							"protocol": "https",
+							"host": [
+								"platform",
+								"ucx",
+								"zone"
+							],
+							"port": "2053",
+							"path": [
+								"advisor",
+								"2",
+								"img"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2053/advisors",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "2053",
 							"path": [
-								"advisor",
-								"4",
-								"img"
+								"advisors"
 							]
 						}
 					},
