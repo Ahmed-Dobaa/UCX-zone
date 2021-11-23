@@ -3,7 +3,7 @@ const fs = require('fs')
 module.exports = {
   frontEnd: { host: 'http://localhost/frontEnd' },
   connection: {
-    host: 'platform.ucx.zone', //'localhost', //'localhost', //'135.181.62.49', //
+    host: 'platform.ucx.zone',  //'localhost', //'135.181.62.49', //
     port: process.env.PORT || 2053, //8000, // 2053
 
      tls: {
@@ -75,9 +75,9 @@ mpPwKPXrtRdSMAgz/qiYyoyBvBSoIg/E7yWcHQ==
     abortEarly: false
   },
   database: {
-    database: 'ucxzone_ucxz',//'sql5431252', //'sql5431252', //
-    username: 'ucxzone_ucxz',//'sql5431252', //'ucxzone_remote', //'sql5431252', //
-    password: 'wW4Fds9v', //'JmeY3URIRj', //'wW4Fds9v', //'JmeY3URIRj', //
+    database: 'ucxzone_ucxz', //'sql5431252', //'sql5431252', //
+    username: 'ucxzone_ucxz', //'sql5431252', //'ucxzone_ucxz',//'sql5431252', //'ucxzone_remote', //'sql5431252', //
+    password: 'wW4Fds9v', //'JmeY3URIRj', //'wW4Fds9v', //'wW4Fds9v', //'JmeY3URIRj', //
     host: 'localhost', //'sql5.freemysqlhosting.net', //'sql5.freemysqlhosting.net', //'localhost', //
     port: 3306,
     dialect: 'mysql',
