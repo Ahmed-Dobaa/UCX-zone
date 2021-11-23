@@ -77,7 +77,7 @@ module.exports = {
 
       await models.usersAdvisors.create({ userId: userId, advisorId: advisor.id, roleId: 8 }, { transaction });
       await transaction.commit();
-
+      request.payload.advisorBasicData["advisor_id"] = advisor.id;
       return reply.response(request.payload).code(201);
     }
     catch (e) {
