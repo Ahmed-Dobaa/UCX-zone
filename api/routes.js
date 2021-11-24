@@ -860,7 +860,7 @@ module.exports = [
       //   allow: ['multipart/form-data']
       // },
       // app: { allowedPermission: { resource: 'investees', action: 'create' } },
-      validate: investeeSchema.createSchema,
+      // validate: investeeSchema.createSchema,
       handler: investeeController.create
     }
   },
