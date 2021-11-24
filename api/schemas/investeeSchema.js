@@ -14,7 +14,7 @@ module.exports = {
     payload: {
       companyBasicData: {
         isConfidential: Joi.boolean().default(false).label('is confidential'),
-        sector: Joi.string().required(),
+        sector: Joi.array(),
         subSector: Joi.string().allow(null).label('sub sector'),
         legalForm: Joi.string().label('legal form'),
         companiesBasicDataTranslation: {
