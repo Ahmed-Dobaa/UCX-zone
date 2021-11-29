@@ -46,6 +46,31 @@ module.exports = {
       return Boom.badImplementation('An internal server error occurred');
     }
   },
+  getInterestForInvestee: async function (request, reply) {
+    try {
+
+      const foundSubmittedInterests = await models.investor_interests_submits.findAll({ where: { investeeId: request.params.investeeId } });
+
+      for(let i = 0; i < foundSubmittedInterests.length; i++){
+
+        let investor = await models.investor.findOne({
+          where: { id: foundSubmittedInterests[i].investorId, deleted: 0 },
+          include: [
+           { model: models.companiesBasicData, as: 'company',
+               include: [{ model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }] }
+          ]
+       });
+        foundSubmittedInterests[i].dataValues["investor_name_en"] = investor.company.companiesBasicDataTranslation.name;
+        foundSubmittedInterests[i].dataValues["investor_name_ar"] = investor.company.companiesBasicDataTranslation.name_ar;
+      }
+      return reply.response(foundSubmittedInterests || {}).code(200);
+    }
+    catch (e) {
+      console.log('error', e);
+
+      return Boom.badImplementation('An internal server error occurred');
+    }
+  },
   findOne: async (request, reply) => {
     try {
 

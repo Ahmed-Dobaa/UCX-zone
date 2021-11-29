@@ -1647,10 +1647,10 @@
 				{
 					"name": "delete",
 					"request": {
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2053/deleteInvestor/1",
+							"raw": "http://localhost:2053/deleteInvestor/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1658,7 +1658,7 @@
 							"port": "2053",
 							"path": [
 								"deleteInvestor",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -1826,7 +1826,7 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "users investors",
+			"name": "users investors interest",
 			"item": [
 				{
 					"name": "get user investors",
@@ -1904,6 +1904,27 @@
 								"users",
 								"1",
 								"submitinterest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Interest For Investee",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2053/users/2/interests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"users",
+								"2",
+								"interests"
 							]
 						}
 					},
@@ -1991,10 +2012,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2053/advisors",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/advisors",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
@@ -2010,15 +2033,78 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:2053/deleteAdvisor/4",
+							"raw": "https://platform.ucx.zone:2053/deleteAdvisor/1",
+							"protocol": "https",
+							"host": [
+								"platform",
+								"ucx",
+								"zone"
+							],
+							"port": "2053",
+							"path": [
+								"deleteAdvisor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "interest dialog",
+			"item": [
+				{
+					"name": "create dialog",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"interest_id\": 1,\n\t\"dialog\": \"fvsbfsbfsb\",\n\t\"sender_type\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2053/interestDialog",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "2053",
 							"path": [
-								"deleteAdvisor",
-								"4"
+								"interestDialog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get dialog",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2053/interestDialog/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"interestDialog",
+								"1"
 							]
 						}
 					},

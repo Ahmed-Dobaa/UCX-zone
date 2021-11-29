@@ -66,6 +66,7 @@ const subUserController = require('./controllers/SubUserController');
 const investmentTypeController = require('./controllers/investmentTypeController');
 const investorManagementController = require('./controllers/investorManagementController');
 const userInvestorController = require('./controllers/usersInvestorController');
+const interestDialog = require('./controllers/interestDialogController');
 
 const Joi = require('joi');
 const CurrencyController = require('./controllers/CurrencyController');
@@ -2460,6 +2461,16 @@ module.exports = [
     }
   },
   {
+    path: '/users/{investeeId}/interests',
+    method: 'GET',
+    options: {
+      auth: false,
+      description: 'Get all interests for investee',
+
+      handler: investorInterestsSubmits.getInterestForInvestee
+    }
+  },
+  {
     path: '/users/{userId}/investor/{investorId}/investee/{investeesId}/proposal/{proposalId}/submitinterest/{id}',
     method: 'GET',
     options: {
@@ -2502,6 +2513,32 @@ module.exports = [
       auth: 'jwt',
       validate: { params: interestSubmition.updateSchema.params },
       handler: investorInterestsSubmits.delete
+    }
+  },
+  {
+    path: '/interestDialog',
+    method: 'POST',
+    options: {
+      pre: [
+        // { method: helperService.authorizeUser },
+        // { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      auth: false,
+      // validate: { params: interestSubmition.updateSchema.params },
+      handler: interestDialog.create
+    }
+  },
+  {
+    path: '/interestDialog/{interestId}',
+    method: 'GET',
+    options: {
+      pre: [
+        // { method: helperService.authorizeUser },
+        // { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      auth: false,
+      // validate: { params: interestSubmition.updateSchema.params },
+      handler: interestDialog.findAll
     }
   },
   {
