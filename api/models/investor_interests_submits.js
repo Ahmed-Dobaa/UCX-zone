@@ -24,6 +24,10 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
+    status: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
     investment_amount: {
       type: DataTypes.INTEGER(11),
       allowNull: true

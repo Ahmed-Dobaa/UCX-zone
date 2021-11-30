@@ -613,7 +613,7 @@ module.exports = [
     path: '/users/{id}/avatar',
     method: 'get',
     options: {
-      auth: false,
+      auth: 'jwt',
       description: 'Get current user avatar',
       validate: { params: { id: Joi.number().required().description('the id of user to get its avatar'), } },
       handler: userController.getAvatar
@@ -666,7 +666,7 @@ module.exports = [
     path: '/company',
     method: 'GET',
     options: {
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'Get all companies in the system',
       app: { allowedPermission: { resource: 'companies', action: 'findAll' } },
       // pre: [
@@ -693,7 +693,7 @@ module.exports = [
     path: '/user/{userId}/company',
     method: 'GET',
     options: {
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'Get all companies in the system',
       app: { allowedPermission: { resource: 'companies', action: 'findAll' } },
       // pre: [
@@ -706,7 +706,7 @@ module.exports = [
     path: '/lookupMaster',
     method: 'GET',
     options: {
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'Get all companies in the system',
       app: { allowedPermission: { resource: 'lookup_master', action: 'findAll' } },
       // pre: [
@@ -719,7 +719,7 @@ module.exports = [
     path: '/lookupDetails/{masterId}',
     method: 'GET',
     options: {
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'Get all companies in the system',
       app: { allowedPermission: { resource: 'lookup_details', action: 'findAll' } },
       // pre: [
@@ -789,7 +789,7 @@ module.exports = [
       // pre: [
       //   // { method: helperService.authorizeUser }
       // ],
-      auth: false,
+      auth: 'jwt',
       // validate: investeeSchema.createSchema,
       handler: companyController.translation
     }
@@ -817,7 +817,7 @@ module.exports = [
       // pre: [
       //   // { method: helperService.authorizeUser }
       // ],
-      auth: false, //'jwt',
+      auth: 'jwt',
       validate: { params: { companyId: Joi.number().required().description('the id of the company') } },
       handler: companyController.delete
     }
@@ -852,7 +852,7 @@ module.exports = [
     path: '/users/{userId}/investees',
     method: 'POST',
     options: {
-      auth: false,
+      auth: 'jwt',
       description: 'Create investee Company',
       // payload: {
       //   maxBytes: 2097152, // maximum payload size in bytes (2M)
@@ -903,7 +903,7 @@ module.exports = [
     path: '/users/{userId}/investees',
     method: 'GET',
     options: {
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'Get all investee companies for that user',
       // app: { allowedPermission: { resource: 'investees', action: 'findAll' } },
       pre: [
@@ -932,7 +932,7 @@ module.exports = [
     path: '/users/{userId}/investees/{id}',
     method: 'GET',
     options: {
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'Get specific investee companies for that user by its it',
       // app: { allowedPermission: { resource: 'investees', action: 'findOne' } },
       pre: [
@@ -959,7 +959,7 @@ module.exports = [
       //   parse: true, // The parse property determines if the incoming payload gets parsed
       //   allow: ['multipart/form-data']
       // },
-      auth: false, // 'jwt',
+      auth: 'jwt',
       app: { allowedPermission: { resource: 'investees', action: 'update' } },
       pre: [
         // { method: helperService.authorizeUser },
@@ -1014,7 +1014,7 @@ module.exports = [
     method: 'POST',
     options: {
       payload: { allow: ['application/json'] },
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'Create investee capital',
       app: { allowedPermission: { resource: 'investeeCapitals', action: 'create' } },
       pre: [
@@ -1067,7 +1067,7 @@ module.exports = [
     method: 'PUT',
     options: {
       payload: { allow: ['application/json'] },
-      auth: false, // 'jwt',
+      auth: 'jwt',
       description: 'Update investee capital',
       app: { allowedPermission: { resource: 'investeeCapitals', action: 'update' } },
       pre: [
@@ -1124,7 +1124,7 @@ module.exports = [
     method: 'POST',
     options: {
       payload: { allow: ['application/json'] },
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'Create investee ownership',
       app: { allowedPermission: { resource: 'investeeOwnerships', action: 'create' } },
       pre: [
@@ -1177,7 +1177,7 @@ module.exports = [
     method: 'PUT',
     options: {
       payload: { allow: ['application/json'] },
-      auth: false, // 'jwt',
+      auth: 'jwt',
       description: 'Update investee ownership',
       app: { allowedPermission: { resource: 'investeeOwnerships', action: 'update' } },
       pre: [
@@ -1249,7 +1249,7 @@ module.exports = [
         // { method: helperService.authorizeUser },
       //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
-      auth: false, //'jwt',
+      auth: 'jwt',
       validate: createBoardOfDirectorsPositionSchema,
       handler: boardOfDirectorsPositionsController.create
     }
@@ -1331,7 +1331,7 @@ module.exports = [
     options: {
       payload: { allow: ['application/json'] },
       description: 'create new Director',
-      auth: false, //'jwt',
+      auth: 'jwt',
       app: { allowedPermission: { resource: 'investeeDirectors', action: 'create' } },
       pre: [
         // { method: helperService.authorizeUser },
@@ -1363,7 +1363,7 @@ module.exports = [
     options: {
       payload: { allow: ['application/json'] },
       description: 'update specific Director by its id',
-      auth: false, //'jwt',
+      auth: 'jwt',
       app: { allowedPermission: { resource: 'investeeDirectors', action: 'update' } },
       pre: [
         // { method: helperService.authorizeUser },
@@ -1517,7 +1517,7 @@ module.exports = [
     method: 'post',
     options: {
       payload: { allow: ['application/json'] },
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'create new investee auditor',
       app: { allowedPermission: { resource: 'investeeAuditors', action: 'create' } },
       pre: [
@@ -1565,7 +1565,7 @@ module.exports = [
     options: {
       payload: { allow: ['application/json'] },
       description: 'get specific investee auditor by its id',
-      auth: false, //'jwt',
+      auth: 'jwt',
       app: { allowedPermission: { resource: 'investeeAuditors', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
@@ -1594,7 +1594,7 @@ module.exports = [
     path: '/investeeAttachmentsTypes',
     method: 'get',
     options: {
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'get all investee attachments types',
       // app: { allowedPermission: { resource: 'investeeAttachmentsTypes', action: 'findAll' } },
       // pre: [
@@ -1696,7 +1696,7 @@ module.exports = [
         parse: true, // The parse property determines if the incoming payload gets parsed
         allow: ['multipart/form-data']
       },
-      auth: false, // 'jwt',
+      auth: 'jwt',
       description: 'create new investee attachment',
       app: { allowedPermission: { resource: 'investeeAttachments', action: 'create' } },
       pre: [
@@ -1748,7 +1748,7 @@ module.exports = [
         allow: ['multipart/form-data']
       },
       description: 'update specific investee attachment by its id',
-      auth: false, //'jwt',
+      auth: 'jwt',
       app: { allowedPermission: { resource: 'investeeAttachments', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
@@ -1827,7 +1827,7 @@ module.exports = [
     method: 'post',
     options: {
       payload: { allow: ['application/json'] },
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'create new investee balance statement',
       app: { allowedPermission: { resource: 'investeeBalances', action: 'create' } },
       pre: [
@@ -1875,7 +1875,7 @@ module.exports = [
     options: {
       payload: { allow: ['application/json'] },
       description: 'update specific investee balance statement by its id',
-      auth: false, //'jwt',
+      auth: 'jwt',
       app: { allowedPermission: { resource: 'investeeBalances', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
@@ -1904,7 +1904,7 @@ module.exports = [
     path: '/users/{userId}/company/{companyId}/subsidiaries',
     method: 'POST',
     options: {
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'Create subsidiary Company',
       app: { allowedPermission: { resource: 'companySubsidiaries', action: 'create' } },
       // pre: [
@@ -1946,7 +1946,7 @@ module.exports = [
     method: 'PUT',
     options: {
       description: 'update specific subsidiary by its id for a specific user id',
-      auth: false, //'jwt',
+      auth: 'jwt',
       app: { allowedPermission: { resource: 'companySubsidiaries', action: 'update' } },
       // pre: [
       //   // { method: helperService.authorizeUser }
@@ -1995,7 +1995,7 @@ module.exports = [
       //   parse: true, // The parse property determines if the incoming payload gets parsed
       //   allow: ['multipart/form-data']
       // },
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'Create investment proposal for investee',
       app: { allowedPermission: { resource: 'investeeInvestmentProposals', action: 'create' } },
       pre: [
@@ -2053,7 +2053,7 @@ module.exports = [
       //   allow: ['multipart/form-data']
       // },
       description: 'update specific investment proposal by its id',
-      auth: false, //'jwt',
+      auth: 'jwt',
       app: { allowedPermission: { resource: 'investeeInvestmentProposals', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
@@ -2098,7 +2098,7 @@ module.exports = [
     method: 'post',
     options: {
       payload: { allow: ['application/json'] },
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'create new investee income',
       app: { allowedPermission: { resource: 'investeeIncomes', action: 'create' } },
       pre: [
@@ -2146,7 +2146,7 @@ module.exports = [
     options: {
       payload: { allow: ['application/json'] },
       description: 'update specific investee income by its id',
-      auth: false, //'jwt',
+      auth: 'jwt',
       app: { allowedPermission: { resource: 'investeeIncomes', action: 'update' } },
       pre: [
         // // { method: helperService.authorizeUser },
@@ -2175,7 +2175,7 @@ module.exports = [
     path: '/users/{userId}/investor',
     method: 'POST',
     options: {
-      auth: false,
+      auth: 'jwt',
       description: 'Create investor',
       // app: { allowedPermission: { resource: 'investor', action: 'create' } },
       pre: [
@@ -2190,7 +2190,7 @@ module.exports = [
     path: '/advisors',
     method: 'GET',
     options: {
-      auth: false,
+      auth: 'jwt',
       description: 'Get all advisors',
       // app: { allowedPermission: { resource: 'investor', action: 'findAll' } },
       pre: [
@@ -2205,7 +2205,7 @@ module.exports = [
     path: '/users/{userId}/advisor',
     method: 'POST',
     options: {
-      auth: false,
+      auth: 'jwt',
       description: 'Create advisor',
       // app: { allowedPermission: { resource: 'investor', action: 'create' } },
       pre: [
@@ -2220,7 +2220,7 @@ module.exports = [
     path: '/advisor/{id}/img',
     method: 'PUT',
     options: {
-      auth: false,
+      auth: 'jwt',
       payload: {
         maxBytes: 2097152, // maximum payload size in bytes (2M)
         output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
@@ -2239,7 +2239,7 @@ module.exports = [
     path: '/deleteAdvisor/{advisorId}',
     method: 'DELETE',
     options: {
-      auth: false,
+      auth: 'jwt',
       // description: 'Get all investors for that user',
       // app: { allowedPermission: { resource: 'investor', action: 'findAll' } },
       pre: [
@@ -2254,7 +2254,7 @@ module.exports = [
     path: '/investor/{id}/img',
     method: 'PUT',
     options: {
-      auth: false,
+      auth: 'jwt',
       payload: {
         maxBytes: 2097152, // maximum payload size in bytes (2M)
         output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
@@ -2273,7 +2273,7 @@ module.exports = [
     path: '/investor/{id}/img',
     method: 'get',
     options: {
-      auth: false,
+      auth: 'jwt',
       description: 'Get current investor img',
       validate: { params: { id: Joi.number().required().description('the id of investor to get its img'), } },
       handler: investorController.getInvestorImg
@@ -2283,7 +2283,7 @@ module.exports = [
     path: '/userInvestor/{userId}',
     method: 'get',
     options: {
-      auth: false,
+      auth: 'jwt',
       description: 'Get current investor img',
       handler: userInvestorController.getUserInvestors
     }
@@ -2322,7 +2322,7 @@ module.exports = [
     path: '/deleteInvestor/{investorId}',
     method: 'PUT',
     options: {
-      auth: false,
+      auth: 'jwt',
       description: 'Get all investors for that user',
       // app: { allowedPermission: { resource: 'investor', action: 'findAll' } },
       pre: [
@@ -2337,7 +2337,7 @@ module.exports = [
     path: '/investors',
     method: 'GET',
     options: {
-      auth: false,
+      auth: 'jwt',
       description: 'Get all investors for that user',
       // app: { allowedPermission: { resource: 'investor', action: 'findAll' } },
       pre: [
@@ -2433,7 +2433,7 @@ module.exports = [
     path: '/investor/{userId}/{investorId}/investees/{investeeId}/submitinterest',
     method: 'POST',
     options: {
-      auth: false,
+      auth: 'jwt',
       description: 'Create investor interest in investee proposal',
       app: { allowedPermission: { resource: 'investorSubmitInterest', action: 'create' } },
       // pre: [
@@ -2449,7 +2449,7 @@ module.exports = [
     path: '/users/{userId}/submitinterest',
     method: 'GET',
     options: {
-      auth: false,
+      auth: 'jwt',
       description: 'Get all interests made by this investor',
       // app: { allowedPermission: { resource: 'investorSubmitInterest', action: 'findAll' } },
       // pre: [
@@ -2464,7 +2464,7 @@ module.exports = [
     path: '/users/{investeeId}/interests',
     method: 'GET',
     options: {
-      auth: false,
+      auth: 'jwt',
       description: 'Get all interests for investee',
 
       handler: investorInterestsSubmits.getInterestForInvestee
@@ -2486,17 +2486,17 @@ module.exports = [
     }
   },
   {
-    path: '/users/{userId}/investor/{investorId}/investees/{investeeId}/proposal/{proposalId}/submitinterest/{id}',
+    path: '/users/{userId}/submitinterest/{id}',
     method: 'PUT',
     options: {
       description: 'Update specific investor\'s  interest by its id for a specific investor id',
       app: { allowedPermission: { resource: 'investorSubmitInterest', action: 'update' } },
       pre: [
         // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
+        // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       auth: 'jwt',
-      validate: interestSubmition.updateSchema,
+      // validate: interestSubmition.updateSchema,
       handler: investorInterestsSubmits.update
     }
   },
@@ -2523,7 +2523,7 @@ module.exports = [
         // { method: helperService.authorizeUser },
         // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
-      auth: false,
+      auth: 'jwt',
       // validate: { params: interestSubmition.updateSchema.params },
       handler: interestDialog.create
     }
@@ -2536,7 +2536,7 @@ module.exports = [
         // { method: helperService.authorizeUser },
         // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
-      auth: false,
+      auth: 'jwt',
       // validate: { params: interestSubmition.updateSchema.params },
       handler: interestDialog.findAll
     }
