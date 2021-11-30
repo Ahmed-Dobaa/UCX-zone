@@ -679,11 +679,11 @@ module.exports = [
     path: '/count',
     method: 'GET',
     options: {
-      auth: false, //'jwt',
+      auth: 'jwt',
       description: 'Get all companies in the system',
       app: { allowedPermission: { resource: 'companies', action: 'count' } },
       // pre: [
-      //   // { method: helperService.authorizeUser }
+      //   { method: helperService.authorizeUser }
       // ],
       handler: companyController.count
     }
