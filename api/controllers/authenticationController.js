@@ -157,7 +157,30 @@ module.exports = {
           foundUser.dataValues["individual_investor"] = individual_investor[0].id;
          }
         }
+         let _found_related_data = 0;
+        if(foundUser.interests === 'Advisor'){
+          const advisor = await models.usersAdvisors.findAndCountAll({ where: { userId: foundUser.id}})
+           if(advisor.count > 0)
+              _found_related_data = 1;
+        }
 
+        if(foundUser.interests === 'Investor'){
+          const investor = await models.usersInvestors.findAndCountAll({ where: { userId: foundUser.id}})
+           if(investor.count > 0)
+              _found_related_data = 1;
+        }
+
+        if(foundUser.interests === 'Selling shareholder'){
+          const advisor = await models.usersInvestors.findAndCountAll({ where: { userId: foundUser.id}})
+           if(advisor.count > 0)
+              _found_related_data = 1;
+        }
+
+        if(foundUser.interests === 'Company Looking For Investors '){
+          const advisor = await models.usersInvestees.findAndCountAll({ where: { userId: foundUser.id}})
+           if(advisor.count > 0)
+              _found_related_data = 1;
+        }
 
         ///////////////// interests
 
@@ -177,8 +200,9 @@ module.exports = {
         active: foundUser.active
       }, foundUser.secret, payload.stayLoggedIn, agent.toJSON());
       await userService.saveAccessToken(foundUser.id, accessToken, accessToken, agent.toJSON());
+
       return reply.response({status: 200, accessToken: accessToken, user_info: foundUser, user_companies: user_companies,
-          user_investors: arr, interests: interests }).header('Authorization', accessToken);
+          user_investors: arr, interests: interests, _found_related_data: _found_related_data }).header('Authorization', accessToken);
     }
     catch (e) {
       console.log('Error', e);
