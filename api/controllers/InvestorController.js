@@ -92,8 +92,10 @@ module.exports = {
       for(let i = 0; i < foundCompanies.length; i++){
         if(foundCompanies[i].img != null){
           foundCompanies[i].img = path.join(__dirname, '../../', foundCompanies[i].img);
+        }else{
+          foundCompanies[i].img = "no img"
         }
-        foundCompanies[i].img = "no img"
+
         var array = foundCompanies[i].turnoverRangeId.split(",");
         foundCompanies[i].turnoverRangeId = array;
         let countries = await models.investorTargetedCountries.findAll({where: {investorId: foundCompanies[i].id}})
