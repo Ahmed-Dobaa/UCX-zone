@@ -90,7 +90,10 @@ module.exports = {
       let avatarFullPath = null; // path.join(__dirname, '../../uploads/default.png');
       // const foundInvestor = await models.investor.findOne({ where: { id: request.params.id }, raw: true });
       for(let i = 0; i < foundCompanies.length; i++){
-        foundCompanies[i].img = path.join(__dirname, '../../', foundCompanies[i].img);
+        if(foundCompanies[i].img != null){
+          foundCompanies[i].img = path.join(__dirname, '../../', foundCompanies[i].img);
+        }
+        foundCompanies[i].img = "no img"
         var array = foundCompanies[i].turnoverRangeId.split(",");
         foundCompanies[i].turnoverRangeId = array;
         let countries = await models.investorTargetedCountries.findAll({where: {investorId: foundCompanies[i].id}})
