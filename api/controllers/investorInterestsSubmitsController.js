@@ -36,7 +36,7 @@ module.exports = {
         foundSubmittedInterests[i].dataValues["investee_name_en"] = foundInvesteeCompanies.basicData.companiesBasicDataTranslation.name;
         foundSubmittedInterests[i].dataValues["investee_name_ar"] = foundInvesteeCompanies.basicData.companiesBasicDataTranslation.name_ar;
         console.log(investor.company);
-        if(typeof investor.company.companiesBasicDataTranslation != "undefined"){
+        if(investor.company === null){
           foundSubmittedInterests[i].dataValues["investor_name_en"] = "Individual Investor";
           foundSubmittedInterests[i].dataValues["investor_name_ar"] = "مستثمر فردى";
         }else{
