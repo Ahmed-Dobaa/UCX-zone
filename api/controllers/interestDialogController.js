@@ -10,6 +10,7 @@ module.exports = {
       let result = [];
       const foundSubmittedInterests = await models.investor_interests_submits.findOne({ where: { id: request.params.interestId } });
       const foundDialog = await models.interest_dialog.findAll({ where: { interest_id: request.params.interestId } });
+      console.log(foundDialog);
       result.push({ interest_id: request.params.interestId,
         sender_type: 1,
         dialog: foundSubmittedInterests.dataValues.clarifications,
