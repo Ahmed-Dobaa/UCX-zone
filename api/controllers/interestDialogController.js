@@ -7,10 +7,15 @@ const _ = require('lodash');
 module.exports = {
   findAll: async function (request, reply) {
     try {
-
+      let result = [];
+      const foundSubmittedInterests = await models.investor_interests_submits.findOne({ where: { id: request.params.interestId } });
       const foundDialog = await models.interest_dialog.findAll({ where: { interest_id: request.params.interestId } });
-
-      return reply.response(foundDialog || {}).code(200);
+      result.push({ interest_id: request.params.interestId,
+        sender_type: 1,
+        dialog: foundSubmittedInterests.dataValues.clarifications,
+        createdAt: foundSubmittedInterests.dataValues.createdAt });
+      result.push(foundDialog[0])
+      return reply.response(result || {}).code(200);
     }
     catch (e) {
       console.log('error', e);
