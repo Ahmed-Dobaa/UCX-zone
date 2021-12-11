@@ -67,6 +67,11 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       default: 0,
       allowNull: true,
+    },
+    watch_list: {
+      type: DataTypes.INTEGER,
+      default: 0,
+      allowNull: true,
     }
   }, { tableName: 'companiesBasicData', paranoid: true });
 

@@ -221,6 +221,82 @@ module.exports = {
     }
   },
 
+  watch_list: async function (request, reply) {
+    let progress = null;
+    try {
+      var foundCompanies = await models.companiesBasicData.findAll({
+        where: {deleted: 0, type: "investee", watch_list: 1},
+        include: [
+          { model: models.investee, as: 'investeeCompany'},
+          { model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }
+        ]
+      });
+      for(let i = 0; i < foundCompanies.length; i++){
+        if(foundCompanies[i].type === 'investee'){
+          let _investee = await investeeData(foundCompanies[i].investeeCompany.id);
+          foundCompanies[i].dataValues["_investee_view"] = _investee;
+          let investeeInvestmentProposal = await models.investeeInvestmentProposals.findOne({
+            where: { investeeId: foundCompanies[i].investeeCompany.id },
+           include: {
+             model : models.investeeInvestmentProposalTranslation, as: "investeeInvestmentProposalTranslation"
+           }})
+           if(investeeInvestmentProposal){
+            foundCompanies[i].dataValues.average_annual_sales = investeeInvestmentProposal.dataValues.investeeInvestmentProposalTranslation.average_annual_sales;
+            foundCompanies[i].dataValues.estimated_company_value = investeeInvestmentProposal.dataValues.investeeInvestmentProposalTranslation.currentValueOfCompany;
+            foundCompanies[i].dataValues.required_investment = investeeInvestmentProposal.dataValues.investeeInvestmentProposalTranslation.valueOfTheInvestmentRequired;
+           }else{
+            foundCompanies[i].dataValues.average_annual_sales = "0";
+            foundCompanies[i].dataValues.estimated_company_value = "0";
+            foundCompanies[i].dataValues.required_investment = "0";
+           }
+           progress = 30;
+           const capitals = await models.investeeCapital.findAll({
+            where: { investeeId: foundCompanies[i].investeeCompany.id }
+          });
+          const directors = await models.investeeBoardOfDirectors.findAll({
+            where: { investeeId: foundCompanies[i].investeeCompany.id }})
+          const ownerShip = await models.investeeOwnerships.findOne({
+              where: { investeeId: foundCompanies[i].investeeCompany.id }});
+          const auditor = await models.investeeAuditor.findOne({
+                where: { investeeId: foundCompanies[i].investeeCompany.id }})
+          const subsidiary  = await models.companies_relations.findOne({
+            where: { parentId: foundCompanies[i].investeeCompany.companyId}})
+          if(capitals.length > 0){
+            progress = progress + 10;
+          }
+          if(directors.length > 0){
+            progress = progress + 10;
+          }
+          if(ownerShip != null){
+            progress = progress + 10;
+          }
+          if(auditor!= null){
+            progress = progress + 10;
+          }
+          if(subsidiary!= null){
+            progress = progress + 10;
+          }
+
+
+          foundCompanies[i].dataValues["progress"] = progress;
+        }else{
+          foundCompanies[i].dataValues.average_annual_sales = "0";
+          foundCompanies[i].dataValues.estimated_company_value = "0";
+          foundCompanies[i].dataValues.required_investment = "0";
+          progress = 100;
+          foundCompanies[i].dataValues["progress"] = progress;
+          }
+
+        }
+
+      return reply.response(foundCompanies).code(200);
+    }
+    catch (e) {
+      console.log('error', e);
+      return Boom.badImplementation('An internal server error occurred');
+    }
+  },
+
 
   findAllUserCompanies: async function (request, reply) {
     try {
@@ -315,6 +391,17 @@ module.exports = {
       const companyId = request.params.companyId;
       await models.companiesBasicData.update({deleted: 1},{ where: { id: companyId } });
       return reply.response({status: 202, message: "deleted successfully"}).code(202);
+    }
+    catch (e) {
+      console.log('error', e);
+      return Boom.badImplementation('An internal server error occurred');
+    }
+  },
+  update_watch_list: async (request, reply) => {
+    try {
+      const companyId = request.params.companyId;
+      await models.companiesBasicData.update({watch_list: 1},{ where: { id: companyId } });
+      return reply.response({status: 202, message: "Watchlisted successfully"}).code(202);
     }
     catch (e) {
       console.log('error', e);

@@ -54,6 +54,11 @@ module.exports = {
       type: Sequelize.INTEGER,
       default: 0,
       allowNull: true,
+    },
+    watch_list: {
+      type: Sequelize.INTEGER,
+      default: 0,
+      allowNull: true,
     }
   },{
     freezeTableName: true,

@@ -676,6 +676,19 @@ module.exports = [
     }
   },
   {
+    path: '/watchlist',
+    method: 'GET',
+    options: {
+      auth: 'jwt',
+      description: 'Get all companies in the system',
+      app: { allowedPermission: { resource: 'companies', action: 'findAll' } },
+      // pre: [
+      //   // { method: helperService.authorizeUser }
+      // ],
+      handler: companyController.watch_list
+    }
+  },
+  {
     path: '/count',
     method: 'GET',
     options: {
@@ -820,6 +833,20 @@ module.exports = [
       auth: 'jwt',
       validate: { params: { companyId: Joi.number().required().description('the id of the company') } },
       handler: companyController.delete
+    }
+  },
+  {
+    path: '/watchlist/{companyId}',
+    method: 'Put',
+    options: {
+      description: 'delete specific company by its id',
+      app: { allowedPermission: { resource: 'companies', action: 'delete' } },
+      // pre: [
+      //   // { method: helperService.authorizeUser }
+      // ],
+      auth: 'jwt',
+      validate: { params: { companyId: Joi.number().required().description('the id of the company') } },
+      handler: companyController.update_watch_list
     }
   },
   {
