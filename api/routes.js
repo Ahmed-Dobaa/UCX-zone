@@ -67,6 +67,7 @@ const investmentTypeController = require('./controllers/investmentTypeController
 const investorManagementController = require('./controllers/investorManagementController');
 const userInvestorController = require('./controllers/usersInvestorController');
 const interestDialog = require('./controllers/interestDialogController');
+const watchListController = require('./controllers/watchListController');
 
 const Joi = require('joi');
 const CurrencyController = require('./controllers/CurrencyController');
@@ -1160,6 +1161,36 @@ module.exports = [
       ],
       validate: investeeOwnershipSchema.createSchema,
       handler: investeeOwnershipController.create
+    }
+  },
+  {
+    path: '/watchlist',
+    method: 'Post',
+    options: {
+      payload: { allow: ['application/json'] },
+      auth: 'jwt',
+      description: 'Create investee ownership',
+      // app: { allowedPermission: { resource: 'investeeOwnerships', action: 'create' } },
+      pre: [
+        // { method: helperService.authorizeUser },
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      // validate: investeeOwnershipSchema.createSchema,
+      handler: watchListController.create
+    }
+  },
+  {
+    path: '/watchlist/{userId}',
+    method: 'GET',
+    options: {
+      auth: 'jwt',
+      description: 'get specific investee ownership',
+      // app: { allowedPermission: { resource: 'investeeOwnerships', action: 'findOne' } },
+      pre: [
+        // // { method: helperService.authorizeUser },
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      handler: watchListController.find
     }
   },
   {

@@ -58,12 +58,10 @@
 							}
 						},
 						"url": {
-							"raw": "https://platform.ucx.zone:2053/login",
-							"protocol": "https",
+							"raw": "http://localhost:2053/login",
+							"protocol": "http",
 							"host": [
-								"platform",
-								"ucx",
-								"zone"
+								"localhost"
 							],
 							"port": "2053",
 							"path": [
@@ -255,14 +253,18 @@
 					"name": "get all companies",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJlbmdhaG1lZGRvYmFhQGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjM5MjE0OTYyLCJleHAiOjE2MzkzMDEzNjJ9.MFb_OoBdQEwf_7takWCNH-krzFTqYE9niztqzdQWQrw",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "https://platform.ucx.zone:2053/company",
-							"protocol": "https",
+							"raw": "http://localhost:2053/company",
+							"protocol": "http",
 							"host": [
-								"platform",
-								"ucx",
-								"zone"
+								"localhost"
 							],
 							"port": "2053",
 							"path": [
@@ -319,12 +321,20 @@
 					"name": "get count",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InRlc3QiLCJlbWFpbCI6ImVuZ2FobWVkZG9iYWFAZ21haWwuY29tIiwiYWN0aXZlIjoxLCJpYXQiOjE2MzgyNjYzNzEsImV4cCI6MTYzODM1Mjc3MX0.7eXrIjv6QjhZZ6WARB5b1mPDKFsihp-aROjA6oX7htk",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:2053/count",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/count",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
@@ -367,6 +377,57 @@
 								"translation",
 								"1",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "watchlist",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJlbmdhaG1lZGRvYmFhQGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjM5MjE0OTYyLCJleHAiOjE2MzkzMDEzNjJ9.MFb_OoBdQEwf_7takWCNH-krzFTqYE9niztqzdQWQrw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2053/watchlist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"watchlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update watchlist",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJlbmdhaG1lZGRvYmFhQGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjM5MjE0OTYyLCJleHAiOjE2MzkzMDEzNjJ9.MFb_OoBdQEwf_7takWCNH-krzFTqYE9niztqzdQWQrw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2053/watchlist/29",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"watchlist",
+								"29"
 							]
 						}
 					},
@@ -1629,12 +1690,20 @@
 					"name": "get all",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InRlc3QiLCJlbWFpbCI6ImVuZ2FobWVkZG9iYWFAZ21haWwuY29tIiwiYWN0aXZlIjoxLCJpYXQiOjE2Mzg0MzIzNzksImV4cCI6MTYzODUxODc3OX0.yJGjyTvTbrS1K_op7vzt-hrYKjCwaJ9v0Vk-oztu-6A",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:2053/investors",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/investors",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
@@ -1858,6 +1927,11 @@
 								"name": "Content-Type",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJlbmdhaG1lZGRvYmFhQGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjM4Mjc5Mzc2LCJleHAiOjE2MzgzNjU3NzZ9.EIch70QNThuc-57ur5qGMRQ-iIqRtBPYZkefgDM21RY",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1892,17 +1966,25 @@
 					"name": "get user interests",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InRlc3QiLCJlbWFpbCI6ImVuZ2FobWVkZG9iYWFAZ21haWwuY29tIiwiYWN0aXZlIjoxLCJpYXQiOjE2Mzg2OTM2NTAsImV4cCI6MTYzODc4MDA1MH0.cxk481E2XFnQSghjbtNfcJg46QXn5xgK6CW6F2r3CT0",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:2053/users/1/submitinterest",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/users/12/submitinterest",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
 								"users",
-								"1",
+								"12",
 								"submitinterest"
 							]
 						}
@@ -1913,18 +1995,71 @@
 					"name": "get Interest For Investee",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InRlc3QiLCJlbWFpbCI6ImVuZ2FobWVkZG9iYWFAZ21haWwuY29tIiwiYWN0aXZlIjoxLCJpYXQiOjE2MzgyODU5MjksImV4cCI6MTYzODM3MjMyOX0.pEH29M0SCga1MJIPOTlW4KbXRICHcwqZ8ynItgDHio8",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:2053/users/2/interests",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/users/2/interests",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
 								"users",
 								"2",
 								"interests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update interest",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InRlc3QiLCJlbWFpbCI6ImVuZ2FobWVkZG9iYWFAZ21haWwuY29tIiwiYWN0aXZlIjoxLCJpYXQiOjE2MzgyOTUxNzksImV4cCI6MTYzODM4MTU3OX0.7Iv_e6a1wOpHpuJsvg55woBTckPkYi2yJns_XzYqrMA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"status\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://platform.ucx.zone:2053/users/5/submitinterest/4",
+							"protocol": "https",
+							"host": [
+								"platform",
+								"ucx",
+								"zone"
+							],
+							"port": "2053",
+							"path": [
+								"users",
+								"5",
+								"submitinterest",
+								"4"
 							]
 						}
 					},
@@ -2077,10 +2212,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:2053/interestDialog",
-							"protocol": "http",
+							"raw": "https://platform.ucx.zone:2053/interestDialog",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"platform",
+								"ucx",
+								"zone"
 							],
 							"port": "2053",
 							"path": [
@@ -2094,9 +2231,15 @@
 					"name": "get dialog",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJlbmdhaG1lZGRvYmFhQGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjM4NzAzNDQ3LCJleHAiOjE2Mzg3ODk4NDd9.m5xC5qfNfy48_qOPIO4-m1vA3aWuobkt27lK35jZ2ik",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:2053/interestDialog/1",
+							"raw": "http://localhost:2053/interestDialog/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2104,6 +2247,84 @@
 							"port": "2053",
 							"path": [
 								"interestDialog",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "watch list",
+			"item": [
+				{
+					"name": "create watch list",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJlbmdhaG1lZGRvYmFhQGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjM5MzMwOTc5LCJleHAiOjE2Mzk0MTczNzl9.F9IAgFv7krYzgTxkbaCwGAf1pmviEaMkmQkbxZmx7yc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user_id\": 1,\n\t\"company_id\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2053/watchlist",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"watchlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get watch list based user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFobWVkIiwiZW1haWwiOiJlbmdhaG1lZGRvYmFhQGdtYWlsLmNvbSIsImFjdGl2ZSI6MSwiaWF0IjoxNjM5MzMwOTc5LCJleHAiOjE2Mzk0MTczNzl9.F9IAgFv7krYzgTxkbaCwGAf1pmviEaMkmQkbxZmx7yc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2053/watchlist/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2053",
+							"path": [
+								"watchlist",
 								"1"
 							]
 						}
