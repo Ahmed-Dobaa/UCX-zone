@@ -161,7 +161,6 @@ find: async (request, reply) =>{
     // let foundCompanies = null;
     let result = [];
     let watchList = await models.watchList.findAll({where: {user_id: request.params.userId}})
-      console.log(watchList[0].id);
       for(let i = 0; i < watchList.length; i++){
         let progress = null;
         try {
