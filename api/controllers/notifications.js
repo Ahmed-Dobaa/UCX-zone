@@ -20,12 +20,20 @@ module.exports = {
           let company = await models.sequelize.query(`SELECT name FROM companiesBasicDataTranslation
                                   where companyBasicDataId = (select companyId from investor
                                             where id = ${notifications[i].from_user_id})`, { type: QueryTypes.SELECT });
+         let investor_type = await models.sequelize.query(`select companyId, type from investor
+                                                      where id = ${notifications[i].from_user_id}`, { type: QueryTypes.SELECT });
           // notifications[i].dataValues["name"] = company[0].name;
+          let name;
+          if(investor_type[0].type === 'Individual Investor'){
+            name = 'Individual Investor'
+          }else{
+            name = company[0].name;
+          }
           results.push({
             title_en: "Submit Interest",
             title_ar: "طلب اهتمام",
-            notification_en: `${company[0].name} company has been interest with your company`,
-            notification_ar: `لقد أبدت شركة ${company[0].name} اهتمام بشركتك`,
+            notification_en: `${name} company has been interest with your company`,
+            notification_ar: `لقد أبدت شركة ${name} اهتمام بشركتك`,
             status: notifications[i].status,
             type: "SubmitInterest",
             id: notifications[i].reference_id,
