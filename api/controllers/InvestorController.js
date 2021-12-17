@@ -157,13 +157,6 @@ module.exports = {
        }
        investor.turnoverRangeId = null
        investor.turnoverRangeId = arr;
-      // if(request.payload.type === 'I') {
-      //   const foundInvestor = await models.investor.findOne({ where: { createdBy: userId, type: 'I' } });
-
-      //   if(!_.isEmpty(foundInvestor)) {
-      //     return Boom.badRequest('You Already Have Individual Investor, You Can Not Create Two');
-      //   }
-      // }
 
       transaction = await models.sequelize.transaction();
 
@@ -214,6 +207,25 @@ module.exports = {
           "position": request.payload.investor_management[i].investorManagementTranslation.position,
           "phoneNumber": request.payload.investor_management[i].investorManagementTranslation.phoneNumber }, { transaction });
         }
+      }
+      for(let k = 0; k < request.payload.portfolio.length; k++){
+        let headquarter_country = [];
+        console.log(request.payload.portfolio[k].country);
+       for(let i = 0; i < request.payload.portfolio[k].country.length; i++){
+        headquarter_country.push(request.payload.portfolio[k].country[i].name)
+       }
+       let sector = [];
+       for(let i = 0; i < request.payload.portfolio[k].sector.length; i++){
+        sector.push(request.payload.portfolio[k].sector[i].name)
+       }
+        let portfolio = await models.investor_portfolio.create({
+          "investor_id": investor.id,
+          "country_name": request.payload.portfolio[k].name,
+          "ownership_percentage": request.payload.portfolio[k].pOfOwnership,
+          "headquarter_country": headquarter_country,
+          "sectors": sector
+        },
+           { transaction });
       }
       // await investor.addTargetedCountries(investorTranslation.targetedCountriesIds);
       // await investor.addTargetedSectors(investorTranslation.targetedSectorsIds);
