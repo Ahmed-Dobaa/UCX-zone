@@ -136,9 +136,12 @@ module.exports = {
       const companies = await models.companiesBasicData.findAndCountAll({where: {type: "investee"}});
       const investors = await models.investor.findAndCountAll({});
       const users = await models.users.findAndCountAll({});
+      const advisor = await models.Advisor.findAndCountAll({});
+
       return reply.response({companies_count: companies.count,
                              investors_count: investors.count,
-                             users_count: users.count}).code(200);
+                             users_count: users.count,
+                             advisors_count: advisor.count}).code(200);
     } catch (error) {
      console.log(error)
     }

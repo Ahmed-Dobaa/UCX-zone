@@ -68,6 +68,7 @@ const investorManagementController = require('./controllers/investorManagementCo
 const userInvestorController = require('./controllers/usersInvestorController');
 const interestDialog = require('./controllers/interestDialogController');
 const watchListController = require('./controllers/watchListController');
+const notifications = require('./controllers/notifications');
 
 const Joi = require('joi');
 const CurrencyController = require('./controllers/CurrencyController');
@@ -1191,6 +1192,20 @@ module.exports = [
      //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
       handler: watchListController.find
+    }
+  },
+  {
+    path: '/notifications/{userId}',
+    method: 'GET',
+    options: {
+      auth: 'jwt',
+      description: 'get specific investee ownership',
+      // app: { allowedPermission: { resource: 'investeeOwnerships', action: 'findOne' } },
+      pre: [
+        // // { method: helperService.authorizeUser },
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      handler: notifications.getAllNotifications
     }
   },
   {

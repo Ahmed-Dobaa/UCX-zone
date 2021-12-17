@@ -107,11 +107,17 @@ module.exports = {
         investorId: request.params.investorId,
         investeeId: request.params.investeeId,
         user_id: request.params.userId,
-        // minTicketSize: request.payload.minTicketSize,
-        // maxTicketSize: request.payload.maxTicketSize,
-        // servicesValue: request.payload.servicesValue,
         investment_amount: request.payload.investment_amount,
         clarifications: request.payload.clarifications,
+      });
+      const investeeUser = await models.usersInvestees.findOne({ where: { investeeId: request.params.investeeId } });
+
+      const notification = await models.notifications.create({
+        from_user_id: request.params.investorId,
+        to_user_id: investeeUser.userId,
+        status: 0,
+        type: 'Investor interest submit',
+        reference_id: createdInterestSubmit.id
       });
 
       return reply.response(createdInterestSubmit).code(200);
@@ -126,12 +132,29 @@ module.exports = {
   update: async (request, reply) => {
     try {
       let foundInterestSubmit = await models.investor_interests_submits.findOne({ where: { id: request.params.id } });
-
       if(_.isEmpty(foundInterestSubmit)) {
 
         return Boom.notFound('Interest you\'re trying to update does not exist');
       }
-      foundInterestSubmit = await models.investor_interests_submits.update(request.payload , { where: { id: request.params.id } });
+      let updated = await models.investor_interests_submits.update(request.payload , { where: { id: request.params.id } });
+
+      if(request.payload.status === 0 ){
+        const notification = await models.notifications.create({
+          from_user_id: foundInterestSubmit.investeeId,
+          to_user_id: foundInterestSubmit.user_id,
+          status: 0,
+          type: 'Reject interest',
+          reference_id: foundInterestSubmit.id
+        });
+      }else{
+        const notification = await models.notifications.create({
+          from_user_id: foundInterestSubmit.investeeIdx,
+          to_user_id: foundInterestSubmit.user_id,
+          status: 0,
+          type: 'Approve interest',
+          reference_id: foundInterestSubmit.id
+        });
+      }
 
       return reply.response({status: 200, message: "Updated successfully"}).code(200);
     }

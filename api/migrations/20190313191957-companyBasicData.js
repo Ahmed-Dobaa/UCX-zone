@@ -46,6 +46,10 @@ module.exports = {
       type: Sequelize.DATE,
       allowNull: true
     },
+    hideCompany: {
+      type: Sequelize.INTEGER(11),
+      allowNull: true
+    },
     deletedAt: {
       type: Sequelize.DATE,
       allowNull: true,
