@@ -1209,6 +1209,20 @@ module.exports = [
     }
   },
   {
+    path: '/notifications/{userId}',
+    method: 'PUT',
+    options: {
+      auth: 'jwt',
+      description: 'get specific investee ownership',
+      // app: { allowedPermission: { resource: 'investeeOwnerships', action: 'findOne' } },
+      pre: [
+        // // { method: helperService.authorizeUser },
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      handler: notifications.update
+    }
+  },
+  {
     path: '/users/{userId}/investees/{investeeId}/ownerships/{id}/translate',
     method: 'POST',
     options: {
