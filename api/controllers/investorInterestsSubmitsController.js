@@ -148,7 +148,7 @@ module.exports = {
         });
       }else{
         const notification = await models.notifications.create({
-          from_user_id: foundInterestSubmit.investeeIdx,
+          from_user_id: foundInterestSubmit.investeeId,
           to_user_id: foundInterestSubmit.user_id,
           status: 0,
           type: 'Approve interest',
