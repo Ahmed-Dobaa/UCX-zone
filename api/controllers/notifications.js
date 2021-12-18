@@ -14,8 +14,9 @@ module.exports = {
     let results = [];
     try {
       const notifications = await models.notifications.findAll({where: {to_user_id: request.params.userId}});
-      console.log(notifications);
       for(let i = 0; i < notifications.length; i++){
+        let interest = await models.investor_interests_submits.findOne({ where: { id: notifications[i].reference_id } });
+  console.log(interest);
         if(notifications[i].type === 'Investor interest submit'){
           let company = await models.sequelize.query(`SELECT name FROM companiesBasicDataTranslation
                                   where companyBasicDataId = (select companyId from investor
@@ -38,7 +39,8 @@ module.exports = {
             type: "SubmitInterest",
             id: notifications[i].reference_id,
             notification_id: notifications[i].id,
-            created_at: notifications[i].createdAt
+            created_at: notifications[i].createdAt,
+            investee_id: interest.investeeId
           })
 
         }else if(notifications[i].type === 'Approve interest'){
@@ -54,7 +56,8 @@ module.exports = {
                       type: "Action",
                       id: notifications[i].reference_id,
                       notification_id: notifications[i].id,
-                      created_at: notifications[i].createdAt
+                      created_at: notifications[i].createdAt,
+                      investee_id: interest.investeeId
                     })
          }else if(notifications[i].type === 'Reject interest'){
           let company = await models.sequelize.query(`SELECT name FROM companiesBasicDataTranslation
@@ -69,7 +72,8 @@ module.exports = {
                       type: "Action",
                       id: notifications[i].reference_id,
                       notification_id: notifications[i].id,
-                      created_at: notifications[i].createdAt
+                      created_at: notifications[i].createdAt,
+                      investee_id: interest.investeeId
                     })
          }
       }
