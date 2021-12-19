@@ -2017,6 +2017,20 @@ module.exports = [
     }
   },
   {
+    path: '/search',
+    method: 'POST',
+    options: {
+      auth: 'jwt',
+      description: 'Get all subsidiaries companies for that user',
+      // app: { allowedPermission: { resource: 'companySubsidiaries', action: 'findAll' } },
+      // pre: [
+      // // { method: helperService.authorizeUser }
+      // ],
+      // validate: { params: subsidiarySchema.findAll.params },
+      handler: companyController.search
+    }
+  },
+  {
     path: '/users/{userId}/company/{companyId}/subsidiaries/{id}',
     method: 'GET',
     options: {

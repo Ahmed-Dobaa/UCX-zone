@@ -4,6 +4,7 @@ const Boom = require('boom');
 const path = require('path');
 const models = require(path.join(__dirname, '../models/index'));
 const _ = require('lodash');
+const { QueryTypes } = require('sequelize');
 
 
 async function investeeData(investeeId){
@@ -411,6 +412,68 @@ module.exports = {
       return Boom.badImplementation('An internal server error occurred');
     }
   },
+ search: async (request, reply) => {
+    try {
+      let category = request.payload.category;
+      let search_words = request.payload.search_words;
+      let result;
+      if(category === 'Investee'){
+        result = await models.sequelize.query(`SELECT c.id, companyBasicDataId, name, sector,
+        phoneNumbers, main_address, companyPurpose, productsOrServices, country, city, otherAddresses,
+        YearOfEstablishment, website, email, name_ar, main_address_ar, companyPurpose_ar, productsOrServices_ar,
+        country_ar, city_ar
+        FROM companiesBasicDataTranslation b, companiesBasicData c
+        where c.id = b.companyBasicDataId
+        and type = 'investee'
+        and (name LIKE '%${search_words}%'
+        or country LIKE '%${search_words}%'
+        or productsOrServices LIKE '%${search_words}%'
+        or sector LIKE '%${search_words}%'
+        )
+        and c.deleted != 1`, { type: QueryTypes.SELECT });
+      }else if(category === 'Investor'){
+        result = await models.sequelize.query(`SELECT c.id, companyBasicDataId, name, sector,
+        phoneNumbers, main_address, companyPurpose, productsOrServices, country, city, otherAddresses,
+        YearOfEstablishment, website, email, name_ar, main_address_ar, companyPurpose_ar, productsOrServices_ar,
+        country_ar, city_ar, turnoverRangeId
+        FROM companiesBasicDataTranslation b, companiesBasicData c, investor i
+        where c.id = b.companyBasicDataId
+        and c.id = i.companyId
+        and c.type = 'investor'
+        and (name LIKE '%${search_words}%'
+        or country LIKE '%${search_words}%'
+        or productsOrServices LIKE '%${search_words}%'
+        or sector LIKE '%${search_words}%'
+        or i.turnoverRangeId LIKE '%${search_words}%'
+        )
+        and c.deleted != 1`, { type: QueryTypes.SELECT });
+      }else if(category === 'Advisor'){
+        result = await models.sequelize.query(`SELECT c.id, companyBasicDataId, name, sector,
+        phoneNumbers, main_address, companyPurpose, productsOrServices, country, city, otherAddresses,
+        YearOfEstablishment, website, email, name_ar, main_address_ar, companyPurpose_ar, productsOrServices_ar,
+        country_ar, city_ar, turnoverRangeId, services_scope
+        FROM companiesBasicDataTranslation b, companiesBasicData c, advisor i
+        where c.id = b.companyBasicDataId
+        and c.id = i.companyId
+        and c.type = 'advisor'
+        and (name LIKE '%${search_words}%'
+        or country LIKE '%${search_words}%'
+        or productsOrServices LIKE '%${search_words}%'
+        or sector LIKE '%${search_words}%'
+        or i.turnoverRangeId LIKE '%${search_words}%'
+        or i.services_scope LIKE '%${search_words}%'
+        )
+        and c.deleted != 1`, { type: QueryTypes.SELECT });
+      }
+
+      return reply.response(result).code(200);
+    }
+    catch (e) {
+      console.log('error', e);
+      return Boom.badImplementation('An internal server error occurred');
+    }
+  },
+
 
   // delete: async (request, reply) => {
   //   try {
