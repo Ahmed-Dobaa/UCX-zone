@@ -1797,7 +1797,7 @@ module.exports = [
         },
         payload: {
           file: Joi.any().required().description('file'),
-          attachmentTypeId: Joi.string().required().description('file type')
+          // attachmentTypeId: Joi.number().required().description('file type')
         }
       },
       handler: investeeAttachmentsController.create

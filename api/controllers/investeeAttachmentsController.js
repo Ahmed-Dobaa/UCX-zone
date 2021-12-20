@@ -33,46 +33,49 @@ module.exports = {
     }
   },
   create: async function (request, reply) {
+    let createdInvesteeAttachmentsType;
+    for(let i = 0; i < request.payload.file.length; i++){
+      const uploadImageExtension = path.extname(request.payload.file[i].hapi.filename);
+      const relativePath = `./../../platform.ucx.zone/assets/${request.payload.attachmentTypeId[i]}-${moment().valueOf()}-${uploadImageExtension}`;  //${request.params.companyId}
+      // const fileName = ``;
+      const fullPath = relativePath;
+      try {
+      await models.investeeAttachmentsTypes.findOne({ where: { id: request.payload.attachmentTypeId[i] } });
 
-    const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
-    const relativePath = `uploads/investee/${request.params.companyId}/`;
-    const fileName = `${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
-    const fullPath = path.join(__dirname, '../', relativePath);
+        // const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif',
+        //   '.7z', '.arj', '.rar', '.tar.gz', '.z', '.zip',
+        //   '.ods', '.xlr', '.xls', '.xlsx',
+        //   '.doc', '.odt', '.pdf', '.wpd'
+        // ];
 
-    try {
+        // if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
 
-      const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif',
-        '.7z', '.arj', '.rar', '.tar.gz', '.z', '.zip',
-        '.ods', '.xlr', '.xls', '.xlsx',
-        '.doc', '.odt', '.pdf', '.wpd'
-      ];
+        //   return Boom.badRequest(`allowed file extension are  ${allowedExtensions.join(' , ')}`);
+        // }
 
-      if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
 
-        return Boom.badRequest(`allowed file extension are  ${allowedExtensions.join(' , ')}`);
+        // if(_.isEmpty(foundInvesteeAttachmentType)) {
+
+        //   return Boom.badRequest('This Attachment Type Not Supported In Investee Company');
+        // }
+
+        await fsPromises.mkdir(fullPath, { recursive: true });
+        await fsPromises.access(fullPath, fs.constants.W_OK);
+        // await request.payload.file.pipe(fs.createWriteStream(fullPath));
+        await request.payload.file[i].pipe(fs.createWriteStream(fullPath));
+        request.payload.file[i].createdBy = request.params.userId; //request.auth.decoded.id;
+        request.payload.file[i].companyId = request.params.companyId;
+        request.payload.file[i].attachmentTypeId = request.payload.attachmentTypeId[i];
+        request.payload.file[i].attachmentPath = fullPath;
+        createdInvesteeAttachmentsType = await models.investeeAttachments.create(request.payload.file[i]);
       }
-
-      const foundInvesteeAttachmentType = await models.investeeAttachmentsTypes.findOne({ where: { id: request.payload.attachmentTypeId } });
-
-      if(_.isEmpty(foundInvesteeAttachmentType)) {
-
-        return Boom.badRequest('This Attachment Type Not Supported In Investee Company');
+      catch (e) {
+        console.log('error', e);
+        fs.unlinkSync(path.join(__dirname, '../', fullPath, fileName));
+        return Boom.badImplementation('An internal server error occurred');
       }
-
-      await fsPromises.mkdir(fullPath, { recursive: true });
-      await fsPromises.access(fullPath, fs.constants.W_OK);
-      await request.payload.file.pipe(fs.createWriteStream(`${fullPath}${fileName}`));
-      request.payload.createdBy = request.params.userId; //request.auth.decoded.id;
-      request.payload.companyId = request.params.companyId;
-      request.payload.attachmentPath = `${relativePath}${fileName}`;
-      const createdInvesteeAttachmentsType = await models.investeeAttachments.create(request.payload);
-      return reply.response(createdInvesteeAttachmentsType).code(201);
     }
-    catch (e) {
-      console.log('error', e);
-      fs.unlinkSync(path.join(__dirname, '../', fullPath, fileName));
-      return Boom.badImplementation('An internal server error occurred');
-    }
+    return reply.response(createdInvesteeAttachmentsType).code(201);
   },
   update: async function (request, reply) {
 
