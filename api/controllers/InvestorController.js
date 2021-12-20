@@ -304,7 +304,7 @@ module.exports = {
   uploadInvestorImg: async function (request, reply) {
     const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif'];
     const uploadImageExtension = path.extname(request.payload.img.hapi.filename);
-    const relativePath = `../../../platform.ucx.zone/assets/${request.params.id}-${moment().valueOf()}-${uploadImageExtension}`;
+    const relativePath = `./../../platform.ucx.zone/assets/${request.params.id}-${moment().valueOf()}-${uploadImageExtension}`;
     const fullPath = relativePath; //path.join(__dirname, '../', relativePath);
     let oldPath = null;
     try {
