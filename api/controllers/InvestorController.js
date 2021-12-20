@@ -315,7 +315,8 @@ module.exports = {
       }
 
       const foundInvestor = await models.investor.findOne({ where: { id: request.params.id }, raw: true });
-      oldPath = foundInvestor.img;
+      console.log(foundInvestor);
+      // oldPath = foundInvestor.img;
       await request.payload.img.pipe(fs.createWriteStream(fullPath));
       await models.investor.update({ img: relativePath }, { where: { id: request.params.id } });
 
