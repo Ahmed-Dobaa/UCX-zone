@@ -34,15 +34,14 @@ module.exports = {
   },
   create: async function (request, reply) {
     let createdInvesteeAttachmentsType;
-    for(let i = 0; i < request.payload.file.length; i++){
-      const uploadImageExtension = path.extname(request.payload.file[i].hapi.filename);
+      const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
       const relativePath = `./../../platform.ucx.zone/assets/${request.params.companyId}-${moment().valueOf()}-${uploadImageExtension}`;
         //${request.params.companyId}
       // const fileName = ``;
       const path_url = `https://platform.ucx.zone/assets/${request.params.companyId}-${moment().valueOf()}-${uploadImageExtension}`
       const fullPath = relativePath;
       try {
-      await models.investeeAttachmentsTypes.findOne({ where: { id: request.payload.attachmentTypeId[i] } });
+      await models.investeeAttachmentsTypes.findOne({ where: { id: request.payload.attachmentTypeId } });
 
         // const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif',
         //   '.7z', '.arj', '.rar', '.tar.gz', '.z', '.zip',
@@ -64,19 +63,21 @@ module.exports = {
         // await fsPromises.mkdir(fullPath, { recursive: true });
         // await fsPromises.access(fullPath, fs.constants.W_OK);
         // await request.payload.file.pipe(fs.createWriteStream(fullPath));
-        await request.payload.file[i].pipe(fs.createWriteStream(fullPath));
-        request.payload.file[i].createdBy = request.params.userId; //request.auth.decoded.id;
-        request.payload.file[i].companyId = request.params.companyId;
-        request.payload.file[i].attachmentTypeId = request.payload.attachmentTypeId[i];
-        request.payload.file[i].attachmentPath = path_url;
-        createdInvesteeAttachmentsType = await models.investeeAttachments.create(request.payload.file[i]);
+        await request.payload.file.pipe(fs.createWriteStream(fullPath));
+        request.payload.createdBy = request.params.userId; //request.auth.decoded.id;
+        request.payload.companyId = request.params.companyId;
+        // request.payload.file[i].attachmentTypeId = request.payload.attachmentTypeId[i];
+        request.payload.attachmentPath = path_url;
+        // request.payload.file[i].description = request.payload.description[i];
+
+        createdInvesteeAttachmentsType = await models.investeeAttachments.create(request.payload);
       }
       catch (e) {
         console.log('error', e);
-        fs.unlinkSync(path.join(__dirname, '../', fullPath, fileName));
+        fs.unlinkSync(path.join(__dirname, '../', fullPath));
         return Boom.badImplementation('An internal server error occurred');
       }
-    }
+
     return reply.response(createdInvesteeAttachmentsType).code(201);
   },
   update: async function (request, reply) {

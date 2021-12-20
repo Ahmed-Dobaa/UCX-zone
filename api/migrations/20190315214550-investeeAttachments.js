@@ -16,6 +16,10 @@ module.exports = {
       type: Sequelize.STRING(100),
       allowNull: false
     },
+    description: {
+      type: Sequelize.STRING(100),
+      allowNull: true
+    },
     attachmentTypeId: {
       type: Sequelize.INTEGER(11),
       allowNull: false
