@@ -36,9 +36,10 @@ module.exports = {
     let createdInvesteeAttachmentsType;
     for(let i = 0; i < request.payload.file.length; i++){
       const uploadImageExtension = path.extname(request.payload.file[i].hapi.filename);
-      const relativePath = `./../../platform.ucx.zone/assets/${request.params.id}-${moment().valueOf()}-${uploadImageExtension}`;
+      const relativePath = `./../../platform.ucx.zone/assets/${request.params.companyId}-${moment().valueOf()}-${uploadImageExtension}`;
         //${request.params.companyId}
       // const fileName = ``;
+      const path_url = `https://platform.ucx.zone/assets/${request.params.companyId}-${moment().valueOf()}-${uploadImageExtension}`
       const fullPath = relativePath;
       try {
       await models.investeeAttachmentsTypes.findOne({ where: { id: request.payload.attachmentTypeId[i] } });
@@ -67,7 +68,7 @@ module.exports = {
         request.payload.file[i].createdBy = request.params.userId; //request.auth.decoded.id;
         request.payload.file[i].companyId = request.params.companyId;
         request.payload.file[i].attachmentTypeId = request.payload.attachmentTypeId[i];
-        request.payload.file[i].attachmentPath = fullPath;
+        request.payload.file[i].attachmentPath = path_url;
         createdInvesteeAttachmentsType = await models.investeeAttachments.create(request.payload.file[i]);
       }
       catch (e) {
