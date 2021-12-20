@@ -36,7 +36,8 @@ module.exports = {
     let createdInvesteeAttachmentsType;
     for(let i = 0; i < request.payload.file.length; i++){
       const uploadImageExtension = path.extname(request.payload.file[i].hapi.filename);
-      const relativePath = `./../../platform.ucx.zone/assets/${request.payload.attachmentTypeId[i]}-${moment().valueOf()}-${uploadImageExtension}`;  //${request.params.companyId}
+      const relativePath = `./../../platform.ucx.zone/assets/${request.params.id}-${moment().valueOf()}-${uploadImageExtension}`;
+        //${request.params.companyId}
       // const fileName = ``;
       const fullPath = relativePath;
       try {
@@ -59,8 +60,8 @@ module.exports = {
         //   return Boom.badRequest('This Attachment Type Not Supported In Investee Company');
         // }
 
-        await fsPromises.mkdir(fullPath, { recursive: true });
-        await fsPromises.access(fullPath, fs.constants.W_OK);
+        // await fsPromises.mkdir(fullPath, { recursive: true });
+        // await fsPromises.access(fullPath, fs.constants.W_OK);
         // await request.payload.file.pipe(fs.createWriteStream(fullPath));
         await request.payload.file[i].pipe(fs.createWriteStream(fullPath));
         request.payload.file[i].createdBy = request.params.userId; //request.auth.decoded.id;
