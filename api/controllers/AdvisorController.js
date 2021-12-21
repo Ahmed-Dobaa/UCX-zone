@@ -94,8 +94,9 @@ module.exports = {
   uploadAdvisorImg: async function (request, reply) {
     const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif'];
     const uploadImageExtension = path.extname(request.payload.img.hapi.filename);
-    const relativePath = `uploads/advisors/${request.params.id}-${moment().valueOf()}-${uploadImageExtension}`;
-    const fullPath = path.join(__dirname, '../', relativePath);
+    const relativePath = `./../../platform.ucx.zone/advisor/${request.params.id}-${moment().valueOf()}-${uploadImageExtension}`;
+    const path_url = `https://platform.ucx.zone/advisor/${request.params.id}-${moment().valueOf()}-${uploadImageExtension}`;
+    const fullPath = relativePath;
     let oldPath = null;
     try {
 
@@ -107,7 +108,7 @@ module.exports = {
       const foundAdvisor = await models.Advisor.findOne({ where: { id: request.params.id }, raw: true });
       oldPath = foundAdvisor.img;
       await request.payload.img.pipe(fs.createWriteStream(fullPath));
-      await models.Advisor.update({ img: relativePath }, { where: { id: request.params.id } });
+      await models.Advisor.update({ img: path_url }, { where: { id: request.params.id } });
 
       return reply.response({message: "Image uploaded successfully"}).code(201);
     }

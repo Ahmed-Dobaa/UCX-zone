@@ -304,7 +304,9 @@ module.exports = {
   uploadInvestorImg: async function (request, reply) {
     const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif'];
     const uploadImageExtension = path.extname(request.payload.img.hapi.filename);
-    const relativePath = `./../../platform.ucx.zone/assets/${request.params.id}-${moment().valueOf()}-${uploadImageExtension}`;
+    const relativePath = `./../../platform.ucx.zone/investor/${request.params.id}-${moment().valueOf()}-${uploadImageExtension}`;
+    const path_url = `https://platform.ucx.zone/investor/${request.params.id}-${moment().valueOf()}-${uploadImageExtension}`;
+
     const fullPath = relativePath; //path.join(__dirname, '../', relativePath);
     let oldPath = null;
     try {
@@ -318,7 +320,7 @@ module.exports = {
       console.log(foundInvestor);
       // oldPath = foundInvestor.img;
       await request.payload.img.pipe(fs.createWriteStream(fullPath));
-      await models.investor.update({ img: relativePath }, { where: { id: request.params.id } });
+      await models.investor.update({ img: path_url }, { where: { id: request.params.id } });
 
       return reply.response({message: "Image uploaded successfully"}).code(201);
     }

@@ -35,10 +35,10 @@ module.exports = {
   create: async function (request, reply) {
     let createdInvesteeAttachmentsType;
       const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
-      const relativePath = `./../../platform.ucx.zone/assets/${request.params.companyId}-${moment().valueOf()}-${uploadImageExtension}`;
+      const relativePath = `./../../platform.ucx.zone/attachments/${request.params.companyId}-${moment().valueOf()}-${uploadImageExtension}`;
         //${request.params.companyId}
       // const fileName = ``;
-      const path_url = `https://platform.ucx.zone/assets/${request.params.companyId}-${moment().valueOf()}-${uploadImageExtension}`
+      const path_url = `https://platform.ucx.zone/attachments/${request.params.companyId}-${moment().valueOf()}-${uploadImageExtension}`
       const fullPath = relativePath;
       try {
       await models.investeeAttachmentsTypes.findOne({ where: { id: request.payload.attachmentTypeId } });
