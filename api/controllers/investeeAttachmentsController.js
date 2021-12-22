@@ -79,32 +79,32 @@ module.exports = {
     const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
     const path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
     const relativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
-
+console.log("hereherehere")
     // const relativePath = `uploads/investee/${request.params.companyId}/`;
-    const fileName = `${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
+    // const fileName = `${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
     const fullPath = relativePath;
     try {
 
-      const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif',
-        '.7z', '.arj', '.rar', '.tar.gz', '.z', '.zip',
-        '.ods', '.xlr', '.xls', '.xlsx',
-        '.doc', '.odt', '.pdf', '.wpd'
-      ];
+      // const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif',
+      //   '.7z', '.arj', '.rar', '.tar.gz', '.z', '.zip',
+      //   '.ods', '.xlr', '.xls', '.xlsx',
+      //   '.doc', '.odt', '.pdf', '.wpd'
+      // ];
 
-      if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
+      // if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
 
-        return Boom.badRequest(`allowed file extension are  ${allowedExtensions.join(' , ')}`);
-      }
+      //   return Boom.badRequest(`allowed file extension are  ${allowedExtensions.join(' , ')}`);
+      // }
 
-      const foundInvesteeAttachmentsType = await models.investeeAttachments.findOne({ where: { id: request.params.id }, raw: true });
+      // const foundInvesteeAttachmentsType = await models.investeeAttachments.findOne({ where: { id: request.params.id }, raw: true });
 
-      if(_.isEmpty(foundInvesteeAttachmentsType)) {
+      // if(_.isEmpty(foundInvesteeAttachmentsType)) {
 
-        return Boom.notFound('Attachment Type You Try To Update does Not Exist');
-      }
+      //   return Boom.notFound('Attachment Type You Try To Update does Not Exist');
+      // }
 
       // await fsPromises.access(fullPath, fs.constants.W_OK);
-      await request.payload.file.pipe(fs.createWriteStream(path_url));
+      await request.payload.file.pipe(fs.createWriteStream(fullPath));
       await models.investeeAttachments.update({ attachmentPath: path_url, attachmentTypeId: request.payload.attachmentTypeId }, { where: { id: request.params.id } });
       // await fsPromises.unlink(path.join(__dirname, '../', foundInvesteeAttachmentsType.attachmentPath));
 
