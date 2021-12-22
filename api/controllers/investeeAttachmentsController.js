@@ -103,10 +103,10 @@ module.exports = {
         return Boom.notFound('Attachment Type You Try To Update does Not Exist');
       }
 
-      await fsPromises.access(fullPath, fs.constants.W_OK);
+      // await fsPromises.access(fullPath, fs.constants.W_OK);
       await request.payload.file.pipe(fs.createWriteStream(path_url));
       await models.investeeAttachments.update({ attachmentPath: path_url, attachmentTypeId: request.payload.attachmentTypeId }, { where: { id: request.params.id } });
-      await fsPromises.unlink(path.join(__dirname, '../', foundInvesteeAttachmentsType.attachmentPath));
+      // await fsPromises.unlink(path.join(__dirname, '../', foundInvesteeAttachmentsType.attachmentPath));
 
       return reply.response({ status: 200, message: "Updated successfully"}).code(200);
     }
