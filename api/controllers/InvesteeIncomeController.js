@@ -63,10 +63,14 @@ module.exports = {
       }
       let createdInvesteeIncomeTranslation;
       const investee= {createdBy: request.params.userId, investeeId: request.params.investeeId} ;
-   console.log("here")
+   console.log("insidee")
       transaction = await models.sequelize.transaction();
+      console.log(investee)
+      console.log("request.payload")
+      console.log(request.payload)
       const createdInvesteeIncome = await models.investeeIncomes.create(investee);
       for(let i = 0; i < request.payload.length; i++){
+        console.log("for")
         request.payload[i].investeeId = request.params.investeeId;
         request.payload[i].createdBy = request.params.userId; // request.auth.decoded.id;
         request.payload[i].languageId = language;
