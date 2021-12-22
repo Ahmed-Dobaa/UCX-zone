@@ -80,6 +80,8 @@ module.exports = {
         createdInvesteeIncomeTranslation = await models.investeeIncomeTranslation.create(request.payload[i]);
 
       }
+      await transaction.commit();
+
       return reply.response(_.set(createdInvesteeIncome.dataValues, 'translation', createdInvesteeIncomeTranslation.dataValues)).code(201);
     }
     catch (e) {

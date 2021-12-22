@@ -75,6 +75,7 @@ module.exports = {
          createdInvesteeBalanceTranslation = await models.investeeBalanceTranslation.create(payload[i]);
       }
 
+      await transaction.commit();
 
       return reply.response(_.set(createdInvesteeBalance.dataValues, 'translation', createdInvesteeBalanceTranslation.dataValues)).code(201);
     }
