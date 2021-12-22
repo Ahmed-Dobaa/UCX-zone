@@ -35,19 +35,13 @@ module.exports = {
   create: async function (request, reply) {
     let createdInvesteeAttachmentsType;
       const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
-      const relativePath = `./../../platform.ucx.zone/attachments/${request.params.companyId}-${moment().valueOf()}-${uploadImageExtension}`;
+      const relativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
         //${request.params.companyId}
       // const fileName = ``;
-      const path_url = `https://platform.ucx.zone/attachments/${request.params.companyId}-${moment().valueOf()}-${uploadImageExtension}`
+      const path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
       const fullPath = relativePath;
       try {
       await models.investeeAttachmentsTypes.findOne({ where: { id: request.payload.attachmentTypeId } });
-
-        // const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif',
-        //   '.7z', '.arj', '.rar', '.tar.gz', '.z', '.zip',
-        //   '.ods', '.xlr', '.xls', '.xlsx',
-        //   '.doc', '.odt', '.pdf', '.wpd'
-        // ];
 
         // if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
 
@@ -83,9 +77,12 @@ module.exports = {
   update: async function (request, reply) {
 
     const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
-    const relativePath = `uploads/investee/${request.params.companyId}/`;
+    const path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
+    const relativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
+
+    // const relativePath = `uploads/investee/${request.params.companyId}/`;
     const fileName = `${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
-    const fullPath = path.join(__dirname, '../', relativePath);
+    const fullPath = relativePath;
     try {
 
       const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif',
@@ -107,7 +104,7 @@ module.exports = {
       }
 
       await fsPromises.access(fullPath, fs.constants.W_OK);
-      await request.payload.file.pipe(fs.createWriteStream(`${fullPath}${fileName}`));
+      await request.payload.file.pipe(fs.createWriteStream(path_url));
       await models.investeeAttachments.update({ attachmentPath: `${relativePath}${fileName}`, attachmentTypeId: request.payload.attachmentTypeId }, { where: { id: request.params.id } });
       await fsPromises.unlink(path.join(__dirname, '../', foundInvesteeAttachmentsType.attachmentPath));
 
