@@ -46,6 +46,7 @@ module.exports = {
     try {
       const language = 1; //request.pre.languageId;
       const { payload } = request;
+      let transaction;
 
       payload.investeeId = request.params.investeeId;
       payload.createdBy = request.params.userId; //auth.decoded.id;
@@ -65,6 +66,7 @@ module.exports = {
       if(!_.isEmpty(foundInvesteeBalance)) {
         return Boom.badRequest(`Investee balance for ${request.payload.year} already created before, it can be updated only.`);
       }
+      transaction = await models.sequelize.transaction();
 
       const createdInvesteeBalance = await models.investeeBalances.create({ investeeId: request.params.investeeId, createdBy: request.params.userId});
 
