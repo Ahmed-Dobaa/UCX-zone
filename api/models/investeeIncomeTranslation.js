@@ -1,5 +1,7 @@
 /* jshint indent: 2 */
 
+const { truncate } = require('lodash');
+
 module.exports = function (sequelize, DataTypes) {
   const investeeIncomeTranslation = sequelize.define('investeeIncomeTranslation', {
     id: {
@@ -13,6 +15,22 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
     },
     languageId: {
+      type: DataTypes.INTEGER(11).UNSIGNED,
+      allowNull: false,
+    },
+    grossProfit: {
+      type: DataTypes.INTEGER(11).UNSIGNED,
+      allowNull: false,
+    },
+    netProfit: {
+      type: DataTypes.INTEGER(11).UNSIGNED,
+      allowNull: false,
+    },
+    netProfitAfterTax: {
+      type: DataTypes.INTEGER(11).UNSIGNED,
+      allowNull: false,
+    },
+    operatingProfit: {
       type: DataTypes.INTEGER(11).UNSIGNED,
       allowNull: false,
     },
@@ -30,7 +48,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     GeneralAndAdministrativeExpense: {
       type: DataTypes.INTEGER(11),
-      allowNull: false
+      allowNull: true
     },
     SellingExpense: {
       type: DataTypes.INTEGER(11),
@@ -50,11 +68,11 @@ module.exports = function (sequelize, DataTypes) {
     },
     otherExpenses: {
       type: DataTypes.INTEGER(11),
-      allowNull: false
+      allowNull: true
     },
     otherRevenues: {
       type: DataTypes.INTEGER(11),
-      allowNull: false
+      allowNull: true
     },
     createdAt: {
       type: DataTypes.DATE,
