@@ -25,8 +25,8 @@ const server = Hapi.server({
       }
     }
   },
-  host: 'platform.ucx.zone', // config.connection.host,
-  port: 2053, //process.env.PORT || config.connection.port,
+  host: config.connection.host,
+  port: process.env.PORT || config.connection.port,
   tls: config.connection.tls,
 });
 const getErrorParts = function (error) {
