@@ -286,8 +286,8 @@ module.exports = {
       const userId = request.auth.decoded ? request.auth.decoded.id : request.params.userId;
 
       const { payload } = request;
-      const { companyBasicData, investeeTranslation } = payload;
-      companyBasicData.companiesBasicDataTranslation.languageId = 1;
+      const { companyBasicData, investeeTranslation, translation } = payload;
+      companyBasicData.companiesBasicDataTranslation.languageId = 'en';
       investeeTranslation.languageId = 1;
 
       // check first that company basic data exist or not.
@@ -304,6 +304,56 @@ module.exports = {
       const createdCompanyBasicData = await models.companiesBasicData.create(companyBasicData, { transaction });
       companyBasicData.companiesBasicDataTranslation.companyBasicDataId = createdCompanyBasicData.id;
       await models.companiesBasicDataTranslation.create(companyBasicData.companiesBasicDataTranslation, { transaction });
+
+
+           // let po = companyBasicData.companiesBasicDataTranslation;
+      // let sp = companyBasicData.companiesBasicDataTranslation;
+      let langauges = ['ar', 'fr', 'po', 'sp'];
+   for(let k = 0; k < langauges.length; k++){
+    let obj = companyBasicData.companiesBasicDataTranslation;
+
+    for(let i = 0; i < translation.length; i++){
+      let column;
+      switch(langauges[k]){
+        case 'ar':
+            obj["languageId"] = 'ar';
+             column = translation[i].propertyName;
+            obj[column] = translation[i].translation.Ar;
+        break;
+        case 'fr':
+            obj["languageId"] = 'fr';
+             column = translation[i].propertyName;
+            obj[column] = translation[i].translation.Fr;
+        break;
+        case 'po':
+            obj["languageId"] = 'po';
+             column = translation[i].propertyName;
+            obj[column] = translation[i].translation.Po;
+        break;
+        case 'sp':
+            obj["languageId"] = 'sp';
+             column = translation[i].propertyName;
+            obj[column] = translation[i].translation.Sp;
+        break;
+        default:
+          break;
+      }
+    }
+    await models.companiesBasicDataTranslation.create(obj, { transaction });
+   }
+
+
+      // let fr = companyBasicData.companiesBasicDataTranslation;
+
+      // for(let i = 0; i < translation.length; i++){
+      //     ar["languageId"] = 'fr';
+      //       let column = translation[i].propertyName;
+      //       arObj[column] = translation[i].translation.Fr;
+      //     }
+          // await models.companiesBasicDataTranslation.create(ar, { transaction });
+        // await models.companiesBasicDataTranslation.create(po, { transaction });
+        // await models.companiesBasicDataTranslation.create(sp, { transaction });
+
       const code = `${moment().format('YYMM')}${new Date().valueOf()}`;
       const createdInvestee = await models.investee.create({ companyId: createdCompanyBasicData.id, code: code, createdBy: userId }, { transaction });
       investeeTranslation.investeeId = createdInvestee.id;

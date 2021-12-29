@@ -20,10 +20,6 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: false
     },
-    name_ar: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
     registrationIdNo: {
       type: DataTypes.STRING(45),
       unique: true,
@@ -37,15 +33,7 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    companyPurpose_ar: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
     productsOrServices: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    productsOrServices_ar: {
       type: DataTypes.TEXT,
       allowNull: true
     },
@@ -58,10 +46,6 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: false
     },
-    country_ar: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
     phoneNumbers: {
       type: DataTypes.STRING(12),
       allowNull: false
@@ -70,17 +54,9 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(1000),
       allowNull: false
     },
-    main_address_ar: {
-      type: DataTypes.STRING(1000),
-      allowNull: true
-    },
     city: {
       type: DataTypes.STRING(100),
       allowNull: false
-    },
-    city_ar: {
-      type: DataTypes.STRING(100),
-      allowNull: true
     },
     img: {
       type: DataTypes.STRING(100),
@@ -104,10 +80,6 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: true
     },
     relationToCompany: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
-    relationToCompany_ar: {
       type: DataTypes.STRING(45),
       allowNull: true
     },
