@@ -4,7 +4,7 @@ module.exports = {
   frontEnd: { host: 'http://localhost/frontEnd' },
   connection: {
     host: 'platform.ucx.zone',  //'localhost', //'135.181.62.49', //
-    port: process.env.PORT || 2053, //8000, // 2053
+    port: process.env.PORT || 2050, //8000, // 2053
 
 
  // test
