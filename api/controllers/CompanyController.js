@@ -9,7 +9,7 @@ const { QueryTypes } = require('sequelize');
 
 async function investeeData(investeeId){
   try {
-    const  languageId  = 1; // request.pre;
+    const  languageId  = 'en'; // request.pre;
     const foundInvesteeCompanies = await models.investee.findOne({
       where: { id: investeeId },
       include: [
@@ -48,7 +48,6 @@ async function investeeData(investeeId){
         where: { investeeId: investeeId },
         include: [{ association: 'auditorTranslation', where: { languageId: languageId }, required: true }]
       });
-
       let subsidiary = await models.companies_relations.findOne({
         where: { parentId: foundInvesteeCompanies.companyId}, // childId: request.params.id },
         include: [{ model: models.companiesBasicData, as: 'basicData', required: true,

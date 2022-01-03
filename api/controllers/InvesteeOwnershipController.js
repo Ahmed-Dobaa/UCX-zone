@@ -96,9 +96,46 @@ module.exports = {
       }, { transaction });
 
 
-      request.payload.ownershipTranslation.languageId = 1; //request.pre.languageId;
+      request.payload.ownershipTranslation.languageId = 'en'; //request.pre.languageId;
       request.payload.ownershipTranslation.investeeOwnershipId= createdOwnership.id;
       await models.investeeOwnershipTranslation.create(request.payload.ownershipTranslation, { transaction });
+
+      let translation = request.payload.ownershipTranslation.translation;
+      let langauges = ['ar', 'fr', 'po', 'sp'];
+      for(let k = 0; k < langauges.length; k++){
+       let obj = request.payload.ownershipTranslation;
+
+       for(let i = 0; i < translation.length; i++){
+         let column;
+         switch(langauges[k]){
+           case 'ar':
+               obj["languageId"] = 'ar';
+                column = translation[i].propertyName;
+               obj[column] = translation[i].translation.Ar;
+           break;
+           case 'fr':
+               obj["languageId"] = 'fr';
+                column = translation[i].propertyName;
+               obj[column] = translation[i].translation.Fr;
+           break;
+           case 'po':
+               obj["languageId"] = 'po';
+                column = translation[i].propertyName;
+               obj[column] = translation[i].translation.Po;
+           break;
+           case 'sp':
+               obj["languageId"] = 'sp';
+                column = translation[i].propertyName;
+               obj[column] = translation[i].translation.Sp;
+           break;
+           default:
+             break;
+         }
+       }
+       await models.investeeOwnershipTranslation.create(obj, { transaction });
+      }
+
+
       let accessToken = null;
       let ownershipUser = null;
 
