@@ -161,7 +161,7 @@ module.exports = {
   },
   findOne: async (request, reply) => {
     try {
-      const  languageId  = 1; // request.pre;
+      const  languageId  = 'en'; // request.pre;
       const foundInvesteeCompanies = await models.investee.findOne({
         where: { id: request.params.id },
         include: [
