@@ -13,7 +13,7 @@ module.exports = {
       allowNull: false
     },
     languageId: {
-      type: Sequelize.INTEGER(11).UNSIGNED,
+      type: Sequelize.STRING(5),
       allowNull: false,
     },
     name: {

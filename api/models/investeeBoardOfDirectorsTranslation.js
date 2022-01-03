@@ -13,22 +13,14 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
     },
     languageId: {
-      type: DataTypes.INTEGER(11).UNSIGNED,
+      type: DataTypes.STRING(5),
       allowNull: false,
     },
     name: {
       type: DataTypes.STRING(100),
       allowNull: false,
     },
-    name_ar: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-    },
     position: {
-      type: DataTypes.STRING(50),
-      allowNull: false
-    },
-    position_ar: {
       type: DataTypes.STRING(50),
       allowNull: false
     },

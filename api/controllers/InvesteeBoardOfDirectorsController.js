@@ -49,7 +49,7 @@ module.exports = {
     try {
 
       const { payload } = request;
-      const language = 1; //request.pre.languageId;
+      const language = 'en'; //request.pre.languageId;
       payload.investeeId = request.params.investeeId;
       payload.createdBy = request.params.userId; // 15; //request.auth.decoded.id;
       const foundInvesteeCompanies = await models.investee.findOne({ where: { id: request.params.investeeId } });
@@ -64,6 +64,40 @@ module.exports = {
         payload.boardOfDirectorTranslation["languageId"] = language;
         payload.boardOfDirectorTranslation.investeeBoardOfDirectorsId = createdDirector.id;
         const createdBoardOfDirectorTranslation = await models.investeeBoardOfDirectorTranslation.create(payload.boardOfDirectorTranslation, { transaction });
+        let translation = payload.boardOfDirectorTranslation.translation;
+        let langauges = ['ar', 'fr', 'po', 'sp'];
+        for(let k = 0; k < langauges.length; k++){
+         let obj = payload.boardOfDirectorTranslation;
+
+         for(let i = 0; i < translation.length; i++){
+           let column;
+           switch(langauges[k]){
+             case 'ar':
+                 obj["languageId"] = 'ar';
+                  column = translation[i].propertyName;
+                 obj[column] = translation[i].translation.Ar;
+             break;
+             case 'fr':
+                 obj["languageId"] = 'fr';
+                  column = translation[i].propertyName;
+                 obj[column] = translation[i].translation.Fr;
+             break;
+             case 'po':
+                 obj["languageId"] = 'po';
+                  column = translation[i].propertyName;
+                 obj[column] = translation[i].translation.Po;
+             break;
+             case 'sp':
+                 obj["languageId"] = 'sp';
+                  column = translation[i].propertyName;
+                 obj[column] = translation[i].translation.Sp;
+             break;
+             default:
+               break;
+           }
+         }
+         await models.investeeBoardOfDirectorTranslation.create(obj, { transaction });
+        }
 
       await transaction.commit();
 
