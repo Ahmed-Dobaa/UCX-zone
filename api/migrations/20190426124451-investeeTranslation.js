@@ -21,7 +21,7 @@ module.exports = {
       allowNull: true
     },
     languageId: {
-      type: Sequelize.INTEGER(11).UNSIGNED,
+      type: Sequelize.STRING(),
       allowNull: false,
     },
     phoneNumbers: {

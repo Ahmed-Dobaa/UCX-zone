@@ -307,8 +307,6 @@ module.exports = {
       await models.companiesBasicDataTranslation.create(companyBasicData.companiesBasicDataTranslation, { transaction });
 
 
-           // let po = companyBasicData.companiesBasicDataTranslation;
-      // let sp = companyBasicData.companiesBasicDataTranslation;
       let langauges = ['ar', 'fr', 'po', 'sp'];
    for(let k = 0; k < langauges.length; k++){
     let obj = companyBasicData.companiesBasicDataTranslation;
@@ -343,17 +341,6 @@ module.exports = {
     await models.companiesBasicDataTranslation.create(obj, { transaction });
    }
 
-
-      // let fr = companyBasicData.companiesBasicDataTranslation;
-
-      // for(let i = 0; i < translation.length; i++){
-      //     ar["languageId"] = 'fr';
-      //       let column = translation[i].propertyName;
-      //       arObj[column] = translation[i].translation.Fr;
-      //     }
-          // await models.companiesBasicDataTranslation.create(ar, { transaction });
-        // await models.companiesBasicDataTranslation.create(po, { transaction });
-        // await models.companiesBasicDataTranslation.create(sp, { transaction });
 
       const code = `${moment().format('YYMM')}${new Date().valueOf()}`;
       const createdInvestee = await models.investee.create({ companyId: createdCompanyBasicData.id, code: code, createdBy: userId }, { transaction });
@@ -456,7 +443,7 @@ module.exports = {
   update: async (request, reply) => {
     let transaction;
     try {
-      const language = 1; //request.pre.languageId;
+      let language = 'en';
       const investeeId = request.params.id;
       const { payload } = request;
       const foundInvesteeCompany = await models.investee.findOne({
@@ -492,8 +479,51 @@ module.exports = {
       if(! _.isEmpty(payload.companyBasicData.companiesBasicDataTranslation)) {
 
         await models.companiesBasicDataTranslation.update(payload.companyBasicData.companiesBasicDataTranslation,
-          { where: { id: foundInvesteeCompany.basicData.companiesBasicDataTranslation.id }, transaction });
+          { where: { id: foundInvesteeCompany.basicData.companiesBasicDataTranslation.id, languageId: language }, transaction });
       }
+
+      let translation = payload.companyBasicData.companiesBasicDataTranslation.translation;
+      let langauges = ['ar', 'fr', 'po', 'sp'];
+      for(let k = 0; k < langauges.length; k++){
+       let obj = payload.companyBasicData.companiesBasicDataTranslation;
+
+       for(let i = 0; i < translation.length; i++){
+         let column;
+         switch(langauges[k]){
+           case 'ar':
+               language = 'ar';
+               obj["languageId"] = 'ar';
+                column = translation[i].propertyName;
+               obj[column] = translation[i].translation.Ar;
+           break;
+           case 'fr':
+            language = 'fr';
+               obj["languageId"] = 'fr';
+                column = translation[i].propertyName;
+               obj[column] = translation[i].translation.Fr;
+           break;
+           case 'po':
+            language = 'po';
+               obj["languageId"] = 'po';
+                column = translation[i].propertyName;
+               obj[column] = translation[i].translation.Po;
+           break;
+           case 'sp':
+            language = 'sp';
+               obj["languageId"] = 'sp';
+                column = translation[i].propertyName;
+               obj[column] = translation[i].translation.Sp;
+           break;
+           default:
+             break;
+         }
+       }
+       await models.companiesBasicDataTranslation.update(obj,
+        { where: { companyBasicDataId: foundInvesteeCompany.basicData.id, languageId: language }, transaction });
+    }
+
+
+
 
       if(! _.isEmpty(payload.investeeTranslation)) {
 

@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
     },
     languageId: {
-      type: DataTypes.INTEGER(11).UNSIGNED,
+      type: DataTypes.STRING(),
       allowNull: false,
     },
     phoneNumbers: {
