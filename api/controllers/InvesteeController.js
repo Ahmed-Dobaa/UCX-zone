@@ -289,7 +289,7 @@ module.exports = {
       const { companyBasicData, investeeTranslation } = payload;
       let translation = companyBasicData.companiesBasicDataTranslation.translation;
       companyBasicData.companiesBasicDataTranslation.languageId = 'en';
-      investeeTranslation.languageId = 1;
+      investeeTranslation.languageId = 'en';
 
       // check first that company basic data exist or not.
       let checkRegistrationIdNo = await models.companiesBasicDataTranslation.findOne( { where: {
