@@ -286,7 +286,8 @@ module.exports = {
       const userId = request.auth.decoded ? request.auth.decoded.id : request.params.userId;
 
       const { payload } = request;
-      const { companyBasicData, investeeTranslation, translation } = payload;
+      const { companyBasicData, investeeTranslation } = payload;
+      let translation = companyBasicData.companiesBasicDataTranslation.translation;
       companyBasicData.companiesBasicDataTranslation.languageId = 'en';
       investeeTranslation.languageId = 1;
 
