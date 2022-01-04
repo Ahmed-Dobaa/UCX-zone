@@ -161,8 +161,6 @@ module.exports = {
       });
       for(let i = 0; i < foundCompanies.length; i++){
         if(foundCompanies[i].type === 'investee'){
-
-
           let basicDataTrans = await models.companiesBasicDataTranslation.findAll({where : {companyBasicDataId: foundCompanies[i].id }});
     let translation = [];
         if(basicDataTrans.length > 1){
@@ -205,9 +203,37 @@ module.exports = {
         ]
         }
 
-        foundCompanies[i].companiesBasicDataTranslation.dataValues["translation"] = translation;
       /////////////////////////////
           let _investee = await investeeData(foundCompanies[i].investeeCompany.id);
+         if(_investee.investee_proposal != null){
+
+          let _proposal = await models.investeeInvestmentProposalTranslation.findAll({
+            where: { investeeInvestmentProposalId: _investee.investee_proposal.id }
+          });
+
+          if(_proposal.length > 1){
+            translation.push({
+              propertyName: "description",
+              translation: {
+                    "Ar": _proposal[1].description,
+                    "Fr": _proposal[2].description,
+                    "Po": _proposal[3].description,
+                    "Sp": _proposal[4].description
+                    }
+              },{
+              propertyName: "PurposeOfTheRequiredInvestment",
+              translation: {
+                    "Ar": _proposal[1].PurposeOfTheRequiredInvestment,
+                    "Fr": _proposal[2].PurposeOfTheRequiredInvestment,
+                    "Po": _proposal[3].PurposeOfTheRequiredInvestment,
+                    "Sp": _proposal[4].PurposeOfTheRequiredInvestment
+                   }
+              }
+            );
+          }
+         }
+         foundCompanies[i].dataValues["translation"] = translation;
+
           foundCompanies[i].dataValues["_investee_view"] = _investee;
           let investeeInvestmentProposal = await models.investeeInvestmentProposals.findOne({
             where: { investeeId: foundCompanies[i].investeeCompany.id },
