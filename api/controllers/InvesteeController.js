@@ -772,6 +772,184 @@ companyBasicInfo: async (request, reply) => {
       return errorService.wrapError(e, 'An internal server error occurred');
     }
   },
+
+
+  updateBasicInfo: async (request, reply) => {
+    let transaction;
+
+    try {
+      const { payload } = request;
+
+      let language = 'en';
+      const investeeId = request.params.id;
+
+      const foundInvesteeCompany = await models.investee.findOne({
+        where: { id: investeeId },
+        include: [
+          { association: 'investeeTranslation', required: true, where: { languageId: language } },
+          {
+            association: 'basicData',
+            required: true,
+            include: [
+              {
+                association: 'companiesBasicDataTranslation',
+                required: true,
+                where: { languageId: language }
+              }
+            ]
+          }
+        ]
+      });
+
+      if(_.isEmpty(foundInvesteeCompany)) {
+
+        return Boom.notFound('Company You Try To Update does Not Exist');
+      }
+
+      transaction = await models.sequelize.transaction();
+
+      if(! _.isEmpty(payload.companyBasicData)) {
+
+        await models.companiesBasicData.update(payload.companyBasicData, { where: { id: foundInvesteeCompany.basicData.id }, transaction });
+      }
+
+      if(! _.isEmpty(payload.companyBasicData.companiesBasicDataTranslation)) {
+
+        await models.companiesBasicDataTranslation.update(payload.companyBasicData.companiesBasicDataTranslation,
+          { where: { id: foundInvesteeCompany.basicData.companiesBasicDataTranslation.id, languageId: language }, transaction });
+      }
+      let translation = payload.companyBasicData.companiesBasicDataTranslation.translation;
+
+      let langauges = ['ar', 'fr', 'po', 'sp'];
+      for(let k = 0; k < langauges.length; k++){
+       let obj = payload.companyBasicData.companiesBasicDataTranslation;
+
+       for(let i = 0; i < translation.length; i++){
+         let column;
+         switch(langauges[k]){
+           case 'ar':
+               language = 'ar';
+               obj["languageId"] = 'ar';
+                column = translation[i].propertyName;
+               obj[column] = translation[i].translation.Ar;
+           break;
+           case 'fr':
+            language = 'fr';
+               obj["languageId"] = 'fr';
+                column = translation[i].propertyName;
+               obj[column] = translation[i].translation.Fr;
+           break;
+           case 'po':
+            language = 'po';
+               obj["languageId"] = 'po';
+                column = translation[i].propertyName;
+               obj[column] = translation[i].translation.Po;
+           break;
+           case 'sp':
+            language = 'sp';
+               obj["languageId"] = 'sp';
+                column = translation[i].propertyName;
+               obj[column] = translation[i].translation.Sp;
+           break;
+           default:
+             break;
+         }
+       }
+       await models.companiesBasicDataTranslation.update(obj,
+        { where: { companyBasicDataId: foundInvesteeCompany.basicData.id, languageId: language }, transaction });
+    }
+
+
+
+      if(! _.isEmpty(payload.investeeTranslation)) {
+
+        await models.investeeTranslation.update(payload.investeeTranslation, { where: { id: foundInvesteeCompany.investeeTranslation.id }, transaction });
+      }
+
+      await models.investee.update({ phoneNumbers: payload.phoneNumbers }, { where: { id: investeeId }, transaction });
+
+      try {
+        const  _payload  = request.payload.proposal;
+
+
+        const foundInvesteeInvestmentProposal = await models.investeeInvestmentProposals.findOne({ where: { id: request.params.proposalId }, raw: true });
+
+        if(_.isEmpty(foundInvesteeInvestmentProposal)) {
+          return Boom.badRequest('Investee investment proposal You Try To Update Does Not Exist');
+        }
+        let _language = 'en';
+        await models.investeeInvestmentProposals.update(_payload, { where: { id: request.params.proposalId }, transaction });
+
+          _payload.investmentProposalTranslation.languageId = _language;
+          await models.investeeInvestmentProposalTranslation.update(_payload.investmentProposalTranslation,
+            { where: { investeeInvestmentProposalId: request.params.proposalId, languageId: _language }, transaction }); //payload.investmentProposalTranslation.id
+
+            for(let k = 0; k < langauges.length; k++){
+              let obj = request.payload.proposal;
+
+              for(let i = 0; i < translation.length; i++){
+                let column;
+                switch(langauges[k]){
+                  case 'ar':
+                      language = 'ar';
+                      obj["languageId"] = 'ar';
+                       column = translation[i].propertyName;
+                      obj[column] = translation[i].translation.Ar;
+                  break;
+                  case 'fr':
+                   language = 'fr';
+                      obj["languageId"] = 'fr';
+                       column = translation[i].propertyName;
+                      obj[column] = translation[i].translation.Fr;
+                  break;
+                  case 'po':
+                   language = 'po';
+                      obj["languageId"] = 'po';
+                       column = translation[i].propertyName;
+                      obj[column] = translation[i].translation.Po;
+                  break;
+                  case 'sp':
+                   language = 'sp';
+                      obj["languageId"] = 'sp';
+                       column = translation[i].propertyName;
+                      obj[column] = translation[i].translation.Sp;
+                  break;
+                  default:
+                    break;
+                }
+              }
+              console.log(obj)
+              await models.investeeInvestmentProposalTranslation.update(obj,
+                { where: { investeeInvestmentProposalId: request.params.proposalId, languageId: language }, transaction }); //payload.investmentProposalTranslation.id
+
+           }
+
+      }
+      catch (e) {
+        console.log('error', e);
+
+        if(transaction) {
+          await transaction.rollback();
+        }
+
+        return errorService.wrapError(e, 'An internal server error occurred');
+      }
+      await transaction.commit();
+
+      return reply.response({status: 200, message: "updated successfully"}).code(200);
+    }
+    catch (e) {
+      console.log('error', e);
+
+      if(transaction) {
+        await transaction.rollback();
+      }
+      await transaction.commit();
+      return errorService.wrapError(e, 'An internal server error occurred');
+    }
+  },
+
+
   delete: async (request, reply) => {
     try {
 

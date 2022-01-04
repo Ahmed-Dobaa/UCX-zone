@@ -1016,6 +1016,27 @@ module.exports = [
     }
   },
   {
+    path: '/users/{userId}/basicInfo/{id}/{proposalId}',
+    method: 'PUT',
+    options: {
+      description: 'update specific investee by its id for a specific user id',
+      // payload: {
+      //   maxBytes: 2097152, // maximum payload size in bytes (2M)
+      //   output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
+      //   parse: true, // The parse property determines if the incoming payload gets parsed
+      //   allow: ['multipart/form-data']
+      // },
+      auth: 'jwt',
+      app: { allowedPermission: { resource: 'investees', action: 'update' } },
+      pre: [
+        // { method: helperService.authorizeUser },
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      validate: investeeSchema.updateSchema,
+      handler: investeeController.updateBasicInfo
+    }
+  },
+  {
     path: '/users/{userId}/investees/{id}',
     method: 'DELETE',
     options: {
