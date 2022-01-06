@@ -339,9 +339,11 @@ companyBasicInfo: async (request, reply) => {
 
     // check first that company basic data exist or not.
     let checkRegistrationIdNo = await models.companiesBasicDataTranslation.findOne( { where: {
-               registrationIdNo: companyBasicData.companiesBasicDataTranslation.registrationIdNo }})
+               registrationIdNo: companyBasicData.companiesBasicDataTranslation.registrationIdNo,languageId: 'en' }})
 
     // check if this registration id number exist or not
+    console.log("checkRegistrationIdNo")
+    console.log(checkRegistrationIdNo);
     if(checkRegistrationIdNo != null){
       await transaction.rollback();
       return reply.response({status: 406, message: "This registration id number already exist"}).code(406);
