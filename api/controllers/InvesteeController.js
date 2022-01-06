@@ -345,137 +345,135 @@ companyBasicInfo: async (request, reply) => {
     if(checkRegistrationIdNo != null){
       await transaction.rollback();
       return reply.response({status: 406, message: "This registration id number already exist"}).code(406);
-    }
-    companyBasicData["user_id"] = request.params.userId;
-    companyBasicData.type = 'investee';
-    const createdCompanyBasicData = await models.companiesBasicData.create(companyBasicData, { transaction });
-    companyBasicData.companiesBasicDataTranslation.companyBasicDataId = createdCompanyBasicData.id;
-    await models.companiesBasicDataTranslation.create(companyBasicData.companiesBasicDataTranslation, { transaction });
+    }else{
+      companyBasicData["user_id"] = request.params.userId;
+      companyBasicData.type = 'investee';
+      const createdCompanyBasicData = await models.companiesBasicData.create(companyBasicData, { transaction });
+      companyBasicData.companiesBasicDataTranslation.companyBasicDataId = createdCompanyBasicData.id;
+      await models.companiesBasicDataTranslation.create(companyBasicData.companiesBasicDataTranslation, { transaction });
 
 
-    let langauges = ['ar', 'fr', 'po', 'sp'];
- for(let k = 0; k < langauges.length; k++){
-  let obj = companyBasicData.companiesBasicDataTranslation;
+      let langauges = ['ar', 'fr', 'po', 'sp'];
+   for(let k = 0; k < langauges.length; k++){
+    let obj = companyBasicData.companiesBasicDataTranslation;
 
-  for(let i = 0; i < translation.length; i++){
-    let column;
-    switch(langauges[k]){
-      case 'ar':
-          obj["languageId"] = 'ar';
-           column = translation[i].propertyName;
-          obj[column] = translation[i].translation.Ar;
-      break;
-      case 'fr':
-          obj["languageId"] = 'fr';
-           column = translation[i].propertyName;
-          obj[column] = translation[i].translation.Fr;
-      break;
-      case 'po':
-          obj["languageId"] = 'po';
-           column = translation[i].propertyName;
-          obj[column] = translation[i].translation.Po;
-      break;
-      case 'sp':
-          obj["languageId"] = 'sp';
-           column = translation[i].propertyName;
-          obj[column] = translation[i].translation.Sp;
-      break;
-      default:
+    for(let i = 0; i < translation.length; i++){
+      let column;
+      switch(langauges[k]){
+        case 'ar':
+            obj["languageId"] = 'ar';
+             column = translation[i].propertyName;
+            obj[column] = translation[i].translation.Ar;
         break;
-    }
-  }
-  await models.companiesBasicDataTranslation.create(obj, { transaction });
- }
-
-
-    const code = `${moment().format('YYMM')}${new Date().valueOf()}`;
-    const createdInvestee = await models.investee.create({ companyId: createdCompanyBasicData.id, code: code, createdBy: userId }, { transaction });
-    investeeTranslation.investeeId = createdInvestee.id;
-    await models.investeeTranslation.create(investeeTranslation, { transaction });
-    await models.usersInvestees.create({ userId: userId , investeeId: createdInvestee.id, roleId: 2 }, { transaction });
-
-
-    await models.request_Role_company.create({
-      userId: userId,
-      companyId: createdInvestee.id,
-      requestedRole: " "
-    }, { transaction });
-
-    await transaction.commit();
-    //////  ************************ proposal  ***************************
-    try {
-      let _language = 'en';
-      const  _payload  = request.payload.proposal;
-
-
-      _payload.investeeId = createdInvestee.id; //request.params.investeeId;
-      _payload.createdBy = request.params.userId; //request.auth.decoded.id;
-      const foundInvestee = await models.investee.findOne({ where: { id: createdInvestee.id } });
-
-      if(_.isEmpty(foundInvestee)) {
-        return Boom.badRequest('The Investee Company Does Not Exist, You have to create It First');
+        case 'fr':
+            obj["languageId"] = 'fr';
+             column = translation[i].propertyName;
+            obj[column] = translation[i].translation.Fr;
+        break;
+        case 'po':
+            obj["languageId"] = 'po';
+             column = translation[i].propertyName;
+            obj[column] = translation[i].translation.Po;
+        break;
+        case 'sp':
+            obj["languageId"] = 'sp';
+             column = translation[i].propertyName;
+            obj[column] = translation[i].translation.Sp;
+        break;
+        default:
+          break;
       }
+    }
+    await models.companiesBasicDataTranslation.create(obj, { transaction });
+   }
 
-      transaction = await models.sequelize.transaction();
 
-      const createdInvesteeInvestmentProposal = await models.investeeInvestmentProposals.create(_payload, { transaction });
-      _payload.investmentProposalTranslation.languageId = _language;
-      _payload.investmentProposalTranslation.investeeInvestmentProposalId = createdInvesteeInvestmentProposal.id;
-      const createdInvesteeInvestmentProposalTranslation =
-      await models.investeeInvestmentProposalTranslation.create(_payload.investmentProposalTranslation, { transaction });
+      const code = `${moment().format('YYMM')}${new Date().valueOf()}`;
+      const createdInvestee = await models.investee.create({ companyId: createdCompanyBasicData.id, code: code, createdBy: userId }, { transaction });
+      investeeTranslation.investeeId = createdInvestee.id;
+      await models.investeeTranslation.create(investeeTranslation, { transaction });
+      await models.usersInvestees.create({ userId: userId , investeeId: createdInvestee.id, roleId: 2 }, { transaction });
 
-      for(let k = 0; k < langauges.length; k++){
-       let obj = _payload.investmentProposalTranslation;
 
-       for(let i = 0; i < translation.length; i++){
-         let column;
-         switch(langauges[k]){
-           case 'ar':
-               obj["languageId"] = 'ar';
-                column = translation[i].propertyName;
-               obj[column] = translation[i].translation.Ar;
-           break;
-           case 'fr':
-               obj["languageId"] = 'fr';
-                column = translation[i].propertyName;
-               obj[column] = translation[i].translation.Fr;
-           break;
-           case 'po':
-               obj["languageId"] = 'po';
-                column = translation[i].propertyName;
-               obj[column] = translation[i].translation.Po;
-           break;
-           case 'sp':
-               obj["languageId"] = 'sp';
-                column = translation[i].propertyName;
-               obj[column] = translation[i].translation.Sp;
-           break;
-           default:
+      await models.request_Role_company.create({
+        userId: userId,
+        companyId: createdInvestee.id,
+        requestedRole: " "
+      }, { transaction });
+
+      await transaction.commit();
+      //////  ************************ proposal  ***************************
+      try {
+        let _language = 'en';
+        const  _payload  = request.payload.proposal;
+
+
+        _payload.investeeId = createdInvestee.id; //request.params.investeeId;
+        _payload.createdBy = request.params.userId; //request.auth.decoded.id;
+        const foundInvestee = await models.investee.findOne({ where: { id: createdInvestee.id } });
+
+        if(_.isEmpty(foundInvestee)) {
+          return Boom.badRequest('The Investee Company Does Not Exist, You have to create It First');
+        }
+
+        transaction = await models.sequelize.transaction();
+
+        const createdInvesteeInvestmentProposal = await models.investeeInvestmentProposals.create(_payload, { transaction });
+        _payload.investmentProposalTranslation.languageId = _language;
+        _payload.investmentProposalTranslation.investeeInvestmentProposalId = createdInvesteeInvestmentProposal.id;
+        const createdInvesteeInvestmentProposalTranslation =
+        await models.investeeInvestmentProposalTranslation.create(_payload.investmentProposalTranslation, { transaction });
+
+        for(let k = 0; k < langauges.length; k++){
+         let obj = _payload.investmentProposalTranslation;
+
+         for(let i = 0; i < translation.length; i++){
+           let column;
+           switch(langauges[k]){
+             case 'ar':
+                 obj["languageId"] = 'ar';
+                  column = translation[i].propertyName;
+                 obj[column] = translation[i].translation.Ar;
              break;
+             case 'fr':
+                 obj["languageId"] = 'fr';
+                  column = translation[i].propertyName;
+                 obj[column] = translation[i].translation.Fr;
+             break;
+             case 'po':
+                 obj["languageId"] = 'po';
+                  column = translation[i].propertyName;
+                 obj[column] = translation[i].translation.Po;
+             break;
+             case 'sp':
+                 obj["languageId"] = 'sp';
+                  column = translation[i].propertyName;
+                 obj[column] = translation[i].translation.Sp;
+             break;
+             default:
+               break;
+           }
          }
-       }
-       await models.investeeInvestmentProposalTranslation.create(obj, { transaction });
+         await models.investeeInvestmentProposalTranslation.create(obj, { transaction });
+        }
       }
-    }
-    catch (e) {
-      console.log('error', e);
+      catch (e) {
+        console.log('error', e);
 
-      if(transaction) {
-        await transaction.rollback();
+        if(transaction) {
+          await transaction.rollback();
+        }
+
+        return errorService.wrapError(e, 'An internal server error occurred');
       }
 
-      return errorService.wrapError(e, 'An internal server error occurred');
-    }
+      /////
+      await transaction.commit();
+      payload.id = createdInvestee.id;
 
-    /////
-    await transaction.commit();
-    payload.id = createdInvestee.id;
+      return reply.response(payload).code(201);}
 
-    return reply.response(payload).code(201);
-
-}
-
-  catch (e) {
+}catch (e) {
     console.log('error', e);
 
     if(transaction) {
