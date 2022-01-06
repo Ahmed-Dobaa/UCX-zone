@@ -345,6 +345,7 @@ companyBasicInfo: async (request, reply) => {
     console.log("checkRegistrationIdNo")
     console.log(checkRegistrationIdNo);
     if(checkRegistrationIdNo != null){
+      console.log("here");
       await transaction.rollback();
       return reply.response({status: 406, message: "This registration id number already exist"}).code(406);
     }else{

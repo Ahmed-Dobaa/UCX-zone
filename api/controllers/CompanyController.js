@@ -98,7 +98,6 @@ async function investeeData(investeeId){
          }
 
       if(investeeIncome != null ){
-        console.log(investeeBalanceTranslation)
         if(investeeBalanceTranslation != undefined){
           for(let i = 0; i < investeeBalanceTranslation.length; i++){
             investeeIncomeTranslation[i].fixedAssets = investeeBalanceTranslation[i].fixedAssets;
