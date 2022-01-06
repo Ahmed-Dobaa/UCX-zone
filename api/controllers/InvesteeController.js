@@ -339,7 +339,7 @@ companyBasicInfo: async (request, reply) => {
 
     // check first that company basic data exist or not.
     let checkRegistrationIdNo = await models.companiesBasicDataTranslation.findOne( { where: {
-               registrationIdNo: companyBasicData.companiesBasicDataTranslation.registrationIdNo,languageId: 'en' }})
+               registrationIdNo: companyBasicData.companiesBasicDataTranslation.registrationIdNo, languageId: 'en' }})
 
     // check if this registration id number exist or not
     console.log("checkRegistrationIdNo")
@@ -918,7 +918,6 @@ companyBasicInfo: async (request, reply) => {
                     break;
                 }
               }
-              console.log(obj)
               await models.investeeInvestmentProposalTranslation.update(obj,
                 { where: { investeeInvestmentProposalId: request.params.proposalId, languageId: language }, transaction }); //payload.investmentProposalTranslation.id
 
