@@ -173,21 +173,21 @@ module.exports = {
                 "Sp": basicDataTrans[4].name
               }},
               {
-                propertyName: "productsOrServices",
+                propertyName: "companyPurpose",
                 translation: {
-                  "Ar": basicDataTrans[1].productsOrServices,
-                  "Fr": basicDataTrans[2].productsOrServices,
-                  "Po": basicDataTrans[3].productsOrServices,
-                  "Sp": basicDataTrans[4].productsOrServices
+                  "Ar": basicDataTrans[1].companyPurpose,
+                  "Fr": basicDataTrans[2].companyPurpose,
+                  "Po": basicDataTrans[3].companyPurpose,
+                  "Sp": basicDataTrans[4].companyPurpose
                 }
             },
            {
             propertyName: "productsOrServices",
             translation: {
-              "Ar": basicDataTrans[1].companyPurpose,
-              "Fr": basicDataTrans[2].companyPurpose,
-              "Po": basicDataTrans[3].companyPurpose,
-              "Sp": basicDataTrans[4].companyPurpose
+              "Ar": basicDataTrans[1].productsOrServices,
+              "Fr": basicDataTrans[2].productsOrServices,
+              "Po": basicDataTrans[3].productsOrServices,
+              "Sp": basicDataTrans[4].productsOrServices
             }
          }
         ]
