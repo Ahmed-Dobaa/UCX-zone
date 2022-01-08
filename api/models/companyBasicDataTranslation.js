@@ -31,7 +31,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     companyPurpose: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     },
     productsOrServices: {
       type: DataTypes.TEXT,

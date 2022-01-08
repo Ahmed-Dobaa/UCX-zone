@@ -360,6 +360,8 @@ companyBasicInfo: async (request, reply) => {
    for(let k = 0; k < langauges.length; k++){
     let obj = companyBasicData.companiesBasicDataTranslation;
 
+    obj.productsOrServices = null;
+    obj.companyPurpose = null;
     for(let i = 0; i < translation.length; i++){
       let column;
       switch(langauges[k]){
@@ -429,7 +431,8 @@ companyBasicInfo: async (request, reply) => {
 
         for(let k = 0; k < langauges.length; k++){
          let obj = _payload.investmentProposalTranslation;
-
+     obj.description = null;
+     obj.PurposeOfTheRequiredInvestment = null;
          for(let i = 0; i < translation.length; i++){
            let column;
            switch(langauges[k]){

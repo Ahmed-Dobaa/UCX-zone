@@ -181,16 +181,7 @@ module.exports = {
                   "Sp": basicDataTrans[4].productsOrServices
                 }
             },
-            {
-              propertyName: "main_address",
-              translation: {
-                "Ar": basicDataTrans[1].main_address,
-                "Fr": basicDataTrans[2].main_address,
-                "Po": basicDataTrans[3].main_address,
-                "Sp": basicDataTrans[4].main_address
-              }
-          },
-          {
+           {
             propertyName: "productsOrServices",
             translation: {
               "Ar": basicDataTrans[1].companyPurpose,

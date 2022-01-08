@@ -22,7 +22,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     description: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: true
     },
     minInvestment: {
       type: DataTypes.DECIMAL,
@@ -42,7 +42,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     PurposeOfTheRequiredInvestment: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: true
     },
     attachmentPath: {
       type: DataTypes.STRING(255),
