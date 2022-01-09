@@ -211,9 +211,9 @@ module.exports = {
       for(let k = 0; k < request.payload.portfolio.length; k++){
         let headquarter_country = [];
         console.log(request.payload.portfolio[k].country);
-       for(let i = 0; i < request.payload.portfolio[k].country.length; i++){
-        headquarter_country.push(request.payload.portfolio[k].country[i].name)
-       }
+      //  for(let i = 0; i < request.payload.portfolio[k].country.length; i++){
+      //   headquarter_country.push(request.payload.portfolio[k].country[i].name)
+      //  }
        let sector = [];
        for(let i = 0; i < request.payload.portfolio[k].sector.length; i++){
         sector.push(request.payload.portfolio[k].sector[i].name)
@@ -222,7 +222,7 @@ module.exports = {
           "investor_id": investor.id,
           "country_name": request.payload.portfolio[k].name,
           "ownership_percentage": request.payload.portfolio[k].pOfOwnership,
-          "headquarter_country": headquarter_country,
+          "headquarter_country": request.payload.portfolio[k].country,
           "sectors": sector
         },
            { transaction });
