@@ -192,35 +192,26 @@ module.exports = {
               "Sp": basicDataTrans[4].name
             }},
             {
-              propertyName: "productsOrServices",
+              propertyName: "companyPurpose",
               translation: {
-                "Ar": basicDataTrans[1].productsOrServices,
-                "Fr": basicDataTrans[2].productsOrServices,
-                "Po": basicDataTrans[3].productsOrServices,
-                "Sp": basicDataTrans[4].productsOrServices
+                "Ar": basicDataTrans[1].companyPurpose,
+                "Fr": basicDataTrans[2].companyPurpose,
+                "Po": basicDataTrans[3].companyPurpose,
+                "Sp": basicDataTrans[4].companyPurpose
               }
           },
-          {
-            propertyName: "main_address",
-            translation: {
-              "Ar": basicDataTrans[1].main_address,
-              "Fr": basicDataTrans[2].main_address,
-              "Po": basicDataTrans[3].main_address,
-              "Sp": basicDataTrans[4].main_address
-            }
-        },
-        {
+         {
           propertyName: "productsOrServices",
           translation: {
-            "Ar": basicDataTrans[1].companyPurpose,
-            "Fr": basicDataTrans[2].companyPurpose,
-            "Po": basicDataTrans[3].companyPurpose,
-            "Sp": basicDataTrans[4].companyPurpose
+            "Ar": basicDataTrans[1].productsOrServices,
+            "Fr": basicDataTrans[2].productsOrServices,
+            "Po": basicDataTrans[3].productsOrServices,
+            "Sp": basicDataTrans[4].productsOrServices
           }
        }
       ]
       }
-      foundInvesteeCompanies.basicData.companiesBasicDataTranslation.dataValues["translation"] = translation;
+      foundInvesteeCompanies.basicData.dataValues["translation"] = translation;
       const capital = await models.investeeCapital.findOne({ where: {investeeId: request.params.id}})
       const director = await models.investeeBoardOfDirectors.findOne({
         where: { investeeId: request.params.id },
@@ -308,6 +299,32 @@ module.exports = {
           where: { investeeId: request.params.id },
           include: [{ association: 'investeeInvestmentProposalTranslation', where: { languageId: languageId }, required: true }]
         });
+
+        if(investeeInvestmentProposal != null){
+          let _proposal = await models.investeeInvestmentProposalTranslation.findAll({
+            where: { investeeInvestmentProposalId: investeeInvestmentProposal.id }
+          });
+          if(_proposal.length > 1){
+            translation.push({
+              propertyName: "description",
+              translation: {
+                    "Ar": _proposal[1].description,
+                    "Fr": _proposal[2].description,
+                    "Po": _proposal[3].description,
+                    "Sp": _proposal[4].description
+                    }
+              },{
+              propertyName: "PurposeOfTheRequiredInvestment",
+              translation: {
+                    "Ar": _proposal[1].PurposeOfTheRequiredInvestment,
+                    "Fr": _proposal[2].PurposeOfTheRequiredInvestment,
+                    "Po": _proposal[3].PurposeOfTheRequiredInvestment,
+                    "Sp": _proposal[4].PurposeOfTheRequiredInvestment
+                   }
+              }
+            );
+          }
+        }
 
         return reply.response({status: 200, company_data: foundInvesteeCompanies, capital: capital,
                     board_director: director, investee_ownership: investeeOwnership, investee_auditor: investeeAuditor,
