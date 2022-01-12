@@ -199,19 +199,10 @@ module.exports = {
                 "Po": basicDataTrans[3].companyPurpose,
                 "Sp": basicDataTrans[4].companyPurpose
               }
-          },
-         {
-          propertyName: "productsOrServices",
-          translation: {
-            "Ar": basicDataTrans[1].productsOrServices,
-            "Fr": basicDataTrans[2].productsOrServices,
-            "Po": basicDataTrans[3].productsOrServices,
-            "Sp": basicDataTrans[4].productsOrServices
           }
-       }
       ]
       }
-      foundInvesteeCompanies.basicData.dataValues["translation"] = translation;
+      foundInvesteeCompanies.basicData.companiesBasicDataTranslation.dataValues["translation"] = translation;
       const capital = await models.investeeCapital.findOne({ where: {investeeId: request.params.id}})
       const director = await models.investeeBoardOfDirectors.findOne({
         where: { investeeId: request.params.id },
