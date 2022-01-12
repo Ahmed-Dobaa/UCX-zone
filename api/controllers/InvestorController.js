@@ -82,9 +82,9 @@ module.exports = {
       const foundCompanies = await models.investor.findAll({
          where: {deleted: 0 },
         include: [
-          { model: models.investorTranslation, as: 'investorTranslation' },
+          { model: models.investorTranslation, where: {languageId: 'en'}, as: 'investorTranslation' },
           { model: models.companiesBasicData, as: 'company',
-              include: [{ model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }] }
+              include: [{ model: models.companiesBasicDataTranslation, where: {languageId: 'en'}, as: 'companiesBasicDataTranslation' }] }
          ]
       });
       let avatarFullPath = null; // path.join(__dirname, '../../uploads/default.png');
@@ -144,9 +144,10 @@ module.exports = {
     let transaction;
     let company = null;
     try {
-      const language = 1; //request.pre.languageId;
+      const language = 'en'; //request.pre.languageId;
       let { investor } = request.payload;
       const { investorTranslation } = request.payload.investor;
+      let translation = request.payload.companyBasicData.companiesBasicDataTranslation.translation;
       const userId = request.auth.decoded ? request.auth.decoded.id : request.params.userId;
       investor.createdBy = userId;
       investor.type = request.payload.investor.type;
@@ -159,6 +160,7 @@ module.exports = {
        investor.turnoverRangeId = arr;
 
       transaction = await models.sequelize.transaction();
+      let langauges = ['ar', 'fr', 'po', 'sp'];
 
       if(request.payload.investor.type === 'Institutional Investor') { // If company already exists, just add the investor data in its table.
         const { companiesBasicDataTranslation } = request.payload.companyBasicData;
@@ -173,12 +175,77 @@ module.exports = {
         await models.companiesBasicDataTranslation.create(companiesBasicDataTranslation, { transaction });
         // }
         investor.companyId = company.id;
+        for(let k = 0; k < langauges.length; k++){
+         let obj = companiesBasicDataTranslation;
+         obj.name = null;
+         obj.companyPurpose = null;
+         obj.main_address;
+         for(let i = 0; i < translation.length; i++){
+           let column;
+           switch(langauges[k]){
+             case 'ar':
+                 obj["languageId"] = 'ar';
+                  column = translation[i].propertyName;
+                 obj[column] = translation[i].translation.Ar;
+             break;
+             case 'fr':
+                 obj["languageId"] = 'fr';
+                  column = translation[i].propertyName;
+                 obj[column] = translation[i].translation.Fr;
+             break;
+             case 'po':
+                 obj["languageId"] = 'po';
+                  column = translation[i].propertyName;
+                 obj[column] = translation[i].translation.Po;
+             break;
+             case 'sp':
+                 obj["languageId"] = 'sp';
+                  column = translation[i].propertyName;
+                 obj[column] = translation[i].translation.Sp;
+             break;
+             default:
+               break;
+           }
+         }
+         await models.companiesBasicDataTranslation.create(obj, { transaction });
+        }
       }
       investor = await models.investor.create(investor, { transaction });
       investorTranslation.investorId= investor.id;
       investorTranslation.phoneNumbers = '010'; //request.payload.companyBasicData.companiesBasicDataTranslation.phoneNumbers;
       await models.investorTranslation.create(investorTranslation, { transaction });
-
+      for(let k = 0; k < langauges.length; k++){
+        let obj = investorTranslation;
+        obj.investmentStrategy = null;
+        for(let i = 0; i < translation.length; i++){
+          let column;
+          switch(langauges[k]){
+            case 'ar':
+                obj["languageId"] = 'ar';
+                 column = translation[i].propertyName;
+                obj[column] = translation[i].translation.Ar;
+            break;
+            case 'fr':
+                obj["languageId"] = 'fr';
+                 column = translation[i].propertyName;
+                obj[column] = translation[i].translation.Fr;
+            break;
+            case 'po':
+                obj["languageId"] = 'po';
+                 column = translation[i].propertyName;
+                obj[column] = translation[i].translation.Po;
+            break;
+            case 'sp':
+                obj["languageId"] = 'sp';
+                 column = translation[i].propertyName;
+                obj[column] = translation[i].translation.Sp;
+            break;
+            default:
+              break;
+          }
+        }
+        await models.investorTranslation.create(obj, { transaction });
+       }
       let countries = [];
        for(let i = 0; i < request.payload.investor.investorTranslation.target_countries.length; i++){
         countries.push(request.payload.investor.investorTranslation.target_countries[i].name)

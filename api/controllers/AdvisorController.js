@@ -17,7 +17,8 @@ module.exports = {
     let transaction;
     let company = null;
     try {
-      const language = 1; //request.pre.languageId;
+      let translation = request.payload.advisorBasicData.advisorsBasicDataTranslation.translation;
+      const language = 'en'; //request.pre.languageId;
       let { advisor } = request.payload;
     //   const { investorTranslation } = request.payload.investor;
       const userId = request.auth.decoded ? request.auth.decoded.id : request.params.userId;
@@ -42,9 +43,43 @@ module.exports = {
         advisorsBasicDataTranslation.companyBasicDataId = company.id;
         advisorsBasicDataTranslation.languageId = language;
         await models.companiesBasicDataTranslation.create(advisorsBasicDataTranslation, { transaction });
-
+        let langauges = ['ar', 'fr', 'po', 'sp'];
+        for(let k = 0; k < langauges.length; k++){
+          let obj = advisorsBasicDataTranslation;
+          obj.name = null;
+          obj.companyPurpose = null;
+          obj.main_address;
+          for(let i = 0; i < translation.length; i++){
+            let column;
+            switch(langauges[k]){
+              case 'ar':
+                  obj["languageId"] = 'ar';
+                   column = translation[i].propertyName;
+                  obj[column] = translation[i].translation.Ar;
+              break;
+              case 'fr':
+                  obj["languageId"] = 'fr';
+                   column = translation[i].propertyName;
+                  obj[column] = translation[i].translation.Fr;
+              break;
+              case 'po':
+                  obj["languageId"] = 'po';
+                   column = translation[i].propertyName;
+                  obj[column] = translation[i].translation.Po;
+              break;
+              case 'sp':
+                  obj["languageId"] = 'sp';
+                   column = translation[i].propertyName;
+                  obj[column] = translation[i].translation.Sp;
+              break;
+              default:
+                break;
+            }
+          }
+          await models.companiesBasicDataTranslation.create(obj, { transaction });
+         }
         advisor.companyId = company.id;
-
+        advisor.deleted = 0;
         advisor = await models.Advisor.create(advisor, { transaction });
 
       let countries = [];
@@ -126,30 +161,31 @@ module.exports = {
         where: {deleted: 0 },
         include: [
           { model: models.companiesBasicData, as: 'company',
-              include: [{ model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }] }
+              include: [{ model: models.companiesBasicDataTranslation, where: {languageId: 'en'}, as: 'companiesBasicDataTranslation' }] }
          ]
       });
+      console.log(foundCompanies)
       let avatarFullPath = null; // path.join(__dirname, '../../uploads/default.png');
       // const foundInvestor = await models.investor.findOne({ where: { id: request.params.id }, raw: true });
-      for(let i = 0; i < foundCompanies.length; i++){
-        foundCompanies[i].img = path.join(__dirname, '../../', foundCompanies[i].img);
-        var array = foundCompanies[i].turnoverRangeId.split(",");
-        foundCompanies[i].turnoverRangeId = array;
-        let countries = await models.advisorTargetedCountries.findAll({where: {advisorId: foundCompanies[i].id}})
-        let sectors = await models.advisorTargetedSectors.findAll({where: {advisorId: foundCompanies[i].id}})
-      if(countries.length != 0){
-        var countroy = countries[0].countryId.split(",");
-        countries[0] = countroy;
-        foundCompanies[i].dataValues["countries"] = countries[0];
-      }
-      if(sectors.length != 0){
-        var sector = sectors[0].sectorId.split(",");
-        sectors[0] = sector;
+      // for(let i = 0; i < foundCompanies.length; i++){
+      //   foundCompanies[i].img = path.join(__dirname, '../../', foundCompanies[i].img);
+      //   var array = foundCompanies[i].turnoverRangeId.split(",");
+      //   foundCompanies[i].turnoverRangeId = array;
+      //   let countries = await models.advisorTargetedCountries.findAll({where: {advisorId: foundCompanies[i].id}})
+      //   let sectors = await models.advisorTargetedSectors.findAll({where: {advisorId: foundCompanies[i].id}})
+      // if(countries.length != 0){
+      //   var countroy = countries[0].countryId.split(",");
+      //   countries[0] = countroy;
+      //   foundCompanies[i].dataValues["countries"] = countries[0];
+      // }
+      // if(sectors.length != 0){
+      //   var sector = sectors[0].sectorId.split(",");
+      //   sectors[0] = sector;
 
-        foundCompanies[i].dataValues["sectors"] = sectors[0];
-      }
+      //   foundCompanies[i].dataValues["sectors"] = sectors[0];
+      // }
 
-      }
+      // }
       return reply.response(foundCompanies).code(200);
     }
     catch (e) {

@@ -52,7 +52,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     main_address: {
       type: DataTypes.STRING(1000),
-      allowNull: false
+      allowNull: true
     },
     city: {
       type: DataTypes.STRING(100),
