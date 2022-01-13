@@ -60,7 +60,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     Tax: {
       type: DataTypes.INTEGER(11),
-      allowNull: false
+      allowNull: true
     },
     depreciation: {
       type: DataTypes.INTEGER(11),
