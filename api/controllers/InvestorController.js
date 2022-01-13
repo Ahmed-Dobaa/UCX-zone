@@ -90,11 +90,64 @@ module.exports = {
       let avatarFullPath = null; // path.join(__dirname, '../../uploads/default.png');
       // const foundInvestor = await models.investor.findOne({ where: { id: request.params.id }, raw: true });
       for(let i = 0; i < foundCompanies.length; i++){
-        if(foundCompanies[i].img != null){
-          foundCompanies[i].img = path.join(__dirname, '../../', foundCompanies[i].img);
-        }else{
-          foundCompanies[i].img = "no img"
+        // if(foundCompanies[i].img != null){
+        //   foundCompanies[i].img = path.join(__dirname, '../../', foundCompanies[i].img);
+        // }else{
+        //   foundCompanies[i].img = "no img"
+        // }
+        let translation = [];
+        if(foundCompanies[i].company != null){
+          let basicDataTran = await models.companiesBasicDataTranslation.findAll({where : {companyBasicDataId: foundCompanies[i].company.id }});
+          let _investorTrans = await models.investorTranslation.findAll({where : {investorId: foundCompanies[i].id }});
+        if(basicDataTran.length > 1){
+          translation = [
+            {
+              propertyName: "name",
+              translation: {
+                "Ar": basicDataTran[1].name,
+                "Fr": basicDataTran[2].name,
+                "Po": basicDataTran[3].name,
+                "Sp": basicDataTran[4].name
+              }},
+              {
+                propertyName: "companyPurpose",
+                translation: {
+                  "Ar": basicDataTran[1].companyPurpose,
+                  "Fr": basicDataTran[2].companyPurpose,
+                  "Po": basicDataTran[3].companyPurpose,
+                  "Sp": basicDataTran[4].companyPurpose
+                }
+            },
+            {
+              propertyName: "main_address",
+              translation: {
+                "Ar": basicDataTran[1].main_address,
+                "Fr": basicDataTran[2].main_address,
+                "Po": basicDataTran[3].main_address,
+                "Sp": basicDataTran[4].main_address
+              }
+          }
+        ]
+         }
+         foundCompanies[i].company.dataValues["translation"] = translation;
+         if(_investorTrans.length > 1){
+          translation.push(
+            {
+              propertyName: "investmentStrategy",
+              translation: {
+                "Ar": _investorTrans[1].investmentStrategy,
+                "Fr": _investorTrans[2].investmentStrategy,
+                "Po": _investorTrans[3].investmentStrategy,
+                "Sp": _investorTrans[4].investmentStrategy
+              }
+            }
+          )
+         }
+
         }
+
+
+      ///////////////////////
 
         var array = foundCompanies[i].turnoverRangeId.split(",");
         foundCompanies[i].turnoverRangeId = array;
@@ -111,8 +164,23 @@ module.exports = {
 
         foundCompanies[i].dataValues["sectors"] = sectors[0];
       }
-
+      let managemant = await models.investorManagement.findAll({
+        where: {investorId: foundCompanies[i].id},
+        include:
+        { model: models.investorManagementTranslation, as: 'managementTranslation' }
+      })
+      foundCompanies[i].dataValues["managemant"] = managemant;
+      let portfolio = await models.investor_portfolio.findAll({where: {investor_id: foundCompanies[i].id}});
+      if(portfolio.length > 0){
+          for(let p = 0; p < portfolio.length; p++){
+            console.log(portfolio[p].sectors);
+            let portSector = portfolio[p].sectors.split(",");
+            portfolio[p].dataValues["sectors"] = portSector;
+          }
+       }
+       foundCompanies[i].dataValues["portfolio"] = portfolio;
       }
+
       // const sequelizeQuery = qsToSequelizeQuery(request.query, models.investor.attributes, models.investor.associations);
       // const foundInvestorCompanies = await models.investor.scope({ method: ['includeRelations', sequelizeQuery, language] }).findAndCountAll();
 

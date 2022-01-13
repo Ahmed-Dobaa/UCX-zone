@@ -37,7 +37,7 @@ module.exports = function (sequelize, DataTypes) {
 
   investorManagement.associate = (models) => {
 
-    investorManagement.belongsTo(models.board_of_directors_positions, { as: 'position', foreignKey: 'positionId', targetKey: 'id' });
+    // investorManagement.belongsTo(models.board_of_directors_positions, { as: 'position', foreignKey: 'positionId', targetKey: 'id' });
     investorManagement.belongsTo(models.investor, { as: 'investor', foreignKey: 'investorId', targetKey: 'id' });
     investorManagement.hasOne(models.investorManagementTranslation, { as: 'managementTranslation', foreignKey: 'investorManagementId' });
   };
