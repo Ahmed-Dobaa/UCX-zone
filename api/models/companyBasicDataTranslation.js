@@ -18,7 +18,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     name: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: true
     },
     registrationIdNo: {
       type: DataTypes.STRING(45),
