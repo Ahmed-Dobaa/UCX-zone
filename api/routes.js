@@ -2036,7 +2036,7 @@ module.exports = [
       //   // { method: helperService.authorizeUser }
       // ],
     //  pre: [{ method: helperService.getLanguageId, assign: 'languageId' }],
-      validate: subsidiarySchema.createSchema,
+      // validate: subsidiarySchema.createSchema,
       handler: subsidiariesCompanyController.create
     }
   },
