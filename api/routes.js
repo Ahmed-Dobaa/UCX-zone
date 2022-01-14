@@ -2522,12 +2522,12 @@ module.exports = [
     options: {
       description: 'update specific investor by its id for a specific user id',
       app: { allowedPermission: { resource: 'investor', action: 'update' } },
-      pre: [
-        // { method: helperService.authorizeUser },
-        { method: helperService.getLanguageId, assign: 'languageId' }
-      ],
+      // pre: [
+      //   // { method: helperService.authorizeUser },
+      //   { method: helperService.getLanguageId, assign: 'languageId' }
+      // ],
       auth: 'jwt',
-      validate: investor.updateSchema,
+      // validate: investor.updateSchema,
       handler: investorController.update
     }
   },
