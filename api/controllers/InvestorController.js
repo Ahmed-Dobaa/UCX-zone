@@ -252,6 +252,7 @@ module.exports = {
            let column;
            switch(langauges[k]){
              case 'ar':
+               console.log("in ar")
                  obj["languageId"] = 'ar';
                   column = translation[i].propertyName;
                  obj[column] = translation[i].translation.Ar;
@@ -275,6 +276,8 @@ module.exports = {
                break;
            }
          }
+         console.log("==============================")
+         console.log(obj.languageId)
          await models.companiesBasicDataTranslation.create(obj, { transaction });
         }
       }
