@@ -244,6 +244,11 @@ module.exports = {
         // }
         investor.companyId = company.id;
         console.log("here +++++++++++++++++++++++++++++++++++++++++++++++")
+        if(translation.length === 0){
+          translation.pus({
+            propertyName: 'test'
+          })
+        }
         for(let k = 0; k < langauges.length; k++){
          let obj = companiesBasicDataTranslation;
          obj.name = null;
