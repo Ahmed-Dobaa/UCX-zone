@@ -243,13 +243,17 @@ module.exports = {
         await models.companiesBasicDataTranslation.create(companiesBasicDataTranslation, { transaction });
         // }
         investor.companyId = company.id;
+        console.log("here +++++++++++++++++++++++++++++++++++++++++++++++")
         for(let k = 0; k < langauges.length; k++){
          let obj = companiesBasicDataTranslation;
          obj.name = null;
          obj.companyPurpose = null;
-         obj.main_address;
+         obj.main_address = null;
+         console.log("inside")
          for(let i = 0; i < translation.length; i++){
            let column;
+           console.log("---------000000000000000000000000000")
+           console.log(langauges[k])
            switch(langauges[k]){
              case 'ar':
                console.log("in ar")
