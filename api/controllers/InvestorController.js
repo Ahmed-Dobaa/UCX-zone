@@ -246,7 +246,14 @@ module.exports = {
         console.log("here +++++++++++++++++++++++++++++++++++++++++++++++")
         if(translation.length === 0){
           translation.push({
-            propertyName: 'test'
+            propertyName: 'test',
+            "translation": {
+              "Ar": "",
+              "Fr": "",
+              "Po": "",
+              "Sp": ""
+            }
+
           })
         }
         for(let k = 0; k < langauges.length; k++){
