@@ -245,7 +245,7 @@ module.exports = {
         investor.companyId = company.id;
         console.log("here +++++++++++++++++++++++++++++++++++++++++++++++")
         if(translation.length === 0){
-          translation.pus({
+          translation.push({
             propertyName: 'test'
           })
         }
