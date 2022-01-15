@@ -150,7 +150,13 @@ module.exports = {
       ///////////////////////
 
         var array = foundCompanies[i].turnoverRangeId.split(",");
-        foundCompanies[i].turnoverRangeId = array;
+        let secData = []
+        for(let x = 0; x < array.length; x++){
+          let result = await models.lookup_details.findOne({where: {lookup_detail_name_en: array[x]}})
+          let cnt = {id: result.id, name: array[x]}
+          secData.push(cnt);
+        }
+        foundCompanies[i].turnoverRangeId = secData;
         let countries = await models.investorTargetedCountries.findAll({where: {investorId: foundCompanies[i].id}})
         let sectors = await models.investorTargetedSectors.findAll({where: {investorId: foundCompanies[i].id}})
       if(countries.length != 0){
