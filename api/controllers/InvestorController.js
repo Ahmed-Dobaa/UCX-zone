@@ -155,13 +155,24 @@ module.exports = {
         let sectors = await models.investorTargetedSectors.findAll({where: {investorId: foundCompanies[i].id}})
       if(countries.length != 0){
         var countroy = countries[0].countryId.split(",");
-        countries[0] = countroy;
+        let cntData = []
+        for(let x = 0; x < countroy.length; x++){
+          let result = await models.countriesTranslation.findOne({where: {name: countroy[x]}})
+          let cnt = {id: result.id, name: countroy[x]}
+          cntData.push(cnt);
+        }
+        countries[0] = cntData;
         foundCompanies[i].dataValues["countries"] = countries[0];
       }
       if(sectors.length != 0){
         var sector = sectors[0].sectorId.split(",");
-        sectors[0] = sector;
-
+        let secData = []
+        for(let x = 0; x < sector.length; x++){
+          let result = await models.sectorsTranslation.findOne({where: {name: sector[x]}})
+          let cnt = {id: result.id, name: sector[x]}
+          secData.push(cnt);
+        }
+        sectors[0] = secData;
         foundCompanies[i].dataValues["sectors"] = sectors[0];
       }
       let managemant = await models.investorManagement.findAll({
@@ -173,9 +184,14 @@ module.exports = {
       let portfolio = await models.investor_portfolio.findAll({where: {investor_id: foundCompanies[i].id}});
       if(portfolio.length > 0){
           for(let p = 0; p < portfolio.length; p++){
-            console.log(portfolio[p].sectors);
             let portSector = portfolio[p].sectors.split(",");
-            portfolio[p].dataValues["sectors"] = portSector;
+            let cntData = []
+              for(let x = 0; x < portSector.length; x++){
+                let result = await models.sectorsTranslation.findOne({where: {name: portSector[x]}})
+                let cnt = {id: result.id, name: portSector[x]}
+                cntData.push(cnt);
+              }
+            portfolio[p].dataValues["sectors"] = cntData;
           }
        }
        foundCompanies[i].dataValues["portfolio"] = portfolio;
