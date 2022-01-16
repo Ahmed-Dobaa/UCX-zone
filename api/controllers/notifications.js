@@ -25,23 +25,27 @@ module.exports = {
                                                       where id = ${notifications[i].from_user_id}`, { type: QueryTypes.SELECT });
           // notifications[i].dataValues["name"] = company[0].name;
           let name;
-          if(investor_type[0].type === 'Individual Investor'){
-            name = 'Individual Investor'
-          }else{
-            name = company[0].name;
+          if(investor_type !== null){
+            if(investor_type[0].type === 'Individual Investor'){
+              name = 'Individual Investor'
+            }else{
+              name = company[0].name;
+            }
+            results.push({
+              title_en: "Submit Interest",
+              title_ar: "طلب اهتمام",
+              notification_en: `${name} company has been interest with your company`,
+              notification_ar: `لقد أبدت شركة ${name} اهتمام بشركتك`,
+              status: notifications[i].status,
+              type: "SubmitInterest",
+              id: notifications[i].reference_id,
+              notification_id: notifications[i].id,
+              created_at: notifications[i].createdAt,
+              investee_id: interest.investeeId
+            })
+
           }
-          results.push({
-            title_en: "Submit Interest",
-            title_ar: "طلب اهتمام",
-            notification_en: `${name} company has been interest with your company`,
-            notification_ar: `لقد أبدت شركة ${name} اهتمام بشركتك`,
-            status: notifications[i].status,
-            type: "SubmitInterest",
-            id: notifications[i].reference_id,
-            notification_id: notifications[i].id,
-            created_at: notifications[i].createdAt,
-            investee_id: interest.investeeId
-          })
+
 
         }else if(notifications[i].type === 'Approve interest'){
           let company = await models.sequelize.query(`SELECT name FROM companiesBasicDataTranslation
