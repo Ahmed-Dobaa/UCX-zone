@@ -199,8 +199,16 @@ module.exports = {
               }
             portfolio[p].dataValues["sectors"] = cntData;
           }
+          foundCompanies[i].dataValues["portfolio"] = portfolio;
+       }else{
+        foundCompanies[i].dataValues["portfolio"] = [{
+          "country_name": "",
+          "headquarter_country": "",
+          "sectors": [],
+          "ownership_percentage": ""
+        }]
        }
-       foundCompanies[i].dataValues["portfolio"] = portfolio;
+
       }
 
       // const sequelizeQuery = qsToSequelizeQuery(request.query, models.investor.attributes, models.investor.associations);
