@@ -25,8 +25,8 @@ module.exports = {
                                                       where id = ${notifications[i].from_user_id}`, { type: QueryTypes.SELECT });
           // notifications[i].dataValues["name"] = company[0].name;
           let name;
-          console.log(investor_type[0])
-          if(investor_type[0] !== null){
+          console.log(investor_type)
+          if(investor_type[0] !== undefined){
             if(investor_type[0].type === 'Individual Investor'){
               name = 'Individual Investor'
             }else{
