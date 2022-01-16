@@ -90,11 +90,8 @@ module.exports = {
       let avatarFullPath = null; // path.join(__dirname, '../../uploads/default.png');
       // const foundInvestor = await models.investor.findOne({ where: { id: request.params.id }, raw: true });
       for(let i = 0; i < foundCompanies.length; i++){
-        // if(foundCompanies[i].img != null){
-        //   foundCompanies[i].img = path.join(__dirname, '../../', foundCompanies[i].img);
-        // }else{
-        //   foundCompanies[i].img = "no img"
-        // }
+        let userInvestor = await models.usersInvestors.findOne({where: { investorId: foundCompanies[i].id}})
+        foundCompanies[i].dataValues["user_id"] = userInvestor.userId;
         let translation = [];
         if(foundCompanies[i].company != null){
           let basicDataTran = await models.companiesBasicDataTranslation.findAll({where : {companyBasicDataId: foundCompanies[i].company.id }});
