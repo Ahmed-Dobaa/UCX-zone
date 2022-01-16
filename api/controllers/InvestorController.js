@@ -220,6 +220,46 @@ module.exports = {
       return errorService.wrapError(e, 'An internal server error occurred');
     }
   },
+  investorsDirectors: async function (request, reply){
+    let foundCompanies = {};
+    try {
+
+      let managemant = await models.investorManagement.findAll({
+        where: {investorId: request.params.id},
+        include:
+        { model: models.investorManagementTranslation, as: 'managementTranslation' }
+      })
+
+      let portfolio = await models.investor_portfolio.findAll({where: {investor_id: request.params.id}});
+      if(portfolio.length > 0){
+          for(let p = 0; p < portfolio.length; p++){
+            let portSector = portfolio[p].sectors.split(",");
+            let cntData = []
+              for(let x = 0; x < portSector.length; x++){
+                let result = await models.sectorsTranslation.findOne({where: {name: portSector[x]}})
+                let cnt = {id: result.id, name: portSector[x]}
+                cntData.push(cnt);
+              }
+            portfolio[p].dataValues["sectors"] = cntData;
+          }
+          foundCompanies =  {directors: managemant, portfolio: portfolio };
+       }else{
+        foundCompanies =  {directors: managemant, portfolio: [{
+          "country_name": "",
+          "headquarter_country": "",
+          "sectors": [],
+          "ownership_percentage": ""
+        }]
+      }
+    }
+      return reply.response(foundCompanies).code(200);
+    }
+    catch (e) {
+      console.log('error', e);
+
+      return errorService.wrapError(e, 'An internal server error occurred');
+    }
+  },
   findOne: async (request, reply) => {
     try {
       const language = request.pre.languageId;
