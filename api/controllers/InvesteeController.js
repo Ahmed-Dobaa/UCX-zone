@@ -396,7 +396,18 @@ companyBasicInfo: async (request, reply) => {
       companyBasicData.companiesBasicDataTranslation.companyBasicDataId = createdCompanyBasicData.id;
       await models.companiesBasicDataTranslation.create(companyBasicData.companiesBasicDataTranslation, { transaction });
 
+      if(translation.length === 0){
+        translation.push({
+          propertyName: 'test',
+          "translation": {
+            "Ar": "",
+            "Fr": "",
+            "Po": "",
+            "Sp": ""
+          }
 
+        })
+      }
       let langauges = ['ar', 'fr', 'po', 'sp'];
    for(let k = 0; k < langauges.length; k++){
     let obj = companyBasicData.companiesBasicDataTranslation;
