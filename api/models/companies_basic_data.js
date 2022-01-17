@@ -19,7 +19,7 @@ module.exports = function (sequelize, DataTypes) {
       defaultValue: false
     },
     sector: {
-      type: DataTypes.JSON, //STRING(100), // INTEGER(10).UNSIGNED,
+      type: DataTypes.INTEGER(11).UNSIGNED, //STRING(100), // INTEGER(10).UNSIGNED,
       allowNull: true
     },
     sector_ar: {
@@ -27,7 +27,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: true
     },
     subSector: {
-      type: DataTypes.STRING(100), //.INTEGER(10).UNSIGNED,
+      type: DataTypes.INTEGER(11).UNSIGNED, //.INTEGER(10).UNSIGNED,
       allowNull: true
     },
     subSector_ar: {

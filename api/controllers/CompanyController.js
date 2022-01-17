@@ -160,6 +160,27 @@ module.exports = {
       });
       for(let i = 0; i < foundCompanies.length; i++){
         if(foundCompanies[i].type === 'investee'){
+
+            var _sector = foundCompanies[i].sector.split(",");
+            let secData = []
+            for(let x = 0; x < _sector.length; x++){
+              let result = await models.sectorsTranslation.findOne({where: {name: _sector[x]}})
+              let cnt = {id: result.id, name: _sector[x]}
+              secData.push(cnt);
+            }
+            // sectors[0] = secData;
+            foundCompanies[i].dataValues["sector"] = secData;
+
+            var _subsector = foundCompanies[i].subSector.split(",");
+            let _secData = []
+            for(let x = 0; x < _subsector.length; x++){
+              let result = await models.subsectors.findOne({where: {subsector_name: _subsector[x]}})
+              let cnt = {id: result.id, name: _subsector[x]}
+              _secData.push(cnt);
+            }
+            // sectors[0] = secData;
+            foundCompanies[i].dataValues["subSector"] = _secData;
+
           let basicDataTrans = await models.companiesBasicDataTranslation.findAll({where : {companyBasicDataId: foundCompanies[i].id }});
     let translation = [];
         if(basicDataTrans.length > 1){

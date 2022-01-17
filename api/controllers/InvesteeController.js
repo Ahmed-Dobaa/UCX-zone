@@ -179,6 +179,26 @@ module.exports = {
           }
         ]
       });
+      var _sector = foundInvesteeCompanies.basicData.sector.split(",");
+      let secData = []
+      for(let x = 0; x < _sector.length; x++){
+        let result = await models.sectorsTranslation.findOne({where: {name: _sector[x]}})
+        let cnt = {id: result.id, name: _sector[x]}
+        secData.push(cnt);
+      }
+      // sectors[0] = secData;
+      foundInvesteeCompanies.basicData.dataValues["sector"] = secData;
+
+      var _subsector = foundInvesteeCompanies.basicData.subSector.split(",");
+      let _secData = []
+      for(let x = 0; x < _subsector.length; x++){
+        let result = await models.subsectors.findOne({where: {subsector_name: _subsector[x]}})
+        let cnt = {id: result.id, name: _subsector[x]}
+        _secData.push(cnt);
+      }
+      // sectors[0] = secData;
+      foundInvesteeCompanies.basicData.dataValues["subSector"] = _secData;
+
       let basicDataTrans = await models.companiesBasicDataTranslation.findAll({where : {companyBasicDataId: foundInvesteeCompanies.basicData.id }});
       let translation = [];
       if(basicDataTrans.length > 1){
@@ -350,15 +370,28 @@ companyBasicInfo: async (request, reply) => {
                registrationIdNo: companyBasicData.companiesBasicDataTranslation.registrationIdNo, languageId: 'en' }})
 
     // check if this registration id number exist or not
-    console.log("checkRegistrationIdNo")
-    console.log(checkRegistrationIdNo);
     if(checkRegistrationIdNo != null){
-      console.log("here");
       await transaction.rollback();
       return reply.response({status: 406, message: "This registration id number already exist"}).code(406);
     }else{
       companyBasicData["user_id"] = request.params.userId;
       companyBasicData.type = 'investee';
+
+      let _sectors = [];
+      for(let i = 0; i < companyBasicData.sector.length; i++){
+        _sectors.push(companyBasicData.sector[i].name)
+      }
+      companyBasicData.sector = null
+      companyBasicData.sector = _sectors;
+
+
+      let _subsectors = [];
+      for(let i = 0; i < companyBasicData.subSector.length; i++){
+        _subsectors.push(companyBasicData.subSector[i].name)
+      }
+      companyBasicData.subSector = null
+      companyBasicData.subSector = _subsectors;
+
       const createdCompanyBasicData = await models.companiesBasicData.create(companyBasicData, { transaction });
       companyBasicData.companiesBasicDataTranslation.companyBasicDataId = createdCompanyBasicData.id;
       await models.companiesBasicDataTranslation.create(companyBasicData.companiesBasicDataTranslation, { transaction });
@@ -823,6 +856,21 @@ companyBasicInfo: async (request, reply) => {
       transaction = await models.sequelize.transaction();
 
       if(! _.isEmpty(payload.companyBasicData)) {
+
+        let _sectors = [];
+      for(let i = 0; i < payload.companyBasicData.sector.length; i++){
+        _sectors.push(payload.companyBasicData.sector[i].name)
+      }
+      payload.companyBasicData.sector = null
+      payload.companyBasicData.sector = _sectors;
+
+
+      let _subsectors = [];
+      for(let i = 0; i < payload.companyBasicData.subSector.length; i++){
+        _subsectors.push(payload.companyBasicData.subSector[i].name)
+      }
+      payload.companyBasicData.subSector = null
+      payload.companyBasicData.subSector = _subsectors;
 
         await models.companiesBasicData.update(payload.companyBasicData, { where: { id: foundInvesteeCompany.basicData.id }, transaction });
       }
