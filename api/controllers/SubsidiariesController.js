@@ -76,9 +76,24 @@ module.exports = {
       }
       // If company doesn't exist, then create the company, add the relation to companies_relations table and send role request.
       transaction = await models.sequelize.transaction();
+      let _sectors = [];
+      for(let i = 0; i < payload.sector.length; i++){
+        _sectors.push(payload.sector[i].name)
+      }
+      payload.sector = null
+      payload.sector = _sectors;
+
+
+      let _subsectors = [];
+      for(let i = 0; i < payload.subSector.length; i++){
+        _subsectors.push(payload.subSector[i].name)
+      }
+      payload.subSector = null
+      payload.subSector = _subsectors;
+
       Company = await models.companiesBasicData.create(payload, { transaction });
       payload.companyBasicDataId = Company.id;
-      payload.languageId = 1; //request.pre.languageId;
+      payload.languageId = 'en'; //request.pre.languageId;
        CompanyTranslation = await models.companiesBasicDataTranslation.create(payload, { transaction });
 
        let investeePayload = {companyId: Company.id,
@@ -134,7 +149,21 @@ module.exports = {
   //  console.log(payload.companyBasicData.companiesBasicDataTranslation);
   //  console.log(request.params.id)
       // let dataTranslation = await models.companiesBasicDataTranslation.findOne({ where: { id: request.params.companyId }});
-      await models.companiesBasicData.update(payload, { where: { id: request.params.id }, transaction });
+      let _sectors = [];
+      for(let i = 0; i < payload.companyBasicData.sector.length; i++){
+        _sectors.push(payload.companyBasicData.sector[i].name)
+      }
+      payload.companyBasicData.sector = null
+      payload.companyBasicData.sector = _sectors;
+
+
+      let _subsectors = [];
+      for(let i = 0; i < payload.companyBasicData.subSector.length; i++){
+        _subsectors.push(payload.companyBasicData.subSector[i].name)
+      }
+      payload.companyBasicData.subSector = null
+      payload.companyBasicData.subSector = _subsectors;
+      await models.companiesBasicData.update(payload.companyBasicData, { where: { id: request.params.id }, transaction });
       await models.companiesBasicDataTranslation.update(payload, { where: { companyBasicDataId: request.params.id }, transaction });
       await transaction.commit();
       return reply.response({ status: 200, message: "Updated successfully"}).code(HTTP_SUCCESS_CODE);

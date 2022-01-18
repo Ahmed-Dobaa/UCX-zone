@@ -2090,7 +2090,7 @@ module.exports = [
       // pre: [
       //   // { method: helperService.authorizeUser }
       // ],
-      validate: subsidiarySchema.updateSchema,
+      // validate: subsidiarySchema.updateSchema,
       handler: subsidiariesCompanyController.update
     }
   },

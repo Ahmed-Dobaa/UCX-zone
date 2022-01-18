@@ -260,6 +260,26 @@ module.exports = {
          where: { investeeId: request.params.id}
        })
 
+       var sidsector = subsidiary.basicData.sector.split(",");
+            let sidsecData = []
+            for(let x = 0; x < sidsector.length; x++){
+              let result = await models.sectorsTranslation.findOne({where: {name: sidsector[x]}})
+              let cnt = {id: result.id, name: sidsector[x]}
+              sidsecData.push(cnt);
+            }
+            // sectors[0] = secData;
+            subsidiary.basicData.dataValues["sector"] = sidsecData;
+
+            var _sidsubsector = subsidiary.basicData.subSector.split(",");
+            let _sidsecData = []
+            for(let x = 0; x < _sidsubsector.length; x++){
+              let result = await models.subsectors.findOne({where: {subsector_name: _sidsubsector[x]}})
+              let cnt = {id: result.id, name: _sidsubsector[x]}
+              _sidsecData.push(cnt);
+            }
+            // sectors[0] = secData;
+            subsidiary.basicData.dataValues["subSector"] = _sidsecData;
+
       //  subsidiary.investeeTranslation = investeeTranslation;
 
         let investeeIncome = await models.investeeIncomes.findOne(
