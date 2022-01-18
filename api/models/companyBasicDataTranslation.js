@@ -44,7 +44,7 @@ module.exports = function (sequelize, DataTypes) {
 
     country: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: true
     },
     phoneNumbers: {
       type: DataTypes.STRING(12),
@@ -56,7 +56,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     city: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: true
     },
     img: {
       type: DataTypes.STRING(100),
