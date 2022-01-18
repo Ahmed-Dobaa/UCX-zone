@@ -150,20 +150,20 @@ module.exports = {
   //  console.log(request.params.id)
       // let dataTranslation = await models.companiesBasicDataTranslation.findOne({ where: { id: request.params.companyId }});
       let _sectors = [];
-      for(let i = 0; i < payload.companyBasicData.sector.length; i++){
-        _sectors.push(payload.companyBasicData.sector[i].name)
+      for(let i = 0; i < payload.sector.length; i++){
+        _sectors.push(payload.sector[i].name)
       }
-      payload.companyBasicData.sector = null
-      payload.companyBasicData.sector = _sectors;
+      payload.sector = null
+      payload.sector = _sectors;
 
 
       let _subsectors = [];
-      for(let i = 0; i < payload.companyBasicData.subSector.length; i++){
-        _subsectors.push(payload.companyBasicData.subSector[i].name)
+      for(let i = 0; i < payload.subSector.length; i++){
+        _subsectors.push(payload.subSector[i].name)
       }
-      payload.companyBasicData.subSector = null
-      payload.companyBasicData.subSector = _subsectors;
-      await models.companiesBasicData.update(payload.companyBasicData, { where: { id: request.params.id }, transaction });
+      payload.subSector = null
+      payload.subSector = _subsectors;
+      await models.companiesBasicData.update(payload, { where: { id: request.params.id }, transaction });
       await models.companiesBasicDataTranslation.update(payload, { where: { companyBasicDataId: request.params.id }, transaction });
       await transaction.commit();
       return reply.response({ status: 200, message: "Updated successfully"}).code(HTTP_SUCCESS_CODE);
