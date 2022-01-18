@@ -170,7 +170,7 @@ module.exports = {
   update: async function (request, reply) {
     let transaction;
     try {
-      const language = 1; //request.pre.languageId;
+      const language = 'en'; //request.pre.languageId;
       const foundAuditor = await models.investeeAuditor.findOne({ where: { id: request.params.auditorId }, raw: true });
       if(_.isEmpty(foundAuditor)) {
 
