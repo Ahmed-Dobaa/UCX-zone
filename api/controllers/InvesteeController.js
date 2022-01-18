@@ -243,7 +243,7 @@ module.exports = {
           where: { investeeId: request.params.id },
           include: [{ association: 'auditorTranslation', where: { languageId: languageId }, required: true }]
         });
-
+  console.log(foundInvesteeCompanies.companyId);
         let subsidiary = await models.companies_relations.findOne({
           where: { parentId: foundInvesteeCompanies.companyId}, // childId: request.params.id },
           include: [{ model: models.companiesBasicData, as: 'basicData', required: true,
