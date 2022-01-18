@@ -259,6 +259,8 @@ module.exports = {
        let investeeTranslation = await models.investeeTranslation.findOne({
          where: { investeeId: request.params.id}
        })
+       console.log("=============")
+       console.log(subsidiary)
       if(subsidiary !== null){
         var sidsector = subsidiary.basicData.sector.split(",");
         let sidsecData = []
