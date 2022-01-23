@@ -66,21 +66,24 @@ module.exports = {
 
         let check = await models.investor.findOne({
           where: { id: foundSubmittedInterests[i].investorId, deleted: 0}});
-
-        if(check.type === 'Institutional Investor'){
-          let investor = await models.investor.findOne({
-            where: { id: foundSubmittedInterests[i].investorId, deleted: 0 },
-            include: [
-             { model: models.companiesBasicData, as: 'company',
-                 include: [{ model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }] }
-            ]
-         });
-         foundSubmittedInterests[i].dataValues["investor_name_en"] = investor.company.companiesBasicDataTranslation.name;
-         foundSubmittedInterests[i].dataValues["investor_name_ar"] = investor.company.companiesBasicDataTranslation.name_ar;
-        }else{
-          foundSubmittedInterests[i].dataValues["investor_name_en"] = "Individual Investor";
-          foundSubmittedInterests[i].dataValues["investor_name_ar"] = 'مستثمر فردى';
+        console.log(check);
+        if(check !== null){
+          if(check.type === 'Institutional Investor'){
+            let investor = await models.investor.findOne({
+              where: { id: foundSubmittedInterests[i].investorId, deleted: 0 },
+              include: [
+               { model: models.companiesBasicData, as: 'company',
+                   include: [{ model: models.companiesBasicDataTranslation, as: 'companiesBasicDataTranslation' }] }
+              ]
+           });
+           foundSubmittedInterests[i].dataValues["investor_name_en"] = investor.company.companiesBasicDataTranslation.name;
+           foundSubmittedInterests[i].dataValues["investor_name_ar"] = investor.company.companiesBasicDataTranslation.name_ar;
+          }else{
+            foundSubmittedInterests[i].dataValues["investor_name_en"] = "Individual Investor";
+            foundSubmittedInterests[i].dataValues["investor_name_ar"] = 'مستثمر فردى';
+          }
         }
+
 
 
       }
