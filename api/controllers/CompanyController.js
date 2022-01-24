@@ -182,8 +182,9 @@ module.exports = {
       });
       for(let i = 0; i < foundCompanies.length; i++){
         if(foundCompanies[i].type === 'investee'){
-
-            var _sector = foundCompanies[i].sector.split(",");
+          const foundSubmittedInterests = await models.investor_interests_submits.findAll({ where: { investeeId: foundCompanies[i].investeeCompany.id } });
+          foundCompanies[i].dataValues["interest_count"] = foundSubmittedInterests.length;
+          var _sector = foundCompanies[i].sector.split(",");
             let secData = []
             for(let x = 0; x < _sector.length; x++){
               let result = await models.sectorsTranslation.findOne({where: {name: _sector[x]}})
