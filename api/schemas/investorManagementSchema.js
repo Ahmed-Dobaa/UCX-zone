@@ -6,7 +6,7 @@ module.exports = {
       userId: Joi.number().required().description('the id of the user'),
       investorId: Joi.number().required().description('the id of the Investor')
     },
-    payload: {
+    payload: [{
       email: Joi.string().allow('', null).email().optional(),
       managementTranslation: Joi.object().keys({
         name: Joi.string().required(),
@@ -14,7 +14,7 @@ module.exports = {
         // representativeFor: Joi.string().required().label('representative For'),
         phoneNumber: Joi.string().allow('', null).optional().label('phone number')
       })
-    }
+    }]
   },
   translateSchema: {
     payload: {
@@ -31,7 +31,7 @@ module.exports = {
       investorId: Joi.number().required().description('the id of the Investor'),
       managementId: Joi.number().required().description('the id of the Investor Management')
     },
-    payload: {
+    payload: [{
       email: Joi.string().allow('', null).email().optional(),
       managementTranslation: {
         id: Joi.number().required(),
@@ -40,6 +40,6 @@ module.exports = {
         // representativeFor: Joi.string().label('representative For'),
         phoneNumber: Joi.string().allow('', null).optional().label('phone number')
       }
-    }
+    }]
   }
 };

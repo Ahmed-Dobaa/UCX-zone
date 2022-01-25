@@ -49,7 +49,7 @@ module.exports = {
     let transaction;
 
     try {
-      const language = 'en'; //request.pre.languageId;
+      // const language = 'en'; //request.pre.languageId;
 
       const foundInvestor = await models.investor.findOne({ where: { id: request.params.investorId } });
 
@@ -57,20 +57,24 @@ module.exports = {
 
         return Boom.notFound('The Investor Is Not Found, You have to create It First');
       }
-      let createdInvestorManagement = null;
-      let investorManagementTranslation = null;
+      let createdInvestorPortfolio = null;
       transaction = await models.sequelize.transaction();
   for(let i = 0; i < request.payload.length; i++ ){
-    request.payload[i].investorId = request.params.investorId;
-      request.payload[i].createdBy = request.params.userId;
-    createdInvestorManagement = await models.investorManagement.create(request.payload[i], { transaction });
-    request.payload[i].investorManagementTranslation.languageId = language;
-    request.payload[i].investorManagementTranslation.investorManagementId = createdInvestorManagement.id;
-    investorManagementTranslation = await models.investorManagementTranslation.create(request.payload[i].investorManagementTranslation, { transaction });
+    let sector = [];
+    for(let x = 0; x < request.payload[i].sector.length; x++){
+      sector.push(request.payload[i].sector[x].name);
+      request.payload[i]["sectors"] = sector;
+     }
+     request.payload[i]["country_name"] = request.payload[i].name,
+     request.payload[i]["ownership_percentage"] = request.payload[i].pOfOwnership,
+     request.payload[i]["headquarter_country"] = request.payload[i].country,
+
+    request.payload[i].investor_id = request.params.investorId;
+      createdInvestorPortfolio = await models.investor_portfolio.create(request.payload[i], { transaction });
   }
       await transaction.commit();
 
-      return reply.response(_.assign(createdInvestorManagement.toJSON(), { managementTranslation: investorManagementTranslation.toJSON() })).code(201);
+      return reply.response(_.assign(createdInvestorPortfolio.toJSON())).code(201);
     }
     catch (e) {
       console.log('error', e);
@@ -141,25 +145,27 @@ module.exports = {
     let transaction;
     try {
       const language = 'en';
-      // const foundManagement = await models.investorManagement.findOne({ where: { id: request.params.managementId }, raw: true });
+      const foundManagement = await models.investorManagement.findOne({ where: { id: request.params.managementId }, raw: true });
 
-      // if(_.isEmpty(foundManagement)) {
-      //   return Boom.notFound('Investor Management You Try To Update Does Not Exist');
-      // }
+
 
       transaction = await models.sequelize.transaction();
-      for(let i = 0; i < request.payload.length; i++){
-        await models.investorManagement.update(request.payload[i], { where: { id: request.payload[i].id }, transaction });
 
-        if(!_.isEmpty(request.payload[i].investorManagementTranslation)) {
-          request.payload[i].investorManagementTranslation.languageId = language;
-          await models.investorManagementTranslation.update(request.payload[i].investorManagementTranslation,
-            { where: { id: request.payload[i].investorManagementTranslation.id }, transaction });
+      for(let i = 0; i < request.payload.length; i++ ){
+        let sector = [];
+        for(let x = 0; x < request.payload[i].sector.length; x++){
+          sector.push(request.payload[i].sector[x].name);
+          request.payload[i]["sectors"] = sector;
+         }
+         request.payload[i]["country_name"] = request.payload[i].name,
+         request.payload[i]["ownership_percentage"] = request.payload[i].pOfOwnership,
+         request.payload[i]["headquarter_country"] = request.payload[i].country,
 
-        }
-
+        request.payload[i].investor_id = request.params.investorId;
+          createdInvestorPortfolio = await models.investor_portfolio.update(request.payload[i], { where: { id: request.payload[i].id },  transaction });
       }
-            await transaction.commit();
+
+      await transaction.commit();
 
       return reply.response({status: 200, message: "updated successfully"}).code(200);
     }

@@ -73,6 +73,7 @@ const subsectorsController = require('./controllers/subsectorsController');
 const Joi = require('joi');
 const CurrencyController = require('./controllers/CurrencyController');
 const city = require('./controllers/CitiesController');
+const investorPortfolioController = require('./controllers/investorPortfolioController');
 
 module.exports = [
   {
@@ -3102,7 +3103,7 @@ module.exports = [
         // // // { method: helperService.authorizeUser },
      //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
-      validate: investorManagementSchema.createSchema,
+      // validate: investorManagementSchema.createSchema,
       handler: investorManagementController.create
     }
   },
@@ -3137,7 +3138,7 @@ module.exports = [
     }
   },
   {
-    path: '/users/{userId}/investors/{investorId}/managements/{managementId}',
+    path: '/users/{userId}/investors/{investorId}/managements',
     method: 'PUT',
     options: {
       auth: 'jwt',
@@ -3147,8 +3148,38 @@ module.exports = [
         // // // { method: helperService.authorizeUser },
      //   { method: helperService.getLanguageId, assign: 'languageId' }
       ],
-      validate: investorManagementSchema.updateSchema,
+      // validate: investorManagementSchema.updateSchema,
       handler: investorManagementController.update
+    }
+  },
+  {
+    path: '/users/{userId}/investors/{investorId}/portfolio',
+    method: 'POST',
+    options: {
+      auth: 'jwt',
+      description: 'Add New Investor Portfolio',
+      app: { allowedPermission: { resource: 'investorPortfolio', action: 'create' } },
+      pre: [
+        // // // { method: helperService.authorizeUser },
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      // validate: investorManagementSchema.createSchema,
+      handler: investorPortfolioController.create
+    }
+  },
+  {
+    path: '/users/{userId}/investors/{investorId}/portfolio',
+    method: 'PUT',
+    options: {
+      auth: 'jwt',
+      description: 'Add New Investor Portfolio',
+      app: { allowedPermission: { resource: 'investorPortfolio', action: 'create' } },
+      pre: [
+        // // // { method: helperService.authorizeUser },
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      // validate: investorManagementSchema.createSchema,
+      handler: investorPortfolioController.update
     }
   }
 ];
