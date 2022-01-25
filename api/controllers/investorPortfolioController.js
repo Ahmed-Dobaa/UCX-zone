@@ -180,15 +180,19 @@ module.exports = {
     }
   },
   delete: async function (request, reply) {
+    let transaction;
     try {
+      transaction = await models.sequelize.transaction();
 
-      await models.investorManagement.destroy({ where: { id: request.params.managementId } });
-
-      return reply.response().code(204);
+      await models.investor_portfolio.destroy({ where: { id: request.params.id }, transaction });
+      await transaction.commit();
+      return reply.response({status: 200, message: "deleted successfully"}).code(200);
     }
     catch (e) {
       console.log('error', e);
-
+      if(transaction) {
+        await transaction.rollback();
+      }
       return errorService.wrapError(e, 'An internal server error occurred');
     }
   }

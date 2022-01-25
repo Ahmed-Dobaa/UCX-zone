@@ -3153,6 +3153,21 @@ module.exports = [
     }
   },
   {
+    path: '/users/{userId}/managements/{managementId}',
+    method: 'DELETE',
+    options: {
+      auth: 'jwt',
+      description: 'Delete Investor Management',
+      app: { allowedPermission: { resource: 'investorManagement', action: 'delete' } },
+      pre: [
+        // // // { method: helperService.authorizeUser },
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      // validate: investorManagementSchema.updateSchema,
+      handler: investorManagementController.delete
+    }
+  },
+  {
     path: '/users/{userId}/investors/{investorId}/portfolio',
     method: 'POST',
     options: {
@@ -3181,5 +3196,20 @@ module.exports = [
       // validate: investorManagementSchema.createSchema,
       handler: investorPortfolioController.update
     }
-  }
+  },
+  {
+    path: '/users/{userId}/portfolio/{id}',
+    method: 'DELETE',
+    options: {
+      auth: 'jwt',
+      description: 'Delete Investor portfolio',
+      app: { allowedPermission: { resource: 'investorportfolio', action: 'delete' } },
+      pre: [
+        // // // { method: helperService.authorizeUser },
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      // validate: investorManagementSchema.updateSchema,
+      handler: investorPortfolioController.delete
+    }
+  },
 ];
