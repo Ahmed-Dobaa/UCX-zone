@@ -3106,4 +3106,49 @@ module.exports = [
       handler: investorManagementController.create
     }
   },
+  {
+    path: '/users/{userId}/investors/{investorId}/managements',
+    method: 'GET',
+    options: {
+      auth: 'jwt',
+      description: 'Get Investor Management',
+      app: { allowedPermission: { resource: 'investorManagement', action: 'get' } },
+      pre: [
+        // // // { method: helperService.authorizeUser },
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      // validate: investorManagementSchema.createSchema,
+      handler: investorManagementController.findAll
+    }
+  },
+  {
+    path: '/users/{userId}/management/{managementId}',
+    method: 'GET',
+    options: {
+      auth: 'jwt',
+      description: 'Get Investor Management',
+      app: { allowedPermission: { resource: 'investorManagement', action: 'get' } },
+      pre: [
+        // // // { method: helperService.authorizeUser },
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      // validate: investorManagementSchema.createSchema,
+      handler: investorManagementController.findOne
+    }
+  },
+  {
+    path: '/users/{userId}/investors/{investorId}/managements/{managementId}',
+    method: 'PUT',
+    options: {
+      auth: 'jwt',
+      description: 'Update Investor Management',
+      app: { allowedPermission: { resource: 'investorManagement', action: 'update' } },
+      pre: [
+        // // // { method: helperService.authorizeUser },
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      validate: investorManagementSchema.updateSchema,
+      handler: investorManagementController.update
+    }
+  }
 ];

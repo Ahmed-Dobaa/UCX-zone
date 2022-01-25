@@ -11,7 +11,7 @@ module.exports = {
       managementTranslation: Joi.object().keys({
         name: Joi.string().required(),
         position: Joi.string().required().label('Position'),
-        representativeFor: Joi.string().required().label('representative For'),
+        // representativeFor: Joi.string().required().label('representative For'),
         phoneNumber: Joi.string().allow('', null).optional().label('phone number')
       })
     }
@@ -37,7 +37,7 @@ module.exports = {
         id: Joi.number().required(),
         name: Joi.string(),
         position: Joi.string().label('Position'),
-        representativeFor: Joi.string().label('representative For'),
+        // representativeFor: Joi.string().label('representative For'),
         phoneNumber: Joi.string().allow('', null).optional().label('phone number')
       }
     }

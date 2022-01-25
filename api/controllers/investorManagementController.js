@@ -11,16 +11,15 @@ module.exports = {
   findAll: async function (request, reply) {
     try {
 
-      const language = request.pre.languageId;
+      const language = 'en'; //request.pre.languageId;
       const foundManagements = await models.investorManagement.findAndCountAll({
-        where: { investeeId: request.params.companyId },
+        where: { investorId: request.params.investorId },
         include: [
-          { association: 'managementTranslation', where: { languageId: language }, required: true },
-          { association: 'position', as: 'position', required: true }
+          { association: 'managementTranslation', where: { languageId: language }, required: true }
         ]
       });
 
-      return reply.response(foundManagements).code(200);
+      return reply.response({status: 200, results: foundManagements.rows}).code(200);
     }
     catch (e) {
       console.log('error', e);
@@ -30,17 +29,15 @@ module.exports = {
   },
   findOne: async function (request, reply) {
     try {
-
-      const language = request.pre.languageId;
+      const language = 'en';
       const foundManagement = await models.investorManagement.findOne({
         where: { id: request.params.managementId },
         include: [
-          { association: 'managementTranslation', where: { languageId: language }, required: true },
-          { association: 'position', as: 'position', required: true }
+          { association: 'managementTranslation', where: { languageId: language }, required: true }
         ]
       });
 
-      return reply.response(foundManagement || {}).code(200);
+      return reply.response({status: 200, results: foundManagement} || {}).code(200);
     }
     catch (e) {
       console.log('error', e);
@@ -52,9 +49,9 @@ module.exports = {
     let transaction;
 
     try {
-      const language = request.pre.languageId;
+      const language = 'en'; //request.pre.languageId;
       request.payload.investorId = request.params.investorId;
-      request.payload.createdBy = request.auth.decoded.id;
+      request.payload.createdBy = request.params.userId;
       const foundInvestor = await models.investor.findOne({ where: { id: request.params.investorId } });
 
       if(_.isEmpty(foundInvestor)) {
@@ -140,7 +137,7 @@ module.exports = {
   update: async function (request, reply) {
     let transaction;
     try {
-      const language = request.pre.languageId;
+      const language = 'en';
       const foundManagement = await models.investorManagement.findOne({ where: { id: request.params.managementId }, raw: true });
 
       if(_.isEmpty(foundManagement)) {
@@ -152,13 +149,13 @@ module.exports = {
 
       if(!_.isEmpty(request.payload.managementTranslation)) {
         request.payload.managementTranslation.languageId = language;
-        await models.investotManagementTranslation.update(request.payload.managementTranslation,
+        await models.investorManagementTranslation.update(request.payload.managementTranslation,
           { where: { id: request.payload.managementTranslation.id }, transaction });
 
       }
       await transaction.commit();
 
-      return reply.response().code(200);
+      return reply.response({status: 200, message: "updated successfully"}).code(200);
     }
     catch (e) {
       console.log('error', e);
