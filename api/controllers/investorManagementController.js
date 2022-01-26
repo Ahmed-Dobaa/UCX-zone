@@ -141,22 +141,22 @@ module.exports = {
     let transaction;
     try {
       const language = 'en';
-      // const foundManagement = await models.investorManagement.findOne({ where: { id: request.params.managementId }, raw: true });
+      const foundManagement = await models.investorManagement.findOne({ where: { id: request.payload.id }, raw: true });
 
-      // if(_.isEmpty(foundManagement)) {
-      //   return Boom.notFound('Investor Management You Try To Update Does Not Exist');
-      // }
+      if(_.isEmpty(foundManagement)) {
+        return Boom.notFound('Investor Management You Try To Update Does Not Exist');
+      }
 
       transaction = await models.sequelize.transaction();
-      for(let i = 0; i < request.payload.length; i++){
-        await models.investorManagement.update(request.payload[i], { where: { id: request.payload[i].id }, transaction });
+      // for(let i = 0; i < request.payload.length; i++){
+        await models.investorManagement.update(request.payload, { where: { id: request.payload.id }, transaction });
 
-        if(!_.isEmpty(request.payload[i].investorManagementTranslation)) {
-          request.payload[i].investorManagementTranslation.languageId = language;
-          await models.investorManagementTranslation.update(request.payload[i].investorManagementTranslation,
-            { where: { id: request.payload[i].investorManagementTranslation.id }, transaction });
+        if(!_.isEmpty(request.payload.investorManagementTranslation)) {
+          request.payload.investorManagementTranslation.languageId = language;
+          await models.investorManagementTranslation.update(request.payload.investorManagementTranslation,
+            { where: { id: request.payload.investorManagementTranslation.id }, transaction });
 
-        }
+        // }
 
       }
             await transaction.commit();

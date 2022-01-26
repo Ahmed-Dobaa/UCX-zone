@@ -151,19 +151,19 @@ module.exports = {
 
       transaction = await models.sequelize.transaction();
 
-      for(let i = 0; i < request.payload.length; i++ ){
+      // for(let i = 0; i < request.payload.length; i++ ){
         let sector = [];
-        for(let x = 0; x < request.payload[i].sector.length; x++){
-          sector.push(request.payload[i].sector[x].name);
-          request.payload[i]["sectors"] = sector;
+        for(let x = 0; x < request.payload.sector.length; x++){
+          sector.push(request.payload.sector[x].name);
+          request.payload["sectors"] = sector;
          }
-         request.payload[i]["country_name"] = request.payload[i].name,
-         request.payload[i]["ownership_percentage"] = request.payload[i].pOfOwnership,
-         request.payload[i]["headquarter_country"] = request.payload[i].country,
+         request.payload["country_name"] = request.payload.name,
+         request.payload["ownership_percentage"] = request.payload.pOfOwnership,
+         request.payload["headquarter_country"] = request.payload.country,
 
-        request.payload[i].investor_id = request.params.investorId;
-          createdInvestorPortfolio = await models.investor_portfolio.update(request.payload[i], { where: { id: request.payload[i].id },  transaction });
-      }
+        request.payload.investor_id = request.params.investorId;
+          createdInvestorPortfolio = await models.investor_portfolio.update(request.payload, { where: { id: request.payload.id },  transaction });
+      // }
 
       await transaction.commit();
 
