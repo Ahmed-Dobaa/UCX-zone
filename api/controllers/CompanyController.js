@@ -181,14 +181,15 @@ module.exports = {
         ]
       });
       for(let i = 0; i < foundCompanies.length; i++){
+        // console.log();
         if(foundCompanies[i].type === 'investee'){
           const foundSubmittedInterests = await models.investor_interests_submits.findAll({ where: { investeeId: foundCompanies[i].investeeCompany.id } });
           foundCompanies[i].dataValues["interest_count"] = foundSubmittedInterests.length;
-          // let country = await models.countriesTranslation.findOne({where: {id: parseInt(foundCompanies[i].country)}})
-          // console.log(country);
-          // foundCompanies[i].dataValues["country"] = country.name;
-          // let city = await models.cities.findOne({where: {id: parseInt(foundCompanies[i].city)}})
-          // foundCompanies[i].dataValues["city"] = city.name_en;
+          let country = await models.countriesTranslation.findOne({where: {id: foundCompanies[i].companiesBasicDataTranslation.country}})
+          console.log(country);
+          foundCompanies[i].companiesBasicDataTranslation.dataValues["country"] = country.name;
+          let city = await models.cities.findOne({where: {id: parseInt(foundCompanies[i].companiesBasicDataTranslation.city)}})
+          foundCompanies[i].companiesBasicDataTranslation.dataValues["city"] = city.name_en;
           var _sector = foundCompanies[i].sector.split(",");
             let secData = [];
             for(let x = 0; x < _sector.length; x++){
