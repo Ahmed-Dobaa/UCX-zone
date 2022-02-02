@@ -51,7 +51,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     validTill: {
       type: DataTypes.STRING(50),
-      allowNull: false
+      allowNull: true
     },
     currency: {
       type: DataTypes.STRING(20),
