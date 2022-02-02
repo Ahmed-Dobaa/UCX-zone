@@ -190,6 +190,7 @@ module.exports = {
           foundCompanies[i].companiesBasicDataTranslation.dataValues["country"] = country.name;
 
           let city = await models.cities.findOne({where: {id: foundCompanies[i].companiesBasicDataTranslation.city}})
+          console.log(city.name_en)
           foundCompanies[i].companiesBasicDataTranslation.dataValues["city"] = city.name_en;
 
           var _sector = foundCompanies[i].sector.split(",");

@@ -201,6 +201,13 @@ module.exports = {
 
       let basicDataTrans = await models.companiesBasicDataTranslation.findAll({where : {companyBasicDataId: foundInvesteeCompanies.basicData.id }});
       let translation = [];
+      let country = await models.countriesTranslation.findOne({where: {id: foundInvesteeCompanies.basicData.companiesBasicDataTranslation.country}})
+      foundInvesteeCompanies.basicData.companiesBasicDataTranslation.dataValues["country"] = country.name;
+
+          let city = await models.cities.findOne({where: {id: foundInvesteeCompanies.basicData.companiesBasicDataTranslation.city}})
+          console.log(city.name_en)
+          foundInvesteeCompanies.basicData.companiesBasicDataTranslation.dataValues["city"] = city.name_en;
+
       if(basicDataTrans.length > 1){
         translation = [
           {
@@ -243,7 +250,6 @@ module.exports = {
           where: { investeeId: request.params.id },
           include: [{ association: 'auditorTranslation', where: { languageId: languageId }, required: true }]
         });
-  console.log(foundInvesteeCompanies.companyId);
         let subsidiary = await models.companies_relations.findOne({
           where: { parentId: foundInvesteeCompanies.companyId}, // childId: request.params.id },
           include: [{ model: models.companiesBasicData, as: 'basicData', required: true,
