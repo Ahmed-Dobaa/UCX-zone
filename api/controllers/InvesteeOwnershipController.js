@@ -125,7 +125,7 @@ module.exports = {
           await models.usersInvestees.create({ userId: createdUser.id, investeeId: request.params.investeeId, roleId: 4 }, { transaction });
           createdInvesteeOwnerships.accountId = createdUser.id;
           await createdInvesteeOwnerships.save({ transaction });
-          await transaction.commit();
+
 
           if(request.payload[i].email && _.isEmpty(user)) {
             Mailer.sendInvitationMailToUser(request.payload[i].email, ownershipUser.name,
@@ -134,6 +134,7 @@ module.exports = {
 
         }
       }
+      await transaction.commit();
       return reply.response({ ...request.payload, id: createdOwnership.id }).code(201);
 
     }
