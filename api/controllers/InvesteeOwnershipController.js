@@ -84,94 +84,60 @@ module.exports = {
 
         return Boom.notFound('The Investee Company Is Not Found');
       }
+   let createdOwnership = null;
+   let createdInvesteeOwnerships = null;
 
+      for(let i = 0; i < request.payload.length; i++){
 
-      request.payload.investeeId = request.params.investeeId;
-      request.payload.createdBy = request.params.userId; // request.auth.decoded.id;
-      const createdOwnership = await models.ownerships.create(request.payload, { transaction });
-      const createdInvesteeOwnerships = await models.investeeOwnerships.create({
-        ownershipId: createdOwnership.id,
-        investeeId: foundInvesteeCompanies.id,
-        createdBy: 15 //request.auth.decoded.id,
-      }, { transaction });
+        request.payload[i].investeeId = request.params.investeeId;
+        request.payload[i].createdBy = request.params.userId; // request.auth.decoded.id;
+         createdOwnership = await models.ownerships.create(request.payload[i], { transaction });
+         createdInvesteeOwnerships = await models.investeeOwnerships.create({
+          ownershipId: createdOwnership.id,
+          investeeId: foundInvesteeCompanies.id,
+          createdBy: 15 //request.auth.decoded.id,
+        }, { transaction });
+        request.payload[i].ownershipTranslation.languageId = 'en'; //request.pre.languageId;
+        request.payload[i].ownershipTranslation.investeeOwnershipId= createdOwnership.id;
+        await models.investeeOwnershipTranslation.create(request.payload[i].ownershipTranslation, { transaction });
 
+        let accessToken = null;
+        let ownershipUser = null;
 
-      request.payload.ownershipTranslation.languageId = 'en'; //request.pre.languageId;
-      request.payload.ownershipTranslation.investeeOwnershipId= createdOwnership.id;
-      await models.investeeOwnershipTranslation.create(request.payload.ownershipTranslation, { transaction });
+        const user = await models.users.findOne({ where: { email: request.payload[i].email } });
+        if(request.payload[i].email && _.isEmpty(user)) {
 
-      // let translation = request.payload.ownershipTranslation.translation;
-      // let langauges = ['ar', 'fr', 'po', 'sp'];
-      // for(let k = 0; k < langauges.length; k++){
-      //  let obj = request.payload.ownershipTranslation;
+          accessToken = jwtService.generateUserAccessToken({
+            scope: 'invitation',
+            email: request.payload[i].email
+          }, config.jwt.authKey);
+          ownershipUser = {
+            name: request.payload[i].ownershipTranslation.shareholderName,
+            phoneNumber: request.payload[i].ownershipTranslation.phoneNumber,
+            email: request.payload[i].email,
+            dob: request.payload[i].ownershipTranslation.dob,
+            gender: request.payload[i].gender,
+            activationToken: accessToken,
+            secret: userService.generateActivationToken(),
+            active: 0
+          };
+          const createdUser = await models.users.create(ownershipUser, { transaction });
+          await models.usersInvestees.create({ userId: createdUser.id, investeeId: request.params.investeeId, roleId: 4 }, { transaction });
+          createdInvesteeOwnerships.accountId = createdUser.id;
+          await createdInvesteeOwnerships.save({ transaction });
+          await transaction.commit();
 
-      //  for(let i = 0; i < translation.length; i++){
-      //    let column;
-      //    switch(langauges[k]){
-      //      case 'ar':
-      //          obj["languageId"] = 'ar';
-      //           column = translation[i].propertyName;
-      //          obj[column] = translation[i].translation.Ar;
-      //      break;
-      //      case 'fr':
-      //          obj["languageId"] = 'fr';
-      //           column = translation[i].propertyName;
-      //          obj[column] = translation[i].translation.Fr;
-      //      break;
-      //      case 'po':
-      //          obj["languageId"] = 'po';
-      //           column = translation[i].propertyName;
-      //          obj[column] = translation[i].translation.Po;
-      //      break;
-      //      case 'sp':
-      //          obj["languageId"] = 'sp';
-      //           column = translation[i].propertyName;
-      //          obj[column] = translation[i].translation.Sp;
-      //      break;
-      //      default:
-      //        break;
-      //    }
-      //  }
-      //  await models.investeeOwnershipTranslation.create(obj, { transaction });
-      // }
+          if(request.payload[i].email && _.isEmpty(user)) {
+            Mailer.sendInvitationMailToUser(request.payload[i].email, ownershipUser.name,
+              foundInvesteeCompanies.basicData.companiesBasicDataTranslation.name, accessToken);
+          }
 
-
-      let accessToken = null;
-      let ownershipUser = null;
-
-      const user = await models.users.findOne({ where: { email: request.payload.email } });
-
-      if(request.payload.email && _.isEmpty(user)) {
-
-        accessToken = jwtService.generateUserAccessToken({
-          scope: 'invitation',
-          email: request.payload.email
-        }, config.jwt.authKey);
-        ownershipUser = {
-          name: request.payload.ownershipTranslation.shareholderName,
-          phoneNumber: request.payload.ownershipTranslation.phoneNumber,
-          email: request.payload.email,
-          dob: request.payload.ownershipTranslation.dob,
-          gender: request.payload.gender,
-          activationToken: accessToken,
-          secret: userService.generateActivationToken(),
-          active: 0
-        };
-        const createdUser = await models.users.create(ownershipUser, { transaction });
-        await models.usersInvestees.create({ userId: createdUser.id, investeeId: request.params.investeeId, roleId: 4 }, { transaction });
-        createdInvesteeOwnerships.accountId = createdUser.id;
-        await createdInvesteeOwnerships.save({ transaction });
+        }
       }
-
-      await transaction.commit();
-
-      if(request.payload.email && _.isEmpty(user)) {
-        Mailer.sendInvitationMailToUser(request.payload.email, ownershipUser.name,
-          foundInvesteeCompanies.basicData.companiesBasicDataTranslation.name, accessToken);
-      }
-
       return reply.response({ ...request.payload, id: createdOwnership.id }).code(201);
+
     }
+
     catch (e) {
       console.log('error', e);
 

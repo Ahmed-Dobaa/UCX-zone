@@ -50,20 +50,24 @@ module.exports = {
 
       const { payload } = request;
       const language = 'en'; //request.pre.languageId;
-      payload.investeeId = request.params.investeeId;
-      payload.createdBy = request.params.userId; // 15; //request.auth.decoded.id;
-      const foundInvesteeCompanies = await models.investee.findOne({ where: { id: request.params.investeeId } });
-
-      if(_.isEmpty(foundInvesteeCompanies)) {
-
-        return Boom.notFound('The Investee Company Is Not Found');
-      }
+      let createdDirector = null;
+      let createdBoardOfDirectorTranslation = null;
       transaction = await models.sequelize.transaction();
+        for(let i = 0; i < payload.length; i++){
+          payload[i].investeeId = request.params.investeeId;
+          payload[i].createdBy = request.params.userId; // 15; //request.auth.decoded.id;
+          const foundInvesteeCompanies = await models.investee.findOne({ where: { id: request.params.investeeId } });
 
-        const createdDirector = await models.investeeBoardOfDirectors.create(payload, { transaction });
-        payload.boardOfDirectorTranslation["languageId"] = language;
-        payload.boardOfDirectorTranslation.investeeBoardOfDirectorsId = createdDirector.id;
-        const createdBoardOfDirectorTranslation = await models.investeeBoardOfDirectorTranslation.create(payload.boardOfDirectorTranslation, { transaction });
+          if(_.isEmpty(foundInvesteeCompanies)) {
+
+            return Boom.notFound('The Investee Company Is Not Found');
+          }
+           createdDirector = await models.investeeBoardOfDirectors.create(payload[i], { transaction });
+          payload[i].boardOfDirectorTranslation["languageId"] = language;
+          payload[i].boardOfDirectorTranslation.investeeBoardOfDirectorsId = createdDirector.id;
+           createdBoardOfDirectorTranslation = await models.investeeBoardOfDirectorTranslation.create(payload[i].boardOfDirectorTranslation, { transaction });
+        }
+
         // let translation = payload.boardOfDirectorTranslation.translation;
         // let langauges = ['ar', 'fr', 'po', 'sp'];
         // for(let k = 0; k < langauges.length; k++){

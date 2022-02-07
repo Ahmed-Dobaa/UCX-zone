@@ -1199,7 +1199,7 @@ module.exports = [
         // { method: helperService.authorizeUser },
       //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
-      validate: investeeOwnershipSchema.createSchema,
+      // validate: investeeOwnershipSchema.createSchema,
       handler: investeeOwnershipController.create
     }
   },
