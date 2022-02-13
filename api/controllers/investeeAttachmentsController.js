@@ -45,6 +45,7 @@ module.exports = {
   },
   create: async function (request, reply) {
     let createdInvesteeAttachmentsType;
+    let transaction = await models.sequelize.transaction();
       const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
       const relativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
         //${request.params.companyId}
@@ -79,7 +80,10 @@ module.exports = {
       }
       catch (e) {
         console.log('error', e);
-        fs.unlinkSync(path.join(__dirname, '../', fullPath));
+        if(transaction){
+          await transaction.rollback();
+        }
+        // fs.unlinkSync(path.join(__dirname, '../', fullPath));
         return Boom.badImplementation('An internal server error occurred');
       }
 
@@ -92,7 +96,7 @@ module.exports = {
     const relativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
     // const relativePath = `uploads/investee/${request.params.companyId}/`;
     // const fileName = `${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
-    const fullPath = path_url;
+    const fullPath = relativePath;
     try {
 
       // const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif',
