@@ -2037,7 +2037,7 @@ module.exports = [
       //   // { method: helperService.authorizeUser }
       // ],
     //  pre: [{ method: helperService.getLanguageId, assign: 'languageId' }],
-      // validate: subsidiarySchema.createSchema,
+      validate: subsidiarySchema.createSchema,
       handler: subsidiariesCompanyController.create
     }
   },
@@ -2091,7 +2091,7 @@ module.exports = [
       // pre: [
       //   // { method: helperService.authorizeUser }
       // ],
-      // validate: subsidiarySchema.updateSchema,
+      validate: subsidiarySchema.updateSchema,
       handler: subsidiariesCompanyController.update
     }
   },

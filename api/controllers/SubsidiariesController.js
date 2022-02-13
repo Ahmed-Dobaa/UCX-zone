@@ -48,12 +48,20 @@ module.exports = {
       const { companyId } = request.params;
       const { payload } = request;
       payload.user_id = request.params.userId;
+      payload.type = 'subsidary';
       Company = await models.companiesBasicDataTranslation.findOne({ where: { registrationIdNo: payload.registrationIdNo } });
       // companiesBasicData
       if(!_.isEmpty(Company)) { // If company already exists, just add the relation to companies_relations table.
 
         if(Company.id === companyId) { // End user might sent request.param.companyId == foundCompay.id to avoid that do this check.
           return Boom.badData('Can not make a company subsidiary for it\'s self.');
+        }
+
+        if(!payload.phoneNumbers.includes('-')) {
+          if(transaction){
+            await transaction.rollback();
+          }
+          return Boom.badData('Please enter the country code');
         }
 
         const foundRelation = await models.companies_relations.findOne({
@@ -76,6 +84,12 @@ module.exports = {
       }
       // If company doesn't exist, then create the company, add the relation to companies_relations table and send role request.
       transaction = await models.sequelize.transaction();
+      if(!payload.phoneNumbers.includes('-')) {
+        if(transaction){
+          await transaction.rollback();
+        }
+        return Boom.badData('Please enter the country code');
+      }
       let _sectors = [];
       for(let i = 0; i < payload.sector.length; i++){
         _sectors.push(payload.sector[i].name)
@@ -138,6 +152,13 @@ module.exports = {
 
       if(_.isEmpty(foundRelation)) {
         return Boom.notFound('You don\'t have this company as subsidiary.');
+      }
+
+      if(!payload.phoneNumbers.includes('-')) {
+        if(transaction){
+          await transaction.rollback();
+        }
+        return Boom.badData('Please enter the country code');
       }
 
       const updatedCompany = await models.companies_relations.update(payload, {

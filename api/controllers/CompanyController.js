@@ -174,7 +174,7 @@ module.exports = {
     let progress = null;
     try {
       var foundCompanies = await models.companiesBasicData.findAll({
-        where: {deleted: 0, type: "investee"},
+        where: {deleted: 0, $or: [{type: "investee"}, {type: "subsidary"}] },
         include: [
           { model: models.investee, as: 'investeeCompany'},
           { model: models.companiesBasicDataTranslation, where: {languageId: 'en'}, as: 'companiesBasicDataTranslation' }
@@ -182,7 +182,7 @@ module.exports = {
       });
       for(let i = 0; i < foundCompanies.length; i++){
         // console.log();
-        if(foundCompanies[i].type === 'investee'){
+        if(foundCompanies[i].type === 'investee' || foundCompanies[i].type === 'subsidary'){
           const foundSubmittedInterests = await models.investor_interests_submits.findAll({ where: { investeeId: foundCompanies[i].investeeCompany.id } });
           foundCompanies[i].dataValues["interest_count"] = foundSubmittedInterests.length;
 
