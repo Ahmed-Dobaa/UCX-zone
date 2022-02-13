@@ -51,6 +51,9 @@ module.exports = {
         //${request.params.companyId}
       // const fileName = ``;
       const path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
+      const id_path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
+      const idRelativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
+
       const fullPath = relativePath;
       try {
       await models.investeeAttachmentsTypes.findOne({ where: { id: request.payload.attachmentTypeId } });
@@ -70,10 +73,12 @@ module.exports = {
         // await fsPromises.access(fullPath, fs.constants.W_OK);
         // await request.payload.file.pipe(fs.createWriteStream(fullPath));
         await request.payload.file.pipe(fs.createWriteStream(fullPath));
+        await request.payload.file.pipe(fs.createWriteStream(idRelativePath));
         request.payload.createdBy = request.params.userId; //request.auth.decoded.id;
         request.payload.companyId = request.params.companyId;
         // request.payload.file[i].attachmentTypeId = request.payload.attachmentTypeId[i];
         request.payload.attachmentPath = path_url;
+        request.payload.id_img_path = id_path_url;
         // request.payload.file[i].description = request.payload.description[i];
 
         createdInvesteeAttachmentsType = await models.investeeAttachments.create(request.payload);
@@ -96,6 +101,8 @@ module.exports = {
     const relativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
     // const relativePath = `uploads/investee/${request.params.companyId}/`;
     // const fileName = `${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
+    const id_path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
+    const idRelativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
     const fullPath = relativePath;
     try {
 
@@ -119,7 +126,9 @@ module.exports = {
 
       // await fsPromises.access(fullPath, fs.constants.W_OK);
       await request.payload.file.pipe(fs.createWriteStream(fullPath));
-      request.payload.attachmentPath = fullPath;
+      await request.payload.file.pipe(fs.createWriteStream(idRelativePath));
+      request.payload.attachmentPath = path_url;
+      request.payload.id_img_path = id_path_url;
 
       await models.investeeAttachments.update( request.payload, { where: { id: request.params.id } });
       // await fsPromises.unlink(path.join(__dirname, '../', foundInvesteeAttachmentsType.attachmentPath));
