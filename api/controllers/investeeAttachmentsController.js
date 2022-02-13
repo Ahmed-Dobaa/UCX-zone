@@ -50,7 +50,7 @@ module.exports = {
         //${request.params.companyId}
       // const fileName = ``;
       const path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
-      const fullPath = path_url;
+      const fullPath = relativePath;
       try {
       await models.investeeAttachmentsTypes.findOne({ where: { id: request.payload.attachmentTypeId } });
 
