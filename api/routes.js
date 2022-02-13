@@ -1856,6 +1856,7 @@ module.exports = [
         },
         payload: {
           file: Joi.any().required().description('file'),
+          id: Joi.any().required().description('id'),
           attachmentTypeId: Joi.number().required().description('file type'),
           description: Joi.string().optional(),
           relationToCompany: Joi.string().optional().label('relation to company').example('Manager')
@@ -1910,6 +1911,7 @@ module.exports = [
         },
         payload: {
         file: Joi.any().required().description('file'),
+        id: Joi.any().required().description('id'),
         attachmentTypeId: Joi.number().required().description('file type'),
         description: Joi.string().optional(),
         relationToCompany: Joi.string().optional().label('relation to company').example('Manager') }

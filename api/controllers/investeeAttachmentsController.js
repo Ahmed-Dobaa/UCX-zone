@@ -47,12 +47,14 @@ module.exports = {
     let createdInvesteeAttachmentsType;
     let transaction = await models.sequelize.transaction();
       const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
+      const uploadIDExtension = path.extname(request.payload.id.hapi.filename);
+
       const relativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
         //${request.params.companyId}
       // const fileName = ``;
       const path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
-      const id_path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
-      const idRelativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
+      const id_path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf() + 1}-${uploadIDExtension}`
+      const idRelativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf() + 1}-${uploadIDExtension}`;
 
       const fullPath = relativePath;
       try {
@@ -97,12 +99,13 @@ module.exports = {
   update: async function (request, reply) {
 
     const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
+    const uploadIDExtension = path.extname(request.payload.id.hapi.filename);
     const path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
     const relativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
     // const relativePath = `uploads/investee/${request.params.companyId}/`;
     // const fileName = `${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
-    const id_path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
-    const idRelativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
+    const id_path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf() + 1}-${uploadIDExtension}`
+    const idRelativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf() + 1}-${uploadIDExtension}`;
     const fullPath = relativePath;
     try {
 
