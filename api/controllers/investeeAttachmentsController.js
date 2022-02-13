@@ -21,6 +21,17 @@ module.exports = {
       return Boom.badImplementation('An internal server error occurred');
     }
   },
+  companyAttachments: async function (request, reply) {
+    try {
+
+      const foundInvesteeAttachments = await models.investeeAttachments.findAll({ where: {companyId: request.params.company_id} });
+      return reply.response(foundInvesteeAttachments).code(200);
+    }
+    catch (e) {
+      console.log('error', e);
+      return Boom.badImplementation('An internal server error occurred');
+    }
+  },
   findOne: async function (request, reply) {
     try {
 
@@ -39,7 +50,7 @@ module.exports = {
         //${request.params.companyId}
       // const fileName = ``;
       const path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
-      const fullPath = relativePath;
+      const fullPath = path_url;
       try {
       await models.investeeAttachmentsTypes.findOne({ where: { id: request.payload.attachmentTypeId } });
 
@@ -79,10 +90,9 @@ module.exports = {
     const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
     const path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
     const relativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
-console.log("hereherehere")
     // const relativePath = `uploads/investee/${request.params.companyId}/`;
     // const fileName = `${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
-    const fullPath = relativePath;
+    const fullPath = path_url;
     try {
 
       // const allowedExtensions = ['.tif', '.png', '.svg', '.jpg', '.gif',
@@ -105,7 +115,9 @@ console.log("hereherehere")
 
       // await fsPromises.access(fullPath, fs.constants.W_OK);
       await request.payload.file.pipe(fs.createWriteStream(fullPath));
-      await models.investeeAttachments.update({ attachmentPath: path_url, attachmentTypeId: request.payload.attachmentTypeId }, { where: { id: request.params.id } });
+      request.payload.attachmentPath = fullPath;
+
+      await models.investeeAttachments.update( request.payload, { where: { id: request.params.id } });
       // await fsPromises.unlink(path.join(__dirname, '../', foundInvesteeAttachmentsType.attachmentPath));
 
       return reply.response({ status: 200, message: "Updated successfully"}).code(200);

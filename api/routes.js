@@ -1813,6 +1813,26 @@ module.exports = [
     }
   },
   {
+    path: '/users/{userId}/attachments/{company_id}',
+    method: 'get',
+    options: {
+      auth: 'jwt',
+      description: 'get all investee attachments',
+      // app: { allowedPermission: { resource: 'investeeAttachments', action: 'findAll' } },
+      pre: [
+        // // // { method: helperService.authorizeUser },
+       // { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      validate: {
+        params: {
+          userId: Joi.number().required().description('the id of the attachment'),
+          company_id: Joi.number().required().description('the id of the attachment')
+        }
+      },
+      handler: investeeAttachmentsController.companyAttachments
+    }
+  },
+  {
     path: '/users/{userId}/investees/{companyId}/attachments',
     method: 'post',
     options: {
@@ -1836,7 +1856,9 @@ module.exports = [
         },
         payload: {
           file: Joi.any().required().description('file'),
-          // attachmentTypeId: Joi.number().required().description('file type')
+          attachmentTypeId: Joi.number().required().description('file type'),
+          description: Joi.string().optional(),
+          relationToCompany: Joi.string().optional().label('relation to company').example('Manager')
         }
       },
       handler: investeeAttachmentsController.create
@@ -1886,7 +1908,11 @@ module.exports = [
           companyId: Joi.number().required().description('the id of the attachment'),
           id: Joi.number().required().description('the id of the attachment')
         },
-        payload: { file: Joi.any().required().description('file') }
+        payload: {
+        file: Joi.any().required().description('file'),
+        attachmentTypeId: Joi.number().required().description('file type'),
+        description: Joi.string().optional(),
+        relationToCompany: Joi.string().optional().label('relation to company').example('Manager') }
       },
       handler: investeeAttachmentsController.update
     }
