@@ -1859,7 +1859,7 @@ module.exports = [
           id: Joi.any().required().description('id'),
           attachmentTypeId: Joi.number().required().description('file type'),
           description: Joi.string().optional(),
-          relationToCompany: Joi.string().optional().label('relation to company').example('Manager')
+          relationToCompany: Joi.string().required().label('relation to company').example('Manager')
         }
       },
       handler: investeeAttachmentsController.create
@@ -1914,7 +1914,7 @@ module.exports = [
         id: Joi.any().required().description('id'),
         attachmentTypeId: Joi.number().required().description('file type'),
         description: Joi.string().optional(),
-        relationToCompany: Joi.string().optional().label('relation to company').example('Manager') }
+        relationToCompany: Joi.string().required().label('relation to company').example('Manager') }
       },
       handler: investeeAttachmentsController.update
     }
