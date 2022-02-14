@@ -47,7 +47,7 @@ module.exports = {
     let createdInvesteeAttachmentsType;
     let transaction = await models.sequelize.transaction();
       const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
-      const uploadIDExtension = path.extname(request.payload.id.hapi.filename);
+      const uploadIDExtension = path.extname(request.payload.idFile.hapi.filename);
 
       const relativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
         //${request.params.companyId}
@@ -75,12 +75,13 @@ module.exports = {
         // await fsPromises.access(fullPath, fs.constants.W_OK);
         // await request.payload.file.pipe(fs.createWriteStream(fullPath));
         await request.payload.file.pipe(fs.createWriteStream(fullPath));
-        await request.payload.id.pipe(fs.createWriteStream(idRelativePath));
+        await request.payload.idFile.pipe(fs.createWriteStream(idRelativePath));
         request.payload.createdBy = request.params.userId; //request.auth.decoded.id;
         request.payload.companyId = request.params.companyId;
         // request.payload.file[i].attachmentTypeId = request.payload.attachmentTypeId[i];
         request.payload.attachmentPath = path_url;
         request.payload.id_img_path = id_path_url;
+        request.payload.relation = request.payload.relationToCompany;
         // request.payload.file[i].description = request.payload.description[i];
 
         createdInvesteeAttachmentsType = await models.investeeAttachments.create(request.payload);
@@ -100,7 +101,7 @@ module.exports = {
   update: async function (request, reply) {
     let transaction = await models.sequelize.transaction();
     const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
-    const uploadIDExtension = path.extname(request.payload.id.hapi.filename);
+    const uploadIDExtension = path.extname(request.payload.idFile.hapi.filename);
     const path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
     const relativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
     // const relativePath = `uploads/investee/${request.params.companyId}/`;
@@ -130,10 +131,10 @@ module.exports = {
 
       // await fsPromises.access(fullPath, fs.constants.W_OK);
       await request.payload.file.pipe(fs.createWriteStream(fullPath));
-      await request.payload.id.pipe(fs.createWriteStream(idRelativePath));
+      await request.payload.idFile.pipe(fs.createWriteStream(idRelativePath));
       request.payload.attachmentPath = path_url;
       request.payload.id_img_path = id_path_url;
-
+      request.payload.relation = request.payload.relationToCompany;
       await models.investeeAttachments.update( request.payload, { where: { id: request.params.id } });
       // await fsPromises.unlink(path.join(__dirname, '../', foundInvesteeAttachmentsType.attachmentPath));
 

@@ -1856,10 +1856,10 @@ module.exports = [
         },
         payload: {
           file: Joi.any().required().description('file'),
-          id: Joi.any().required().description('id'),
+          idFile: Joi.any().required().description('id'),
           attachmentTypeId: Joi.number().required().description('file type'),
           description: Joi.string().optional(),
-          relationToCompany: Joi.string().required().label('relation to company').example('Manager')
+          relation: Joi.string().required().label('relation to company').example('Manager')
         }
       },
       handler: investeeAttachmentsController.create
@@ -1911,10 +1911,10 @@ module.exports = [
         },
         payload: {
         file: Joi.any().required().description('file'),
-        id: Joi.any().required().description('id'),
+        idFile: Joi.any().required().description('id'),
         attachmentTypeId: Joi.number().required().description('file type'),
         description: Joi.string().optional(),
-        relationToCompany: Joi.string().required().label('relation to company').example('Manager') }
+        relation: Joi.string().required().label('relation to company').example('Manager') }
       },
       handler: investeeAttachmentsController.update
     }
