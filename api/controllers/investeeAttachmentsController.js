@@ -92,7 +92,7 @@ module.exports = {
         // request.payload.file[i].attachmentTypeId = request.payload.attachmentTypeId[i];
         request.payload.attachmentPath = path_url;
         request.payload.id_img_path = id_path_url;
-        request.payload.relation = request.payload.relationToCompany;
+        request.payload.relationToCompany = request.payload.relation;
         // request.payload.file[i].description = request.payload.description[i];
 
         createdInvesteeAttachmentsType = await models.investeeAttachments.create(request.payload);
