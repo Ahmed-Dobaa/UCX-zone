@@ -84,6 +84,7 @@ module.exports = {
         // request.payload.file[i].description = request.payload.description[i];
 
         createdInvesteeAttachmentsType = await models.investeeAttachments.create(request.payload);
+        await transaction.commit();
       }
       catch (e) {
         console.log('error', e);
@@ -97,7 +98,7 @@ module.exports = {
     return reply.response(createdInvesteeAttachmentsType).code(201);
   },
   update: async function (request, reply) {
-
+    let transaction = await models.sequelize.transaction();
     const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
     const uploadIDExtension = path.extname(request.payload.id.hapi.filename);
     const path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
@@ -137,10 +138,14 @@ module.exports = {
       // await fsPromises.unlink(path.join(__dirname, '../', foundInvesteeAttachmentsType.attachmentPath));
 
       return reply.response({ status: 200, message: "Updated successfully"}).code(200);
+      await transaction.commit();
     }
     catch (e) {
+      if(transaction){
+        await transaction.rollback();
+      }
       console.log('error', e);
-      await fsPromises.unlink(path.join(__dirname, '../', fullPath));
+      // await fsPromises.unlink(path.join(__dirname, '../', fullPath));
       return Boom.badImplementation('An internal server error occurred');
     }
   },
