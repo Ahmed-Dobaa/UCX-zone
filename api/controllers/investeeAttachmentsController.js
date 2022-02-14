@@ -14,6 +14,10 @@ module.exports = {
     try {
 
       const foundInvesteeAttachments = await models.investeeAttachments.findAll({ raw: true });
+      for(let i = 0; i < foundInvesteeAttachments.length; i++){
+        let foundInvesteeAttachmentsType = await models.investeeAttachmentsTypes.findOne({ where: { id: foundInvesteeAttachments[i].attachmentTypeId }, raw: true });
+        foundInvesteeAttachments[i]["type_name"] = foundInvesteeAttachmentsType.name;
+      }
       return reply.response(foundInvesteeAttachments).code(200);
     }
     catch (e) {
@@ -25,6 +29,10 @@ module.exports = {
     try {
 
       const foundInvesteeAttachments = await models.investeeAttachments.findAll({ where: {companyId: request.params.company_id} });
+      for(let i = 0; i < foundInvesteeAttachments.length; i++){
+        let foundInvesteeAttachmentsType = await models.investeeAttachmentsTypes.findOne({ where: { id: foundInvesteeAttachments[i].attachmentTypeId }, raw: true });
+        foundInvesteeAttachments[i].dataValues["type_name"] = foundInvesteeAttachmentsType.name;
+      }
       return reply.response(foundInvesteeAttachments).code(200);
     }
     catch (e) {
