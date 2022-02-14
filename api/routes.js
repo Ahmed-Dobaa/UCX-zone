@@ -1856,13 +1856,41 @@ module.exports = [
         },
         payload: {
           file: Joi.any().required().description('file'),
-          idFile: Joi.any().required().description('id'),
           attachmentTypeId: Joi.number().required().description('file type'),
-          description: Joi.string().optional(),
-          relation: Joi.string().required().label('relation to company').example('Manager')
+          description: Joi.string().optional()
         }
       },
       handler: investeeAttachmentsController.create
+    }
+  },
+  {
+    path: '/users/{userId}/investees/{companyId}/identity',
+    method: 'post',
+    options: {
+      payload: {
+        maxBytes: 2097152, // maximum payload size in bytes (2M)
+        output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
+        parse: true, // The parse property determines if the incoming payload gets parsed
+        allow: ['multipart/form-data']
+      },
+      auth: 'jwt',
+      description: 'create new investee attachment identity',
+      app: { allowedPermission: { resource: 'investeeAttachments', action: 'create' } },
+      pre: [
+        // // { method: helperService.authorizeUser },
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      validate: {
+        params: {
+          userId: Joi.number().required().description('the id of the attachment'),
+          companyId: Joi.number().required().description('the id of the attachment')
+        },
+        payload: {
+          idFile: Joi.any().required().description('id'),
+          relation: Joi.string().required().label('relation to company').example('Manager')
+        }
+      },
+      handler: investeeAttachmentsController.identity
     }
   },
   {
@@ -1911,12 +1939,42 @@ module.exports = [
         },
         payload: {
         file: Joi.any().required().description('file'),
-        idFile: Joi.any().required().description('id'),
         attachmentTypeId: Joi.number().required().description('file type'),
         description: Joi.string().optional(),
-        relation: Joi.string().required().label('relation to company').example('Manager') }
+
+       }
       },
       handler: investeeAttachmentsController.update
+    }
+  },
+  {
+    path: '/users/{userId}/investees/{companyId}/updateIdentity/{id}',
+    method: 'put',
+    options: {
+      payload: {
+        maxBytes: 2097152, // maximum payload size in bytes (2M)
+        output: 'stream', // The output controls whether you keep the file in memory, a temporary file or receive the file as a stream
+        parse: true, // The parse property determines if the incoming payload gets parsed
+        allow: ['multipart/form-data']
+      },
+      description: 'update specific investee attachment by its id',
+      auth: 'jwt',
+      app: { allowedPermission: { resource: 'investeeAttachments', action: 'update' } },
+      pre: [
+        // // { method: helperService.authorizeUser },
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      validate: {
+        params: {
+          userId: Joi.number().required().description('the id of the attachment'),
+          companyId: Joi.number().required().description('the id of the attachment'),
+          id: Joi.number().required().description('the id of the attachment')
+        },
+        payload: {
+        idFile: Joi.any().required().description('id'),
+        relation: Joi.string().required().label('relation to company').example('Manager') }
+      },
+      handler: investeeAttachmentsController.updateIdentity
     }
   },
   {

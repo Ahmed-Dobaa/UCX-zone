@@ -14,11 +14,11 @@ module.exports = function (sequelize, DataTypes) {
     },
     attachmentPath: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: true
     },
     id_img_path: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: true
     },
     description: {
       type: DataTypes.STRING(100),
@@ -30,7 +30,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     attachmentTypeId: {
       type: DataTypes.INTEGER(11),
-      allowNull: false
+      allowNull: true
     },
     createdBy: {
       type: DataTypes.INTEGER(11),

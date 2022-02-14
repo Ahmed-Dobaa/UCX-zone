@@ -56,14 +56,11 @@ module.exports = {
     let createdInvesteeAttachmentsType;
     let transaction = await models.sequelize.transaction();
       const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
-      const uploadIDExtension = path.extname(request.payload.idFile.hapi.filename);
 
       const relativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
         //${request.params.companyId}
       // const fileName = ``;
       const path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
-      const id_path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf() + 1}-${uploadIDExtension}`
-      const idRelativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf() + 1}-${uploadIDExtension}`;
 
       const fullPath = relativePath;
       try {
@@ -84,13 +81,10 @@ module.exports = {
         // await fsPromises.access(fullPath, fs.constants.W_OK);
         // await request.payload.file.pipe(fs.createWriteStream(fullPath));
         await request.payload.file.pipe(fs.createWriteStream(fullPath));
-        await request.payload.idFile.pipe(fs.createWriteStream(idRelativePath));
         request.payload.createdBy = request.params.userId; //request.auth.decoded.id;
         request.payload.companyId = request.params.companyId;
         // request.payload.file[i].attachmentTypeId = request.payload.attachmentTypeId[i];
         request.payload.attachmentPath = path_url;
-        request.payload.id_img_path = id_path_url;
-        request.payload.relationToCompany = request.payload.relation;
         // request.payload.file[i].description = request.payload.description[i];
 
         createdInvesteeAttachmentsType = await models.investeeAttachments.create(request.payload);
@@ -107,16 +101,44 @@ module.exports = {
 
     return reply.response(createdInvesteeAttachmentsType).code(201);
   },
+  identity: async function (request, reply) {
+    let createdInvesteeAttachmentsType;
+    let transaction = await models.sequelize.transaction();
+      const uploadIDExtension = path.extname(request.payload.idFile.hapi.filename);
+
+      const id_path_url = `https://platform.ucx.zone/attachments/${moment().valueOf()}-${uploadIDExtension}`
+      const idRelativePath = `./../../platform.ucx.zone/attachments/${moment().valueOf()}-${uploadIDExtension}`;
+
+      try {
+      await models.investeeAttachmentsTypes.findOne({ where: { id: request.payload.attachmentTypeId } });
+
+        await request.payload.idFile.pipe(fs.createWriteStream(idRelativePath));
+        request.payload.createdBy = request.params.userId;
+        request.payload.companyId = request.params.companyId;
+        request.payload.id_img_path = id_path_url;
+        request.payload.relationToCompany = request.payload.relation;
+
+        createdInvesteeAttachmentsType = await models.investeeAttachments.create(request.payload);
+        await transaction.commit();
+      }
+      catch (e) {
+        console.log('error', e);
+        if(transaction){
+          await transaction.rollback();
+        }
+        return Boom.badImplementation('An internal server error occurred');
+      }
+
+    return reply.response(createdInvesteeAttachmentsType).code(201);
+  },
   update: async function (request, reply) {
     let transaction = await models.sequelize.transaction();
     const uploadImageExtension = path.extname(request.payload.file.hapi.filename);
-    const uploadIDExtension = path.extname(request.payload.idFile.hapi.filename);
     const path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`
     const relativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
     // const relativePath = `uploads/investee/${request.params.companyId}/`;
     // const fileName = `${request.payload.attachmentTypeId}-${moment().valueOf()}-${uploadImageExtension}`;
-    const id_path_url = `https://platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf() + 1}-${uploadIDExtension}`
-    const idRelativePath = `./../../platform.ucx.zone/attachments/${request.payload.attachmentTypeId}-${moment().valueOf() + 1}-${uploadIDExtension}`;
+
     const fullPath = relativePath;
     try {
 
@@ -140,15 +162,38 @@ module.exports = {
 
       // await fsPromises.access(fullPath, fs.constants.W_OK);
       await request.payload.file.pipe(fs.createWriteStream(fullPath));
-      await request.payload.idFile.pipe(fs.createWriteStream(idRelativePath));
       request.payload.attachmentPath = path_url;
-      request.payload.id_img_path = id_path_url;
-      request.payload.relation = request.payload.relationToCompany;
       await models.investeeAttachments.update( request.payload, { where: { id: request.params.id } });
       // await fsPromises.unlink(path.join(__dirname, '../', foundInvesteeAttachmentsType.attachmentPath));
+      await transaction.commit();
 
       return reply.response({ status: 200, message: "Updated successfully"}).code(200);
+    }
+    catch (e) {
+      if(transaction){
+        await transaction.rollback();
+      }
+      console.log('error', e);
+      // await fsPromises.unlink(path.join(__dirname, '../', fullPath));
+      return Boom.badImplementation('An internal server error occurred');
+    }
+  },
+  updateIdentity: async function (request, reply) {
+    let transaction = await models.sequelize.transaction();
+    const uploadIDExtension = path.extname(request.payload.idFile.hapi.filename);
+    const id_path_url = `https://platform.ucx.zone/attachments/${moment().valueOf()}-${uploadIDExtension}`
+    const idRelativePath = `./../../platform.ucx.zone/attachments/${moment().valueOf()}-${uploadIDExtension}`;
+
+    try {
+
+      await request.payload.idFile.pipe(fs.createWriteStream(idRelativePath));
+
+      request.payload.id_img_path = id_path_url;
+      request.payload.relationToCompany = request.payload.relation;
+      await models.investeeAttachments.update( request.payload, { where: { id: request.params.id } });
+
       await transaction.commit();
+      return reply.response({ status: 200, message: "Updated successfully"}).code(200);
     }
     catch (e) {
       if(transaction){
