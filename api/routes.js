@@ -1920,7 +1920,7 @@ module.exports = [
     }
   },
   {
-    path: '/users/{userId}/investees/{companyId}/attachments/{id}',
+    path: '/users/{userId}/attachments/{id}',
     method: 'delete',
     options: {
       description: 'delete specific investee attachment by its id',
@@ -1933,7 +1933,6 @@ module.exports = [
       validate: {
         params: {
           userId: Joi.number().required().description('the id of the attachment'),
-          companyId: Joi.number().required().description('the id of the attachment'),
           id: Joi.number().required().description('the id of the attachment')
         }
       },
