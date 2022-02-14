@@ -31,9 +31,9 @@ module.exports = {
       const foundInvesteeAttachments = await models.investeeAttachments.findAll({ where: {companyId: request.params.company_id} });
       for(let i = 0; i < foundInvesteeAttachments.length; i++){
         let foundInvesteeAttachmentsType = await models.investeeAttachmentsTypes.findOne({ where: { id: foundInvesteeAttachments[i].attachmentTypeId }, raw: true });
-        if(foundInvesteeAttachmentsType != null){
+
           foundInvesteeAttachments[i].dataValues["type_name"] = foundInvesteeAttachmentsType.name;
-        }
+
         foundInvesteeAttachments[i].dataValues["type_name"] = '';
       }
       return reply.response(foundInvesteeAttachments).code(200);
