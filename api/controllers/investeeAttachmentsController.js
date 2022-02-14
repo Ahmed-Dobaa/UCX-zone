@@ -75,7 +75,7 @@ module.exports = {
         // await fsPromises.access(fullPath, fs.constants.W_OK);
         // await request.payload.file.pipe(fs.createWriteStream(fullPath));
         await request.payload.file.pipe(fs.createWriteStream(fullPath));
-        await request.payload.file.pipe(fs.createWriteStream(idRelativePath));
+        await request.payload.id.pipe(fs.createWriteStream(idRelativePath));
         request.payload.createdBy = request.params.userId; //request.auth.decoded.id;
         request.payload.companyId = request.params.companyId;
         // request.payload.file[i].attachmentTypeId = request.payload.attachmentTypeId[i];
@@ -130,7 +130,7 @@ module.exports = {
 
       // await fsPromises.access(fullPath, fs.constants.W_OK);
       await request.payload.file.pipe(fs.createWriteStream(fullPath));
-      await request.payload.file.pipe(fs.createWriteStream(idRelativePath));
+      await request.payload.id.pipe(fs.createWriteStream(idRelativePath));
       request.payload.attachmentPath = path_url;
       request.payload.id_img_path = id_path_url;
 
