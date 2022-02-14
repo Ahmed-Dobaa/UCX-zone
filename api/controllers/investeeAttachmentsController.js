@@ -33,8 +33,6 @@ module.exports = {
         let foundInvesteeAttachmentsType = await models.investeeAttachmentsTypes.findOne({ where: { id: foundInvesteeAttachments[i].attachmentTypeId }, raw: true });
 
           foundInvesteeAttachments[i].dataValues["type_name"] = foundInvesteeAttachmentsType.name;
-
-        foundInvesteeAttachments[i].dataValues["type_name"] = '';
       }
       return reply.response(foundInvesteeAttachments).code(200);
     }
