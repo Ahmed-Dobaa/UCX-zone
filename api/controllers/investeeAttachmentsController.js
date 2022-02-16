@@ -30,6 +30,7 @@ module.exports = {
 
       const foundInvesteeAttachments = await models.investeeAttachments.findAll({ where: {companyId: request.params.company_id} });
       for(let i = 0; i < foundInvesteeAttachments.length; i++){
+        console.log(foundInvesteeAttachments[i])
         let foundInvesteeAttachmentsType = await models.investeeAttachmentsTypes.findOne({ where: { id: foundInvesteeAttachments[i].attachmentTypeId }, raw: true });
 
           foundInvesteeAttachments[i].dataValues["type_name"] = foundInvesteeAttachmentsType.name;
@@ -201,6 +202,28 @@ module.exports = {
       }
       console.log('error', e);
       // await fsPromises.unlink(path.join(__dirname, '../', fullPath));
+      return Boom.badImplementation('An internal server error occurred');
+    }
+  },
+  delete: async function (request, reply) {
+    let transaction = await models.sequelize.transaction();
+    try {
+
+      const foundInvesteeAttachmentsType = await models.investeeAttachments.findOne({ where: { id: request.params.id }, raw: true });
+
+      if(!_.isEmpty(foundInvesteeAttachmentsType)) {
+
+        await models.investeeAttachments.destroy({ where: { id: request.params.id } });
+        // await fsPromises.unlink(path.join(__dirname, '../', foundInvesteeAttachmentsType.attachmentPath));
+      }
+      await transaction.commit();
+      return reply.response({status: 200, message: "Deleted successfully"}).code(200);
+    }
+    catch (e) {
+      if(transaction){
+        await transaction.rollback();
+      }
+      console.log('error', e);
       return Boom.badImplementation('An internal server error occurred');
     }
   },
