@@ -34,6 +34,8 @@ module.exports = {
         let foundInvesteeAttachmentsType = await models.investeeAttachmentsTypes.findOne({ where: { id: foundInvesteeAttachments[i].attachmentTypeId }, raw: true });
         if(foundInvesteeAttachments[i].attachmentTypeId != null){
           foundInvesteeAttachments[i].dataValues["type_name"] = foundInvesteeAttachmentsType.name;
+        }else{
+          foundInvesteeAttachments[i].dataValues["type_name"] = null;
         }
       }
       return reply.response(foundInvesteeAttachments).code(200);
