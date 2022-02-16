@@ -32,8 +32,9 @@ module.exports = {
       for(let i = 0; i < foundInvesteeAttachments.length; i++){
         console.log(foundInvesteeAttachments[i])
         let foundInvesteeAttachmentsType = await models.investeeAttachmentsTypes.findOne({ where: { id: foundInvesteeAttachments[i].attachmentTypeId }, raw: true });
-
+        if(foundInvesteeAttachments[i].attachmentTypeId != null){
           foundInvesteeAttachments[i].dataValues["type_name"] = foundInvesteeAttachmentsType.name;
+        }
       }
       return reply.response(foundInvesteeAttachments).code(200);
     }
