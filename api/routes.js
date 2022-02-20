@@ -2227,7 +2227,7 @@ module.exports = [
         // // // { method: helperService.authorizeUser },
       //  { method: helperService.getLanguageId, assign: 'languageId' }
       ],
-      validate: investeeInvestmentProposalsSchema.createSchema,
+      // validate: investeeInvestmentProposalsSchema.createSchema,
       handler: investeeInvestmentProposalsController.create
     }
   },

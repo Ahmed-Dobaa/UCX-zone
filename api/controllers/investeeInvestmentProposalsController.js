@@ -166,47 +166,80 @@ module.exports = {
     }
   },
   create: async function (request, reply) {
-    console.log("here")
     let uploadImageExtension = null, relativePath= null, fileName = null, fullPath= null;
     let transaction;
     try {
-      const language = 1; //request.pre.languageId;
+      const language = 'en';
       const { payload } = request;
+      transaction = await models.sequelize.transaction();
+      let createdInvesteeInvestmentProposal = null;
+      let createdInvesteeInvestmentProposalTranslation = null;
+    for(let i = 0; i < payload.length; i++){
 
-      if(payload.file) {
-        uploadImageExtension = path.extname(request.payload.file.hapi.filename);
-        relativePath = `uploads/investee/${request.params.investeeId}/investmentProposals/`;
-        fileName = `${moment().valueOf()}-${uploadImageExtension}`;
-        fullPath = path.join(__dirname, '../', relativePath);
-
-        const allowedExtensions = ['.ods', '.xlr', '.xls', '.xlsx', '.doc', '.odt', '.pdf', '.wpd'];
-
-        if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
-          return Boom.badRequest(`allowed file extension are  ${allowedExtensions.join(' , ')}`);
-        }
-      }
-
-      payload.investeeId = request.params.investeeId;
-      payload.createdBy = request.params.userId; //request.auth.decoded.id;
+      payload[i].investeeId = request.params.investeeId;
+      payload[i].createdBy = request.params.userId;
       const foundInvestee = await models.investee.findOne({ where: { id: request.params.investeeId } });
 
       if(_.isEmpty(foundInvestee)) {
         return Boom.badRequest('The Investee Company Does Not Exist, You have to create It First');
       }
+       createdInvesteeInvestmentProposal = await models.investeeInvestmentProposals.create(payload[i], { transaction });
+      payload[i].investmentProposalTranslation.languageId = language;
+      payload[i].investmentProposalTranslation.investeeInvestmentProposalId = createdInvesteeInvestmentProposal.id;
+       createdInvesteeInvestmentProposalTranslation =
+        await models.investeeInvestmentProposalTranslation.create(payload[i].investmentProposalTranslation, { transaction });
 
-      if(payload.file) {
-        await fsPromises.mkdir(fullPath, { recursive: true });
-        await fsPromises.access(fullPath, fs.constants.W_OK);
-        await payload.file.pipe(fs.createWriteStream(`${fullPath}${fileName}`));
-        payload.attachmentPath = `${relativePath}${fileName}`;
+        ///////// translation
+
+        let translation = payload[i].translation;
+      if(translation.length === 0){
+        translation.push({
+          propertyName: 'test',
+          "translation": {
+            "Ar": "",
+            "Fr": "",
+            "Po": "",
+            "Sp": ""
+          }
+
+        })
       }
-      transaction = await models.sequelize.transaction();
+        let langauges = ['ar', 'fr', 'po', 'sp'];
+        for(let k = 0; k < langauges.length; k++){
+          let obj = payload[i].investmentProposalTranslation;
+      obj.description = null;
+      obj.PurposeOfTheRequiredInvestment = null;
+          for(let i = 0; i < translation.length; i++){
+            let column;
+            switch(langauges[k]){
+              case 'ar':
+                  obj["languageId"] = 'ar';
+                   column = translation[i].propertyName;
+                  obj[column] = translation[i].translation.Ar;
+              break;
+              case 'fr':
+                  obj["languageId"] = 'fr';
+                   column = translation[i].propertyName;
+                  obj[column] = translation[i].translation.Fr;
+              break;
+              case 'po':
+                  obj["languageId"] = 'po';
+                   column = translation[i].propertyName;
+                  obj[column] = translation[i].translation.Po;
+              break;
+              case 'sp':
+                  obj["languageId"] = 'sp';
+                   column = translation[i].propertyName;
+                  obj[column] = translation[i].translation.Sp;
+              break;
+              default:
+                break;
+            }
+          }
+          await models.investeeInvestmentProposalTranslation.create(obj, { transaction });
+         }
 
-      const createdInvesteeInvestmentProposal = await models.investeeInvestmentProposals.create(payload, { transaction });
-      payload.investmentProposalTranslation.languageId = language;
-      payload.investmentProposalTranslation.investeeInvestmentProposalId = createdInvesteeInvestmentProposal.id;
-      const createdInvesteeInvestmentProposalTranslation =
-        await models.investeeInvestmentProposalTranslation.create(payload.investmentProposalTranslation, { transaction });
+      }
       await transaction.commit();
 
       return reply.response(_.assign(createdInvesteeInvestmentProposal.toJSON(), { investmentProposalTranslation: createdInvesteeInvestmentProposalTranslation.toJSON() })).code(201);
@@ -276,33 +309,15 @@ module.exports = {
     let uploadImageExtension = null, relativePath= null, fileName = null, fullPath= null;
     let transaction;
     try {
-      const { payload } = request;
-      const language = 1; //request.pre.languageId;
-
-      // if(payload.file) {
-      //   uploadImageExtension = path.extname(request.payload.file.hapi.filename);
-      //   relativePath = `uploads/investee/${request.params.companyId}/investmentProposals/`;
-      //   fileName = `${moment().valueOf()}-${uploadImageExtension}`;
-      //   fullPath = path.join(__dirname, '../', relativePath);
-      //   const allowedExtensions = ['.ods', '.xlr', '.xls', '.xlsx', '.doc', '.odt', '.pdf', '.wpd'];
-
-      //   if(!_.includes(allowedExtensions, uploadImageExtension.toLowerCase())) {
-      //     return Boom.badRequest(`allowed file extension are  ${allowedExtensions.join(' , ')}`);
-      //   }
-      // }
-
+      let { payload } = request;
+      let language = 'en';
+      let langauges = ['ar', 'fr', 'po', 'sp'];
+      let translation = payload.translation;
       const foundInvesteeInvestmentProposal = await models.investeeInvestmentProposals.findOne({ where: { id: request.params.id }, raw: true });
 
       if(_.isEmpty(foundInvesteeInvestmentProposal)) {
         return Boom.badRequest('Investee investment proposal You Try To Update Does Not Exist');
       }
-
-      // if(payload.file) {
-      //   await fsPromises.mkdir(fullPath, { recursive: true });
-      //   await fsPromises.access(fullPath, fs.constants.W_OK);
-      //   await payload.file.pipe(fs.createWriteStream(`${fullPath}${fileName}`));
-      //   payload.attachmentPath = `${relativePath}${fileName}`;
-      // }
 
       transaction = await models.sequelize.transaction();
       await models.investeeInvestmentProposals.update(payload, { where: { id: request.params.id }, transaction });
@@ -312,6 +327,45 @@ module.exports = {
         await models.investeeInvestmentProposalTranslation.update(payload.investmentProposalTranslation,
           { where: { id: request.params.transId }, transaction }); //payload.investmentProposalTranslation.id
 
+          for(let k = 0; k < langauges.length; k++){
+            let obj = payload.investmentProposalTranslation;
+            obj.description = null;
+            obj.PurposeOfTheRequiredInvestment = null;
+            for(let i = 0; i < translation.length; i++){
+              let column;
+              switch(langauges[k]){
+                case 'ar':
+                    language = 'ar';
+                    obj["languageId"] = 'ar';
+                     column = translation[i].propertyName;
+                    obj[column] = translation[i].translation.Ar;
+                break;
+                case 'fr':
+                 language = 'fr';
+                    obj["languageId"] = 'fr';
+                     column = translation[i].propertyName;
+                    obj[column] = translation[i].translation.Fr;
+                break;
+                case 'po':
+                 language = 'po';
+                    obj["languageId"] = 'po';
+                     column = translation[i].propertyName;
+                    obj[column] = translation[i].translation.Po;
+                break;
+                case 'sp':
+                 language = 'sp';
+                    obj["languageId"] = 'sp';
+                     column = translation[i].propertyName;
+                    obj[column] = translation[i].translation.Sp;
+                break;
+                default:
+                  break;
+              }
+            }
+            await models.investeeInvestmentProposalTranslation.update(obj,
+              { where: { investeeInvestmentProposalId: request.params.id, languageId: language }, transaction }); //payload.investmentProposalTranslation.id
+
+         }
       // }
 
       await transaction.commit();

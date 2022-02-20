@@ -9,9 +9,9 @@ module.exports = {
       userId: Joi.number().required().description('the id of the user'),
       investeeId: Joi.number().required().description('the id of the company')
     },
-    payload: {
-      investmentTypeId: Joi.number().label('investment Type'),
-      file: Joi.any(),
+    payload:  {
+      investmentTypeId:  Joi.number().label('investment Type'),
+      // file: Joi.any(),
       currencyId: Joi.number().positive().label('currency'),
       investmentProposalTranslation: {
         title: Joi.string().label('title'),
@@ -50,7 +50,6 @@ module.exports = {
     },
     payload: {
       investmentTypeId: Joi.number().label('investment Type'),
-      file: Joi.any(),
       currencyId: Joi.number().positive().required().label('currency'),
       investmentProposalTranslation: {
         // id: Joi.number().required(),
@@ -61,9 +60,9 @@ module.exports = {
         valueOfTheInvestmentRequired: Joi.number().label('value Of The Investment Required'),
         PurposeOfTheRequiredInvestment: Joi.string().label('Purpose Of The Required Investment'),
         validTill: Joi.string(), //.min(moment().format('YYYY-MM-DDTHH:mm:ss[Z]')).label('valid Till'),
-        average_annual_sales: Joi.number().positive(),
-        currency: Joi.string(),
-        EBITDA: Joi.number()
+        average_annual_sales: Joi.number().positive()
+        // currency: Joi.string(),
+        // EBITDA: Joi.number()
       }
     }
   }
