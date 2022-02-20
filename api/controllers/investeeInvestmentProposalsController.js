@@ -151,11 +151,55 @@ module.exports = {
   },
   findOne: async function (request, reply) {
     try {
-      const language = 1; //request.pre.languageId;
+      const language = 'en'; //request.pre.languageId;
       const foundInvesteeInvestmentProposal = await models.investeeInvestmentProposals.findOne({
         where: { id: request.params.id },
         include: [{ association: 'investeeInvestmentProposalTranslation', where: { languageId: language }, required: true }]
       });
+
+      return reply.response(foundInvesteeInvestmentProposal || {}).code(200);
+    }
+    catch (e) {
+      console.log('error', e);
+
+      return errorService.wrapError(e, 'An internal server error occurred');
+    }
+  },
+  findBasedInvestee: async function (request, reply) {
+    try {
+      const language = 'en'; //request.pre.languageId;
+      const foundInvesteeInvestmentProposal = await models.investeeInvestmentProposals.findAll({
+        where: { investeeId: request.params.investeeId },
+        include: [{ association: 'investeeInvestmentProposalTranslation', where: { languageId: language }, required: true }]
+      });
+
+      for(let i = 0; i < foundInvesteeInvestmentProposal.length; i++){
+        let proposal = await models.investeeInvestmentProposalTranslation.findAll({
+          where: { investeeInvestmentProposalId: foundInvesteeInvestmentProposal[i].id }
+        });
+        let translation = [];
+        if(proposal.length > 1){
+          translation.push({
+            propertyName: "description",
+            translation: {
+                  "Ar": proposal[1].description,
+                  "Fr": proposal[2].description,
+                  "Po": proposal[3].description,
+                  "Sp": proposal[4].description
+                  }
+            },{
+            propertyName: "PurposeOfTheRequiredInvestment",
+            translation: {
+                  "Ar": proposal[1].PurposeOfTheRequiredInvestment,
+                  "Fr": proposal[2].PurposeOfTheRequiredInvestment,
+                  "Po": proposal[3].PurposeOfTheRequiredInvestment,
+                  "Sp": proposal[4].PurposeOfTheRequiredInvestment
+                 }
+            }
+          );
+        }
+        foundInvesteeInvestmentProposal[i].dataValues["translation"] = translation;
+      }
 
       return reply.response(foundInvesteeInvestmentProposal || {}).code(200);
     }

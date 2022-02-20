@@ -2268,6 +2268,20 @@ module.exports = [
     }
   },
   {
+    path: '/users/{userId}/investmentproposals/{investeeId}',
+    method: 'GET',
+    options: {
+      auth: 'jwt',
+      description: 'Get specific investment proposal for investee by its investee id',
+      // app: { allowedPermission: { resource: 'investeeInvestmentProposals', action: 'findOne' } },
+      pre: [
+        // // { method: helperService.authorizeUser },
+      //  { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      handler: investeeInvestmentProposalsController.findBasedInvestee
+    }
+  },
+  {
     path: '/users/{userId}/investees/{investeeId}/investmentproposals/{id}/{transId}',
     method: 'PUT',
     options: {
