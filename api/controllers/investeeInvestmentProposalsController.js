@@ -180,7 +180,7 @@ module.exports = {
         let translation = [];
         if(proposal.length > 1){
           translation.push({
-            propertyName: "description",
+            propertyName: "pp_description",
             translation: {
                   "Ar": proposal[1].description,
                   "Fr": proposal[2].description,
@@ -188,7 +188,7 @@ module.exports = {
                   "Sp": proposal[4].description
                   }
             },{
-            propertyName: "PurposeOfTheRequiredInvestment",
+            propertyName: "pp_PurposeOfTheRequiredInvestment",
             translation: {
                   "Ar": proposal[1].PurposeOfTheRequiredInvestment,
                   "Fr": proposal[2].PurposeOfTheRequiredInvestment,
@@ -258,22 +258,22 @@ module.exports = {
             switch(langauges[k]){
               case 'ar':
                   obj["languageId"] = 'ar';
-                   column = translation[i].propertyName;
+                   column = translation[i].propertyName.substr(3);
                   obj[column] = translation[i].translation.Ar;
               break;
               case 'fr':
                   obj["languageId"] = 'fr';
-                   column = translation[i].propertyName;
+                   column = translation[i].propertyName.substr(3);
                   obj[column] = translation[i].translation.Fr;
               break;
               case 'po':
                   obj["languageId"] = 'po';
-                   column = translation[i].propertyName;
+                   column = translation[i].propertyName.substr(3);
                   obj[column] = translation[i].translation.Po;
               break;
               case 'sp':
                   obj["languageId"] = 'sp';
-                   column = translation[i].propertyName;
+                   column = translation[i].propertyName.substr(3);
                   obj[column] = translation[i].translation.Sp;
               break;
               default:
@@ -381,25 +381,25 @@ module.exports = {
                 case 'ar':
                     language = 'ar';
                     obj["languageId"] = 'ar';
-                     column = translation[i].propertyName;
+                     column = translation[i].propertyName.substr(3);
                     obj[column] = translation[i].translation.Ar;
                 break;
                 case 'fr':
                  language = 'fr';
                     obj["languageId"] = 'fr';
-                     column = translation[i].propertyName;
+                     column = translation[i].propertyName.substr(3);
                     obj[column] = translation[i].translation.Fr;
                 break;
                 case 'po':
                  language = 'po';
                     obj["languageId"] = 'po';
-                     column = translation[i].propertyName;
+                     column = translation[i].propertyName.substr(3);
                     obj[column] = translation[i].translation.Po;
                 break;
                 case 'sp':
                  language = 'sp';
                     obj["languageId"] = 'sp';
-                     column = translation[i].propertyName;
+                     column = translation[i].propertyName.substr(3);
                     obj[column] = translation[i].translation.Sp;
                 break;
                 default:
