@@ -200,7 +200,7 @@ module.exports = {
         }
         foundInvesteeInvestmentProposal[i].dataValues["translation"] = translation;
       }
-
+      foundInvesteeInvestmentProposal.shift();
       return reply.response(foundInvesteeInvestmentProposal || {}).code(200);
     }
     catch (e) {
