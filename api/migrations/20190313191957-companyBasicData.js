@@ -26,7 +26,7 @@ module.exports = {
       allowNull: true
     },
     legalForm: {
-      type: Sequelize.STRING(100), //.INTEGER(10).UNSIGNED,
+      type: Sequelize.INTEGER(10), //.INTEGER(10).UNSIGNED,
       allowNull: true
     },
     type: {

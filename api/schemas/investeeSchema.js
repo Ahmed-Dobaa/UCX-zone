@@ -16,7 +16,7 @@ module.exports = {
         isConfidential: Joi.boolean().default(false).label('is confidential'),
         sector: Joi.array(),
         subSector: Joi.string().allow(null).label('sub sector'),
-        legalForm: Joi.string().label('legal form'),
+        legalForm: Joi.number().label('legal form'),
         companiesBasicDataTranslation: {
           city: Joi.string().allow(null, '').example('Cairo'),
           country: Joi.string().required().example('Egypt'),
@@ -77,7 +77,7 @@ module.exports = {
         isConfidential: Joi.boolean().default(false).label('is confidential'),
         sector: Joi.array(),
         subSector: Joi.array(),
-        legalForm: Joi.string().label('legal form'),
+        legalForm: Joi.number().label('legal form'),
         companiesBasicDataTranslation: {
           name: Joi.string().required().example('test company'),
           // registrationIdNo: Joi.string().label('registration id number').example('4235158542531'),

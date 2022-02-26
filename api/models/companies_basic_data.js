@@ -35,7 +35,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: true
     },
     legalForm: {
-      type: DataTypes.STRING(100), //INTEGER(10).UNSIGNED,
+      type: DataTypes.INTEGER(10), //INTEGER(10).UNSIGNED,
       allowNull: true
     },
     legatForm_ar: {

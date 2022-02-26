@@ -21,7 +21,7 @@ module.exports = {
     sub_sector: Joi.string().required().label('sub sector').example('Mobiles'),
     company_purpose: Joi.string().required().label('company purpose').example('Money Laundry'),
     products_or_services: Joi.string().required().label('products or services').example('Mobile Software'),
-    legal_form: Joi.string().required().label('legal form').example('Mobile Software'),
+    legal_form: Joi.number().required().label('legal form').example('Mobile Software'),
     address: address,
     other_addresses: Joi.array().items(address).required().label('other address'),
     phone_numbers: Joi.string().required().label('phone number').example('01155467899'),
