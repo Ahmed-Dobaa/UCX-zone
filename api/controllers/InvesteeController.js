@@ -179,6 +179,16 @@ module.exports = {
           }
         ]
       });
+
+      let cityName = await models.cities.findOne({where: { id: foundInvesteeCompanies.basicData.companiesBasicDataTranslation.city}});
+      let countryName = await models.countriesTranslation.findOne({where: { id: foundInvesteeCompanies.basicData.companiesBasicDataTranslation.country}});
+      if(cityName != null){
+        foundInvesteeCompanies.basicData.companiesBasicDataTranslation.dataValues["city"] = cityName.name_en;
+      }
+      if(countryName != null){
+        foundInvesteeCompanies.basicData.companiesBasicDataTranslation.dataValues["country"] = countryName.name;
+      }
+
       var _sector = foundInvesteeCompanies.basicData.sector.split(",");
       let secData = []
       for(let x = 0; x < _sector.length; x++){

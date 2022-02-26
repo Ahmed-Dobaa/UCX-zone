@@ -174,7 +174,13 @@ module.exports = {
       });
 
       for(let i = 0; i < foundInvesteeInvestmentProposal.length; i++){
-        let proposal = await models.investeeInvestmentProposalTranslation.findAll({
+      let result = await models.lookup_details.findOne({where: {id: foundInvesteeInvestmentProposal[i].investmentTypeId}})
+
+      if(result != null){
+          foundInvesteeInvestmentProposal[i].dataValues["investmentTypeId"] = result.lookup_detail_name_en;
+      }
+
+      let proposal = await models.investeeInvestmentProposalTranslation.findAll({
           where: { investeeInvestmentProposalId: foundInvesteeInvestmentProposal[i].id }
         });
         let translation = [];

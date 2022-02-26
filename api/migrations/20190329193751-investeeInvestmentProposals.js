@@ -9,7 +9,7 @@ module.exports = {
       autoIncrement: true,
     },
     investmentTypeId: {
-      type: Sequelize.STRING(500),
+      type: Sequelize.INTEGER(10),
       allowNull: false
     },
     investeeId: {
