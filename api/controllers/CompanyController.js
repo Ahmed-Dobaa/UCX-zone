@@ -185,13 +185,15 @@ module.exports = {
         if(foundCompanies[i].type === 'investee' || foundCompanies[i].type === 'subsidary'){
           const foundSubmittedInterests = await models.investor_interests_submits.findAll({ where: { investeeId: foundCompanies[i].investeeCompany.id } });
           foundCompanies[i].dataValues["interest_count"] = foundSubmittedInterests.length;
+          let cityName = await models.cities.findOne({where: { id: foundCompanies[i].companiesBasicDataTranslation.city}});
+          let countryName = await models.countriesTranslation.findOne({where: { id: foundCompanies[i].companiesBasicDataTranslation.country}});
 
-          // let country = await models.countriesTranslation.findOne({where: {id: foundCompanies[i].companiesBasicDataTranslation.country}})
-          // foundCompanies[i].companiesBasicDataTranslation.dataValues["country"] = country.name;
-
-          // let city = await models.cities.findOne({where: {id: foundCompanies[i].companiesBasicDataTranslation.city}})
-          // console.log(city.name_en)
-          // foundCompanies[i].companiesBasicDataTranslation.dataValues["city"] = city.name_en;
+          if(cityName != null){
+            foundCompanies[i].companiesBasicDataTranslation.dataValues["city"] = cityName.name_en;
+      }
+      if(countryName != null){
+        foundCompanies[i].companiesBasicDataTranslation.dataValues["country"] = countryName.name;
+      }
 
           var _sector = foundCompanies[i].sector.split(",");
             let secData = [];
