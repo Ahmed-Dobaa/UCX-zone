@@ -75,11 +75,11 @@ module.exports = {
     payload: {
       companyBasicData: {
         isConfidential: Joi.boolean().default(false).label('is confidential'),
-        // sector: Joi.string(),
-        // subSector: Joi.string().allow(null).label('sub sector'),
+        sector: Joi.array(),
+        subSector: Joi.array(),
         legalForm: Joi.string().label('legal form'),
         companiesBasicDataTranslation: {
-          name: Joi.string().example('test company'),
+          name: Joi.string().required().example('test company'),
           // registrationIdNo: Joi.string().label('registration id number').example('4235158542531'),
           // registrationOffice: Joi.string().label('registration office').example('Cairo office'),
           companyPurpose: Joi.string().label('company purpose').example('Money Laundry'),

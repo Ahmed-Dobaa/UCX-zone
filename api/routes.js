@@ -1017,7 +1017,7 @@ module.exports = [
     }
   },
   {
-    path: '/users/{userId}/basicInfo/{id}/{proposalId}',
+    path: '/users/{userId}/basicInfo/{id}',
     method: 'PUT',
     options: {
       description: 'update specific investee by its id for a specific user id',
@@ -2303,7 +2303,7 @@ module.exports = [
     }
   },
   {
-    path: '/users/{userId}/investees/{investeeId}/investmentproposals/{id}',
+    path: '/users/{userId}/investmentproposals/{id}',
     method: 'DELETE',
     options: {
       description: 'delete specific investment proposal by its id',
@@ -2313,7 +2313,7 @@ module.exports = [
         // // { method: helperService.authorizeUser },
        // { method: helperService.getLanguageId, assign: 'languageId' }
       ],
-      validate: { params: investeeInvestmentProposalsSchema.updateSchema.params },
+      // validate: { params: investeeInvestmentProposalsSchema.updateSchema.params },
       handler: investeeInvestmentProposalsController.delete
     }
   },

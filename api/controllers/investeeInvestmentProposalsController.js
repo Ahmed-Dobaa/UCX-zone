@@ -428,19 +428,25 @@ module.exports = {
     }
   },
   delete: async function (request, reply) {
+    let transaction = await models.sequelize.transaction();
+
     try {
       const foundInvesteeAttachmentsType = await models.investeeInvestmentProposals.findOne({ where: { id: request.params.id }, raw: true });
 
       if(_.isEmpty(foundInvesteeAttachmentsType)) {
-        return reply.response().code(204);
+        return reply.response({status: 204, message: "This proposal is not exist"}).code(200);
       }
 
       await models.investeeInvestmentProposals.destroy({ where: { id: request.params.id } });
-      await fsPromises.unlink(path.join(__dirname, '../', foundInvesteeAttachmentsType.attachmentPath));
-
-      return reply.response().code(204);
+      // await fsPromises.unlink(path.join(__dirname, '../', foundInvesteeAttachmentsType.attachmentPath));
+      await models.investeeInvestmentProposalTranslation.destroy({ where: { investeeInvestmentProposalId : request.params.id } });
+      await transaction.commit();
+      return reply.response({status: 200, message: "Deleted successfully"}).code(200);
     }
     catch (e) {
+      if(transaction){
+        await transaction.rollback();
+      }
       console.log('error', e);
 
       return errorService.wrapError(e, 'An internal server error occurred');
