@@ -35,6 +35,9 @@ module.exports = function (sequelize, DataTypes) {
     }
   }, { tableName: 'advisorManagement', paranoid: true });
 
+  advisorManagement.associate = (models) => {
 
+  advisorManagement.hasOne(models.advisorManagementTranslation, { as: 'managementTranslation', foreignKey: 'advisorManagementId' });
+};
   return advisorManagement;
 };
