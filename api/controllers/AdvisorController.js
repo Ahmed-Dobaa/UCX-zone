@@ -350,7 +350,7 @@ module.exports = {
     try {
       const language = 'en'; //request.pre.languageId;
       const foundCompanies = await models.Advisor.findAll({
-        where: { deleted: 0 },
+        where: { deleted: 0, languageId: 'en' },
         include: [
           { model: models.companiesBasicData, as: 'company',
               include: [{ model: models.companiesBasicDataTranslation, where: {languageId: 'en'}, as: 'companiesBasicDataTranslation' }] }
