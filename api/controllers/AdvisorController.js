@@ -44,11 +44,23 @@ module.exports = {
         advisorsBasicDataTranslation.languageId = language;
         await models.companiesBasicDataTranslation.create(advisorsBasicDataTranslation, { transaction });
         let langauges = ['ar', 'fr', 'po', 'sp'];
+        if(translation.length === 0){
+          translation.push({
+            propertyName: 'test',
+            "translation": {
+              "Ar": "",
+              "Fr": "",
+              "Po": "",
+              "Sp": ""
+            }
+
+          })
+        }
         for(let k = 0; k < langauges.length; k++){
           let obj = advisorsBasicDataTranslation;
           obj.name = null;
           obj.companyPurpose = null;
-          obj.main_address;
+          obj.main_address = null;
           for(let i = 0; i < translation.length; i++){
             let column;
             switch(langauges[k]){
