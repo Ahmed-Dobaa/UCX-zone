@@ -2490,6 +2490,21 @@ module.exports = [
     }
   },
   {
+    path: '/users/{userId}/advisor/{id}',
+    method: 'PUT',
+    options: {
+      auth: 'jwt',
+      // description: 'Get all investors for that user',
+      // app: { allowedPermission: { resource: 'investor', action: 'findAll' } },
+      pre: [
+        // // // { method: helperService.authorizeUser },
+     //   { method: helperService.getLanguageId, assign: 'languageId' }
+      ],
+      // validate: { params: investor.createSchema.params },
+      handler: advisorController.update
+    }
+  },
+  {
     path: '/investor/{id}/img',
     method: 'PUT',
     options: {

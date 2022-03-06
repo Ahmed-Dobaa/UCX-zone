@@ -139,71 +139,76 @@ module.exports = {
   },
 
   update: async (request, reply) => {
-    let transaction;
-
+    let transaction = null;
     try {
-      const { payload } = request;
-
-      let language = 'en';
-      const investeeId = request.params.id;
-
-      const foundInvesteeCompany = await models.investee.findOne({
-        where: { id: investeeId },
-        include: [
-          { association: 'investeeTranslation', required: true, where: { languageId: language } },
-          {
-            association: 'basicData',
-            required: true,
-            include: [
-              {
-                association: 'companiesBasicDataTranslation',
-                required: true,
-                where: { languageId: language }
-              }
-            ]
-          }
-        ]
-      });
-
-      if(_.isEmpty(foundInvesteeCompany)) {
-
-        return Boom.notFound('Company You Try To Update does Not Exist');
+      let language = 'en'; //equest.pre.languageId;
+      let foundInvestor = await models.Advisor.findOne({ where: { id: request.params.id } });
+      if(_.isEmpty(foundInvestor)) {
+        return Boom.notFound('Advisor you\'re trying to update does not exist');
       }
 
       transaction = await models.sequelize.transaction();
 
-      if(! _.isEmpty(payload.companyBasicData)) {
+      let arr = [];
+       for(let i = 0; i < request.payload.advisor.turnoverRangeId.length; i++){
+        arr.push(request.payload.advisor.turnoverRangeId[i].name)
+       }
+       request.payload.advisor.turnoverRangeId = null
+       request.payload.advisor.turnoverRangeId = arr;
 
-        let _sectors = [];
-      for(let i = 0; i < payload.companyBasicData.sector.length; i++){
-        _sectors.push(payload.companyBasicData.sector[i].name)
+      await models.Advisor.update(request.payload.advisor, {
+        where: {
+          id: request.params.id
+
+      }, transaction });
+
+      // await models.advisorTranslation.update(request.payload.investor.investorTranslation,
+      //   {
+      //     where: {
+      //       investorId: request.params.id,
+      //       languageId: language
+      //     },
+      //     transaction
+      //   });
+
+        let translation = request.payload.advisorBasicData.advisorsBasicDataTranslation.translation;
+
+        let langauges = ['ar', 'fr', 'po', 'sp'];
+
+        let countries = [];
+       for(let i = 0; i < request.payload.advisor.target_countries.length; i++){
+        countries.push(request.payload.advisor.target_countries[i].name)
+       }
+       request.payload.advisor.target_countries = null
+       request.payload.advisor.target_countries = countries;
+
+       let sectors = [];
+       for(let i = 0; i < request.payload.advisor.target_sectors.length; i++){
+        sectors.push(request.payload.advisor.target_sectors[i].name)
+       }
+       request.payload.advisor.target_sectors = null
+       request.payload.advisor.target_sectors = sectors;
+      let targetCountries = {"advisorId": foundInvestor.id, "countryId": request.payload.advisor.target_countries};
+      await models.advisorTargetedCountries.update(targetCountries, { where: {  advisorId: request.params.id }, transaction });
+
+      let targetedSectors = {"advisorId": foundInvestor.id, "sectorId": request.payload.advisor.target_sectors}
+      await models.advisorTargetedSectors.update(targetedSectors, { where: { advisorId: request.params.id}, transaction });
+
+      if(request.payload.advisorBasicData) {
+        await models.companiesBasicData.update(request.payload.advisorBasicData,
+          { where: { id: foundInvestor.companyId }, transaction });
+
+        if(request.payload.advisorBasicData.advisorsBasicDataTranslation) {
+          await models.companiesBasicDataTranslation.update(request.payload.advisorBasicData.advisorsBasicDataTranslation,
+            { where: { companyBasicDataId: foundInvestor.companyId, languageId: 'en' }, transaction });
+        }
       }
-      payload.companyBasicData.sector = null
-      payload.companyBasicData.sector = _sectors;
 
 
-      let _subsectors = [];
-      for(let i = 0; i < payload.companyBasicData.subSector.length; i++){
-        _subsectors.push(payload.companyBasicData.subSector[i].name)
-      }
-      payload.companyBasicData.subSector = null
-      payload.companyBasicData.subSector = _subsectors;
-
-        await models.companiesBasicData.update(payload.companyBasicData, { where: { id: foundInvesteeCompany.basicData.id }, transaction });
-      }
-
-      if(! _.isEmpty(payload.companyBasicData.companiesBasicDataTranslation)) {
-
-        await models.companiesBasicDataTranslation.update(payload.companyBasicData.companiesBasicDataTranslation,
-          { where: { id: foundInvesteeCompany.basicData.companiesBasicDataTranslation.id, languageId: language }, transaction });
-      }
-      let translation = payload.companyBasicData.companiesBasicDataTranslation.translation;
-
-      let langauges = ['ar', 'fr', 'po', 'sp'];
       for(let k = 0; k < langauges.length; k++){
-       let obj = payload.companyBasicData.companiesBasicDataTranslation;
+       let obj = request.payload.advisorBasicData.advisorsBasicDataTranslation;
        obj.name = null;
-       obj.productsOrServices = null;
+       obj.main_address = null;
        obj.companyPurpose = null;
        for(let i = 0; i < translation.length; i++){
          let column;
@@ -237,88 +242,19 @@ module.exports = {
          }
        }
        await models.companiesBasicDataTranslation.update(obj,
-        { where: { companyBasicDataId: foundInvesteeCompany.basicData.id, languageId: language }, transaction });
+        { where: { companyBasicDataId: foundInvestor.companyId, languageId: language }, transaction });
+
+
     }
 
+        await models.advisorManagement.update(request.payload.advisor_management, {
+             where: {id: request.payload.advisor_management.id }, transaction });
 
+          await models.advisorManagementTranslation.update(request.payload.advisor_management.advisorManagementTranslation,
+             {where: {id: request.payload.advisor_management.advisorManagementTranslation.id}, transaction });
 
-      if(! _.isEmpty(payload.investeeTranslation)) {
-
-        await models.investeeTranslation.update(payload.investeeTranslation, { where: { id: foundInvesteeCompany.investeeTranslation.id }, transaction });
-      }
-
-      await models.investee.update({ phoneNumbers: payload.phoneNumbers }, { where: { id: investeeId }, transaction });
-
-      // try {
-      //   const  _payload  = request.payload.proposal;
-
-
-      //   const foundInvesteeInvestmentProposal = await models.investeeInvestmentProposals.findOne({ where: { id: request.params.proposalId }, raw: true });
-
-      //   if(_.isEmpty(foundInvesteeInvestmentProposal)) {
-      //     return Boom.badRequest('Investee investment proposal You Try To Update Does Not Exist');
-      //   }
-      //   let _language = 'en';
-      //   await models.investeeInvestmentProposals.update(_payload, { where: { id: request.params.proposalId }, transaction });
-
-      //     _payload.investmentProposalTranslation.languageId = _language;
-      //     await models.investeeInvestmentProposalTranslation.update(_payload.investmentProposalTranslation,
-      //       { where: { investeeInvestmentProposalId: request.params.proposalId, languageId: _language }, transaction }); //payload.investmentProposalTranslation.id
-
-      //       for(let k = 0; k < langauges.length; k++){
-      //         let obj = request.payload.proposal;
-      //         obj.description = null;
-      //         obj.PurposeOfTheRequiredInvestment = null;
-      //         for(let i = 0; i < translation.length; i++){
-      //           let column;
-      //           switch(langauges[k]){
-      //             case 'ar':
-      //                 language = 'ar';
-      //                 obj["languageId"] = 'ar';
-      //                  column = translation[i].propertyName;
-      //                 obj[column] = translation[i].translation.Ar;
-      //             break;
-      //             case 'fr':
-      //              language = 'fr';
-      //                 obj["languageId"] = 'fr';
-      //                  column = translation[i].propertyName;
-      //                 obj[column] = translation[i].translation.Fr;
-      //             break;
-      //             case 'po':
-      //              language = 'po';
-      //                 obj["languageId"] = 'po';
-      //                  column = translation[i].propertyName;
-      //                 obj[column] = translation[i].translation.Po;
-      //             break;
-      //             case 'sp':
-      //              language = 'sp';
-      //                 obj["languageId"] = 'sp';
-      //                  column = translation[i].propertyName;
-      //                 obj[column] = translation[i].translation.Sp;
-      //             break;
-      //             default:
-      //               break;
-      //           }
-      //         }
-      //         await models.investeeInvestmentProposalTranslation.update(obj,
-      //           { where: { investeeInvestmentProposalId: request.params.proposalId, languageId: language }, transaction }); //payload.investmentProposalTranslation.id
-
-      //      }
-
-      // }
-      // catch (e) {
-      //   console.log('error', e);
-
-      //   if(transaction) {
-      //     await transaction.rollback();
-      //   }
-
-      //   return errorService.wrapError(e, 'An internal server error occurred');
-      // }
-      // await transaction.commit();
-      await transaction.commit();
-
-      return reply.response({status: 200, message: "updated successfully"}).code(200);
+   await transaction.commit();
+      return reply.response(request.payload).code(200);
     }
     catch (e) {
       console.log('error', e);
@@ -326,6 +262,7 @@ module.exports = {
       if(transaction) {
         await transaction.rollback();
       }
+
       return errorService.wrapError(e, 'An internal server error occurred');
     }
   },
