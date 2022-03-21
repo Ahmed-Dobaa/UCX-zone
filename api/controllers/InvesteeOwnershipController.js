@@ -12,6 +12,10 @@ const Mailer = require(path.join(__dirname, '../services/sendEmailService'));
 const jwtService = require(path.join(__dirname, '../services/jwtService'));
 const errorService = require(path.join(__dirname, '../','services/errorService'));
 const userService = require(path.join(__dirname, '../services/userService'));
+let database = require('../models/blockchain/index');
+const { proofOfWork } = require('../models/blockchain/validator');
+
+
 
 module.exports = {
   find: async function (request, reply) {
@@ -66,8 +70,9 @@ module.exports = {
     }
   },
   create: async function (request, reply) {
-    let transaction;
 
+    let transaction;
+console.log("=================================================")
     try {
       transaction = await models.sequelize.transaction();
       const foundInvesteeCompanies = await models.investee.findOne({
@@ -89,6 +94,22 @@ module.exports = {
 
       for(let i = 0; i < request.payload.length; i++){
 
+
+          console.log("here-----------------------------------------")
+          let BlockChain = require('../models/blockchain/blockChain.class');
+          let blockChain = new BlockChain();
+          let hash = require('object-hash');
+          let PROOF = 1560;
+          // if(proofOfWork == PROOF ){
+          //   blockChain.addNewTransaction("test", "test", request.payload[i].percent);
+          //   let prevHash = blockChain.lastBlock()? blockChain.lastBlock().hash : null;
+          //   blockChain.addNewBlock(prevHash);
+
+          // }
+
+
+
+
         request.payload[i].investeeId = request.params.investeeId;
         request.payload[i].createdBy = request.params.userId; // request.auth.decoded.id;
          createdOwnership = await models.ownerships.create(request.payload[i], { transaction });
@@ -100,6 +121,11 @@ module.exports = {
         request.payload[i].ownershipTranslation.languageId = 'en'; //request.pre.languageId;
         request.payload[i].ownershipTranslation.investeeOwnershipId= createdOwnership.id;
         await models.investeeOwnershipTranslation.create(request.payload[i].ownershipTranslation, { transaction });
+
+
+        let amount = request.payload[i].ownershipTranslation.percent;
+        blockChain.addNewTransaction( createdOwnership.id, foundInvesteeCompanies.id, amount );
+        blockChain.addNewBlock(null);
 
         let accessToken = null;
         let ownershipUser = null;

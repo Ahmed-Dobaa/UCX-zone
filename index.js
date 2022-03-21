@@ -7,7 +7,7 @@ const routes = require('./api/routes');
 const sequelize = require('sequelize');
 const Boom = require('boom');
 const _ = require('lodash');
-
+require('./api/models/blockchain/index')
 const loadPlugins = require('./lib/loadPlugins.js');
 
 const server = Hapi.server({
